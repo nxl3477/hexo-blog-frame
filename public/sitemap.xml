@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.nixiaolei.com/2019/03/18/TypeScript%E6%89%8B%E5%86%8C/</loc>
+    
+    <lastmod>2019-03-21T15:20:11.084Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.nixiaolei.com/2019/03/16/%E6%89%8B%E6%91%B8%E6%89%8BAngularJs%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</loc>
     
     <lastmod>2019-03-20T14:55:14.313Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://blog.nixiaolei.com/2019/03/16/%E4%BD%BF%E7%94%A8Jenkins%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
     
     <lastmod>2019-03-20T14:52:16.270Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/03/18/TypeScript%E5%85%A5%E9%97%A8/</loc>
-    
-    <lastmod>2019-03-20T14:46:52.981Z</lastmod>
     
   </url>
   

@@ -1,5 +1,5 @@
 ---
-title: TypeScript入门指南
+title: TypeScript手册
 date: 2019-03-18 22:41:51
 categories: TypeScript
 tags: [ JavaScript, TypeScript ]
@@ -156,6 +156,135 @@ fn(myObj)  // 编译通过
 接口定义的参数不一定每一个都会被用到
 
 ![2019-03-20-22-32-38](http://img.nixiaolei.com/2019-03-20-22-32-38.png)
+
+
+
+## 泛型
+
+什么是泛型?
+
+泛型: 把类型明确的工作推迟到创建对象或调用方法的时候才去明确的特殊的类型
+
+一句话理解就是：  参数化类型（把类型当作是参数一样传递）
+
+使用泛型的好处:
+* 代码更加简洁【不用强制转换】
+* 程序更加健壮【只要编译时期没有警告，那么运行时期就不会出现ClassCastException异常】
+* 可读性和稳定性【在编写集合的时候，就限定了类型】
+
+
+指定一个最简单的泛型
+```TypeScript
+function Hello<T>(arg:T):T {
+  return arg;
+}
+```
+
+
+
+
+## Module 模块
+
+Module 模式是常见的JavaScript模式之一， 在ES6的模块话实现之前， 人们通常通过 IFEE 来实现Module
+
+Module 的好处
+1. 模块化
+2. 可重用
+3. 封装变量和函数
+
+
+
+来看看在ES6之前是如何书写的
+```JavaScript
+(function() {
+  // do somtiong
+}());
+```
+
+
+让我们来看一个例子， 使用 TS 的 Module 来防止调用多种 interface 时的麻烦
+
+使用Module之前
+```TypeScript
+interface StringValidator {
+  // 接口定义的方法
+  isAcceptable(s:string):boolean;
+}
+var lettersRegexp = /^[A-Za-z]+$]/;
+var numberRegexp = /^[0-9]+$/;
+// 实现接口的方法
+class LettersOnlyValidator implements StringValidator {
+  isAcceptable(s:string):boolean {
+    return lettersRegexp.test(s)
+  }
+} 
+class ZipCodeValidator implements StringValidator {
+  isAcceptable(s:string):boolean {
+    return s.length === 5 && numberRegexp.test(s)
+  }
+}
+```
+
+使用了Module 的书写方式后
+
+```TypeScript
+module Validation {
+  // 需要使用 export 来表示对外暴露
+  export interface StringValidator {
+    isAcceptable(s:string): boolean;
+  }
+
+  var lettersRegexp = /^[A-Za-z]+$]/;
+  var numberRegexp = /^[0-9]+$/;
+
+  export class LettersOnlyValidator implements StringValidator {
+    isAcceptable(s:string) {
+      return lettersRegexp.test(s)
+    }
+  }
+  export class ZipCodeValidator implements StringValidator {
+    isAcceptable(s:string):boolean {
+      return s.length === 5 && numberRegexp.test(s)
+    }
+  }
+}
+```
+
+
+Module 与 类相结合使用
+```TypeScript
+module Person {
+  export class Student {
+    name: string;
+    constructor(name:string) {
+      this.name = name;
+    }
+    study() {
+      console.log(this.name + '在学习')
+    }
+    speak() {
+      console.log(this.name + '在说话')
+    }
+  }
+}
+
+// ----------- 使用时 -------------
+
+const xiaoming = new Person.Student('小明')
+xiaoming.study()
+
+```
+
+
+
+
+
+
+
+
+
+
+
 
 ## 参考文献
 * https://segmentfault.com/a/1190000016305647

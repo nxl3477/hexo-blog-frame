@@ -82,16 +82,16 @@
 <meta name="description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
 <meta name="keywords" content="JavaScript,TypeScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TypeScript入门指南">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/18/TypeScript入门/index.html">
+<meta property="og:title" content="TypeScript手册">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/18/TypeScript手册/index.html">
 <meta property="og:site_name" content="倪晓磊的前端梦">
 <meta property="og:description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-18-22-50-51.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-20-22-32-38.png">
-<meta property="og:updated_time" content="2019-03-20T14:46:52.981Z">
+<meta property="og:updated_time" content="2019-03-21T15:20:11.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TypeScript入门指南">
+<meta name="twitter:title" content="TypeScript手册">
 <meta name="twitter:description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
 <meta name="twitter:image" content="http://img.nixiaolei.com/2019-03-18-22-50-51.png">
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/18/TypeScript入门/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/18/TypeScript手册/">
 
 
 
 
 
-  <title>TypeScript入门指南 | 倪晓磊的前端梦</title>
+  <title>TypeScript手册 | 倪晓磊的前端梦</title>
   
 
 
@@ -278,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/18/TypeScript入门/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/18/TypeScript手册/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="杭州 | a磊">
@@ -295,7 +295,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">TypeScript入门指南</h2>
+          <h2 class="post-title" itemprop="name headline">TypeScript手册</h2>
         
 
         <div class="post-meta">
@@ -348,8 +348,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/18/TypeScript入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/18/TypeScript入门/" itemprop="commentCount"></span>
+                <a href="/2019/03/18/TypeScript手册/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/18/TypeScript手册/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  697 字
+                  1.2k 字
                 </span>
               
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -457,6 +457,29 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">interface dogValue &#123;</span><br><span class="line">  name:string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定参数`dog`是接口类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">dog: dogValue</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(dog.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myObj = &#123; <span class="attr">name</span>: <span class="string">"Hello"</span> &#125;</span><br><span class="line">fn(myObj)  <span class="comment">// 编译通过</span></span><br></pre></td></tr></table></figure>
 <h3 id="接口的可选属性"><a href="#接口的可选属性" class="headerlink" title="接口的可选属性"></a>接口的可选属性</h3><p>接口定义的参数不一定每一个都会被用到</p>
 <p><img src="http://img.nixiaolei.com/2019-03-20-22-32-38.png" alt="2019-03-20-22-32-38"></p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>什么是泛型?</p>
+<p>泛型: 把类型明确的工作推迟到创建对象或调用方法的时候才去明确的特殊的类型</p>
+<p>一句话理解就是：  参数化类型（把类型当作是参数一样传递）</p>
+<p>使用泛型的好处:</p>
+<ul>
+<li>代码更加简洁【不用强制转换】</li>
+<li>程序更加健壮【只要编译时期没有警告，那么运行时期就不会出现ClassCastException异常】</li>
+<li>可读性和稳定性【在编写集合的时候，就限定了类型】</li>
+</ul>
+<p>指定一个最简单的泛型<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hello</span>&lt;<span class="title">T</span>&gt;(<span class="params">arg:T</span>):<span class="title">T</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Module-模块"><a href="#Module-模块" class="headerlink" title="Module 模块"></a>Module 模块</h2><p>Module 模式是常见的JavaScript模式之一， 在ES6的模块话实现之前， 人们通常通过 IFEE 来实现Module</p>
+<p>Module 的好处</p>
+<ol>
+<li>模块化</li>
+<li>可重用</li>
+<li>封装变量和函数</li>
+</ol>
+<p>来看看在ES6之前是如何书写的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do somtiong</span></span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></p>
+<p>让我们来看一个例子， 使用 TS 的 Module 来防止调用多种 interface 时的麻烦</p>
+<p>使用Module之前<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> StringValidator &#123;</span><br><span class="line">  <span class="comment">// 接口定义的方法</span></span><br><span class="line">  isAcceptable(s:<span class="built_in">string</span>):<span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$]/</span>;</span><br><span class="line"><span class="keyword">var</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"><span class="comment">// 实现接口的方法</span></span><br><span class="line"><span class="keyword">class</span> LettersOnlyValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">  isAcceptable(s:<span class="built_in">string</span>):<span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> lettersRegexp.test(s)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">class</span> ZipCodeValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">  isAcceptable(s:<span class="built_in">string</span>):<span class="built_in">boolean</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> s.length === <span class="number">5</span> &amp;&amp; numberRegexp.test(s)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用了Module 的书写方式后</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Validation &#123;</span><br><span class="line">  <span class="comment">// 需要使用 export 来表示对外暴露</span></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> StringValidator &#123;</span><br><span class="line">    isAcceptable(s:<span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$]/</span>;</span><br><span class="line">  <span class="keyword">var</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> LettersOnlyValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">    isAcceptable(s:<span class="built_in">string</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> lettersRegexp.test(s)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> ZipCodeValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">    isAcceptable(s:<span class="built_in">string</span>):<span class="built_in">boolean</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> s.length === <span class="number">5</span> &amp;&amp; numberRegexp.test(s)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Module 与 类相结合使用<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Person &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> Student &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    study() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'在学习'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    speak() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'在说话'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------- 使用时 -------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> xiaoming = <span class="keyword">new</span> Person.Student(<span class="string">'小明'</span>)</span><br><span class="line">xiaoming.study()</span><br></pre></td></tr></table></figure></p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li><a href="https://segmentfault.com/a/1190000016305647" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016305647</a></li>
 </ul>
@@ -700,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境搭建"><span class="nav-text">开发环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础接口"><span class="nav-text">基础接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的可选属性"><span class="nav-text">接口的可选属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境搭建"><span class="nav-text">开发环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础接口"><span class="nav-text">基础接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的可选属性"><span class="nav-text">接口的可选属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module-模块"><span class="nav-text">Module 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -734,7 +757,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7.9k</span>
+    <span title="Site words total count">8.4k</span>
   
 </div>
 
@@ -880,9 +903,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://blog.nixiaolei.com/2019/03/18/TypeScript入门/';
-          this.page.identifier = '2019/03/18/TypeScript入门/';
-          this.page.title = 'TypeScript入门指南';
+          this.page.url = 'http://blog.nixiaolei.com/2019/03/18/TypeScript手册/';
+          this.page.identifier = '2019/03/18/TypeScript手册/';
+          this.page.title = 'TypeScript手册';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://alei.disqus.com/embed.js';
