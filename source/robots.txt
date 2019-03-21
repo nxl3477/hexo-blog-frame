@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /categories/
+Allow: /tags/
+
+Sitemap: http://blog.nixiaolei.com/sitemap.xml
+Sitemap: http://blog.nixiaolei.com/baidusitemap.xml
