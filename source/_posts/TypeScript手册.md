@@ -279,6 +279,125 @@ xiaoming.study()
 
 ## Namespaces
 
+Namespaces 的和Module 的用法相同，  在Ts 的1.5 版本后， 用 Namespaces 取代了 Module 
+
+查看一下官方的示例
+
+```TypeScript
+namespace Shapes {
+    export namespace Polygons {
+        export class Triangle { }
+        export class Square { }
+    }
+}
+
+import polygons = Shapes.Polygons;
+let sq = new polygons.Square(); // Same as 'new Shapes.Polygons.Square()'
+```
+
+
+## 装饰器 < Decorators >
+
+如何定义一个装饰器
+
+其实装饰器就是一个普通的函数， 他接收一个参数`target` ，这个参数就是被装饰对象， 看下面的例子， `sealed` 装饰了`Dog`类， 并且在`sealed` 中打印了 `target` ， 让我们看看 `target`到底是什么？
+```TypeScript
+function sealed(target:any) {
+  // do something with 'target' ...
+  console.log(target)
+  return target
+}
+
+
+// 被装饰的对象 foo
+@sealed
+class Dog {
+
+}
+```
+
+打印结果
+![使用装饰器](http://img.nixiaolei.com/2019-03-22-22-06-26.png)
+
+我们可以看到， 得到的正是 `Dog`这个类
+
+
+
+### 装饰器工厂< Decorator Factories >
+
+> 如果希望自定义如何将装饰器应用于声明，可以编写装饰器工厂。装饰器工厂只是一个函数，它返回将在运行时由装饰器调用的表达式。
+
+
+装饰器工厂和普通装饰器相比的好处就是更加的自定义了， 可以根据不同情况自定义效果
+
+
+如何定义一个`装饰器工厂`
+
+```TypeScript
+function dec(value:string) {
+  return function (target:any)  {
+    console.log(value)
+    console.log(target)    
+  }
+}
+
+// 在这里使用并传入自定义的参数
+@dec('test')
+class Cat {
+  
+}
+```
+
+让我们来看看运行的结果
+
+![定义装饰器工厂](http://img.nixiaolei.com/2019-03-22-22-22-55.png)
+
+可以看到，我们传入的`test`字符串和 `Cat`类都被打印出来了，
+
+### 多装饰器的执行顺序
+使用多个装饰器时如何书写呢?
+
+当我们使用多个装饰器时有两种写法
+
+1. 写成一行
+```TypeScript
+@f @g x
+```
+2. 垂直书写
+```TypeScript
+@f
+@g
+x
+```
+**多个装饰器的执行顺序是如何的呢？**
+
+套用官网的说明
+1. 对每个装饰器的表达式进行自上而下的计算。
+2. 然后将结果作为自下而上的函数调用。
+
+
+其实真实的运行原理是
+```TypeScript
+f(g(x))
+```
+
+### 装饰器参数
+一般会传入三个参数
+
+1. target 对于静态成员是类的构造函数， 而对于实例成员是类的实例对象
+2. propertyKey 成员的名称
+3. descriptor 成员属性的描述符
+
+
+
+
+
+
+
+
+
+
+
 
 
 

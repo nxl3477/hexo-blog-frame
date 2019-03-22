@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.nixiaolei.com/2019/03/18/TypeScript%E6%89%8B%E5%86%8C/</loc>
+    
+    <lastmod>2019-03-22T14:45:38.221Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.nixiaolei.com/2019/03/16/%E3%80%90PostCss%E3%80%91%E4%BD%BF%E7%94%A8%E6%98%8E%E5%A4%A9%E7%9A%84CSS/</loc>
     
     <lastmod>2019-03-22T13:49:32.343Z</lastmod>
@@ -54,13 +61,6 @@
     <loc>http://blog.nixiaolei.com/2019/03/16/css%E5%88%86%E5%B1%82-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/</loc>
     
     <lastmod>2019-03-22T13:47:48.923Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/03/18/TypeScript%E6%89%8B%E5%86%8C/</loc>
-    
-    <lastmod>2019-03-21T15:20:11.084Z</lastmod>
     
   </url>
   

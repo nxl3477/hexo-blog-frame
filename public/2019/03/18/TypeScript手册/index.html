@@ -84,12 +84,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="TypeScript手册">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/18/TypeScript手册/index.html">
-<meta property="og:site_name" content="倪晓磊的前端梦">
+<meta property="og:site_name" content="倪晓磊的个人博客">
 <meta property="og:description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-18-22-50-51.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-20-22-32-38.png">
-<meta property="og:updated_time" content="2019-03-21T15:20:11.084Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-22-22-06-26.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-22-22-22-55.png">
+<meta property="og:updated_time" content="2019-03-22T14:45:38.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript手册">
 <meta name="twitter:description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
@@ -129,7 +131,7 @@
 
 
 
-  <title>TypeScript手册 | 倪晓磊的前端梦</title>
+  <title>TypeScript手册 | 倪晓磊的个人博客</title>
   
 
 
@@ -159,7 +161,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">倪晓磊的前端梦</span>
+        <span class="site-title">倪晓磊的个人博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -287,7 +289,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="倪晓磊的前端梦">
+      <meta itemprop="name" content="倪晓磊的个人博客">
     </span>
 
     
@@ -371,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k 字
+                  1.7k 字
                 </span>
               
 
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -480,6 +482,45 @@
 <p>使用了Module 的书写方式后</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Validation &#123;</span><br><span class="line">  <span class="comment">// 需要使用 export 来表示对外暴露</span></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">interface</span> StringValidator &#123;</span><br><span class="line">    isAcceptable(s:<span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> lettersRegexp = <span class="regexp">/^[A-Za-z]+$]/</span>;</span><br><span class="line">  <span class="keyword">var</span> numberRegexp = <span class="regexp">/^[0-9]+$/</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> LettersOnlyValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">    isAcceptable(s:<span class="built_in">string</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> lettersRegexp.test(s)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> ZipCodeValidator <span class="keyword">implements</span> StringValidator &#123;</span><br><span class="line">    isAcceptable(s:<span class="built_in">string</span>):<span class="built_in">boolean</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> s.length === <span class="number">5</span> &amp;&amp; numberRegexp.test(s)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Module 与 类相结合使用<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> Person &#123;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">class</span> Student &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">constructor</span>(<span class="params">name:<span class="built_in">string</span></span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    study() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'在学习'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    speak() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">'在说话'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----------- 使用时 -------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> xiaoming = <span class="keyword">new</span> Person.Student(<span class="string">'小明'</span>)</span><br><span class="line">xiaoming.study()</span><br></pre></td></tr></table></figure></p>
+<h2 id="Namespaces"><a href="#Namespaces" class="headerlink" title="Namespaces"></a>Namespaces</h2><p>Namespaces 的和Module 的用法相同，  在Ts 的1.5 版本后， 用 Namespaces 取代了 Module </p>
+<p>查看一下官方的示例</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Shapes &#123;</span><br><span class="line">    <span class="keyword">export</span> <span class="keyword">namespace</span> Polygons &#123;</span><br><span class="line">        <span class="keyword">export</span> <span class="keyword">class</span> Triangle &#123; &#125;</span><br><span class="line">        <span class="keyword">export</span> <span class="keyword">class</span> Square &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> polygons = Shapes.Polygons;</span><br><span class="line"><span class="keyword">let</span> sq = <span class="keyword">new</span> polygons.Square(); <span class="comment">// Same as 'new Shapes.Polygons.Square()'</span></span><br></pre></td></tr></table></figure>
+<h2 id="装饰器-lt-Decorators-gt"><a href="#装饰器-lt-Decorators-gt" class="headerlink" title="装饰器 &lt; Decorators &gt;"></a>装饰器 &lt; Decorators &gt;</h2><p>如何定义一个装饰器</p>
+<p>其实装饰器就是一个普通的函数， 他接收一个参数<code>target</code> ，这个参数就是被装饰对象， 看下面的例子， <code>sealed</code> 装饰了<code>Dog</code>类， 并且在<code>sealed</code> 中打印了 <code>target</code> ， 让我们看看 <code>target</code>到底是什么？<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sealed</span>(<span class="params">target:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something with 'target' ...</span></span><br><span class="line">  <span class="built_in">console</span>.log(target)</span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 被装饰的对象 foo</span></span><br><span class="line"><span class="meta">@sealed</span></span><br><span class="line"><span class="keyword">class</span> Dog &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打印结果<br><img src="http://img.nixiaolei.com/2019-03-22-22-06-26.png" alt="使用装饰器"></p>
+<p>我们可以看到， 得到的正是 <code>Dog</code>这个类</p>
+<h3 id="装饰器工厂-lt-Decorator-Factories-gt"><a href="#装饰器工厂-lt-Decorator-Factories-gt" class="headerlink" title="装饰器工厂&lt; Decorator Factories &gt;"></a>装饰器工厂&lt; Decorator Factories &gt;</h3><blockquote>
+<p>如果希望自定义如何将装饰器应用于声明，可以编写装饰器工厂。装饰器工厂只是一个函数，它返回将在运行时由装饰器调用的表达式。</p>
+</blockquote>
+<p>装饰器工厂和普通装饰器相比的好处就是更加的自定义了， 可以根据不同情况自定义效果</p>
+<p>如何定义一个<code>装饰器工厂</code></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dec</span>(<span class="params">value:<span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target:<span class="built_in">any</span></span>)  </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">    <span class="built_in">console</span>.log(target)    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在这里使用并传入自定义的参数</span></span><br><span class="line"><span class="meta">@dec</span>(<span class="string">'test'</span>)</span><br><span class="line"><span class="keyword">class</span> Cat &#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>让我们来看看运行的结果</p>
+<p><img src="http://img.nixiaolei.com/2019-03-22-22-22-55.png" alt="定义装饰器工厂"></p>
+<p>可以看到，我们传入的<code>test</code>字符串和 <code>Cat</code>类都被打印出来了，</p>
+<h3 id="多装饰器的执行顺序"><a href="#多装饰器的执行顺序" class="headerlink" title="多装饰器的执行顺序"></a>多装饰器的执行顺序</h3><p>使用多个装饰器时如何书写呢?</p>
+<p>当我们使用多个装饰器时有两种写法</p>
+<ol>
+<li><p>写成一行</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@f</span> <span class="meta">@g</span> x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>垂直书写</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@f</span></span><br><span class="line"><span class="meta">@g</span></span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>多个装饰器的执行顺序是如何的呢？</strong></p>
+<p>套用官网的说明</p>
+<ol>
+<li>对每个装饰器的表达式进行自上而下的计算。</li>
+<li>然后将结果作为自下而上的函数调用。</li>
+</ol>
+<p>其实真实的运行原理是<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(g(x))</span><br></pre></td></tr></table></figure></p>
+<h3 id="装饰器参数"><a href="#装饰器参数" class="headerlink" title="装饰器参数"></a>装饰器参数</h3><p>一般会传入三个参数</p>
+<ol>
+<li>target 对于静态成员是类的构造函数， 而对于实例成员是类的实例对象</li>
+<li>propertyKey 成员的名称</li>
+<li>descriptor 成员属性的描述符</li>
+</ol>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li><a href="https://segmentfault.com/a/1190000016305647" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016305647</a></li>
 </ul>
@@ -723,7 +764,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境搭建"><span class="nav-text">开发环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础接口"><span class="nav-text">基础接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的可选属性"><span class="nav-text">接口的可选属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module-模块"><span class="nav-text">Module 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境搭建"><span class="nav-text">开发环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础接口"><span class="nav-text">基础接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的可选属性"><span class="nav-text">接口的可选属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module-模块"><span class="nav-text">Module 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespaces"><span class="nav-text">Namespaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器-lt-Decorators-gt"><span class="nav-text">装饰器 &lt; Decorators &gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器工厂-lt-Decorator-Factories-gt"><span class="nav-text">装饰器工厂&lt; Decorator Factories &gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多装饰器的执行顺序"><span class="nav-text">多装饰器的执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器参数"><span class="nav-text">装饰器参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -757,7 +798,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.4k</span>
+    <span title="Site words total count">9k</span>
   
 </div>
 
