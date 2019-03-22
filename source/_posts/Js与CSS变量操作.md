@@ -2,7 +2,7 @@
 title: Js与CSS变量操作
 date: 2019-03-16 17:47:07
 categories: CSS
-tags: [JavaScript, CSS]
+tags: [JavaScript, css]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 

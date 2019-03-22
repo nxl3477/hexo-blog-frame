@@ -2,7 +2,7 @@
 title: 【PostCss】使用明天的CSS
 date: 2019-03-16 13:30:24
 categories: CSS
-tags: [CSS, PostCss]
+tags: [css, PostCss]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 

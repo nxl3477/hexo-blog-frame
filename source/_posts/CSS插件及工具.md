@@ -2,7 +2,7 @@
 title: CSS插件及工具
 date: 2019-03-16 18:02:21
 categories: CSS
-tags: [CSS, PostCss, 插件, 工具]
+tags: [css, PostCss, 插件, 工具]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 

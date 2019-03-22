@@ -2,7 +2,7 @@
 title: CSS如何了解新知识
 date: 2019-03-16 16:56:22
 categories: 学习技巧
-tags: [学习技巧, 学习渠道, CSS]
+tags: [学习技巧, 学习渠道, css]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 

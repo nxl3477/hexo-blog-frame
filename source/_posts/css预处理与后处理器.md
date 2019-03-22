@@ -2,7 +2,7 @@
 title: css预处理与后处理器
 date: 2019-03-16 12:20:43
 categories: CSS
-tags: [CSS预处理器, PostCss]
+tags: [css, PostCss]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 

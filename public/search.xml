@@ -46,7 +46,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
+        <tag>css</tag>
         <tag>命名规范</tag>
       </tags>
   </entry>
@@ -58,7 +58,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
+        <tag>css</tag>
         <tag>web-component</tag>
         <tag>特效</tag>
       </tags>
@@ -71,7 +71,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -82,7 +82,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
+        <tag>css</tag>
         <tag>PostCss</tag>
         <tag>插件</tag>
         <tag>工具</tag>
@@ -96,7 +96,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
+        <tag>css</tag>
         <tag>JavaScript</tag>
       </tags>
   </entry>
@@ -110,7 +110,7 @@
       <tags>
         <tag>学习技巧</tag>
         <tag>学习渠道</tag>
-        <tag>CSS</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -121,7 +121,7 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
+        <tag>css</tag>
         <tag>PostCss</tag>
       </tags>
   </entry>
@@ -147,8 +147,8 @@
         <category>CSS</category>
       </categories>
       <tags>
+        <tag>css</tag>
         <tag>PostCss</tag>
-        <tag>CSS预处理器</tag>
       </tags>
   </entry>
   <entry>

@@ -2,9 +2,8 @@
 title: css分层&命名规范
 date: 2019-03-16 23:32:55
 categories: CSS
-tags: [CSS, 命名规范]
+tags: [css, 命名规范]
 ---
-<script type="text/javascript" src="/js/src/bai.js"></script>
 
 为什么要分层? 
 

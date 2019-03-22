@@ -2,7 +2,7 @@
 title: 【css-doodle】 css web-component入门
 date: 2019-03-16 20:36:22
 categories: CSS
-tags: [CSS, web-component, 特效]
+tags: [css, web-component, 特效]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 

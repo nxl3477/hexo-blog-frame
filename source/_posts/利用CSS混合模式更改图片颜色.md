@@ -2,7 +2,7 @@
 title: 利用CSS混合模式更改图片颜色
 date: 2019-03-16 18:34:26
 categories: CSS
-tags: [CSS]
+tags: [css]
 ---
 <script type="text/javascript" src="/js/src/bai.js"></script>
 
