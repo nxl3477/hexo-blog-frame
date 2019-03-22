@@ -33,9 +33,9 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>vim</tag>
         <tag>插件</tag>
         <tag>工具</tag>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
@@ -83,9 +83,9 @@
       </categories>
       <tags>
         <tag>CSS</tag>
+        <tag>PostCss</tag>
         <tag>插件</tag>
         <tag>工具</tag>
-        <tag>PostCss</tag>
       </tags>
   </entry>
   <entry>
