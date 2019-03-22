@@ -280,7 +280,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
       <meta itemprop="description" content="挑战10000小时定律">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/myavatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -339,16 +339,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/16/CSS插件及工具/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/16/CSS插件及工具/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -534,17 +524,8 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
+  <div id="gitalk-container"></div>
   
-
 
 
         </div>
@@ -579,6 +560,8 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/myavatar.jpg" alt="a磊的前端梦">
             
               <p class="site-author-name" itemprop="name">a磊的前端梦</p>
               <p class="site-description motion-element" itemprop="description">挑战10000小时定律</p>
@@ -674,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS兼容查询"><span class="nav-text">CSS兼容查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画"><span class="nav-text">动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高逼格"><span class="nav-text">高逼格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PostCss-值得收藏的插件"><span class="nav-text">PostCss 值得收藏的插件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS兼容查询"><span class="nav-number">1.</span> <span class="nav-text">CSS兼容查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画"><span class="nav-number">2.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高逼格"><span class="nav-number">3.</span> <span class="nav-text">高逼格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PostCss-值得收藏的插件"><span class="nav-number">4.</span> <span class="nav-text">PostCss 值得收藏的插件</span></a></li></ol></div>
             
 
           </div>
@@ -847,26 +830,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://alei.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://blog.nixiaolei.com/2019/03/16/CSS插件及工具/';
-          this.page.identifier = '2019/03/16/CSS插件及工具/';
-          this.page.title = 'CSS插件及工具';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://alei.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -882,6 +845,7 @@
 
 
 
+  
 
 
 
@@ -889,6 +853,34 @@
 
 
 
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'ae75f57caa167e009522',
+          clientSecret: '469b1ab9e02def71f8d477bee218ac9f0e12ab58',
+          repo: 'blog-gitalk',
+          owner: 'nxl3477',
+          admin: ['nxl3477'],
+          id: md5(location.pathname),
+          // labels: 'gitalk',
+          labels: 'gitalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   
@@ -1243,6 +1235,7 @@
   
 
   
+
 
 </body>
 </html>

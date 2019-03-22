@@ -307,17 +307,8 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
+  <div id="gitalk-container"></div>
   
-
 
 
         </div>
@@ -343,6 +334,8 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/myavatar.jpg" alt="a磊的前端梦">
             
               <p class="site-author-name" itemprop="name">a磊的前端梦</p>
               <p class="site-description motion-element" itemprop="description">挑战10000小时定律</p>
@@ -595,26 +588,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://alei.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://blog.nixiaolei.com/categories/index.html';
-          this.page.identifier = 'categories/index.html';
-          this.page.title = '分类';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://alei.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -630,6 +603,7 @@
 
 
 
+  
 
 
 
@@ -637,6 +611,34 @@
 
 
 
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'ae75f57caa167e009522',
+          clientSecret: '469b1ab9e02def71f8d477bee218ac9f0e12ab58',
+          repo: 'blog-gitalk',
+          owner: 'nxl3477',
+          admin: ['nxl3477'],
+          id: md5(location.pathname),
+          // labels: 'gitalk',
+          labels: 'gitalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   
@@ -991,6 +993,7 @@
   
 
   
+
 
 </body>
 </html>

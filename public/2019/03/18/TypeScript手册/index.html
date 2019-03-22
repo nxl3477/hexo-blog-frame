@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-20-22-32-38.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-22-22-06-26.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-22-22-22-55.png">
-<meta property="og:updated_time" content="2019-03-22T14:45:38.221Z">
+<meta property="og:updated_time" content="2019-03-22T14:54:33.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript手册">
 <meta name="twitter:description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
@@ -285,7 +285,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
       <meta itemprop="description" content="挑战10000小时定律">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/myavatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -345,16 +345,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/18/TypeScript手册/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/18/TypeScript手册/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -373,7 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
+                  1.8k 字
                 </span>
               
 
@@ -515,7 +505,15 @@
 <li>然后将结果作为自下而上的函数调用。</li>
 </ol>
 <p>其实真实的运行原理是<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(g(x))</span><br></pre></td></tr></table></figure></p>
-<h3 id="装饰器参数"><a href="#装饰器参数" class="headerlink" title="装饰器参数"></a>装饰器参数</h3><p>一般会传入三个参数</p>
+<h3 id="装饰器参数"><a href="#装饰器参数" class="headerlink" title="装饰器参数"></a>装饰器参数</h3><ol>
+<li>类装饰器</li>
+</ol>
+<p>类装饰器的参数只接收一个， 那就是<code>target</code> 也就是这个类本身</p>
+<p>就和上面演示的那些例子一样</p>
+<ol start="2">
+<li>方法装饰器</li>
+</ol>
+<p>一般会传入三个参数</p>
 <ol>
 <li>target 对于静态成员是类的构造函数， 而对于实例成员是类的实例对象</li>
 <li>propertyKey 成员的名称</li>
@@ -624,17 +622,8 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    </div>
-
+  <div id="gitalk-container"></div>
   
-
 
 
         </div>
@@ -669,6 +658,8 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/myavatar.jpg" alt="a磊的前端梦">
             
               <p class="site-author-name" itemprop="name">a磊的前端梦</p>
               <p class="site-description motion-element" itemprop="description">挑战10000小时定律</p>
@@ -764,7 +755,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境搭建"><span class="nav-text">开发环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础接口"><span class="nav-text">基础接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的可选属性"><span class="nav-text">接口的可选属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module-模块"><span class="nav-text">Module 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespaces"><span class="nav-text">Namespaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器-lt-Decorators-gt"><span class="nav-text">装饰器 &lt; Decorators &gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器工厂-lt-Decorator-Factories-gt"><span class="nav-text">装饰器工厂&lt; Decorator Factories &gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多装饰器的执行顺序"><span class="nav-text">多装饰器的执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器参数"><span class="nav-text">装饰器参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境搭建"><span class="nav-number">1.</span> <span class="nav-text">开发环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型"><span class="nav-number">2.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">3.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础接口"><span class="nav-number">3.1.</span> <span class="nav-text">基础接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的可选属性"><span class="nav-number">3.2.</span> <span class="nav-text">接口的可选属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">4.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module-模块"><span class="nav-number">5.</span> <span class="nav-text">Module 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespaces"><span class="nav-number">6.</span> <span class="nav-text">Namespaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器-lt-Decorators-gt"><span class="nav-number">7.</span> <span class="nav-text">装饰器 &lt; Decorators &gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器工厂-lt-Decorator-Factories-gt"><span class="nav-number">7.1.</span> <span class="nav-text">装饰器工厂&lt; Decorator Factories &gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多装饰器的执行顺序"><span class="nav-number">7.2.</span> <span class="nav-text">多装饰器的执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器参数"><span class="nav-number">7.3.</span> <span class="nav-text">装饰器参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -937,26 +928,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://alei.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://blog.nixiaolei.com/2019/03/18/TypeScript手册/';
-          this.page.identifier = '2019/03/18/TypeScript手册/';
-          this.page.title = 'TypeScript手册';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://alei.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
 
 
 
@@ -972,6 +943,7 @@
 
 
 
+  
 
 
 
@@ -979,6 +951,34 @@
 
 
 
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'ae75f57caa167e009522',
+          clientSecret: '469b1ab9e02def71f8d477bee218ac9f0e12ab58',
+          repo: 'blog-gitalk',
+          owner: 'nxl3477',
+          admin: ['nxl3477'],
+          id: md5(location.pathname),
+          // labels: 'gitalk',
+          labels: 'gitalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   
@@ -1333,6 +1333,7 @@
   
 
   
+
 
 </body>
 </html>

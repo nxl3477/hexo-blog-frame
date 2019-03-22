@@ -156,14 +156,14 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-#avatar: /images/avatar.gif
+avatar: /images/myavatar.jpg
 
 # Table Of Contents in the Sidebar
 toc:
   enable: true
 
   # Automatically add list number to toc.
-  number: false
+  number: true
 
   # If true, all words will placed on next lines if header width longer then sidebar width.
   wrap: false
@@ -366,9 +366,27 @@ han: false
 # Duoshuo ShortName
 #duoshuo_shortname:
 
+gitalk:
+  enable: true
+  ClientID: ae75f57caa167e009522
+  ClientSecret: 469b1ab9e02def71f8d477bee218ac9f0e12ab58
+  repo: blog-gitalk
+  owner: nxl3477
+  adminUser: nxl3477
+  ID: location.pathname
+  labels:
+    - gitalk
+  perPage: 15
+  pagerDirection: last
+  createIssueManually: true
+  distractionFreeMode: false
+
+
+
+
 # Disqus
 disqus:
-  enable: true
+  enable: false
   shortname: alei
   count: true
 
