@@ -368,7 +368,7 @@ han: false
 #duoshuo_shortname:
 
 gitalk:
-  enable: false
+  enable: true
   ClientID: ae75f57caa167e009522
   ClientSecret: 469b1ab9e02def71f8d477bee218ac9f0e12ab58
   repo: blog-gitalk
@@ -423,7 +423,7 @@ valine:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-livere_uid: MTAyMC80MzM0My8xOTg4NA==
+# livere_uid: MTAyMC80MzM0My8xOTg4NA==
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
