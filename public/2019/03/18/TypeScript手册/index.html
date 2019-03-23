@@ -91,7 +91,8 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-20-22-32-38.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-22-22-06-26.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-22-22-22-55.png">
-<meta property="og:updated_time" content="2019-03-22T14:54:33.484Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-23-11-35-28.png">
+<meta property="og:updated_time" content="2019-03-23T03:35:52.984Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TypeScript手册">
 <meta name="twitter:description" content="TypeScript是JavaScript的超集 开发环境搭建 我的环境: window10 + vscode  全局安装Ts  npm i -g typescript  生成并配置tsconfig.json  tsc –init  配置文件， 下面的配置中ts应存放在src 目录下， 并且会自动编译到dist文件夹下1234567891011121314151617181920212223242">
@@ -363,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k 字
+                  1.9k 字
                 </span>
               
 
@@ -519,6 +520,13 @@
 <li>propertyKey 成员的名称</li>
 <li>descriptor 成员属性的描述符</li>
 </ol>
+<p>我们来验证下方法装饰器的参数</p>
+<p>让我们看看这段例子会输出什么<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">value:<span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target:<span class="built_in">any</span>, propertyKey: <span class="built_in">string</span>, descriptor: PropertyDescriptor</span>)  </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(target)    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Tiger &#123;</span><br><span class="line">  <span class="meta">@f</span>(<span class="string">'tiger run'</span>)</span><br><span class="line">  run() &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输入结果: </p>
+<p><img src="http://img.nixiaolei.com/2019-03-23-11-35-28.png" alt="方法装饰器参数"></p>
+<p>在控制台输出， 我们看到了，<br>第一个参数是 <code>tiger</code> 的实例对象（因为<code>run</code>是实例成员）</p>
+<p>第二个参数是成员名称， 也就是被装饰的<code>run</code></p>
+<p>第三个参数是 <code>run</code> 的属性描述符</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
 <li><a href="https://segmentfault.com/a/1190000016305647" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016305647</a></li>
 </ul>
@@ -810,7 +818,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">9k</span>
+    <span title="Site words total count">9.1k</span>
   
 </div>
 

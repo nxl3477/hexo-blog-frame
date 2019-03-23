@@ -399,6 +399,34 @@ f(g(x))
 3. descriptor 成员属性的描述符
 
 
+我们来验证下方法装饰器的参数
+
+让我们看看这段例子会输出什么
+```TypeScript
+function f(value:string) {
+  return function (target:any, propertyKey: string, descriptor: PropertyDescriptor)  {
+    console.log(arguments)
+    console.log(target)    
+  }
+}
+
+class Tiger {
+  @f('tiger run')
+  run() {
+  }
+}
+```
+输入结果: 
+
+![方法装饰器参数](http://img.nixiaolei.com/2019-03-23-11-35-28.png)
+
+
+在控制台输出， 我们看到了， 
+第一个参数是 `tiger` 的实例对象（因为`run`是实例成员）
+
+第二个参数是成员名称， 也就是被装饰的`run`
+
+第三个参数是 `run` 的属性描述符
 
 
 
