@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习技巧,学习渠道,css,">
+  <meta name="keywords" content="css,学习技巧,学习渠道,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="平时闲着无聊的时候多去看看MDN或者一些国外的网站， 多试试一些新特性， 说不定就会有新的发现 并且还可以尝试着参与MDN的文章翻译及国外优质技术文章  MDN：https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference">
-<meta name="keywords" content="学习技巧,学习渠道,css">
+<meta name="keywords" content="css,学习技巧,学习渠道">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS如何了解新知识">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/16/CSS如何了解新知识/index.html">
@@ -340,16 +340,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/16/CSS如何了解新知识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/16/CSS如何了解新知识/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -476,11 +466,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/css/" rel="tag"># css</a>
+          
             <a href="/tags/学习技巧/" rel="tag"># 学习技巧</a>
           
             <a href="/tags/学习渠道/" rel="tag"># 学习渠道</a>
-          
-            <a href="/tags/css/" rel="tag"># css</a>
           
         </div>
       
@@ -536,7 +526,9 @@
 
   
     <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
     </div>
+
   
 
 
@@ -833,37 +825,26 @@
 
 
   
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: true,
-        appId: 'K9EVpWEMzEmJwrKrsSMOJCXH-gzGzoHsz',
-        appKey: 'GdwQSdpTT1dVPUgf9mttefPv',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
+
+
+
+
+
+
+
+
+
 
 
 

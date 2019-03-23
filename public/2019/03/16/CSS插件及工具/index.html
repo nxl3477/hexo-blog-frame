@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="css,PostCss,插件,工具,">
+  <meta name="keywords" content="css,插件,工具,PostCss,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="CSS兼容查询 https://caniuse.com/  https://cssdb.org/  动画 贝塞尔: http://cubic-bezier.com/#.17,.67,.83,.67  高逼格 web component CSS: https://css-doodle.com/  PostCss 值得收藏的插件 POSTCSS-CUSTOM-PROPERTIES 运行时变量 P">
-<meta name="keywords" content="css,PostCss,插件,工具">
+<meta name="keywords" content="css,插件,工具,PostCss">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSS插件及工具">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/16/CSS插件及工具/index.html">
@@ -340,16 +340,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/16/CSS插件及工具/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/16/CSS插件及工具/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -493,11 +483,11 @@
           
             <a href="/tags/css/" rel="tag"># css</a>
           
-            <a href="/tags/PostCss/" rel="tag"># PostCss</a>
-          
             <a href="/tags/插件/" rel="tag"># 插件</a>
           
             <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+            <a href="/tags/PostCss/" rel="tag"># PostCss</a>
           
         </div>
       
@@ -553,7 +543,9 @@
 
   
     <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
     </div>
+
   
 
 
@@ -875,37 +867,26 @@
 
 
   
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: true,
-        appId: 'K9EVpWEMzEmJwrKrsSMOJCXH-gzGzoHsz',
-        appKey: 'GdwQSdpTT1dVPUgf9mttefPv',
-        placeholder: 'ヾﾉ≧∀≦)o 来呀！吐槽一番吧！',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
-    });
-  </script>
+
+
+
+
+
+
+
+
+
 
 
 
