@@ -155,8 +155,6 @@ fn(myObj)  // 编译通过
 ### 接口的可选属性
 接口定义的参数不一定每一个都会被用到
 
-![2019-03-20-22-32-38](http://img.nixiaolei.com/2019-03-20-22-32-38.png)
-
 
 
 ## 泛型
@@ -381,6 +379,89 @@ x
 f(g(x))
 ```
 
+### 访问器修饰器
+
+访问器修饰器的接收的参数和方法修饰器接收的参数一样
+
+
+```TypeScript
+function dec(value:string) {
+  return function (target:any, propertyKey: string, descriptor: PropertyDescriptor)  {
+  }
+}
+
+// 在这里使用并传入自定义的参数
+@dec('test')
+class Cat {
+  private _x: number;
+  private _y: number;
+
+  constructor(x: number, y: number) {
+    this._x = x
+    this._y = y
+  }
+  // 访问器修饰器
+  @dec(true)
+  get  x() { return this._x }
+  @dec(false)
+  get  y() { return this._y }
+}
+```
+
+
+### 属性修饰器
+
+属性修饰器只有前两个参数
+```TypeScript
+function dec(value:string) {
+  return function (target:any, propertyKey: string)  {
+  }
+}
+
+// 在这里使用并传入自定义的参数
+@dec('test')
+class Cat {
+  private _x: number;
+  private _y: number;
+
+  constructor(x: number, y: number) {
+    // 属性修饰器
+    @dec(false)
+    this._x = x
+    this._y = y
+  }
+}
+```
+
+### 参数修饰器
+参数修饰器也是三个参数， 但不同的是第三个参数接收
+
+**参数装饰器只能确认一个方法的参数是否被传入**
+
+
+前两个和其他的修饰器都相同， 
+
+1. target 对于静态成员是类的构造函数， 而对于实例成员是类的实例对象
+2. propertyKey 成员的名称
+3. 参数在所处函数的参数列表中的索引， 说人话就是告诉你他是第几个参数
+
+
+
+```TypeScript
+function require(value:boolean) {
+  return function (target:any, propertyKey: string, index: number)  {
+  }
+}
+
+// 在这里使用并传入自定义的参数
+@dec('test')
+class Cat {
+  run(@require(true) name:string) {
+  }
+}
+```
+
+
 ### 装饰器参数
 
 1. 类装饰器
@@ -429,15 +510,92 @@ class Tiger {
 第三个参数是 `run` 的属性描述符
 
 
+## Mixins 混入
+除了传统的面向对象继承方式，还流行一种通过可重用组件创建类的方式，就是联合另一个简单类的代码。 你可能在Scala等语言里对mixins及其特性已经很熟悉了，但它在JavaScript中也是很流行的。
 
 
+Mixins 其实可以拆分为两个单词
+
+Mix : 混合
+
+ins : 是进入
+
+所以合在一起就是叫 `混入` 的意思的单词
+
+它想要表达的是一个对象中混入另一个对象的方法
 
 
+**让我们来实现一下Mixins**
 
+代码里首先定义两个类，它们将做为mixins。 可以看到每个类都只定义了一个特定的行为或功能。 稍后我们使用它们来创建一个新类，同时具有这两种功能。
 
+```TypeScript
+// Disposable Mixin
+class Disposable {
+    isDisposed: boolean;
+    dispose() {
+        this.isDisposed = true;
+    }
 
+}
 
+// Activatable Mixin
+class Activatable {
+    isActive: boolean;
+    activate() {
+        this.isActive = true;
+    }
+    deactivate() {
+        this.isActive = false;
+    }
+}
+```
+创建一个类，结合了这两个mixins。 下面来看一下具体是怎么操作的：
+```TypeScript
 
+class SmartObject implements Disposable, Activatable { }
+```
+这里我们没有使用extends而是使用implements。 把类当成了接口，仅使用Disposable和Activatable的类型而非其实现。 这意味着我们需要在类里面实现接口。 但是这是我们在用mixin时想避免的。
+
+我们可以这么做来达到目的，为将要mixin进来的属性方法创建出占位属性。 这告诉编译器这些成员在运行时是可用的。 这样就能使用mixin带来的便利，虽说需要提前定义一些占位属性。
+
+也就是这样
+
+```TypeScript
+class SmartObject implements Disposable, Activatable {
+  constructor() {
+      setInterval(() => console.log(this.isActive + " : " + this.isDisposed), 500);
+  }
+
+  interact() {
+      this.activate();
+  }
+
+  // Disposable
+  isDisposed: boolean = false;
+  dispose: () => void;
+  // Activatable
+  isActive: boolean = false;
+  activate: () => void;
+  deactivate: () => void;
+}
+```
+
+最后，把mixins混入定义的类，完成全部实现部分。
+```TypeScript
+applyMixins(SmartObject, [Disposable, Activatable]);
+```
+
+我们同时也需要创建这个帮助函数， 帮我们做混入操作。 它会遍历mixins上的所有属性，并复制到目标上去，把之前的占位属性替换成真正的实现代码。
+```TypeScript
+function applyMixins(derivedCtor: any, baseCtors: any[]) {
+  baseCtors.forEach(baseCtor => {
+      Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+          derivedCtor.prototype[name] = baseCtor.prototype[name];
+      })
+  });
+}
+```
 
 
 
