@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[你不知道的Css矩阵]]></title>
+    <url>%2F2019%2F03%2F24%2F%E3%80%90CSS%E7%9F%A9%E9%98%B5%E3%80%91%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84Css%E7%9F%A9%E9%98%B5%2F</url>
+    <content type="text"><![CDATA[矩阵 matrix(a,b,c,d,e,f); a c e 分别和 X, Y, 1 相乘得出线性方程 b d f 分别和 X, Y, 1 相乘得出线性方程 这是很清楚的计算公式 rotateZ矩阵推理推理过程 参考同学的笔记同学写的很不错👍]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【CSS全景】淘宝造物节H5原理]]></title>
+    <url>%2F2019%2F03%2F24%2F%E3%80%90CSS%E5%85%A8%E6%99%AF%E3%80%91%E6%B7%98%E5%AE%9D%E9%80%A0%E7%89%A9%E8%8A%82H5%E5%8E%9F%E7%90%86%2F</url>
+    <content type="text"><![CDATA[2016年的淘宝造物节邀请函， 太牛了， 不过，我们这回先不研究他的入场特效，先研究下它的全景是如何实现的 一、 载入图片, 定位至统一位置 因为20张图片被定位到统一地方, 所以所有图片都叠在一起了 此时效果 二、依照Y轴旋转图片 先说下为什么要依照y轴: 我们需要把图片围绕成一个环形, 类似于 木桶的每一块木板, 图片就是木板, 按图片的顺序旋转自各自的角度, 目前也是原地旋转, 所以图片依旧叠加在一起 素材有20张图片, 那每张的旋转角度就是 360 / 20 = 18度, 每张旋转的度数在前一张的基础上累加 18 度, 这里注意注意注意: 因为是按图片中心的Y轴旋转, 所以同一个度数会有两张图片, 比如: 0度的图片, 头在0度, 尾在90度, 然后当轮到头在90度的图片时, 他的尾在 0 度, 所以会有同一个度数两张图片的现象 此时效果 为了方便理解, 切换成上帝视角, , 所有图片围绕中心点旋转 三、将图片沿着各自Z轴向外推 现在木板(也就是每一张图片)是穿插在一起的, 我们需要让他们远离中心点, 拉开距离, 让他,们边缘连接而不是这样交叉在一起, 才能形成一个圆 先了解每一块木板怎么推 简单的画了个前后的效果图, 用的是上帝视角, 也就是你低头看一个木桶的视角 如何计算该推多少距离 做一道三角函数数学题 画的角度不太对别介意 设一共12条线, 每条长200px(此时的长就对应图片的宽) , 求将橙线移动到图中最终位置的距离 “黑线”,12345678910// 先求旋转度数// 然后取度数的一半360 / 12 / 2 = 15 度// 得知直角底边长度200 / 2 = 100px// 根据度数得知 tan, 顺便说下, tan是对边比邻边tan15°= 0.26794// 求出黑线100PX / 黑线 = 0.26794黑线约等于 373.2px js计算时注意 Math.tan 接收的是弧度单位 Math.PI 表示的是一个 Π 360度 = 2Π 计算出每张图片之间的形成的弧度 12345678 // 假设图片数量是 8 张// 因为 360 = 2Π// 1度 = Π / 180// 每份的角度是const deg = 360 / 8 // 此时为 45// 一份的弧度就是 每份弧度 * 旋转角度的一半// 最后结果就等于 Π / 图片数量( Math.PI / 180 ) * ( 45 / 2 ) ==&gt; Math.PI / 8 谢谢最可爱的贝玺]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[工具目录]]></title>
     <url>%2F2019%2F03%2F24%2F%E5%B7%A5%E5%85%B7%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[这里存放各种可能用到的用不到的东西， 真用到时方便查找😄 当然平日里经常用到的， 耳熟能详的， 我就不妨进来了， 主要是起个备忘录的作用 CSS兼容查询 https://caniuse.com/ https://cssdb.org/ 动画 贝塞尔: http://cubic-bezier.com/#.17,.67,.83,.67 高逼格 web component CSS: https://css-doodle.com/ PostCss 值得收藏的插件 POSTCSS-CUSTOM-PROPERTIES 运行时变量 POSTCSS-SIMPLE-VARS 与SCSS一致的变量实现 POSTCSS-MIXINS 实现类似SASS的@MIXIN的功能 POSTCSS-EXTEND 实现类似SASS的继承功能 POSTCSS-IMPORT 实现类似SASS的IMPORT CSSNext 面向未来 CSS Grace 修复过去（兼容IE，zomm、一像素留白等） Node框架 功能 插件名 周边生态 帮助实现DI的库 Awilix awilix-koa 实现控制反转&amp;构造注入的框架 InversifyJS inversify-koa-utils webpack4功能性能类 功能 插件名 自动插入html及静态文件 HtmlWebpackPlugin【配置自动注入loading（监测资源）】 抽离css文件 MiniCssExtractPlugin 清空指定目录 CleanWebpackPlugin js 深度 tree sharking 基于ES6模块 webpack-deep-scope-plugin css tree sharking PurifyCSSPlugin 多核打包件 [需要babel] uglifyjs-webpack-plugin[官方], happypack 前端缓存负载【自动生成缓存文件】 Webpack Manifest Plugin js 压缩 以及 es压缩 多核压缩 webpack-parallel-uglify-plugin, happypack hint css 多核压缩css css-nano, optimize-css-assets-webpack-plugin js 转 ast静态语法分析树 acorn , acorn-walk 优化体验类 功能 插件名 监测 webpack 打包速度 speed-measure-webpack-plugin 打包成功通知 webpack-build-notifier 显示打包进度 progress-bar-webpack-plugin 信息面板优化 webpack-dashboard[需要配置Pagejson]， webpack-jarvis[网页中浏览] 修改cmd 标题 node-bash-title[ github ][cmder 无效] loader 功能 插件名 缓存Loader结果 cache-loader TypeScript运行工具 功能 插件名 周边生态 在node中不用编译就运行 ts-node Linuxvim 快速学习vim的网站: https://vim-adventures.com/ 算法学习帮助 算法过程可视化: https://algorithm-visualizer.org/branch-and-bound/binary-search]]></content>
+    <content type="text"><![CDATA[这里存放各种可能用到的用不到的东西， 真用到时方便查找😄 当然平日里经常用到的， 耳熟能详的， 我就不放进来了， 主要是起个备忘录的作用 CSS兼容查询 https://caniuse.com/ https://cssdb.org/ 动画 贝塞尔: http://cubic-bezier.com/#.17,.67,.83,.67 可生成matrix的网站 名称 网址 matrix3d http://ds-overdesign.com/transform/matrix3d.html CSS-Matrix3d https://github.com/Zhangdroid/CSS-Matrix3d matrix http://meyerweb.com/eric/tools/matrix/ tools http://www.f2e.name/case/css3/tools.html 高逼格 web component CSS: https://css-doodle.com/ PostCss 值得收藏的插件 功能 插件名 运行时变量 POSTCSS-CUSTOM-PROPERTIES 与SCSS一致的变量实现 POSTCSS-SIMPLE-VARS 实现类似SASS的@MIXIN的功能 POSTCSS-MIXINS 实现类似SASS的继承功能 POSTCSS-EXTEND 实现类似SASS的IMPORT POSTCSS-IMPORT 面向未来 CSSNext 修复过去（兼容IE，zomm、一像素留白等） CSS Grace Node框架 功能 插件名 周边生态 帮助实现DI的库 Awilix awilix-koa 实现控制反转&amp;构造注入的框架 InversifyJS inversify-koa-utils webpack4功能性能类 功能 插件名 自动插入html及静态文件 HtmlWebpackPlugin【配置自动注入loading（监测资源）】 抽离css文件 MiniCssExtractPlugin 清空指定目录 CleanWebpackPlugin js 深度 tree sharking 基于ES6模块 webpack-deep-scope-plugin css tree sharking PurifyCSSPlugin 多核打包件 [需要babel] uglifyjs-webpack-plugin[官方], happypack 前端缓存负载【自动生成缓存文件】 Webpack Manifest Plugin js 压缩 以及 es压缩 多核压缩 webpack-parallel-uglify-plugin, happypack hint css 多核压缩css css-nano, optimize-css-assets-webpack-plugin js 转 ast静态语法分析树 acorn , acorn-walk 优化体验类 功能 插件名 监测 webpack 打包速度 speed-measure-webpack-plugin 打包成功通知 webpack-build-notifier 显示打包进度 progress-bar-webpack-plugin 信息面板优化 webpack-dashboard[需要配置Pagejson]， webpack-jarvis[网页中浏览] 修改cmd 标题 node-bash-title[ github ][cmder 无效] loader 功能 插件名 缓存Loader结果 cache-loader TypeScript运行工具 功能 插件名 周边生态 在node中不用编译就运行 ts-node ts-node-dev 热重启 Linuxvim 快速学习vim的网站: https://vim-adventures.com/ 算法学习帮助 算法过程可视化: https://algorithm-visualizer.org/branch-and-bound/binary-search]]></content>
       <categories>
         <category>目录</category>
       </categories>
@@ -162,8 +184,8 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>css</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -174,9 +196,9 @@
         <category>学习技巧</category>
       </categories>
       <tags>
-        <tag>css</tag>
         <tag>学习技巧</tag>
         <tag>学习渠道</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
