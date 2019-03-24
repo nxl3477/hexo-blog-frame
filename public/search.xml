@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[工具目录]]></title>
+    <url>%2F2019%2F03%2F24%2F%E5%B7%A5%E5%85%B7%E7%9B%AE%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[这里存放各种可能用到的用不到的东西， 真用到时方便查找😄 当然平日里经常用到的， 耳熟能详的， 我就不妨进来了， 主要是起个备忘录的作用 CSS兼容查询 https://caniuse.com/ https://cssdb.org/ 动画 贝塞尔: http://cubic-bezier.com/#.17,.67,.83,.67 高逼格 web component CSS: https://css-doodle.com/ PostCss 值得收藏的插件 POSTCSS-CUSTOM-PROPERTIES 运行时变量 POSTCSS-SIMPLE-VARS 与SCSS一致的变量实现 POSTCSS-MIXINS 实现类似SASS的@MIXIN的功能 POSTCSS-EXTEND 实现类似SASS的继承功能 POSTCSS-IMPORT 实现类似SASS的IMPORT CSSNext 面向未来 CSS Grace 修复过去（兼容IE，zomm、一像素留白等） Node框架 功能 插件名 周边 一套实现了控制反转的框架 InversifyJS inversify-koa-utils webpack4功能性能类 功能 插件名 自动插入html及静态文件 HtmlWebpackPlugin【配置自动注入loading（监测资源）】 抽离css文件 MiniCssExtractPlugin 清空指定目录 CleanWebpackPlugin js 深度 tree sharking webpack-deep-scope-plugin css tree sharking PurifyCSSPlugin 多核打包件 [需要babel] uglifyjs-webpack-plugin[官方], happypack 前端缓存负载【自动生成缓存文件】 Webpack Manifest Plugin js 压缩 以及 es压缩 多核压缩 webpack-parallel-uglify-plugin, happypack hint css 多核压缩css css-nano, optimize-css-assets-webpack-plugin js 转 ast静态语法分析树 acorn , acorn-walk 优化体验类 功能 插件名 监测 webpack 打包速度 speed-measure-webpack-plugin 打包成功通知 webpack-build-notifier 显示打包进度 progress-bar-webpack-plugin 信息面板优化 webpack-dashboard[需要配置Pagejson]， webpack-jarvis[网页中浏览] 修改cmd 标题 node-bash-title[ github ][cmder 无效] loader 功能 插件名 缓存Loader结果 cache-loader Linuxvim 快速学习vim的网站: https://vim-adventures.com/ 算法学习帮助 算法过程可视化: https://algorithm-visualizer.org/branch-and-bound/binary-search]]></content>
+      <categories>
+        <category>目录</category>
+      </categories>
+      <tags>
+        <tag>目录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vue-cli3脚手架配置px2rem适配方案]]></title>
+    <url>%2F2019%2F03%2F24%2Fvue-cli3%E8%84%9A%E6%89%8B%E6%9E%B6%E9%85%8D%E7%BD%AEpx2rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[安装12npm i lib-flexible --savenpm install px2rem-loader 引入 main.js 1import &apos;lib-flexible/flexible&apos; index.html 1&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt; 根目录新建 vue.config.js 文件 复制如下代码， 重启， 搞定 123456789101112131415// vue.config.jsmodule.exports = &#123; chainWebpack: config =&gt; &#123; config.module .rule(&apos;css&apos;) .test(/\.css$/) .oneOf(&apos;vue&apos;) .resourceQuery(/\?vue/) .use(&apos;px2rem&apos;) .loader(&apos;px2rem-loader&apos;) .options(&#123; remUnit: 75 &#125;) &#125;&#125; 谢谢最可爱的贝玺]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>适配</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【AOP】面向切面编程]]></title>
     <url>%2F2019%2F03%2F24%2F%E3%80%90AOP%E3%80%91%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[Aspect Oriented Programming 面向切面编程（aop）是对面向对象编程（oop）的补充 面向切面编程在软件业， AOP为 Aspect Oriented Programming 的缩写， 意为: 面向切面编程， 通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。 AOP是OOP的延续， 是软件开发中的一个热点， 也是Spring 框架中的一个重要内容， 是函数式编程的一种衍生范式。 利用AOP可以对业务逻辑的各个部分进行隔离， 从而使得业务逻辑各部分之间的耦合度降低， 提高程序的可重用性， 同时提高了开发效率。 基础概念AOP 完善Spring 的依赖注入(DI) 面向对象编程将程序分解成各个层次的对象， 面向切面编程将程序运行过程分解成各个切面。 FilterFilter(过滤器) 也是一种AOPA， 他利用一种称为“横切”的技术， 刨解开封装的对象内部， 并将那些影响了多个类的公共行为封装到一个可重用的模块， 并将其命名为”Aspect”， 即切面。 所谓“切面”。 优点AOP的好处就是你只需要干你的正事， 其他事情别人帮你干。 在你访问数据库之前， 自动帮你开启事务， 当你访问数据库结束之后， 自动帮你提交/回滚事务！ 就像函数的before和 after 谢谢最可爱的贝玺]]></content>
@@ -51,32 +74,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[算法工具&插件]]></title>
-    <url>%2F2019%2F03%2F17%2F%E7%AE%97%E6%B3%95%E5%B7%A5%E5%85%B7-%E6%8F%92%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[学习帮助 算法过程可视化: https://algorithm-visualizer.org/branch-and-bound/binary-search]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>插件</tag>
-        <tag>工具</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Linux工具&插件]]></title>
-    <url>%2F2019%2F03%2F17%2FLinux%E5%B7%A5%E5%85%B7-%E6%8F%92%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[vim 快速学习vim的网站: https://vim-adventures.com/]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>插件</tag>
-        <tag>工具</tag>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[css分层&命名规范]]></title>
     <url>%2F2019%2F03%2F16%2Fcss%E5%88%86%E5%B1%82-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%2F</url>
     <content type="text"><![CDATA[为什么要分层? CSS有语义化的命名约定和CSS层的分离， 将有助于它的可扩展性， 性能的提高和代码的组织管理。 避免大量的样式、 覆盖、 权重和很多！important, 分好层可以让团队命名统一规范， 方便维护。 有责任感地去命名你的选择器 有哪些分层理论? SMACSS BEM SUIT ACSS ITCSS BEMBEM和SMACCS非常类似， 主要用来如何给项目命名。一个简单命名更容易让别人一起工作。 比如选项卡导航是一个块(Block)， 这个块里的元素是其中标签之一（Element）, 而当前选项卡是一个修饰状态( Modifier ) block - 代表了更高级别的抽象或组件 block__element - 代表.block的后代， 用于形成一个完整的.block的整体。 block–modifier - 代表.block 的不同状态或不同版本。 修饰符使用的是_, 子模块使用的是__符号。 ( 不同一个-的原因是因为CSS单词连接 ) 12345678&lt;!-- container 是大容器 --&gt;&lt;div class="container"&gt; &lt;div class="menu"&gt; &lt;div class="menu--item menu--item__active"&gt;首页&lt;/div&gt; &lt;div class="menu--item"&gt;新闻&lt;/div&gt; &lt;div class="menu--item"&gt;消息&lt;/div&gt; &lt;/div&gt;&lt;/div&gt;]]></content>
@@ -113,20 +110,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CSS插件及工具]]></title>
-    <url>%2F2019%2F03%2F16%2FCSS%E6%8F%92%E4%BB%B6%E5%8F%8A%E5%B7%A5%E5%85%B7%2F</url>
-    <content type="text"><![CDATA[CSS兼容查询 https://caniuse.com/ https://cssdb.org/ 动画 贝塞尔: http://cubic-bezier.com/#.17,.67,.83,.67 高逼格 web component CSS: https://css-doodle.com/ PostCss 值得收藏的插件 POSTCSS-CUSTOM-PROPERTIES 运行时变量 POSTCSS-SIMPLE-VARS 与SCSS一致的变量实现 POSTCSS-MIXINS 实现类似SASS的@MIXIN的功能 POSTCSS-EXTEND 实现类似SASS的继承功能 POSTCSS-IMPORT 实现类似SASS的IMPORT CSSNext 面向未来 CSS Grace 修复过去（兼容IE，zomm、一像素留白等）]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>PostCss</tag>
-        <tag>插件</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Js与CSS变量操作]]></title>
     <url>%2F2019%2F03%2F16%2FJs%E4%B8%8ECSS%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%2F</url>
     <content type="text"><![CDATA[就目前来说CSS变量已经不是什么新鲜的东西了， 渐渐的我们可以在浏览器中尝试使用它， 和SCSS、 LESS 等预处理器不同的是， CSS的变量机制是浏览器天生支持的， 并且浏览器还对其做了优化， 减少了我们使用JS 去操作CSS变量造成的重绘和重排 一起来看看如何操作吧~ 变量虽好， 不可滥用哦 定义一个简单的变量12345678/* 定义css 变量 */:root &#123; --backgroundColor: pink;&#125;body &#123; background-color: var(--backgroundColor);&#125; 创建一个按钮123&lt;body&gt; &lt;button id="btn"&gt;点我改变背景&lt;/button&gt;&lt;/body&gt; 获取root元素并绑定按钮的点击事件12345678&lt;script&gt;var root = document.documentElementbtn.onclick = function() &#123; // 将变量修改为天蓝色 root.style.setProperty('--backgroundColor', 'skyblue')&#125;&lt;/script&gt; 结果对比点击前 按钮点击后 非常Nice~ 利用这个特性实现更多的可能吧！]]></content>
@@ -134,8 +117,8 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>css</tag>
         <tag>JavaScript</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
@@ -146,9 +129,9 @@
         <category>学习技巧</category>
       </categories>
       <tags>
+        <tag>css</tag>
         <tag>学习技巧</tag>
         <tag>学习渠道</tag>
-        <tag>css</tag>
       </tags>
   </entry>
   <entry>
