@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[【AOP】面向切面编程]]></title>
     <url>%2F2019%2F03%2F24%2F%E3%80%90AOP%E3%80%91%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[谢谢最可爱的贝玺]]></content>
+    <content type="text"><![CDATA[Aspect Oriented Programming 面向切面编程（aop）是对面向对象编程（oop）的补充 面向切面编程在软件业， AOP为 Aspect Oriented Programming 的缩写， 意为: 面向切面编程， 通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。 AOP是OOP的延续， 是软件开发中的一个热点， 也是Spring 框架中的一个重要内容， 是函数式编程的一种衍生范式。 利用AOP可以对业务逻辑的各个部分进行隔离， 从而使得业务逻辑各部分之间的耦合度降低， 提高程序的可重用性， 同时提高了开发效率。 基础概念AOP 完善Spring 的依赖注入(DI) 面向对象编程将程序分解成各个层次的对象， 面向切面编程将程序运行过程分解成各个切面。 FilterFilter(过滤器) 也是一种AOPA， 他利用一种称为“横切”的技术， 刨解开封装的对象内部， 并将那些影响了多个类的公共行为封装到一个可重用的模块， 并将其命名为”Aspect”， 即切面。 所谓“切面”。 优点AOP的好处就是你只需要干你的正事， 其他事情别人帮你干。 在你访问数据库之前， 自动帮你开启事务， 当你访问数据库结束之后， 自动帮你提交/回滚事务！ 就像函数的before和 after 谢谢最可爱的贝玺]]></content>
       <categories>
         <category>编程思想</category>
       </categories>
@@ -146,9 +146,9 @@
         <category>学习技巧</category>
       </categories>
       <tags>
-        <tag>css</tag>
         <tag>学习技巧</tag>
         <tag>学习渠道</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
