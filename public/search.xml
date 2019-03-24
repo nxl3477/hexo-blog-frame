@@ -9,7 +9,6 @@
       </categories>
       <tags>
         <tag>AOP</tag>
-        <tag>面向切面</tag>
         <tag>编程范式</tag>
       </tags>
   </entry>
@@ -21,10 +20,9 @@
         <category>编程思想</category>
       </categories>
       <tags>
-        <tag>面向对象</tag>
+        <tag>oop</tag>
         <tag>IOC</tag>
         <tag>编程原则</tag>
-        <tag>控制反转</tag>
       </tags>
   </entry>
   <entry>
@@ -35,7 +33,7 @@
         <category>编程思想</category>
       </categories>
       <tags>
-        <tag>面向对象</tag>
+        <tag>oop</tag>
         <tag>编程原则</tag>
         <tag>SOLID</tag>
       </tags>
@@ -73,9 +71,9 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>vim</tag>
         <tag>插件</tag>
         <tag>工具</tag>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
@@ -123,9 +121,9 @@
       </categories>
       <tags>
         <tag>css</tag>
+        <tag>PostCss</tag>
         <tag>插件</tag>
         <tag>工具</tag>
-        <tag>PostCss</tag>
       </tags>
   </entry>
   <entry>
@@ -148,9 +146,9 @@
         <category>学习技巧</category>
       </categories>
       <tags>
+        <tag>css</tag>
         <tag>学习技巧</tag>
         <tag>学习渠道</tag>
-        <tag>css</tag>
       </tags>
   </entry>
   <entry>

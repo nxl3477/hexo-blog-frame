@@ -2,7 +2,7 @@
 title: 面向对象设计原则之IOC控制反转
 date: 2019-03-24 13:39:45
 categories: [编程思想]
-tags: [面向对象, IOC, 编程原则, 控制反转]
+tags: [oop, IOC, 编程原则]
 ---
 
 
