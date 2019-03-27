@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 javascri">
+<meta name="description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 Eventloo">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="弄懂js的微任务和宏任务">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/26/弄懂js的微任务和宏任务/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 javascri">
+<meta property="og:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 Eventloo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img.nixiaolei.com/js-stack.gif">
-<meta property="og:updated_time" content="2019-03-26T15:52:14.712Z">
+<meta property="og:image" content="http://img.nixiaolei.com/js-stack.gif">
+<meta property="og:updated_time" content="2019-03-27T15:39:41.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="弄懂js的微任务和宏任务">
-<meta name="twitter:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 javascri">
-<meta name="twitter:image" content="https://img.nixiaolei.com/js-stack.gif">
+<meta name="twitter:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 Eventloo">
+<meta name="twitter:image" content="http://img.nixiaolei.com/js-stack.gif">
 
 
 
@@ -360,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  243 字
+                  911 字
                 </span>
               
 
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -400,16 +400,93 @@
         <p>首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了<code>Web-Worker</code>, 但JavaScript本质上还是一门单线程的语言，</p>
 <p>这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的</p>
 <p>所以JavaScript 放弃了多线程</p>
-<h2 id="javascript事件循环"><a href="#javascript事件循环" class="headerlink" title="javascript事件循环"></a>javascript事件循环</h2><p>单线程当遇到比较费事的操作带来的后果就是浏览器卡死， 那怎么办？<br>为了应对这些问题， JavaScript将事件分为了</p>
+<h2 id="Eventloop"><a href="#Eventloop" class="headerlink" title="Eventloop"></a>Eventloop</h2><p>单线程当遇到比较费事的操作带来的后果就是浏览器卡死， 那怎么办？<br>为了应对这些问题， JavaScript将事件分为了</p>
 <ul>
 <li>同步任务</li>
 <li>异步任务</li>
 </ul>
 <p>所有的事件任务都被加入到栈内,  栈的特点是先入后出， 如下图</p>
-<p><img src="https://img.nixiaolei.com/js-stack.gif" alt="js事件执行栈"></p>
+<p><img src="http://img.nixiaolei.com/js-stack.gif" alt="js事件执行栈"></p>
 <p>看图中， 最开始调用的函数被压在了最下面， 直到最后才出栈</p>
-<p>digui</p>
-<p>为了实现异步，也就有了独特的JavaScript事件循环</p>
+<p>当我们递归书写不规范时， 就会撑爆函数的执行栈， 也就是<code>爆栈</code></p>
+<h2 id="微任务与宏任务的区别"><a href="#微任务与宏任务的区别" class="headerlink" title="微任务与宏任务的区别"></a>微任务与宏任务的区别</h2><p>我们可以把事件处理机制想象成银行柜台的柜员， 柜员每次只能处理接待一个客户， 就和JS一样是单线程的， 每一次的事件循环就是一个来办理业务的客户， 这个客户就是宏任务， </p>
+<p>当前的客户结束之后， 柜员叫号，继续接待下一个客户， 也就是开始下一个宏任务</p>
+<p>能进入任务队列的都是已完成的异步操作， 当你注册了异步事件，但还未完成， 就好比你取了排队的票子， 但是人离开了，有可能先去吃饭，有可能先去逛街， 于是当轮到你的号码时， 银行柜员会先跳过你， 当你回来时， 你依旧需要重新排队</p>
+<p>在宏任务期间， 可以追加微任务的， 或者说微任务是可以插队的，  就像在柜台办理业务中， 一位大爷在办完自己的本来的业务后，  柜员通常都会问还有什么需要办理的业务， 这时老大爷想了一下：“最近P2P爆雷有点儿多，是不是要选择稳一些的理财呢”，然后告诉柜员说，要办一些理财的业务，这时候柜员肯定不能告诉老大爷说：“您再上后边取个号去，重新排队”。 </p>
+<p>所以本来快轮到你来办理业务，会因为老大爷临时添加的“理财业务”而往后推。<br>也许老大爷在办完理财以后还想 再办一个信用卡？或者 再买点儿纪念币？<br>无论是什么需求，只要是柜员能够帮她办理的，都会在处理你的业务之前来做这些事情，这些都可以认为是微任务。</p>
+<p>所以<br><strong>在当前的微任务没有执行完成时，是不会执行下一个宏任务的</strong></p>
+<h3 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h3><table>
+<thead>
+<tr>
+<th>API</th>
+<th style="text-align:center">浏览器</th>
+<th style="text-align:center">Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I/O</td>
+<td style="text-align:center">✅</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>setTimeout</td>
+<td style="text-align:center">✅</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>setInterval</td>
+<td style="text-align:center">✅</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>setImmediate</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>requestAnimationFrame</td>
+<td style="text-align:center">✅</td>
+<td style="text-align:center">❌</td>
+</tr>
+</tbody>
+</table>
+<p>有些地方会列出来UI Rendering，说这个也是宏任务，可是在读了HTML规范文档以后，发现这很显然是和微任务平行的一个操作步骤 </p>
+<p>HTML规范文档:</p>
+<blockquote>
+<p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" target="_blank" rel="noopener">https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model</a></p>
+</blockquote>
+<p>requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在MDN的定义为，下次页面重绘前所执行的操作，而重绘也是作为宏任务的一个步骤来存在的，且该步骤晚于微任务的执行</p>
+<p>MDN:</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame</a></p>
+</blockquote>
+<h3 id="微任务例子"><a href="#微任务例子" class="headerlink" title="微任务例子"></a>微任务例子</h3><table>
+<thead>
+<tr>
+<th>API</th>
+<th style="text-align:center">浏览器</th>
+<th style="text-align:center">Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>process.nextTick</td>
+<td style="text-align:center">❌</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>MutationObserver</td>
+<td style="text-align:center">✅</td>
+<td style="text-align:center">❌</td>
+</tr>
+<tr>
+<td>Promise.then catch finally</td>
+<td style="text-align:center">✅</td>
+<td style="text-align:center">✅</td>
+</tr>
+</tbody>
+</table>
 <p>参考文献</p>
 <ul>
 <li><a href="https://segmentfault.com/a/1190000016022069" target="_blank" rel="noopener">https://segmentfault.com/a/1190000016022069</a></li>
@@ -665,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript事件循环"><span class="nav-number">1.</span> <span class="nav-text">javascript事件循环</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eventloop"><span class="nav-number">1.</span> <span class="nav-text">Eventloop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微任务与宏任务的区别"><span class="nav-number">2.</span> <span class="nav-text">微任务与宏任务的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏任务"><span class="nav-number">2.1.</span> <span class="nav-text">宏任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微任务例子"><span class="nav-number">2.2.</span> <span class="nav-text">微任务例子</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -699,7 +776,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">17.4k</span>
+    <span title="Site words total count">18.1k</span>
   
 </div>
 
