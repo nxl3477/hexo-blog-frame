@@ -1,5 +1,5 @@
 ---
-title: 弄懂js的微任务和宏任务
+title: JavaScript事件机制
 date: 2019-03-26 23:20:40
 categories: JavaScript
 tags: JavaScript
@@ -14,7 +14,10 @@ tags: JavaScript
 
 
 
-## Eventloop
+
+
+
+## 事件机制
 
 单线程当遇到比较费事的操作带来的后果就是浏览器卡死， 那怎么办？
 为了应对这些问题， JavaScript将事件分为了
@@ -31,6 +34,9 @@ tags: JavaScript
 看图中， 最开始调用的函数被压在了最下面， 直到最后才出栈
 
 当我们递归书写不规范时， 就会撑爆函数的执行栈， 也就是`爆栈`
+
+
+
 
 
 ## 微任务与宏任务的区别
@@ -50,6 +56,48 @@ tags: JavaScript
 所以
 **在当前的微任务没有执行完成时，是不会执行下一个宏任务的**
 
+
+### 优先级
+
+不管是微任务还是宏任务， 都是异步任务， 当他们的事件处理完成后， 最终都是要归回到同步事件队列处理的， 也就是主进程， 
+
+
+既然是主进程，主进程又要负责浏览器的渲染， 那这三者之间的优先级是什么呢
+
+
+因为微任务实际上是宏任务的其中一个步骤， 也就是下一次的宏任务到来之前必然得先执行完当前的宏任务的微任务, 所以可以这么看:
+> 浏览器渲染 > 微任务 > 宏任务
+
+微任务会插队， 插入每一次的执行栈末尾， 宏任务比较可怜， 只要存在微任务，就会被插队，顺序就会往后
+
+
+
+
+
+
+
+
+## EventLoop
+
+每办理完一个业务，柜员就会问当前的客户，是否还有其他需要办理的业务。_（检查还有没有微任务需要处理）_ 
+而客户明确告知说没有事情以后，柜员就去查看后边还有没有等着办理业务的人。_（结束本次宏任务、检查还有没有宏任务需要处理）_ 
+这个检查的过程是持续进行的，每完成一个任务都会进行一次，而这样的操作就被称为Event Loop。_(这是个非常简易的描述了，实际上会复杂很多)_
+
+而且就如同上边所说的，一个柜员同一时间只能处理一件事情，即便这些事情是一个客户所提出的，所以可以认为微任务也存在一个队列，大致是这样的一个逻辑：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 宏任务
 | API        | 浏览器    |  Node  |
 | --------   | :-----:   | :----: |
@@ -60,16 +108,15 @@ tags: JavaScript
 | requestAnimationFrame        | ✅     |  ❌  |
 
 
-有些地方会列出来UI Rendering，说这个也是宏任务，可是在读了HTML规范文档以后，发现这很显然是和微任务平行的一个操作步骤 
-
-HTML规范文档:
-> https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model
+I/O这一项感觉有点儿笼统，有太多的东西都可以称之为I/O，点击一次button，上传一个文件，与程序产生交互的这些都可以称之为I/O。
 
 
-requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在MDN的定义为，下次页面重绘前所执行的操作，而重绘也是作为宏任务的一个步骤来存在的，且该步骤晚于微任务的执行
+有些地方会列出来UI Rendering，说这个也是宏任务，可是在读了[HTML规范文档](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model)以后，发现这很显然是和微任务平行的一个操作步骤 
 
-MDN:
-> https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
+
+
+requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在[MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame)的定义为，下次页面重绘前所执行的操作，而重绘也是作为宏任务的一个步骤来存在的，且该步骤晚于微任务的执行
+
 
 
 
@@ -79,6 +126,9 @@ MDN:
 | process.nextTick      | ❌     |  ✅  |
 | MutationObserver        | ✅     |  ❌   |
 | Promise.then catch finally       | ✅      |  ✅  |
+
+
+
 
 
 

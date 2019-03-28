@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 Eventloo">
+<meta name="description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 事件机制单线程当">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="弄懂js的微任务和宏任务">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/26/弄懂js的微任务和宏任务/index.html">
+<meta property="og:title" content="JavaScript事件机制">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/26/JavaScript事件机制/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 Eventloo">
+<meta property="og:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 事件机制单线程当">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/js-stack.gif">
-<meta property="og:updated_time" content="2019-03-27T15:39:41.798Z">
+<meta property="og:updated_time" content="2019-03-28T15:13:23.689Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="弄懂js的微任务和宏任务">
-<meta name="twitter:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 Eventloo">
+<meta name="twitter:title" content="JavaScript事件机制">
+<meta name="twitter:description" content="首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了Web-Worker, 但JavaScript本质上还是一门单线程的语言， 这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的 所以JavaScript 放弃了多线程 事件机制单线程当">
 <meta name="twitter:image" content="http://img.nixiaolei.com/js-stack.gif">
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/26/弄懂js的微任务和宏任务/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/26/JavaScript事件机制/">
 
 
 
 
 
-  <title>弄懂js的微任务和宏任务 | 倪晓磊的个人博客</title>
+  <title>JavaScript事件机制 | 倪晓磊的个人博客</title>
   
 
 
@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/26/弄懂js的微任务和宏任务/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/26/JavaScript事件机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -294,7 +294,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">弄懂js的微任务和宏任务</h2>
+          <h2 class="post-title" itemprop="name headline">JavaScript事件机制</h2>
         
 
         <div class="post-meta">
@@ -360,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  911 字
+                  1.4k 字
                 </span>
               
 
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -400,7 +400,7 @@
         <p>首先我们都知道JavaScript是单线程的， 当然现在浏览器中 HTML5 为我们提供了<code>Web-Worker</code>, 但JavaScript本质上还是一门单线程的语言，</p>
 <p>这也是为了保持JavaScript 的简单易学，并且这也和DOM有关，因为如果 JavaScript 是多线程的， 一个县城增加了 DOM，一个删除了DOM， 那该听哪个线程的</p>
 <p>所以JavaScript 放弃了多线程</p>
-<h2 id="Eventloop"><a href="#Eventloop" class="headerlink" title="Eventloop"></a>Eventloop</h2><p>单线程当遇到比较费事的操作带来的后果就是浏览器卡死， 那怎么办？<br>为了应对这些问题， JavaScript将事件分为了</p>
+<h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><p>单线程当遇到比较费事的操作带来的后果就是浏览器卡死， 那怎么办？<br>为了应对这些问题， JavaScript将事件分为了</p>
 <ul>
 <li>同步任务</li>
 <li>异步任务</li>
@@ -415,6 +415,15 @@
 <p>在宏任务期间， 可以追加微任务的， 或者说微任务是可以插队的，  就像在柜台办理业务中， 一位大爷在办完自己的本来的业务后，  柜员通常都会问还有什么需要办理的业务， 这时老大爷想了一下：“最近P2P爆雷有点儿多，是不是要选择稳一些的理财呢”，然后告诉柜员说，要办一些理财的业务，这时候柜员肯定不能告诉老大爷说：“您再上后边取个号去，重新排队”。 </p>
 <p>所以本来快轮到你来办理业务，会因为老大爷临时添加的“理财业务”而往后推。<br>也许老大爷在办完理财以后还想 再办一个信用卡？或者 再买点儿纪念币？<br>无论是什么需求，只要是柜员能够帮她办理的，都会在处理你的业务之前来做这些事情，这些都可以认为是微任务。</p>
 <p>所以<br><strong>在当前的微任务没有执行完成时，是不会执行下一个宏任务的</strong></p>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>不管是微任务还是宏任务， 都是异步任务， 当他们的事件处理完成后， 最终都是要归回到同步事件队列处理的， 也就是主进程， </p>
+<p>既然是主进程，主进程又要负责浏览器的渲染， 那这三者之间的优先级是什么呢</p>
+<p>因为微任务实际上是宏任务的其中一个步骤， 也就是下一次的宏任务到来之前必然得先执行完当前的宏任务的微任务, 所以可以这么看:</p>
+<blockquote>
+<p>浏览器渲染 &gt; 微任务 &gt; 宏任务</p>
+</blockquote>
+<p>微任务会插队， 插入每一次的执行栈末尾， 宏任务比较可怜， 只要存在微任务，就会被插队，顺序就会往后</p>
+<h2 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h2><p>每办理完一个业务，柜员就会问当前的客户，是否还有其他需要办理的业务。<em>（检查还有没有微任务需要处理）</em><br>而客户明确告知说没有事情以后，柜员就去查看后边还有没有等着办理业务的人。<em>（结束本次宏任务、检查还有没有宏任务需要处理）</em><br>这个检查的过程是持续进行的，每完成一个任务都会进行一次，而这样的操作就被称为Event Loop。<em>(这是个非常简易的描述了，实际上会复杂很多)</em></p>
+<p>而且就如同上边所说的，一个柜员同一时间只能处理一件事情，即便这些事情是一个客户所提出的，所以可以认为微任务也存在一个队列，大致是这样的一个逻辑：</p>
 <h3 id="宏任务"><a href="#宏任务" class="headerlink" title="宏任务"></a>宏任务</h3><table>
 <thead>
 <tr>
@@ -451,16 +460,9 @@
 </tr>
 </tbody>
 </table>
-<p>有些地方会列出来UI Rendering，说这个也是宏任务，可是在读了HTML规范文档以后，发现这很显然是和微任务平行的一个操作步骤 </p>
-<p>HTML规范文档:</p>
-<blockquote>
-<p><a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" target="_blank" rel="noopener">https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model</a></p>
-</blockquote>
-<p>requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在MDN的定义为，下次页面重绘前所执行的操作，而重绘也是作为宏任务的一个步骤来存在的，且该步骤晚于微任务的执行</p>
-<p>MDN:</p>
-<blockquote>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame</a></p>
-</blockquote>
+<p>I/O这一项感觉有点儿笼统，有太多的东西都可以称之为I/O，点击一次button，上传一个文件，与程序产生交互的这些都可以称之为I/O。</p>
+<p>有些地方会列出来UI Rendering，说这个也是宏任务，可是在读了<a href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" target="_blank" rel="noopener">HTML规范文档</a>以后，发现这很显然是和微任务平行的一个操作步骤 </p>
+<p>requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame" target="_blank" rel="noopener">MDN</a>的定义为，下次页面重绘前所执行的操作，而重绘也是作为宏任务的一个步骤来存在的，且该步骤晚于微任务的执行</p>
 <h3 id="微任务例子"><a href="#微任务例子" class="headerlink" title="微任务例子"></a>微任务例子</h3><table>
 <thead>
 <tr>
@@ -540,7 +542,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.nixiaolei.com/2019/03/26/弄懂js的微任务和宏任务/" title="弄懂js的微任务和宏任务">http://blog.nixiaolei.com/2019/03/26/弄懂js的微任务和宏任务/</a>
+    <a href="http://blog.nixiaolei.com/2019/03/26/JavaScript事件机制/" title="JavaScript事件机制">http://blog.nixiaolei.com/2019/03/26/JavaScript事件机制/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -742,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eventloop"><span class="nav-number">1.</span> <span class="nav-text">Eventloop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微任务与宏任务的区别"><span class="nav-number">2.</span> <span class="nav-text">微任务与宏任务的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏任务"><span class="nav-number">2.1.</span> <span class="nav-text">宏任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微任务例子"><span class="nav-number">2.2.</span> <span class="nav-text">微任务例子</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件机制"><span class="nav-number">1.</span> <span class="nav-text">事件机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微任务与宏任务的区别"><span class="nav-number">2.</span> <span class="nav-text">微任务与宏任务的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级"><span class="nav-number">2.1.</span> <span class="nav-text">优先级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EventLoop"><span class="nav-number">3.</span> <span class="nav-text">EventLoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏任务"><span class="nav-number">3.1.</span> <span class="nav-text">宏任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微任务例子"><span class="nav-number">3.2.</span> <span class="nav-text">微任务例子</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -776,7 +778,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">18.1k</span>
+    <span title="Site words total count">18.6k</span>
   
 </div>
 
