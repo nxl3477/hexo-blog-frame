@@ -200,27 +200,59 @@ $outer.addEventListener('click', handler)
 
 
 ## Node Js
-Node也是单线程，但是在处理Event Loop上与浏览器稍微有些不同，这里是Node官方文档的地址。
+Node也是单线程，但是在处理Event Loop上与浏览器稍微有些不同，这里是[Node官方文档](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#event-loop-explained)的地址。
+
 
 就单从API层面上来理解，Node新增了两个方法可以用来使用：微任务的process.nextTick以及宏任务的setImmediate。
 
-setImmediate与setTimeout的区别
-在官方文档中的定义，setImmediate为一次Event Loop执行完毕后调用。 
-setTimeout则是通过计算一个延迟时间后进行执行。
 
-但是同时还提到了如果在主进程中直接执行这两个操作，很难保证哪个会先触发。 
-因为如果主进程中先注册了两个任务，然后执行的代码耗时超过XXs，而这时定时器已经处于可执行回调的状态了。 
-所以会先执行定时器，而执行完定时器以后才是结束了一次Event Loop，这时才会执行setImmediate。
+### 几个特殊的API
+1. SetTimeout和SetInterval 线程池不参与
+2. process.nextTick() 实现类似SetTimeout(function(){},0);每次调用放入队列中，在下一轮循环中取出。
+3. setImmediate();比process.nextTick()优先级低
+
+
+来看看这段代码
 
 ```JavaScript
-setTimeout(_ => console.log('setTimeout'))
-setImmediate(_ => console.log('setImmediate'))
+setTimeout(() => {
+  console.log(1)
+}, 0)
+
+setImmediate(() => {
+  console.log(2)
+})
+
+process.nextTick(() => {
+  console.log(3)
+})
+
+new Promise((resolve, reject) => {
+  console.log(4)
+  resolve(4)
+}).then(() => {
+  console.log(5)
+})
+
+console.log(6)
 ```
 
+这道题目的答案是 463512
+
+这里有几个注意点， 第一就是 nextTick ，它的优先级比 promise.then 要高， 如下图， 它加入队列的方式属于插队行为, 它直接加入到了当前执行栈（同步队列）与 下一次的等待执行栈之间
+
+![nextTick](http://img.nixiaolei.com/2019-03-29-22-45-02.png)
 
 
+我们都知道 then 比 setTimeout 优先级高
 
+然后就是 setTimeout 和 setImmediate 的问题了，
 
+setImmediate与setTimeout的区别，在官方文档中的定义，setImmediate为一次Event Loop执行完毕后调用。 setTimeout则是通过计算一个延迟时间后进行执行。
+
+但是在实际使用中， 当setTimeout 设置为0时， 他们都是放在队列最后,  所以执行顺序就是谁先写就先执行谁了， 但当setTimeout 设置的时间大于0 时（最低延迟会被忽略）， 情况就不一样了， setTmmediate 会先被执行
+
+![setImmediate](http://img.nixiaolei.com/2019-03-29-22-45-25.png)
 
 
 
