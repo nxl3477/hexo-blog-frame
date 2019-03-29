@@ -57,6 +57,7 @@ tags: JavaScript
 **在当前的微任务没有执行完成时，是不会执行下一个宏任务的**
 
 
+
 ### 优先级
 
 不管是微任务还是宏任务， 都是异步任务， 当他们的事件处理完成后， 最终都是要归回到同步事件队列处理的， 也就是主进程， 
@@ -71,8 +72,14 @@ tags: JavaScript
 微任务会插队， 插入每一次的执行栈末尾， 宏任务比较可怜， 只要存在微任务，就会被插队，顺序就会往后
 
 
+***
+
+看下图， 我们可以理解微任务和微任务分别维护着一个队列， 微任务的箭头指向靠前， 表示微任务会优先于宏任务加入事件队列，  宏任务会延迟加入
+
+理论上UI渲染的优先级是比较高的， 但实际上如果你的微任务或宏任务之内， 出现了死循环或大量计算的情况， UI渲染就会被阻塞住， 无法进行，也就是页面卡死状态， 毕竟js单线程
 
 
+![事件关系](http://img.nixiaolei.com/2019-03-29-22-31-43.png)
 
 
 
@@ -130,9 +137,95 @@ requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在[MDN]
 
 
 
+## 浏览器中
+
+在上边简单的说明了两种任务的差别，以及Event Loop的作用，那么在真实的浏览器中是什么表现呢？ 
+首先要明确的一点是，宏任务必然是在微任务之后才执行的（因为微任务实际上是宏任务的其中一个步骤）
+
+I/O这一项感觉有点儿笼统，有太多的东西都可以称之为I/O，点击一次button，上传一个文件，与程序产生交互的这些都可以称之为I/O。
+
+假设有这样的一些DOM结构：
+```HTML
+<style>
+  #outer {
+    padding: 20px;
+    background: #616161;
+  }
+
+  #inner {
+    width: 100px;
+    height: 100px;
+    background: #757575;
+  }
+</style>
+<div id="outer">
+  <div id="inner"></div>
+</div>
+```
+
+```JavaScript
+const $inner = document.querySelector('#inner')
+const $outer = document.querySelector('#outer')
+
+function handler () {
+  console.log('click') // 直接输出
+
+  Promise.resolve().then(_ => console.log('promise')) // 注册微任务
+
+  setTimeout(_ => console.log('timeout')) // 注册宏任务
+
+  requestAnimationFrame(_ => console.log('animationFrame')) // 注册宏任务
+
+  $outer.setAttribute('data-random', Math.random()) // DOM属性修改，触发微任务
+}
+
+new MutationObserver(_ => {
+  console.log('observer')
+}).observe($outer, {
+  attributes: true
+})
+
+$inner.addEventListener('click', handler)
+$outer.addEventListener('click', handler)
+
+```
+
+如果点击#inner，其执行顺序一定是：click -> promise -> observer -> click -> promise -> observer -> animationFrame -> animationFrame -> timeout -> timeout。
+
+因为一次I/O创建了一个宏任务，也就是说在这次任务中会去触发handler。 
+按照代码中的注释，在同步的代码已经执行完以后，这时就会去查看是否有微任务可以执行，然后发现了Promise和MutationObserver两个微任务，遂执行之。 
+因为click事件会冒泡，所以对应的这次I/O会触发两次handler函数(_一次在inner、一次在outer_)，所以会优先执行冒泡的事件(_早于其他的宏任务_)，也就是说会重复上述的逻辑。 
+在执行完同步代码与微任务以后，这时继续向后查找有木有宏任务。 
+需要注意的一点是，因为我们触发了setAttribute，实际上修改了DOM的属性，这会导致页面的重绘，而这个set的操作是同步执行的，也就是说requestAnimationFrame的回调会早于setTimeout所执行。
 
 
-参考文献
+## Node Js
+Node也是单线程，但是在处理Event Loop上与浏览器稍微有些不同，这里是Node官方文档的地址。
+
+就单从API层面上来理解，Node新增了两个方法可以用来使用：微任务的process.nextTick以及宏任务的setImmediate。
+
+setImmediate与setTimeout的区别
+在官方文档中的定义，setImmediate为一次Event Loop执行完毕后调用。 
+setTimeout则是通过计算一个延迟时间后进行执行。
+
+但是同时还提到了如果在主进程中直接执行这两个操作，很难保证哪个会先触发。 
+因为如果主进程中先注册了两个任务，然后执行的代码耗时超过XXs，而这时定时器已经处于可执行回调的状态了。 
+所以会先执行定时器，而执行完定时器以后才是结束了一次Event Loop，这时才会执行setImmediate。
+
+```JavaScript
+setTimeout(_ => console.log('setTimeout'))
+setImmediate(_ => console.log('setImmediate'))
+```
+
+
+
+
+
+
+
+
+
+参考文献(原文写的不错， 所以我大部分是复制，方便之后自己回顾理解)
 * https://segmentfault.com/a/1190000016022069
 
 
