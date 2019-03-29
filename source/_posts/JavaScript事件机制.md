@@ -105,7 +105,7 @@ tags: JavaScript
 
 
 
-### 宏任务
+### 宏任务例子
 | API        | 浏览器    |  Node  |
 | --------   | :-----:   | :----: |
 | I/O      | ✅     |  ✅  |
@@ -137,7 +137,7 @@ requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在[MDN]
 
 
 
-## 浏览器中
+## 浏览器中的情况
 
 在上边简单的说明了两种任务的差别，以及Event Loop的作用，那么在真实的浏览器中是什么表现呢？ 
 首先要明确的一点是，宏任务必然是在微任务之后才执行的（因为微任务实际上是宏任务的其中一个步骤）
@@ -199,7 +199,7 @@ $outer.addEventListener('click', handler)
 需要注意的一点是，因为我们触发了setAttribute，实际上修改了DOM的属性，这会导致页面的重绘，而这个set的操作是同步执行的，也就是说requestAnimationFrame的回调会早于setTimeout所执行。
 
 
-## Node Js
+## Node Js中的情况
 Node也是单线程，但是在处理Event Loop上与浏览器稍微有些不同，这里是[Node官方文档](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/#event-loop-explained)的地址。
 
 
