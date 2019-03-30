@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="倪晓磊, a磊, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
+  <meta name="keywords" content="Vue,">
 
 
 
@@ -79,22 +79,24 @@
 
 
 
-<meta name="description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 📃diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
-<meta name="keywords" content="倪晓磊, a磊, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
+<meta name="description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 🍎diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
+<meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Vue】源码解析">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/18/【Vue】/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 📃diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
+<meta property="og:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 🍎diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/vuejs/vue">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-10-44-35.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-10-57-26.png">
-<meta property="og:updated_time" content="2019-03-30T02:58:09.760Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-48-41.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-12-57-56.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-51-42.png">
+<meta property="og:updated_time" content="2019-03-30T05:15:58.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Vue】源码解析">
-<meta name="twitter:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 📃diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
-<meta name="twitter:image" content="https://github.com/vuejs/vue">
+<meta name="twitter:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 🍎diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-03-30-10-44-35.png">
 
 
 
@@ -319,6 +321,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -340,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  574 字
+                  1k 字
                 </span>
               
 
@@ -356,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -381,7 +405,7 @@
 <p>当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然</p>
 <p>要了解MVVM的本质原理， <code>virtual Dom</code>和 <code>Diff</code>算法带来的好处以及坏处</p>
 <p>拒绝盲目跟风</p>
-<h2 id="📃diffDom优劣"><a href="#📃diffDom优劣" class="headerlink" title="📃diffDom优劣"></a>📃diffDom优劣</h2><p>现在很多人都说 <code>Vue</code>, <code>React</code> 多牛， <code>Diff</code>算法快，不用操作<code>Dom</code>。</p>
+<h2 id="🍎diffDom优劣"><a href="#🍎diffDom优劣" class="headerlink" title="🍎diffDom优劣"></a>🍎diffDom优劣</h2><p>现在很多人都说 <code>Vue</code>, <code>React</code> 多牛， <code>Diff</code>算法快，不用操作<code>Dom</code>。</p>
 <p>只能无语。</p>
 <p><code>Diff</code>算法不是不需要操作<code>Dom</code>,  而是不需要开发者去操作<code>Dom</code>了， <code>Diff</code>算法其实不快， 就算使用了<code>virtual Dom</code>,  还得花实现把真实<code>Dom</code> 转换为 <code>virtual Dom</code> 再去比对， 这远远没有<code>js</code>直接 <code>getElementById</code>直达目标来的快</p>
 <p>那Diff算法不快为什么还要用呢?</p>
@@ -391,13 +415,49 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拿到结果不管三七二十一把旧dom全替换了</span></span><br><span class="line">$.<span class="keyword">get</span>('/api', (res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">var</span> _HTML = <span class="string">""</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt; res.length; i++)&#123;</span><br><span class="line">    _HTML = <span class="string">"&lt;li&gt;"</span> + res[i] +<span class="string">"&lt;/li&gt;"</span></span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="string">"#ul"</span>).html(_HTML)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>如果是原始的<code>Dom</code>操作， 有很多小白会像这个例子一样， 不管<code>Dom</code>需不需要更新， 他都把<code>ajax</code>返回的请求全部跑一边，生成<code>HTML</code>模板， 然后把原本的所有<code>li</code>都删了，  再把新的模板放进去， <code>Dom</code>少还看不出来， 如果<code>Dom</code>多了呢， 上千的<code>Dom</code>， 这顿操作一下就玩炸了。</p>
 <p>况且网站优化原则就是尽量减小<code>Dom</code>操作， 如果是有经验的开发者， 会选择找到有变化的位置，使用<code>append</code>插入</p>
-<h2 id="Vue架构目录"><a href="#Vue架构目录" class="headerlink" title="Vue架构目录"></a>Vue架构目录</h2><p>去<img src="https://github.com/vuejs/vue" alt="Vue官网">下载Vue源码看看，</p>
+<h2 id="📄Vue架构目录"><a href="#📄Vue架构目录" class="headerlink" title="📄Vue架构目录"></a>📄Vue架构目录</h2><p>去<a href="https://github.com/vuejs/vue" target="_blank" rel="noopener">Vue官网</a>下载Vue源码看看，</p>
 <p>打开里面会有一个 src目录， 里面就是整个的Vue源码</p>
 <p>目前有6个目录， 作用分别如下</p>
 <p><img src="http://img.nixiaolei.com/2019-03-30-10-44-35.png" alt="Vue目录"></p>
 <p>Vue.js 的组成是由 <code>core</code> + 对应的 ‘平台’ 补充代码构成（独立构建和运行时构建只是 <code>platforms</code> 下 web 平台的两种选择）</p>
 <p>vue的核心原理就在core文件夹中， 让我们进入 <code>core</code> 文件夹看看</p>
-<p><img src="http://img.nixiaolei.com/2019-03-30-10-57-26.png" alt="2019-03-30-10-57-26"></p>
+<p><img src="http://img.nixiaolei.com/2019-03-30-10-57-26.png" alt="core文件夹"></p>
+<p>了解了目录，接下来我们就来研究Vue的双向绑定</p>
+<h2 id="🔗双向绑定（响应式原理）-所涉及到的技术"><a href="#🔗双向绑定（响应式原理）-所涉及到的技术" class="headerlink" title="🔗双向绑定（响应式原理） 所涉及到的技术"></a>🔗双向绑定（响应式原理） 所涉及到的技术</h2><ul>
+<li>✅ <strong>Obejct.defineProperty</strong> <em>【提供getter 和 setter】</em></li>
+<li>✅ <strong>Observer</strong> <em>【提供getter 和 setter】</em></li>
+<li>✅ <strong>watcher</strong>  <em>【提供getter 和 setter】</em></li>
+<li>✅ <strong>Dep</strong> <em>【负责收集watcher】</em></li>
+<li>✅ <strong>Directive</strong> <em>【处理Vue模板指令】</em></li>
+</ul>
+<p><code>Obejct.defineProperty</code> 是整个<code>Vue</code>的灵魂， </p>
+<p>来看一下<code>Obejct.defineProperty</code> 如何使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> c;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'a'</span>, &#123;</span><br><span class="line">  <span class="keyword">get</span>() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'getter'</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(newVal) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setter'</span>)</span><br><span class="line">    c = newVal</span><br><span class="line">    <span class="keyword">this</span>.a = newVal</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">obj.a = <span class="string">'234'</span></span><br><span class="line"><span class="built_in">console</span>.log(c) <span class="comment">// 234</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.a) <span class="comment">// 234</span></span><br></pre></td></tr></table></figure></p>
+<p>它帮助<code>Vue</code>实现了双向绑定, 但也因为这个， <code>Vue</code>也只能舍弃了对低版本浏览器的支持。</p>
+<p><img src="http://img.nixiaolei.com/2019-03-30-11-48-41.png" alt="defineProperty兼容"></p>
+<p>它只能兼容到<code>IE9</code> ， 并且市面上的<code>polyfill</code>实现的也并不是很好</p>
+<p>那低版本如何代替<code>Obejct.defineProperty</code> ？， 难道真没了它就不行吗？</p>
+<p><strong>当然有</strong>：</p>
+<ol>
+<li>👆 &gt; IE 7</li>
+</ol>
+<p>实际上在IE7的时候就已经有暴露了 <code>__defineGetter__</code> 方法，<br><img src="http://img.nixiaolei.com/2019-03-30-12-57-56.png" alt="__defineGetter__"></p>
+<p>具体用法如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> random = &#123;&#125;;</span><br><span class="line">random.__defineGetter__(<span class="string">'ten'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">10</span>); &#125;);</span><br><span class="line">random.__defineGetter__(<span class="string">'hundred'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>); &#125;);</span><br><span class="line"></span><br><span class="line">random.ten <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>👇 &lt; IE 7</li>
+</ol>
+<p>早年间的<code>IE</code> 是支持<code>VBScript</code>,  <a href="http://www.w3school.com.cn/vbscript/index.asp" target="_blank" rel="noopener">VBScript</a> 就可以直接写类， 并且也支持<code>get</code>，<code>set</code>方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="keyword">get</span> name () &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> name() &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="🐶霸道的IE"><a href="#🐶霸道的IE" class="headerlink" title="🐶霸道的IE"></a>🐶霸道的IE</h3><p>说了这么多<code>IE</code>的坏， 这里也带一嘴IE的好，</p>
+<p><code>IE</code>能够调用<code>EXE</code>程序, 比如<code>JS</code>无法设置打印机的宽高，就可以利用<code>ActiveObjectX</code>来做到, 甚至可以修改<code>word</code>格式等等  , 所以办公类的项目离不开<code>IE</code></p>
+<h2 id="😕MVVM-双向数据绑定流程"><a href="#😕MVVM-双向数据绑定流程" class="headerlink" title="😕MVVM 双向数据绑定流程"></a>😕MVVM 双向数据绑定流程</h2><p>MVVM: Model–view–viewmodel</p>
+<p>那怎么区分这些层呢</p>
+<ul>
+<li>🚀<strong>Model</strong>: Observer</li>
+<li>✈️<strong>view</strong> : directive</li>
+<li>🚚<strong>viewmodel</strong>: Watcher &amp;&amp; Dep  <em>【用于连接 Model 和 view】</em></li>
+</ul>
+<p><img src="http://img.nixiaolei.com/2019-03-30-11-51-42.png" alt="双向数据绑定"></p>
+<p>先看<code>Directive</code>, 这就是我们平时写的<code>vue</code>指令， 如上面举例得的<code>v-text=&quot;times&quot;</code>, 这就是一个指令， 一个<code>Directive</code>会分配一个<code>Watcher</code></p>
 
       
     </div>
@@ -459,6 +519,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
       
 
       
@@ -647,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#📃diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">📃diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">Vue架构目录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.1.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a></li></ol></div>
             
 
           </div>
@@ -681,7 +747,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.2k</span>
+    <span title="Site words total count">21.7k</span>
   
 </div>
 
