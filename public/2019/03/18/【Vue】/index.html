@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-48-41.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-12-57-56.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-51-42.png">
-<meta property="og:updated_time" content="2019-03-30T05:15:58.071Z">
+<meta property="og:updated_time" content="2019-03-30T05:28:51.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Vue】源码解析">
 <meta name="twitter:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 🍎diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k 字
+                  1.4k 字
                 </span>
               
 
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -430,7 +430,7 @@
 <li>✅ <strong>Dep</strong> <em>【负责收集watcher】</em></li>
 <li>✅ <strong>Directive</strong> <em>【处理Vue模板指令】</em></li>
 </ul>
-<p><code>Obejct.defineProperty</code> 是整个<code>Vue</code>的灵魂， </p>
+<h3 id="Obejct-defineProperty"><a href="#Obejct-defineProperty" class="headerlink" title="Obejct.defineProperty"></a>Obejct.defineProperty</h3><p><code>Obejct.defineProperty</code> 是整个<code>Vue</code>的灵魂， </p>
 <p>来看一下<code>Obejct.defineProperty</code> 如何使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line"><span class="keyword">var</span> c;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'a'</span>, &#123;</span><br><span class="line">  <span class="keyword">get</span>() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'getter'</span>)</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(newVal) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setter'</span>)</span><br><span class="line">    c = newVal</span><br><span class="line">    <span class="keyword">this</span>.a = newVal</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">obj.a = <span class="string">'234'</span></span><br><span class="line"><span class="built_in">console</span>.log(c) <span class="comment">// 234</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.a) <span class="comment">// 234</span></span><br></pre></td></tr></table></figure></p>
 <p>它帮助<code>Vue</code>实现了双向绑定, 但也因为这个， <code>Vue</code>也只能舍弃了对低版本浏览器的支持。</p>
 <p><img src="http://img.nixiaolei.com/2019-03-30-11-48-41.png" alt="defineProperty兼容"></p>
@@ -458,6 +458,14 @@
 </ul>
 <p><img src="http://img.nixiaolei.com/2019-03-30-11-51-42.png" alt="双向数据绑定"></p>
 <p>先看<code>Directive</code>, 这就是我们平时写的<code>vue</code>指令， 如上面举例得的<code>v-text=&quot;times&quot;</code>, 这就是一个指令， 一个<code>Directive</code>会分配一个<code>Watcher</code></p>
+<h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><p>观察者模式是软件设计模式的一种。在此种模式中，一个目标对象管理所有相依于它的观察者对象，并且在它本身的状态改变时主动发出通知。这通常透过呼叫各观察者所提供的方法来实现。此种模式通常被用来实时事件处理系统。订阅者模式涉及三个对象：发布者、主题对象、订阅者，三个对象间的是一对多的关系，每当主题对象状态发生改变时，其相关依赖对象都会得到通知，并被自动更新。</p>
+<p>简单的描述就是:</p>
+<p>你想买漫画， 但是问了报刊亭的大爷， 大爷说现在没有， 还没到货， 然后你回去了， 第二天你又去问， 大爷还是说没有， 如果你每天这样问， 大爷估计会嫌你烦。 如果这时候你把你的电话给大爷， 大爷记录到他的<strong>本子</strong>上,  当大爷的漫画到货的时候电话通知你。</p>
+<p>这时你就是<code>订阅者</code>, 大爷就是<code>发布者</code>, 你们就存在一个发布订阅者的关系</p>
+<p>优质文献: </p>
+<ul>
+<li><a href="http://www.cnblogs.com/TomXu/archive/2012/03/02/2355128.html" target="_blank" rel="noopener">汤姆大叔的观察者模式</a></li>
+</ul>
 
       
     </div>
@@ -713,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.1.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Obejct-defineProperty"><span class="nav-number">3.1.</span> <span class="nav-text">Obejct.defineProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.2.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">4.1.</span> <span class="nav-text">Observer</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -747,7 +755,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.7k</span>
+    <span title="Site words total count">22k</span>
   
 </div>
 
