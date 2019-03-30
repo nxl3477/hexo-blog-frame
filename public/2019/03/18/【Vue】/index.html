@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习技巧,学习渠道,css,">
+  <meta name="keywords" content="倪晓磊, a磊, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="平时闲着无聊的时候多去看看MDN或者一些国外的网站， 多试试一些新特性， 说不定就会有新的发现 并且还可以尝试着参与MDN的文章翻译及国外优质技术文章  MDN：https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference">
-<meta name="keywords" content="学习技巧,学习渠道,css">
+<meta name="description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 📃diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
+<meta name="keywords" content="倪晓磊, a磊, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS如何了解新知识">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/16/CSS如何了解新知识/index.html">
+<meta property="og:title" content="【Vue】源码解析">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/18/【Vue】/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="平时闲着无聊的时候多去看看MDN或者一些国外的网站， 多试试一些新特性， 说不定就会有新的发现 并且还可以尝试着参与MDN的文章翻译及国外优质技术文章  MDN：https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference">
+<meta property="og:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 📃diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-22T13:47:52.702Z">
+<meta property="og:updated_time" content="2019-03-30T02:17:23.385Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS如何了解新知识">
-<meta name="twitter:description" content="平时闲着无聊的时候多去看看MDN或者一些国外的网站， 多试试一些新特性， 说不定就会有新的发现 并且还可以尝试着参与MDN的文章翻译及国外优质技术文章  MDN：https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference">
+<meta name="twitter:title" content="【Vue】源码解析">
+<meta name="twitter:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 📃diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/16/CSS如何了解新知识/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/18/【Vue】/">
 
 
 
 
 
-  <title>CSS如何了解新知识 | 倪晓磊的个人博客</title>
+  <title>【Vue】源码解析 | 倪晓磊的个人博客</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/16/CSS如何了解新知识/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/18/【Vue】/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -292,7 +292,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">CSS如何了解新知识</h2>
+          <h2 class="post-title" itemprop="name headline">【Vue】源码解析</h2>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-16T16:56:22+08:00">
-                2019-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T09:50:34+08:00">
+                2019-03-18
               </time>
             
 
@@ -314,28 +314,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">学习技巧</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -358,7 +336,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  77 字
+                  464 字
                 </span>
               
 
@@ -395,13 +373,20 @@
       
 
       
-        <script type="text/javascript" src="/js/src/bai.js"></script>
-
-<p>平时闲着无聊的时候多去看看MDN或者一些国外的网站， 多试试一些新特性， 说不定就会有新的发现</p>
-<p>并且还可以尝试着参与MDN的文章翻译及国外优质技术文章</p>
-<ul>
-<li>MDN：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference</a> </li>
-</ul>
+        <p>现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地， </p>
+<p>当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然</p>
+<p>要了解MVVM的本质原理， <code>virtual Dom</code>和 <code>Diff</code>算法带来的好处以及坏处</p>
+<p>拒绝盲目跟风</p>
+<h2 id="📃diffDom优劣"><a href="#📃diffDom优劣" class="headerlink" title="📃diffDom优劣"></a>📃diffDom优劣</h2><p>现在很多人都说 <code>Vue</code>, <code>React</code> 多牛， <code>Diff</code>算法快，不用操作<code>Dom</code>。</p>
+<p>只能无语。</p>
+<p><code>Diff</code>算法不是不需要操作<code>Dom</code>,  而是不需要开发者去操作<code>Dom</code>了， <code>Diff</code>算法其实不快， 就算使用了<code>virtual Dom</code>,  还得花实现把真实<code>Dom</code> 转换为 <code>virtual Dom</code> 再去比对， 这远远没有<code>js</code>直接 <code>getElementById</code>直达目标来的快</p>
+<p>那Diff算法不快为什么还要用呢?</p>
+<p><code>Diff</code>算法其实是给那些比较随意的新手开发者准备的</p>
+<p>看这个例子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 原本的dom --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"ul"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>a<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拿到结果不管三七二十一把旧dom全替换了</span></span><br><span class="line">$.<span class="keyword">get</span>('/api', (res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">var</span> _HTML = <span class="string">""</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt; res.length; i++)&#123;</span><br><span class="line">    _HTML = <span class="string">"&lt;li&gt;"</span> + res[i] +<span class="string">"&lt;/li&gt;"</span></span><br><span class="line">  &#125;</span><br><span class="line">  $(<span class="string">"#ul"</span>).html(_HTML)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>如果是原始的<code>Dom</code>操作， 有很多小白会像这个例子一样， 不管<code>Dom</code>需不需要更新， 他都把<code>ajax</code>返回的请求全部跑一边，生成<code>HTML</code>模板， 然后把原本的所有<code>li</code>都删了，  再把新的模板放进去， <code>Dom</code>少还看不出来， 如果<code>Dom</code>多了呢， 上千的<code>Dom</code>， 这顿操作一下就玩炸了。</p>
+<p>况且网站优化原则就是尽量减小<code>Dom</code>操作， 如果是有经验的开发者， 会选择找到有变化的位置，使用<code>append</code>插入</p>
 
       
     </div>
@@ -451,7 +436,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.nixiaolei.com/2019/03/16/CSS如何了解新知识/" title="CSS如何了解新知识">http://blog.nixiaolei.com/2019/03/16/CSS如何了解新知识/</a>
+    <a href="http://blog.nixiaolei.com/2019/03/18/【Vue】/" title="【Vue】源码解析">http://blog.nixiaolei.com/2019/03/18/【Vue】/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -464,16 +449,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/学习技巧/" rel="tag"># 学习技巧</a>
-          
-            <a href="/tags/学习渠道/" rel="tag"># 学习渠道</a>
-          
-            <a href="/tags/css/" rel="tag"># css</a>
-          
-        </div>
-      
 
       
       
@@ -483,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/16/【PostCss】使用明天的CSS/" rel="next" title="【PostCss】使用明天的CSS">
-                <i class="fa fa-chevron-left"></i> 【PostCss】使用明天的CSS
+              <a href="/2019/03/17/工具目录/" rel="next" title="工具目录">
+                <i class="fa fa-chevron-left"></i> 工具目录
               </a>
             
           </div>
@@ -493,8 +468,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/16/Js与CSS变量操作/" rel="prev" title="Js与CSS变量操作">
-                Js与CSS变量操作 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/18/【CSS全景】淘宝造物节H5原理/" rel="prev" title="【CSS全景】淘宝造物节H5原理">
+                【CSS全景】淘宝造物节H5原理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,8 +526,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -642,6 +626,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#📃diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">📃diffDom优劣</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
