@@ -62,4 +62,8 @@ $.get('/api', (res) => {
 ![Vue目录](http://img.nixiaolei.com/2019-03-30-10-44-35.png)
 
 
+Vue.js 的组成是由 `core` + 对应的 '平台' 补充代码构成（独立构建和运行时构建只是 `platforms` 下 web 平台的两种选择）
 
+vue的核心原理就在core文件夹中， 让我们进入 `core` 文件夹看看
+
+![2019-03-30-10-57-26](http://img.nixiaolei.com/2019-03-30-10-57-26.png)
