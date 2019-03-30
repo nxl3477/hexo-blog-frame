@@ -92,7 +92,8 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-48-41.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-12-57-56.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-51-42.png">
-<meta property="og:updated_time" content="2019-03-30T06:46:08.883Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-14-50-38.png">
+<meta property="og:updated_time" content="2019-03-30T07:05:46.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Vue】源码解析">
 <meta name="twitter:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法解决的问题 拒绝盲目跟风 🍎diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是不需要操">
@@ -364,7 +365,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
+                  2.1k 字
                 </span>
               
 
@@ -380,7 +381,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -441,7 +442,7 @@
 <li>👆 &gt; IE 7</li>
 </ol>
 <p>实际上在<code>IE7</code>的时候就已经有暴露了 <code>__defineGetter__</code> 方法，<br><img src="http://img.nixiaolei.com/2019-03-30-12-57-56.png" alt="__defineGetter__"></p>
-<p>具体用法如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> random = &#123;&#125;;</span><br><span class="line">random.__defineGetter__(<span class="string">'ten'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">10</span>); &#125;);</span><br><span class="line">random.__defineGetter__(<span class="string">'hundred'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>); &#125;);</span><br><span class="line"></span><br><span class="line">random.ten <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
+<p>具体用法如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> random = &#123;&#125;;</span><br><span class="line">random.__defineGetter__(<span class="string">'ten'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">10</span>); &#125;);</span><br><span class="line">random.__defineGetter__(<span class="string">'hundred'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">100</span>); &#125;);</span><br><span class="line"></span><br><span class="line">random.ten <span class="comment">// 随机的一个值</span></span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>👇 &lt; IE 7</li>
 </ol>
@@ -467,7 +468,16 @@
 <p>当数组发生变化时，触发 <code>notify</code> 如果是 <code>push</code>，<code>unshift</code>，<code>splice</code> 这些添加新元素的操作，则会使用<code>observer</code>观察新添加的数据重写完原型方法后，遍历拿到数组中的每个数据 使用<code>observer</code>观察它而对于<code>Object</code>类型的数据，则遍历它的每个<code>key</code>，使用 <code>defineProperty</code> 设置 <code>getter</code> 和 <code>setter</code>，当触发<code>getter</code>的时候，<code>observer</code>则开始收集依赖，而触发<code>setter</code>的时候，<code>observer</code>则触发<code>notify</code>。</p>
 <h4 id="对-Object-的处理"><a href="#对-Object-的处理" class="headerlink" title="对 Object 的处理"></a>对 Object 的处理</h4><p><code>Observer</code> 对象的标志就是<code>__ob__</code> 这个属性，这个属性保存了 <code>Observer</code> 对象自己本身。对象在转化为 <code>Observer</code> 对象的过程中是一个递归的过程，对象的子元素如果是对象或数组的话，也会转化为 <code>Observer</code> 对象</p>
 <h4 id="对数组的处理"><a href="#对数组的处理" class="headerlink" title="对数组的处理"></a>对数组的处理</h4><p>其实 <code>observeArray</code> 方法就是对数组进行遍历，递归调用 <code>observe</code> 方法，最终都会走入 <code>walk</code> 方监控单个元素。而 <code>walk</code> 方法就是遍历对象，结合 defineReactive 方法递归将属性转化为 <code>getter</code> 和 <code>setter</code></p>
-<h3 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h3><p>Watcher 是将模板和 Observer 对象结合在一起的纽带。Watcher 是订阅者模式中的订阅者。Watcher 的两<br>个参数： expOrFn 最终会被转换为 getter 函数， cb 是更新时执行的回调。依赖收集的入口就是get函数。</p>
+<h3 id="Watcher"><a href="#Watcher" class="headerlink" title="Watcher"></a>Watcher</h3><p><code>Watcher</code> 是将模板和 <code>Observer</code> 对象结合在一起的纽带。<code>Watcher</code> 是订阅者模式中的订阅者。<code>Watcher</code> 的两个参数： <code>expOrFn</code> 最终会被转换为 <code>getter</code> 函数， cb 是更新时执行的回调。依赖收集的入口就是get函数。</p>
+<blockquote>
+<p>getter 函数是用来连接监控属性与 <code>Watcher</code> 的关键</p>
+</blockquote>
+<p>只有通过<code>watcher</code> 触发的getter 会收集依赖，而所谓的被收集的依赖就是当前<code>watcher</code>.初始化时传入的参数 expOrFn 中涉及到的每一项数据，然后触发该数据项的 getter 函数；getter 函数中就是通过判断 Dep.target的有无来判断是 <code>Watcher</code> 初始化时调用的还是普通数据读取，如果有则进行依赖收集</p>
+<h3 id="Dep"><a href="#Dep" class="headerlink" title="Dep"></a>Dep</h3><p>这个方法是在响应式的过程中调用的，用户修改数据触发 setter 函数，函数的最后一行就是调用 dep.notify 去通知订阅者更新视图。</p>
+<h3 id="Directive"><a href="#Directive" class="headerlink" title="Directive"></a>Directive</h3><p><img src="http://img.nixiaolei.com/2019-03-30-14-50-38.png" alt="Directive"></p>
+<p>关于编译这块vue分了两种类型，一种是文本节点，一种是元素节点</p>
+<p>vue内置了这么多的指令，这些指令都会抛出两个接口bind 和 update，这两个接口的作用是，编译的最后一步是执行所有用到的指令的bind方法，而 update 方法则是当watcher 触发 update 时，Directive会触发指令的update方法</p>
+<p>observe -&gt; 触发setter -&gt; watcher -&gt; 触发update -&gt; Directive -&gt; 触发update -&gt; 指令</p>
 <h2 id="Vue3重写的原因"><a href="#Vue3重写的原因" class="headerlink" title="Vue3重写的原因"></a>Vue3重写的原因</h2><p>// <code>Obejct.defineProperty</code></p>
 <p>优质文献: </p>
 <ul>
@@ -728,7 +738,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Obejct-defineProperty"><span class="nav-number">3.1.</span> <span class="nav-text">Obejct.defineProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.2.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">4.1.</span> <span class="nav-text">Observer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对-Object-的处理"><span class="nav-number">4.1.1.</span> <span class="nav-text">对 Object 的处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数组的处理"><span class="nav-number">4.1.2.</span> <span class="nav-text">对数组的处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Watcher"><span class="nav-number">4.2.</span> <span class="nav-text">Watcher</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue3重写的原因"><span class="nav-number">5.</span> <span class="nav-text">Vue3重写的原因</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Obejct-defineProperty"><span class="nav-number">3.1.</span> <span class="nav-text">Obejct.defineProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.2.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">4.1.</span> <span class="nav-text">Observer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对-Object-的处理"><span class="nav-number">4.1.1.</span> <span class="nav-text">对 Object 的处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对数组的处理"><span class="nav-number">4.1.2.</span> <span class="nav-text">对数组的处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Watcher"><span class="nav-number">4.2.</span> <span class="nav-text">Watcher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dep"><span class="nav-number">4.3.</span> <span class="nav-text">Dep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Directive"><span class="nav-number">4.4.</span> <span class="nav-text">Directive</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue3重写的原因"><span class="nav-number">5.</span> <span class="nav-text">Vue3重写的原因</span></a></li></ol></div>
             
 
           </div>
@@ -762,7 +772,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">22.4k</span>
+    <span title="Site words total count">22.8k</span>
   
 </div>
 
