@@ -52,5 +52,14 @@ $.get('/api', (res) => {
 
 
 
+## Vue架构目录
+去![Vue官网](https://github.com/vuejs/vue)下载Vue源码看看，
+
+打开里面会有一个 src目录， 里面就是整个的Vue源码
+
+目前有6个目录， 作用分别如下
+
+![Vue目录](http://img.nixiaolei.com/2019-03-30-10-44-35.png)
+
 
 
