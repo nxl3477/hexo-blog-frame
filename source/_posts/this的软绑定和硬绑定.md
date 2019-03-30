@@ -5,8 +5,10 @@ categories: JavaScript
 tags: JavaScript
 ---
 
+被调用的函数示例
 ```JavaScript
 function fn() {
+  // 如果严格模式， "use strict"加在此处
   console.log(this)
 }
 ```

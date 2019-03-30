@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="123function fn() &amp;#123;  console.log(this)&amp;#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn()  // undefined 硬绑定1fn.apply(&amp;#123;&amp;#125;,[&apos;a&apos;])  // &amp;#123;&amp;#125; 忽略硬绑定， 使用软绑定1fn.apply(null,[&apos;a&apos;])  // wi">
+<meta name="description" content="被调用的函数示例1234function fn() &amp;#123;  // 如果严格模式， &quot;use strict&quot;加在此处  console.log(this)&amp;#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn()  // undefined 硬绑定1fn.apply(&amp;#123;&amp;#125;,[&apos;a&apos;])  // &amp;#123;&amp;#125; 忽略">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="this的软绑定和硬绑定">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/30/this的软绑定和硬绑定/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="123function fn() &amp;#123;  console.log(this)&amp;#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn()  // undefined 硬绑定1fn.apply(&amp;#123;&amp;#125;,[&apos;a&apos;])  // &amp;#123;&amp;#125; 忽略硬绑定， 使用软绑定1fn.apply(null,[&apos;a&apos;])  // wi">
+<meta property="og:description" content="被调用的函数示例1234function fn() &amp;#123;  // 如果严格模式， &quot;use strict&quot;加在此处  console.log(this)&amp;#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn()  // undefined 硬绑定1fn.apply(&amp;#123;&amp;#125;,[&apos;a&apos;])  // &amp;#123;&amp;#125; 忽略">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T06:19:26.870Z">
+<meta property="og:updated_time" content="2019-03-30T06:26:53.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this的软绑定和硬绑定">
-<meta name="twitter:description" content="123function fn() &amp;#123;  console.log(this)&amp;#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn()  // undefined 硬绑定1fn.apply(&amp;#123;&amp;#125;,[&apos;a&apos;])  // &amp;#123;&amp;#125; 忽略硬绑定， 使用软绑定1fn.apply(null,[&apos;a&apos;])  // wi">
+<meta name="twitter:description" content="被调用的函数示例1234function fn() &amp;#123;  // 如果严格模式， &quot;use strict&quot;加在此处  console.log(this)&amp;#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn()  // undefined 硬绑定1fn.apply(&amp;#123;&amp;#125;,[&apos;a&apos;])  // &amp;#123;&amp;#125; 忽略">
 
 
 
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  67 字
+                  87 字
                 </span>
               
 
@@ -395,7 +395,7 @@
       
 
       
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>被调用的函数示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 如果严格模式， "use strict"加在此处</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="软绑定"><a href="#软绑定" class="headerlink" title="软绑定"></a>软绑定</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn() <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
 <p>“use strict” 严格模式的软绑定</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn()  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
@@ -687,7 +687,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">22k</span>
+    <span title="Site words total count">22.1k</span>
   
 </div>
 

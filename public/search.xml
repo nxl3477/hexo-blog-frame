@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[this的软绑定和硬绑定]]></title>
     <url>%2F2019%2F03%2F30%2Fthis%E7%9A%84%E8%BD%AF%E7%BB%91%E5%AE%9A%E5%92%8C%E7%A1%AC%E7%BB%91%E5%AE%9A%2F</url>
-    <content type="text"><![CDATA[123function fn() &#123; console.log(this)&#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn() // undefined 硬绑定1fn.apply(&#123;&#125;,['a']) // &#123;&#125; 忽略硬绑定， 使用软绑定1fn.apply(null,['a']) // window “use strict” 严格模式12fn.apply(&#123;&#125;,['a']) // &#123;&#125;fn.apply(null,['a']) // null]]></content>
+    <content type="text"><![CDATA[被调用的函数示例1234function fn() &#123; // 如果严格模式， "use strict"加在此处 console.log(this)&#125; 软绑定1fn() // window “use strict” 严格模式的软绑定 1fn() // undefined 硬绑定1fn.apply(&#123;&#125;,['a']) // &#123;&#125; 忽略硬绑定， 使用软绑定1fn.apply(null,['a']) // window “use strict” 严格模式12fn.apply(&#123;&#125;,['a']) // &#123;&#125;fn.apply(null,['a']) // null]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
