@@ -188,7 +188,8 @@ MVVM: Model–view–viewmodel
 这时你就是`订阅者`, 大爷就是`发布者`, 你们就存在一个发布订阅者的关系
 
 
-
+## Vue3重写的原因
+// `Obejct.defineProperty`
 
 
 

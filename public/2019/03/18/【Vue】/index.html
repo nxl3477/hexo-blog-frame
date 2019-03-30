@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-48-41.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-12-57-56.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-03-30-11-51-42.png">
-<meta property="og:updated_time" content="2019-03-30T05:28:51.141Z">
+<meta property="og:updated_time" content="2019-03-30T06:24:50.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Vue】源码解析">
 <meta name="twitter:description" content="现在三大框架风起云涌， JQuery老大哥的光辉不再， 使前端成为了各路诸侯的兵家必争之地，  当然作为一名优质的前端，光跟风学框架是肯定不行的， 要知其然而知其所以然 要了解MVVM的本质原理， virtual Dom和 Diff算法带来的好处以及坏处 拒绝盲目跟风 🍎diffDom优劣现在很多人都说 Vue, React 多牛， Diff算法快，不用操作Dom。 只能无语。 Diff算法不是">
@@ -462,6 +462,7 @@
 <p>简单的描述就是:</p>
 <p>你想买漫画， 但是问了报刊亭的大爷， 大爷说现在没有， 还没到货， 然后你回去了， 第二天你又去问， 大爷还是说没有， 如果你每天这样问， 大爷估计会嫌你烦。 如果这时候你把你的电话给大爷， 大爷记录到他的<strong>本子</strong>上,  当大爷的漫画到货的时候电话通知你。</p>
 <p>这时你就是<code>订阅者</code>, 大爷就是<code>发布者</code>, 你们就存在一个发布订阅者的关系</p>
+<h2 id="Vue3重写的原因"><a href="#Vue3重写的原因" class="headerlink" title="Vue3重写的原因"></a>Vue3重写的原因</h2><p>// <code>Obejct.defineProperty</code></p>
 <p>优质文献: </p>
 <ul>
 <li><a href="http://www.cnblogs.com/TomXu/archive/2012/03/02/2355128.html" target="_blank" rel="noopener">汤姆大叔的观察者模式</a></li>
@@ -721,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Obejct-defineProperty"><span class="nav-number">3.1.</span> <span class="nav-text">Obejct.defineProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.2.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">4.1.</span> <span class="nav-text">Observer</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🍎diffDom优劣"><span class="nav-number">1.</span> <span class="nav-text">🍎diffDom优劣</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#📄Vue架构目录"><span class="nav-number">2.</span> <span class="nav-text">📄Vue架构目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔗双向绑定（响应式原理）-所涉及到的技术"><span class="nav-number">3.</span> <span class="nav-text">🔗双向绑定（响应式原理） 所涉及到的技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Obejct-defineProperty"><span class="nav-number">3.1.</span> <span class="nav-text">Obejct.defineProperty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#🐶霸道的IE"><span class="nav-number">3.2.</span> <span class="nav-text">🐶霸道的IE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#😕MVVM-双向数据绑定流程"><span class="nav-number">4.</span> <span class="nav-text">😕MVVM 双向数据绑定流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">4.1.</span> <span class="nav-text">Observer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue3重写的原因"><span class="nav-number">5.</span> <span class="nav-text">Vue3重写的原因</span></a></li></ol></div>
             
 
           </div>
