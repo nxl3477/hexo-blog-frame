@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="倪晓磊的个人博客">
 <meta property="og:description" content="bind方法用来保留JavaScript的this指向， 和apply、call这两个方法不同的是，bind不会立即执行 如何模拟实现一个bind方法 初始函数，我们将对整个函数修改this指向12345function fn( name ) &amp;#123;  this.name = name&amp;#125;var obj = &amp;#123; age: 18 &amp;#125; 最普通的实现创建一个函数1234">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-31T09:17:25.877Z">
+<meta property="og:updated_time" content="2019-03-31T09:37:47.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模拟实现一个bind">
 <meta name="twitter:description" content="bind方法用来保留JavaScript的this指向， 和apply、call这两个方法不同的是，bind不会立即执行 如何模拟实现一个bind方法 初始函数，我们将对整个函数修改this指向12345function fn( name ) &amp;#123;  this.name = name&amp;#125;var obj = &amp;#123; age: 18 &amp;#125; 最普通的实现创建一个函数1234">
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  228 字
+                  239 字
                 </span>
               
 
@@ -402,6 +402,10 @@
 <h2 id="原型实现"><a href="#原型实现" class="headerlink" title="原型实现"></a>原型实现</h2><p>创建一个函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.mybind = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> _this = <span class="keyword">this</span></span><br><span class="line">  <span class="keyword">return</span>  <span class="function">(<span class="params">...args2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _this.apply( context, [ ...args, ...args2] )</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bindFn = fn.mybind(obj, <span class="string">'小明'</span> )</span><br></pre></td></tr></table></figure></p>
 <p>实现很简单， 但是还差一步，就是<code>bind</code>后的函数， 拿来作为构造函数<code>new</code>时， <code>this</code>指向会出问题</p>
 <h2 id="处理new-的指向"><a href="#处理new-的指向" class="headerlink" title="处理new 的指向"></a>处理new 的指向</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.mybind = <span class="function"><span class="keyword">function</span>(<span class="params">context, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> _this = <span class="keyword">this</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">cbFn</span> (<span class="params">...tempArgs</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span> <span class="keyword">instanceof</span> cbFn ? _this.apply(<span class="keyword">this</span>, [ ...args, ...tempArgs]) : _this.apply( context, [ ...args, ...tempArgs] )</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> cbFn</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> BindFn = fn.mybind(obj, <span class="string">'小明'</span> )</span><br><span class="line"><span class="keyword">var</span> bfn = <span class="keyword">new</span> BindFn()</span><br></pre></td></tr></table></figure>
+<p>参考文献</p>
+<ul>
+<li><a href="https://github.com/mqyqingfeng/Blog/issues/13" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/13</a></li>
+</ul>
 
       
     </div>

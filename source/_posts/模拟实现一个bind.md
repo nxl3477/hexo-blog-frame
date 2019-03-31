@@ -62,8 +62,8 @@ var bfn = new BindFn()
 ```
 
 
-
-
+参考文献
+* https://github.com/mqyqingfeng/Blog/issues/13
 
 
 
