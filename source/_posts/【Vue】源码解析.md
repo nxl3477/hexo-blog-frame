@@ -632,7 +632,7 @@ new Vue --> `Observe` 挂载 `setter` 和 `getter` -->  `Compile` 编译模板 -
 并且此时会触发 `getter` 将`watcher`加入`dep` -->  `batcher` 统一来处理`watcher`后初始化自己 -->  当用户修改某个变量时 --> `dep`通知`watcher` --> `watcher`又被加入`batcher`处理 --> `watcher` 更新`dom`
 
 
-`Vue`的`batcher`还是实现的不是很好， 缺少调度机制， 这点上还是`React Fiber`更优秀点
+`Vue`的`batcher`还是实现的不是很好， 缺少调度机制， 这点上还是`React Fiber`更优秀点，`Fiber`如果遇上了长时间的任务会选择放弃， 避免阻塞进程。
 
 
 😕好了， 神秘的`Vue`源码已被揭开面纱， 但这仅仅是简易版的实现， 真实的`Vue`非常庞大， 还有更多的内容， 这里只是让大家明白`MVVM`的核心原理
