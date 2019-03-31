@@ -528,7 +528,7 @@ Watcher.prototype = {
 }
 ```
 
-看到`update`方法， 首先调用了一下`get`方法， 这个`get`呢就是根据`this.name`从 `vm`实例上取一次值， 并挂到`Watcher`实例上的`value`属性上
+看到`update`方法， 首先调用了一下`get`方法， 这个`get`呢就是根据`this.name`从 `vm`实例上取一次值， 并挂到`Watcher`实例上的`value`属性上, 并且他还会触发一次`getter`方法，将自己加入到`dep`中， 也就是加入到报刊亭大爷的电话本中， 便于之后的通知
 
 然后判断了一下`window.batcher`是否存在， 如果不存在就创建一个， 保证其是一个单例模式,
 如果存在， 就将自己(`watcher`实例)，通过`push`方法传入
@@ -629,7 +629,7 @@ Watcher.prototype = {
 **到这里就整个串完了，但是感觉废话还是有点多， 再简化一点流程**:
 
 new Vue --> `Observe` 挂载 `setter` 和 `getter` -->  `Compile` 编译模板 --> 为每个指令分配一个`watcher` --> 创建时会调用一次`watcher.update` 将自己加入到`batcher`的队列 -->
-并且此时会触发 `getter` 将`watcher`加入`dep` -->  `batcher` 统一来处理`watcher`后初始化自己 -->  当用户修改某个变量时 --> `dep`通知`watcher` --> `watcher`又被加入`batcher`处理 --> `watcher` 更新dom
+并且此时会触发 `getter` 将`watcher`加入`dep` -->  `batcher` 统一来处理`watcher`后初始化自己 -->  当用户修改某个变量时 --> `dep`通知`watcher` --> `watcher`又被加入`batcher`处理 --> `watcher` 更新`dom`
 
 
 
