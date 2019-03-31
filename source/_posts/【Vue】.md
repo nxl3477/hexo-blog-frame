@@ -346,7 +346,7 @@ function defineReactive(vm, key, val) {
 然后调用`dep`实例上的`notify`方法， `notify` 看着名字也知道是通知， 也就是大爷挨个打电话的一个操作
 
 
-好， `observe` 这一块我们理顺了， 是为了挂上`getter`和`setter`， 但又遇到了新问题`dep`， `dep`到底在干什么， 为什么被`getter`，`setter`都使用了 
+好, 这一块我们理顺了， 是为了挂上`getter`和`setter`， 但又遇到了新问题`dep`， `dep`到底在干什么， 为什么被`getter`，`setter`都使用了 
 
 
 找到`Dep`的构造函数
@@ -372,12 +372,288 @@ Dep.prototype = {
 
 我们可以看到， `Dep`构造函数中维护了一个 `subs`数组， 并且下面的在`prototype`上定义了几个方法， `addSub` 和`notify`，
 这不就是刚刚`observe`里调用的两个方法吗， 
-哦，明白了， `addSub`原来是将`getter`中传入的 `Dep.target`追加到每个`Dep`实例都单独维护的一个`subs`数组中呀， `notify`就是遍历整个数组，挨个调用`update`方法
+哦，明白了， `addSub`原来是将`getter`中传入的 `Dep.target`追加到每个`Dep`实例都单独维护的一个`subs`数组中呀， `notify`就是遍历整个数组，挨个调用`update`方法（先不管update的具体实现）
+
+
+好， 解决了`observe`方法，那我们就回到最初的`Vue`构造函数中,  继续往下走, 攻克剩余的绿色区域
+
+![Compile](http://img.nixiaolei.com/2019-03-31-11-36-41.png)
+
+
+我们可以看到，它通过`el` 获取到了`dom`, 并在`new Compile` 将`dom` 传入
+
+那我们就找到`Compile`的构造函数一探究竟
+```JavaScript
+function Compile(node, vm) {
+  if(node) {
+    this.$frag = this.nodeToFragment(node, vm)
+    return this.$frag
+  }
+}
+```
+
+可以看到， 它接收了一个`node`， 和一个`vm` , 并且判断了一下`node`是否存在， 
+
+并将`node`和`vm`，传入了`this.nodeToFragment`方法， 又将其的返回结果`return`出去， 也就是`new Compile`之后返回的值 ，如下
+
+![Compile02](http://img.nixiaolei.com/2019-03-31-11-49-23.png)
+
+
+那`this.nodeToFragment`这个方法做了什么， 让我们找到他
+```JavaScript
+Compile.prototype = {
+  nodeToFragment(node, vm) {
+    var _this = this
+    // 创建文档片段
+    var frag = document.createDocumentFragment()
+    var child;
+    while ( child = node.firstChild ) {
+      // 替换变量
+      _this.compileElement(child, vm)
+      // 剪贴子元素
+      frag.append(child)
+    }
+    return frag
+  },
+  compileElement(node, vm) {
+    var reg = /\{\{(.*)\}\}/;
+    // 节点类型为元素, 根据nodeType来判断
+    if ( node.nodeType === 1 ) {
+      // 获取自定义属性
+      var attr = node.attributes
+      for (var i = 0; i < attr.length; i++) {
+        if (attr[i].nodeName == "v-model") {
+          // 获取v-model 绑定的属性名
+          var name = attr[i].nodeValue
+          // 双向绑定
+          node.addEventListener('input', function(e) {
+            // 给相应的data属性赋值， 进而触发该属性的set方法
+            // 再批处理渲染元素
+            vm[name] = e.target.value 
+          })
+          // 把this ，节点， 还有v-model绑定的变量交给watcher
+          new Watcher(vm, node, name, "value")
+        }
+      }
+    }
+
+    // 节点类型为text
+    if ( node.nodeType === 3 ) {
+      if ( reg.test(node.nodeValue) ) {
+        var name = RegExp.$1; // 获取匹配到的字符串
+        name = name.trim()
+         // 把this ，节点， 还有{{}}中使用的变量交给watcher
+        new Watcher(vm, node, name, 'nodeValue')
+      }
+    }
+  }
+}
+```
+
+我们看到它在`Compile`原型上挂了`nodeToFragment`, `compileElement`两个方法，  `nodeToFragment`方法接收 `node`, `vm`参数
+
+先保存了一下`this`指向,  然后使用`document.createDocumentFragment()`方法创建了一个文档片段， 并将在`while`循环中传入的`node`节点的第一个元素赋值给 `child`变量，
+然后使用`compileElement(child, vm)` 将`child`和`vm` 传入, 然后将`child` 追加给创建好的文档片段`frag`, 你肯定会觉得这是个死循环, 其实不是的， 这个`append`对`dom`有剪切的效果，
+所以他会一直抽离`node`的第一个节点，直至`node`空了， 吸干他
+
+完成了这顿操作后， 再将`frag`文档片段返回
+
+然后我们来看看它在`while`中调用的`compileElement`方法做了什么
+
+它同样接收`node`和`vm` , 首先就是定义一个正则， 这是用来匹配`{{ }}`双括号的， 也就是我们平时的变量写法
+
+然后它判断了一下这个 `node`的节点类型,  如果`nodeType == 1`, 那就说明是元素，  如果`nodeType == 3` 那就说明节点类型是`text`
+      
+如果节点类型是元素， 就利用`attributes` 方法，获取到该元素身上的属性,  查看是否存在`v-model`这样一个属性， 如果有，就获取到`v-model`填写的变量，交给变量`name`,
+然后监听该元素的`input`事件， 
+
+所以每当改元素发生`input`时间时，就将元素上的`value`根据`v-model`上获取到的`name`作为`vm`的`key`去修改`vm`实例上的对应的值， 因为`vm`上的变量已经被挂载此来触发`vm`
+
+最后还创建了一个`Watcher`实例,  传入`vm, node ,name, "value"`这几个参数，
+
+`Watcher`的具体实现我们待会去看
+
+接下来就是判断`node.nodeType == 3`， 也就是text类型的节点， 如果是此类节点， 就先用正则去匹配一下`{{ }}`语法， 看看有没有使用到某个变量， 
+如果匹配到了， 则通过`RegExp.$1`获取到被匹配到的值， 然后去除左右的空格， 交给变量`name`
+最后，同样的创建了一个`Watcher`实例,  传入`vm, node ,name, "value"`这几个参数，
+
+出现两次`Watcher`， 什么情况， 到底干了啥
+那， 现在就来让我们看看神秘的`Watcher`构造函数
+
+找到`Watcher`的构造函数
+```JavaScript
+let uid = 0;
+
+function Watcher(vm, node, name, type) {
+  // 单例， 使用原因未知
+  Dep.target = this
+  // 姓名
+  this.name = name;
+  // 呵呵哒 uid
+  this.id = ++uid;
+  // 与变量相关的Node节点
+  this.node = node;
+  // vm 实例
+  this.vm = vm;
+  // 变量类型  nodeValue  || value
+  this.type = type;
+  // 触发自己原型上的update方法
+  this.update()
+  // Watcher 实例创建结束就把单例置空
+  Dep.target = null
+}
+```
+
+此时我们发现了一个关键的东西`Dep.target` ， 这个鬼东西原来在这里， 它被赋值为了`Watcher`的实例， 然后在`Watcher`实例上挂载了`name`，也就是用到的变量， 还使用了一个`uid`， 不过这`uid`也是呵呵了，用数字作为`uid`, `Vue`的真实源码就这么干的， 为每个`Watcher`都配分一个`uid`， 这会造成数组空间的不连续， 引发内存泄漏
+
+接着说， 然后他将传入的`node`节点， `vm`实例， 还有`type`( 'nodeValue' 和 'value' ), 都挂到了实例上面， 并且还在调用了`update`方法后， 将`Dep.target`设为`null`
+
+那我们来看下`update`做了啥
+
+```JavaScript
+Watcher.prototype = {
+  update() {
+    this.get()
+    if(!batcher) {
+      // bastcher 单例
+      batcher = new Batcher()
+    }
+    // 加入队列
+    batcher.push(this)
+  },
+  // 获取新值挂到自己的实例上
+  get() {
+    this.value = this.vm[this.name]  // 触发getter
+  }
+}
+```
+
+看到`update`方法， 首先调用了一下`get`方法， 这个`get`呢就是根据`this.name`从 `vm`实例上取一次值， 并挂到`Watcher`实例上的`value`属性上
+
+然后判断了一下`window.batcher`是否存在， 如果不存在就创建一个， 保证其是一个单例模式,
+如果存在， 就将自己(`watcher`实例)，通过`push`方法传入
+
+看到这里，又晕了， 什么时候又冒出来一个`Batcher`
+
+我们又找到`Batcher`的构造函数好好分析下，
+```JavaScript
+// 批处理构造函数
+function Batcher() {
+  //  重置  has  queue waiting
+  this.reset()
+}
+
+Batcher.prototype.reset = function () {
+  this.has = {}
+  this.queue = []
+  this.waiting = false
+} 
+
+// 将watcher 添加到队列中
+Batcher.prototype.push = function (job) {
+  let id = job.id
+  // 先根据 对象的key 看看是否已经有了这个watcher
+  if (!this.has[id]) {
+    // console.log(batcher)
+    this.queue.push(job)
+    // 将watcher 的key的设为true
+    this.has[id] = true
+
+    // 延迟执行
+    if (!this.waiting ) {
+      this.waiting = true
+      if ( "Promise" in window ) {
+        Promise.resolve().then(() => {
+          this.flush()
+        })
+      } else {
+        setTimeout(() => {
+          this.flush()
+        }, 0)
+      }
+    }
+  }
+}
+
+
+// 执行并情况事件队列
+Batcher.prototype.flush = function() {
+  this.queue.forEach(job => {
+    job.cb()
+  })
+  this.reset()
+}
+
+
+```
+
+`Batcher`的构造函数很简单， 就调用了一下自己的`reset`方法， 但好像事情远没有这么简单，我们不是在 `Watcher`的`update`方法中调用了`batcher.push`吗， 我也可以在这原型上找的这个方法， 首先它接收一个`job`参数， 也就是`Watcher`实例， 
+
+获取到该`watcher`的`id`, 然后使用这个`id`,去`has`这个对象上访问一下， 看看是否存在，
+如果不存在，在证明之前没有添加进来过， 然后将该`watcher`实例加到`queue`队列中， 
+并将`has`对象中`id`对应的值设为`true`, 以防止重复加入队列
+
+并且判断一下`waiting`，得知当前是否处于等待状态， 如果不是， 就将`waiting`改为`true`, 然后就是判断当前浏览器的支持情况， 将处理的任务扔到异步队列中，
+
+它这里这么做是为了，只批处理一次， 你一瞬间加入多个`watcher`, 很容易造成重复执行， 利用`Watcher`的`id`来过滤， 并且利用异步， 等你要加的`watcher`都加完了， 我再给你统一的去执行所有`Watcher`
+
+也就是异步任务结束后调用的`flush`方法， 它在内部会遍历`queue`队列， 挨个的调用`Watcher`的`cb`方法
+在这一切都执行完成之后， 又调用了一次`reset`方法， 将`bascher`的三个属性重置为初始状态
+
+此时关注点又回到了`Watcher`身上， 它的`cb`方法又做了什么
+```JavaScript
+Watcher.prototype = {
+  // ...省略其他方法
+
+  // 给dom赋值
+  cb() {
+    // 最终实际虚拟dom 处理结果， 只处理一次
+    // 虚拟dom -> diff( 虚拟dom ) -> 局部更新 -> createElement(vNode) -> render
+    this.node[this.type] = this.value
+  },
+}
+```
+
+可以看到`cb`方法做的事情很简单那， 就是**根据元素的值类型去修改元素对象的值**， 而这个`this.value`早在之前调用 `Watcher`的`get`方法时就被赋上了
+
+到这里，整个流程就走完了， 相信你还是一头雾水， 我们把整个流程来串一下
+
+1. new Vue
+2. 将`data`中的值挂上 `getter`和`setter` 的相应方法， 然后暂且搁置，因为此时还无人调用`getter`和`setter`
+3. 通过 `Compile`解析模板， 挨个递归`#app`下的`dom`, 判断元素类型， 如果是元素，并且使用了`v-model`， 就绑定一个`input`事件,  如果是文本类型节点,就去匹配是使用了`{{ }}`语法， 最后为他们都创建了一个`watcher`
+4. 每个`watcher` 用来保存相关的元素对象， `vm`实例，使用的`变量` 以及元素值类型, 并将自己的实例交给， `Dep.target`， 并触发自己的`update`方法，`update`方法又会调用`get`方法， `get`方法又会触发该变量的`getter`， 这也就使得`getter`中可以将该`watcher`放入`dep`实例中， 最后将自己也放入`Bacher`中，用以批处理以及将`Dep.target`置空
+5. `Batcher`是个单例， 根据`Watcher`的`id`, 它用来过滤重复传入的`Watcher`, 保证一个`Watcher`只触发一次, 并将更新事件丢入异步，等当前的连续操作执行完成后去调用`Watcher`的`cb`方法更新`dom`
+6. 之后用户修改了变量, `setter`又会调用`dep`这个发布者来发出通知， 相关的`Watcher`的`update`方法再次被调用， 又会加入`batcher` , `batcher`等待异步完成后又调用`Watcher`的`cb`方法更新`dom`
+
+
+**到这里就整个串完了，但是感觉废话还是有点多， 再简化一点流程**:
+
+new Vue --> `Observe` 挂载 `setter` 和 `getter` -->  `Compile` 编译模板 --> 为每个指令分配一个`watcher` --> 创建时会调用一次`watcher.update` 将自己加入到`batcher`的队列 -->
+并且此时会触发 `getter` 将`watcher`加入`dep` -->  `batcher` 统一来处理`watcher`后初始化自己 -->  当用户修改某个变量时 --> `dep`通知`watcher` --> `watcher`又被加入`batcher`处理 --> `watcher` 更新dom
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 奇怪， `update`又是哪来的？ 
 我们知道， 每一个`sub`都是通过`Dep.target`传入的， 因此要弄明白， 就必须去看看`Dep.target`到底是啥
 
-终于找到了使用`Dep.target`的地方， 它在`Watcher`里
+终于, 找到了使用`Dep.target`的地方， 它在`Watcher`里
+
 ```JavaScript
 let uid = 0;
 function Watcher(vm, node, name, type) {
