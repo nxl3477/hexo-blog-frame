@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[面试题集合]]></title>
+    <url>%2F2019%2F03%2F31%2F%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88%2F</url>
+    <content type="text"><![CDATA[ES6系列async await题目一: 请问result输出几1234567var a = 0async function test () &#123; let result = a + await 10 console.log(result)&#125;test()a = a + 1 答案: 10 分析: await 后如果是一个常量, 将作为 Promise.resolve的结果返回 因为 async await 是 generator的语法糖， 当执行 test 方法时， 变量a的值会被锁住 所以结果是10]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[模拟实现一个bind]]></title>
     <url>%2F2019%2F03%2F31%2F%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAbind%2F</url>
     <content type="text"><![CDATA[bind方法用来保留JavaScript的this指向， 和apply、call这两个方法不同的是，bind不会立即执行 如何模拟实现一个bind方法 初始函数，我们将对整个函数修改this指向12345function fn( name ) &#123; this.name = name&#125;var obj = &#123; age: 18 &#125; 最普通的实现创建一个函数1234567function mybind(func ,context, ...args) &#123; return () =&gt; &#123; return func.apply(context, args ) &#125;&#125;var bindFn = mybind(fn, obj, '小明') 原型实现创建一个函数12345678Function.prototype.mybind = function(context, ...args) &#123; const _this = this return (...args2) =&gt; &#123; return _this.apply( context, [ ...args, ...args2] ) &#125; &#125;var bindFn = fn.mybind(obj, '小明' ) 实现很简单， 但是还差一步，就是bind后的函数， 拿来作为构造函数new时， this指向会出问题 处理new 的指向123456789Function.prototype.mybind = function(context, ...args) &#123; const _this = this function cbFn (...tempArgs) &#123; return this instanceof cbFn ? _this.apply(this, [ ...args, ...tempArgs]) : _this.apply( context, [ ...args, ...tempArgs] ) &#125; return cbFn&#125;var BindFn = fn.mybind(obj, '小明' )var bfn = new BindFn() 参考文献 https://github.com/mqyqingfeng/Blog/issues/13]]></content>
