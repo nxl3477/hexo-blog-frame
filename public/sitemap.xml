@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.nixiaolei.com/2019/03/31/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88/</loc>
+    <loc>http://blog.nixiaolei.com/2019/03/20/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88/</loc>
     
-    <lastmod>2019-03-31T09:51:44.106Z</lastmod>
+    <lastmod>2019-03-31T11:46:09.209Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.nixiaolei.com/2019/03/18/%E3%80%90Vue%E3%80%91%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    
+    <lastmod>2019-03-31T10:14:33.893Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.nixiaolei.com/2019/03/26/JavaScript%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</loc>
+    
+    <lastmod>2019-03-31T10:04:38.433Z</lastmod>
     
   </url>
   
@@ -16,23 +30,9 @@
   </url>
   
   <url>
-    <loc>http://blog.nixiaolei.com/2019/03/18/%E3%80%90Vue%E3%80%91%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
-    
-    <lastmod>2019-03-31T06:36:01.726Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.nixiaolei.com/2019/03/30/this%E7%9A%84%E8%BD%AF%E7%BB%91%E5%AE%9A%E5%92%8C%E7%A1%AC%E7%BB%91%E5%AE%9A/</loc>
     
     <lastmod>2019-03-30T06:26:53.912Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/03/26/JavaScript%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</loc>
-    
-    <lastmod>2019-03-29T15:02:30.028Z</lastmod>
     
   </url>
   

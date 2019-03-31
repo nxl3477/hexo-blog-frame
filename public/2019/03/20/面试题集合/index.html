@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="ES6系列async await:题目一: 请问result输出几12345678var a = 0async function  test () &amp;#123;  let result = a + await 10  console.log(result)&amp;#125;test()a = a + 1test() 答案:  10  , 11  分析:  await 后如果是一个常量, 将作为 Prom">
+<meta name="description" content="事件机制Promise题目一:123456789101112131415setTimeout(() =&amp;gt; &amp;#123;  console.log(4)&amp;#125;, 0)new Promise(resolve =&amp;gt; &amp;#123;  console.log(1)  setTimeout(() =&amp;gt; &amp;#123;    resolve(&quot;done&quot;)    console.log(6">
 <meta name="keywords" content="面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试题集合">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/31/面试题集合/index.html">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/20/面试题集合/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="ES6系列async await:题目一: 请问result输出几12345678var a = 0async function  test () &amp;#123;  let result = a + await 10  console.log(result)&amp;#125;test()a = a + 1test() 答案:  10  , 11  分析:  await 后如果是一个常量, 将作为 Prom">
+<meta property="og:description" content="事件机制Promise题目一:123456789101112131415setTimeout(() =&amp;gt; &amp;#123;  console.log(4)&amp;#125;, 0)new Promise(resolve =&amp;gt; &amp;#123;  console.log(1)  setTimeout(() =&amp;gt; &amp;#123;    resolve(&quot;done&quot;)    console.log(6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-31T09:51:44.106Z">
+<meta property="og:updated_time" content="2019-03-31T11:46:09.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题集合">
-<meta name="twitter:description" content="ES6系列async await:题目一: 请问result输出几12345678var a = 0async function  test () &amp;#123;  let result = a + await 10  console.log(result)&amp;#125;test()a = a + 1test() 答案:  10  , 11  分析:  await 后如果是一个常量, 将作为 Prom">
+<meta name="twitter:description" content="事件机制Promise题目一:123456789101112131415setTimeout(() =&amp;gt; &amp;#123;  console.log(4)&amp;#125;, 0)new Promise(resolve =&amp;gt; &amp;#123;  console.log(1)  setTimeout(() =&amp;gt; &amp;#123;    resolve(&quot;done&quot;)    console.log(6">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/31/面试题集合/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/20/面试题集合/">
 
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/31/面试题集合/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/20/面试题集合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T17:40:34+08:00">
-                2019-03-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T17:40:34+08:00">
+                2019-03-20
               </time>
             
 
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  98 字
+                  293 字
                 </span>
               
 
@@ -395,8 +395,22 @@
       
 
       
-        <h2 id="ES6系列"><a href="#ES6系列" class="headerlink" title="ES6系列"></a>ES6系列</h2><h3 id="async-await"><a href="#async-await" class="headerlink" title="async await:"></a>async await:</h3><h4 id="题目一-请问result输出几"><a href="#题目一-请问result输出几" class="headerlink" title="题目一: 请问result输出几"></a>题目一: 请问result输出几</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span>  <span class="title">test</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = a + <span class="keyword">await</span> <span class="number">10</span></span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line">a = a + <span class="number">1</span></span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
-<p>答案:</p>
+        <h2 id="事件机制"><a href="#事件机制" class="headerlink" title="事件机制"></a>事件机制</h2><h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><h4 id="题目一"><a href="#题目一" class="headerlink" title="题目一:"></a>题目一:</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="string">"done"</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">6</span>)</span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line">  resolve(<span class="number">5</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 微任务</span></span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案:</strong></p>
+<blockquote>
+<p>1 , 2 , 5 , 4, 6</p>
+</blockquote>
+<p>注意， 没有<code>done</code>！</p>
+<p><strong>分析:</strong><br><code>Promise</code> 的<code>resolve</code>只会触发一次， 因为<code>Promise</code>的状态已经被修改为<code>resolve</code></p>
+<p>所以第二次的<code>resolve</code> 不会触发</p>
+<h4 id="题目二"><a href="#题目二" class="headerlink" title="题目二:"></a>题目二:</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">7</span>)</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(<span class="string">"done"</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"aa"</span>)</span><br><span class="line">    &#125;, <span class="number">0</span>)</span><br><span class="line">    resolve(<span class="number">8</span>)</span><br><span class="line">  &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">  &#125;)</span><br><span class="line">  resolve(<span class="number">5</span>)</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>答案:</strong></p>
+<blockquote>
+<p>1, 7, 2, 8 , 5 , 4 , aa</p>
+</blockquote>
+<p><strong>分析:</strong><br><code>Promise</code>的完成先后还得看谁先挂载了 <code>then</code>， 并不是谁先<code>new</code>就是谁</p>
+<h2 id="ES6系列"><a href="#ES6系列" class="headerlink" title="ES6系列"></a>ES6系列</h2><h3 id="async-await"><a href="#async-await" class="headerlink" title="async await:"></a>async await:</h3><h4 id="题目一-请问result输出几"><a href="#题目一-请问result输出几" class="headerlink" title="题目一: 请问result输出几 ?"></a>题目一: 请问result输出几 ?</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span>  <span class="title">test</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = a + <span class="keyword">await</span> <span class="number">10</span></span><br><span class="line">  <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line">a = a + <span class="number">1</span></span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+<p><strong>答案:</strong></p>
 <blockquote>
 <p>10  , 11</p>
 </blockquote>
@@ -455,7 +469,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.nixiaolei.com/2019/03/31/面试题集合/" title="面试题集合">http://blog.nixiaolei.com/2019/03/31/面试题集合/</a>
+    <a href="http://blog.nixiaolei.com/2019/03/20/面试题集合/" title="面试题集合">http://blog.nixiaolei.com/2019/03/20/面试题集合/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -483,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/31/模拟实现一个bind/" rel="next" title="模拟实现一个bind">
-                <i class="fa fa-chevron-left"></i> 模拟实现一个bind
+              <a href="/2019/03/18/TypeScript手册/" rel="next" title="TypeScript手册">
+                <i class="fa fa-chevron-left"></i> TypeScript手册
               </a>
             
           </div>
@@ -492,6 +506,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/24/面向对象设计原则之SOLID/" rel="prev" title="面向对象设计原则之S.O.L.I.D">
+                面向对象设计原则之S.O.L.I.D <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -657,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6系列"><span class="nav-number">1.</span> <span class="nav-text">ES6系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await"><span class="nav-number">1.1.</span> <span class="nav-text">async await:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目一-请问result输出几"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目一: 请问result输出几</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件机制"><span class="nav-number">1.</span> <span class="nav-text">事件机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">1.1.</span> <span class="nav-text">Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目一"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目一:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目二"><span class="nav-number">1.1.2.</span> <span class="nav-text">题目二:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6系列"><span class="nav-number">2.</span> <span class="nav-text">ES6系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#async-await"><span class="nav-number">2.1.</span> <span class="nav-text">async await:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目一-请问result输出几"><span class="nav-number">2.1.1.</span> <span class="nav-text">题目一: 请问result输出几 ?</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -691,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">26.9k</span>
+    <span title="Site words total count">27.1k</span>
   
 </div>
 

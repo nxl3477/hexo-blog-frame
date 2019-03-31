@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.nixiaolei.com/2019/03/31/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88/</loc>
-    <lastmod>2019-03-31</lastmod>
-  </url>  <url>
-    <loc>http://blog.nixiaolei.com/2019/03/31/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAbind/</loc>
+    <loc>http://blog.nixiaolei.com/2019/03/20/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88/</loc>
     <lastmod>2019-03-31</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/03/18/%E3%80%90Vue%E3%80%91%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
     <lastmod>2019-03-31</lastmod>
   </url>  <url>
+    <loc>http://blog.nixiaolei.com/2019/03/26/JavaScript%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2019-03-31</lastmod>
+  </url>  <url>
+    <loc>http://blog.nixiaolei.com/2019/03/31/%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAbind/</loc>
+    <lastmod>2019-03-31</lastmod>
+  </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/03/30/this%E7%9A%84%E8%BD%AF%E7%BB%91%E5%AE%9A%E5%92%8C%E7%A1%AC%E7%BB%91%E5%AE%9A/</loc>
     <lastmod>2019-03-30</lastmod>
-  </url>  <url>
-    <loc>http://blog.nixiaolei.com/2019/03/26/JavaScript%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2019-03-29</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/03/26/%E3%80%90NodeJs%E3%80%91%E5%BC%82%E6%AD%A5IO%E4%B8%8EEventLoop/</loc>
     <lastmod>2019-03-29</lastmod>

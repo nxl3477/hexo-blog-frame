@@ -593,7 +593,7 @@ Batcher.prototype.flush = function() {
 如果不存在，在证明之前没有添加进来过， 然后将该`watcher`实例加到`queue`队列中， 
 并将`has`对象中`id`对应的值设为`true`, 以防止重复加入队列
 
-并且判断一下`waiting`，得知当前是否处于等待状态， 如果不是， 就将`waiting`改为`true`, 然后就是判断当前浏览器的支持情况， 将处理的任务扔到异步队列中，
+并且判断一下`waiting`，得知当前是否处于等待状态， 如果不是， 就将`waiting`改为`true`, 然后就是判断当前浏览器的支持情况， 将处理的任务扔到异步队列中
 
 它这里这么做是为了，只批处理一次， 你一瞬间加入多个`watcher`, 很容易造成重复执行， 利用`Watcher`的`id`来过滤， 并且利用异步， 等你要加的`watcher`都加完了， 我再给你统一的去执行所有`Watcher`
 
@@ -630,6 +630,9 @@ Watcher.prototype = {
 
 new Vue --> `Observe` 挂载 `setter` 和 `getter` -->  `Compile` 编译模板 --> 为每个指令分配一个`watcher` --> 创建时会调用一次`watcher.update` 将自己加入到`batcher`的队列 -->
 并且此时会触发 `getter` 将`watcher`加入`dep` -->  `batcher` 统一来处理`watcher`后初始化自己 -->  当用户修改某个变量时 --> `dep`通知`watcher` --> `watcher`又被加入`batcher`处理 --> `watcher` 更新`dom`
+
+
+`Vue`的`batcher`还是实现的不是很好， 缺少调度机制， 这点上还是`React Fiber`更优秀点
 
 
 😕好了， 神秘的`Vue`源码已被揭开面纱， 但这仅仅是简易版的实现， 真实的`Vue`非常庞大， 还有更多的内容， 这里只是让大家明白`MVVM`的核心原理

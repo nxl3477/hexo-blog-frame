@@ -133,7 +133,7 @@ requestAnimationFrame姑且也算是宏任务吧，requestAnimationFrame在[MDN]
 | process.nextTick      | ❌     |  ✅  |
 | MutationObserver        | ✅     |  ❌   |
 | Promise.then catch finally       | ✅      |  ✅  |
-
+| MessageChannel 消息队列    |      |    |
 
 
 
