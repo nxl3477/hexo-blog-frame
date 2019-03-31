@@ -460,7 +460,7 @@ Compile.prototype = {
 
 然后我们来看看它在`while`中调用的`compileElement`方法做了什么
 
-它同样接收`node`和`vm` , 首先就是定义一个正则， 这是用来匹配`{{ }}`双括号的， 也就是我们平时的变量写法
+它同样接收`node`和`vm` , 首先就是定义一个正则， 这是用来匹配`{{}}`双括号的， 也就是我们平时的变量写法
 
 然后它判断了一下这个 `node`的节点类型,  如果`nodeType == 1`, 那就说明是元素，  如果`nodeType == 3` 那就说明节点类型是`text`
       
@@ -473,7 +473,7 @@ Compile.prototype = {
 
 `Watcher`的具体实现我们待会去看
 
-接下来就是判断`node.nodeType == 3`， 也就是text类型的节点， 如果是此类节点， 就先用正则去匹配一下`{{ }}`语法， 看看有没有使用到某个变量， 
+接下来就是判断`node.nodeType == 3`， 也就是text类型的节点， 如果是此类节点， 就先用正则去匹配一下`{{}}`语法， 看看有没有使用到某个变量， 
 如果匹配到了， 则通过`RegExp.$1`获取到被匹配到的值， 然后去除左右的空格， 交给变量`name`
 最后，同样的创建了一个`Watcher`实例,  传入`vm, node ,name, "value"`这几个参数，
 
@@ -620,7 +620,7 @@ Watcher.prototype = {
 
 1. new Vue
 2. 将`data`中的值挂上 `getter`和`setter` 的相应方法， 然后暂且搁置，因为此时还无人调用`getter`和`setter`
-3. 通过 `Compile`解析模板， 挨个递归`#app`下的`dom`, 判断元素类型， 如果是元素，并且使用了`v-model`， 就绑定一个`input`事件,  如果是文本类型节点,就去匹配是使用了`{{ }}`语法， 最后为他们都创建了一个`watcher`
+3. 通过 `Compile`解析模板， 挨个递归`#app`下的`dom`, 判断元素类型， 如果是元素，并且使用了`v-model`， 就绑定一个`input`事件,  如果是文本类型节点,就去匹配是使用了`{{}}`语法， 最后为他们都创建了一个`watcher`
 4. 每个`watcher` 用来保存相关的元素对象， `vm`实例，使用的`变量` 以及元素值类型, 并将自己的实例交给， `Dep.target`， 并触发自己的`update`方法，`update`方法又会调用`get`方法， `get`方法又会触发该变量的`getter`， 这也就使得`getter`中可以将该`watcher`放入`dep`实例中， 最后将自己也放入`Bacher`中，用以批处理以及将`Dep.target`置空
 5. `Batcher`是个单例， 根据`Watcher`的`id`, 它用来过滤重复传入的`Watcher`, 保证一个`Watcher`只触发一次, 并将更新事件丢入异步，等当前的连续操作执行完成后去调用`Watcher`的`cb`方法更新`dom`
 6. 之后用户修改了变量, `setter`又会调用`dep`这个发布者来发出通知， 相关的`Watcher`的`update`方法再次被调用， 又会加入`batcher` , `batcher`等待异步完成后又调用`Watcher`的`cb`方法更新`dom`
