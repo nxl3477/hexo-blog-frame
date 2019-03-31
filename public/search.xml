@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[面试题集合]]></title>
     <url>%2F2019%2F03%2F31%2F%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88%2F</url>
-    <content type="text"><![CDATA[ES6系列async await题目一: 请问result输出几1234567var a = 0async function test () &#123; let result = a + await 10 console.log(result)&#125;test()a = a + 1 答案: 10 分析: await 后如果是一个常量, 将作为 Promise.resolve的结果返回 因为 async await 是 generator的语法糖， 当执行 test 方法时， 变量a的值会被锁住 所以结果是10]]></content>
+    <content type="text"><![CDATA[ES6系列async await:题目一: 请问result输出几12345678var a = 0async function test () &#123; let result = a + await 10 console.log(result)&#125;test()a = a + 1test() 答案: 10 , 11 分析: await 后如果是一个常量, 将作为 Promise.resolve的结果返回 因为 async await 是 generator的语法糖， 当执行 test 方法时， 变量a的值会被锁住 所以第一个结果是10， 第二个结果是 11]]></content>
       <categories>
         <category>面试</category>
       </categories>
