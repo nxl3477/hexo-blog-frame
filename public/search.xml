@@ -109,8 +109,8 @@
         <category>Vue</category>
       </categories>
       <tags>
-        <tag>适配</tag>
         <tag>Vue</tag>
+        <tag>适配</tag>
       </tags>
   </entry>
   <entry>
@@ -155,6 +155,12 @@
     <title><![CDATA[【Linux】理解权限命令-chown]]></title>
     <url>%2F2019%2F03%2F22%2F%E3%80%90Linux%E3%80%91%E7%90%86%E8%A7%A3chown%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[123456789101112131415161718192021# 更改文件属组chgrp [-R] 属组名 文件名# 更改文件属主 或 属组chown [-R] 属主名 文件名chown [-R] 属主名：属组名 文件名# 修改文件权限 9 个属性# 有两种设置方式， 一种是数字 一种是符号# 基本身份 owner/group/others 的各自三种权限# read(r 4)/write(w 2)/execute(x 1): -rwxr-xr-- = [4+2+1][4+0+1][4+0+0]=754chmod [-R] xyz 文件或目录# 符号修改权限chmod u(user) +(加入) r 文件或目录 g(group) -(减去) w o(others) =(设定) x a(all 全部身份) chmod u=rwx,g=rx, o=r 文件名chmod a-x test1 图解]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[面试题集合]]></title>

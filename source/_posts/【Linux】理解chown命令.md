@@ -1,8 +1,8 @@
 ---
 title: 【Linux】理解权限命令-chown
 date: 2019-03-22 20:38:50
-categories:
-tags:
+categories: Linux
+tags:  Linux
 ---
 
 ```Python
