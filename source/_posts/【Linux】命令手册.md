@@ -82,7 +82,7 @@ ln -s old new  | 建立软链
 命令 | 说明
 ---|---
 systemctl  | 查看进程
-ststemctl [ status \| start \| stop \| restart ] nginx |  如对 nginx 执行相关命令 
+ststemctl [ status , start , stop , restart ] nginx |  如对 nginx 执行相关命令 
 top  | 进程资源实时状态
 ps  [aux] | 进程快照
 kill [-9] pid | 杀死进程
@@ -99,8 +99,8 @@ ip | 网络配置工具箱
 route | 诊断网络
  ipdown eth0 | 关闭`eth0`网卡
 ipup eth0 |开启`eth0`网卡
-ss -anp [|] grep :22 |  查找占用端口情况
-netstat -anp [|] grep :22 |  查找占用端口情况
+ss -anp , grep :22 |  查找占用端口情况
+netstat -anp , grep :22 |  查找占用端口情况
 
 
 ## 命令行下载命令
