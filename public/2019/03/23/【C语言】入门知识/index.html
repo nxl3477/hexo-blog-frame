@@ -79,19 +79,21 @@
 
 
 
-<meta name="description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理机制 分析webkit引擎代">
+<meta name="description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 C语言的编译工具就是gcc 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理">
 <meta name="keywords" content="C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【C语言】入门知识">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/03/23/【C语言】入门知识/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理机制 分析webkit引擎代">
+<meta property="og:description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 C语言的编译工具就是gcc 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-04-22-39-41.png">
-<meta property="og:updated_time" content="2019-04-04T14:40:40.756Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-13-46-58.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-13-58-53.png">
+<meta property="og:updated_time" content="2019-04-06T06:21:00.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【C语言】入门知识">
-<meta name="twitter:description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理机制 分析webkit引擎代">
+<meta name="twitter:description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 C语言的编译工具就是gcc 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理">
 <meta name="twitter:image" content="http://img.nixiaolei.com/2019-04-04-22-39-41.png">
 
 
@@ -360,7 +362,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  222 字
+                  573 字
                 </span>
               
 
@@ -376,7 +378,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -398,6 +400,7 @@
 
       
         <p><img src="http://img.nixiaolei.com/2019-04-04-22-39-41.png" alt="C语言"><br>C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。</p>
+<p>C语言的编译工具就是gcc</p>
 <h2 id="🤯前端不限端"><a href="#🤯前端不限端" class="headerlink" title="🤯前端不限端"></a>🤯前端不限端</h2><p>作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索</p>
 <p>当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性</p>
 <ul>
@@ -409,7 +412,34 @@
 <li>分析webkit引擎代码</li>
 <li>用C语言编写Node.js和PHP扩展模块</li>
 </ul>
-<h2 id="C语言和C"><a href="#C语言和C" class="headerlink" title="C语言和C++"></a>C语言和C++</h2><h2 id="理解内存与指针"><a href="#理解内存与指针" class="headerlink" title="理解内存与指针"></a>理解内存与指针</h2><h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p><strong>声明一个指针</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br></pre></td></tr></table></figure></p>
+<h2 id="C语言沉浮录"><a href="#C语言沉浮录" class="headerlink" title="C语言沉浮录"></a>C语言沉浮录</h2><p>C语言的前身是B语言</p>
+<ul>
+<li>天生的系统级语言</li>
+<li>最早用来编写Unix内核</li>
+<li>曾经最流行的语言</li>
+<li>至今仍在不断发展</li>
+</ul>
+<p><img src="http://img.nixiaolei.com/2019-04-06-13-46-58.png" alt="语言发展史"></p>
+<h2 id="C语言和JavaScript的异同"><a href="#C语言和JavaScript的异同" class="headerlink" title="C语言和JavaScript的异同"></a>C语言和JavaScript的异同</h2><ul>
+<li>C语言是编译型语言</li>
+<li>C语言要借助编译器转换成可执行程序</li>
+<li>JavaScript是解释型语言</li>
+<li>JavaScript要借助解释引擎运行</li>
+</ul>
+<p><img src="http://img.nixiaolei.com/2019-04-06-13-58-53.png" alt="语言编译过程"></p>
+<p>需要编译的语言经过编译后生成目标程序， 其实生成目标程序时已经是机器指令了， 但是计算机仍旧无法直接运行它，因为操作系统有他自己的规则， 想要符合操作系统的规则， 这时候就要走链接， 那链接做了哪些事让操作系统能够识别到该程序呢：</p>
+<ol>
+<li>给操作系统一个识别块，操作系统先读识别块再运行程序</li>
+<li>把生成的很多<code>.obj</code>文件串起来， 连成一块</li>
+</ol>
+<h2 id="C语言与C-语言的区别"><a href="#C语言与C-语言的区别" class="headerlink" title="C语言与C++语言的区别"></a>C语言与C++语言的区别</h2><ol>
+<li>C++是新的编程语言，并不是C的扩展</li>
+<li>C语言是面向过程的，C＋＋是面向对象的</li>
+<li>C和C++语言都有标准库【standard.io】</li>
+<li>目前C大多用在网络相关和嵌入式等方面【不管Python、还是JS，底层都需要C语言基本环境】</li>
+<li>目前C++大多用在复杂引擎和应用软件方面</li>
+</ol>
+<h2 id="理解内存与指针"><a href="#理解内存与指针" class="headerlink" title="理解内存与指针"></a>理解内存与指针</h2><h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p><strong>声明一个指针</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -582,7 +612,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -604,7 +634,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -665,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🤯前端不限端"><span class="nav-number">1.</span> <span class="nav-text">🤯前端不限端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言和C"><span class="nav-number">2.</span> <span class="nav-text">C语言和C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解内存与指针"><span class="nav-number">3.</span> <span class="nav-text">理解内存与指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">3.1.</span> <span class="nav-text">指针</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🤯前端不限端"><span class="nav-number">1.</span> <span class="nav-text">🤯前端不限端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言沉浮录"><span class="nav-number">2.</span> <span class="nav-text">C语言沉浮录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言和JavaScript的异同"><span class="nav-number">3.</span> <span class="nav-text">C语言和JavaScript的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言与C-语言的区别"><span class="nav-number">4.</span> <span class="nav-text">C语言与C++语言的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解内存与指针"><span class="nav-number">5.</span> <span class="nav-text">理解内存与指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.1.</span> <span class="nav-text">指针</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -699,7 +729,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">29.7k</span>
+    <span title="Site words total count">30.4k</span>
   
 </div>
 
