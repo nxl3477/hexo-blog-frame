@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="倪晓磊的个人博客">
 <meta property="og:description" content="1.1 Docker简介 Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。 Docker通常用于如下场景： web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-06T11:20:50.570Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-19-57-22.png">
+<meta property="og:updated_time" content="2019-04-06T11:57:35.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【容器】Docker入门教程">
 <meta name="twitter:description" content="1.1 Docker简介 Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。 Docker通常用于如下场景： web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-04-06-19-57-22.png">
 
 
 
@@ -358,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  174 字
+                  349 字
                 </span>
               
 
@@ -405,6 +407,24 @@
 </ul>
 </li>
 </ul>
+<h2 id="2-1-Docker-vs-VM"><a href="#2-1-Docker-vs-VM" class="headerlink" title="2.1 Docker vs. VM"></a>2.1 Docker vs. VM</h2><ul>
+<li>VM：<ul>
+<li>运行在宿主机之上的完整的操作系统</li>
+<li>运行自身操作系统会占用较多的资源</li>
+</ul>
+</li>
+<li>Docker：<ul>
+<li>Docker更加轻量高效</li>
+<li>对系统资源的利用率很高</li>
+<li>比虚拟机技术更为轻便、快捷</li>
+<li>隔离效果不如VM</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://img.nixiaolei.com/2019-04-06-19-57-22.png" alt="Docker与VM"></p>
+<hr>
+<p>总的来说， 虚拟机是在操作系统上又装了一个操作系统，运行操作系统特别消耗资源</p>
+<p>而<code>Docker</code>是一种类似于隔离的技术， 公用你宿主机上的内核， 在<code>Docker</code>中再装了一层<code>shell</code>   并且<code>Docker</code>和其他<code>Docker</code>之间是可以通过内核相互进行通信的(Linux进程之间必须经过内核)</p>
 
       
     </div>
@@ -662,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Docker简介"><span class="nav-number">1.</span> <span class="nav-text">1.1 Docker简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Docker简介"><span class="nav-number">1.</span> <span class="nav-text">1.1 Docker简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Docker-vs-VM"><span class="nav-number">2.</span> <span class="nav-text">2.1 Docker vs. VM</span></a></li></ol></div>
             
 
           </div>
@@ -696,7 +716,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">33k</span>
+    <span title="Site words total count">33.2k</span>
   
 </div>
 
