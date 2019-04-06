@@ -90,7 +90,8 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-04-22-39-41.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-13-46-58.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-13-58-53.png">
-<meta property="og:updated_time" content="2019-04-06T06:21:00.645Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-14-38-20.png">
+<meta property="og:updated_time" content="2019-04-06T06:59:34.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【C语言】入门知识">
 <meta name="twitter:description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 C语言的编译工具就是gcc 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理">
@@ -362,7 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  573 字
+                  1k 字
                 </span>
               
 
@@ -378,7 +379,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -439,7 +440,28 @@
 <li>目前C大多用在网络相关和嵌入式等方面【不管Python、还是JS，底层都需要C语言基本环境】</li>
 <li>目前C++大多用在复杂引擎和应用软件方面</li>
 </ol>
-<h2 id="理解内存与指针"><a href="#理解内存与指针" class="headerlink" title="理解内存与指针"></a>理解内存与指针</h2><h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p><strong>声明一个指针</strong><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br></pre></td></tr></table></figure></p>
+<h2 id="理解内存与指针"><a href="#理解内存与指针" class="headerlink" title="理解内存与指针"></a>理解内存与指针</h2><ul>
+<li>内存与内存地址</li>
+<li>指针、地址与引用</li>
+<li>指向变量的指针</li>
+<li>指向指针的指针</li>
+<li>指向函数的指针</li>
+<li>动态内存分配</li>
+</ul>
+<p>要理解内存和指针首先我们应该知道内存在计算机中是什么样子的， 我们可以把内存看作是一个打了很多格子的小纸条，<strong>每个格子就是内存的基本存储单位</strong>, 1个单位是一个字节，也就是一个<code>byte</code>, 而一个<code>byte</code>等于8个<code>bit</code>，那我们该如何找到对应的内存呢， 实际上内存是有编号的，这个编号从0开始， 作为内存的地址（门牌）</p>
+<p><img src="http://img.nixiaolei.com/2019-04-06-14-38-20.png" alt="内存地址"></p>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>容纳内存地址的变量就是指针</p>
+<p>C语言中， 指针也是有类型的， 因为不同的数据类型对应内存中的所占的大小不一样， 定义类型是为了从内存中拿出正确长度的数据， 比如： 短整型只占两个字节、 长整型占4和字节、  超长整型占8个字节、单精度浮点型占6个字节、 双精度浮点型占8个字节</p>
+<p>如果不正确定义指针的类型，就会导致从内存中拿出来的长度是错的， 也就是导致得到的值是错的</p>
+<h4 id="🤒声明指针"><a href="#🤒声明指针" class="headerlink" title="🤒声明指针"></a>🤒声明指针</h4><blockquote>
+<p>一开始声明的指针我们只能给他一个Null或是 内存地址, 因为一个具体的值对于指针是没有意义的，</p>
+</blockquote>
+<p>声明一个整型的指针<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br></pre></td></tr></table></figure></p>
+<p><strong>二级指针及多级指针</strong></p>
+<blockquote>
+<p>不管是几级指针编译器都是能够通过的</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向指针的指针</span></span><br><span class="line"><span class="keyword">int</span> ** pp_a = &amp;p_a;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -695,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🤯前端不限端"><span class="nav-number">1.</span> <span class="nav-text">🤯前端不限端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言沉浮录"><span class="nav-number">2.</span> <span class="nav-text">C语言沉浮录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言和JavaScript的异同"><span class="nav-number">3.</span> <span class="nav-text">C语言和JavaScript的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言与C-语言的区别"><span class="nav-number">4.</span> <span class="nav-text">C语言与C++语言的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解内存与指针"><span class="nav-number">5.</span> <span class="nav-text">理解内存与指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.1.</span> <span class="nav-text">指针</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🤯前端不限端"><span class="nav-number">1.</span> <span class="nav-text">🤯前端不限端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言沉浮录"><span class="nav-number">2.</span> <span class="nav-text">C语言沉浮录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言和JavaScript的异同"><span class="nav-number">3.</span> <span class="nav-text">C语言和JavaScript的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言与C-语言的区别"><span class="nav-number">4.</span> <span class="nav-text">C语言与C++语言的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解内存与指针"><span class="nav-number">5.</span> <span class="nav-text">理解内存与指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.1.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#🤒声明指针"><span class="nav-number">5.1.1.</span> <span class="nav-text">🤒声明指针</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -729,7 +751,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30.4k</span>
+    <span title="Site words total count">30.8k</span>
   
 </div>
 
