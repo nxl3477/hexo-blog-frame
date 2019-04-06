@@ -91,7 +91,10 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-13-46-58.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-13-58-53.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-14-38-20.png">
-<meta property="og:updated_time" content="2019-04-06T06:59:34.515Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-15-09-10.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-15-13-36.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-15-14-35.png">
+<meta property="og:updated_time" content="2019-04-06T07:40:21.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【C语言】入门知识">
 <meta name="twitter:description" content="C语言的诞生要比JavaScript早很多, 属于低级语言，比较擅长和系统交互写底层应用。 C语言的编译工具就是gcc 🤯前端不限端作为一名优质的前端切图仔， 不应该把自己困死在前端中， 更应该多开阔视野， 朝较底层的方向探索 当然， 这只是鸡汤， 我们来看看前端学习C语言的必要性  编译开源软件的源代码 C语言基本语法，要看得懂代码 指针和C语言的坑 从内存层面理解数据结构 搞懂V8的内存管理">
@@ -363,7 +366,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k 字
+                  1.6k 字
                 </span>
               
 
@@ -379,7 +382,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -450,18 +453,70 @@
 </ul>
 <p>要理解内存和指针首先我们应该知道内存在计算机中是什么样子的， 我们可以把内存看作是一个打了很多格子的小纸条，<strong>每个格子就是内存的基本存储单位</strong>, 1个单位是一个字节，也就是一个<code>byte</code>, 而一个<code>byte</code>等于8个<code>bit</code>，那我们该如何找到对应的内存呢， 实际上内存是有编号的，这个编号从0开始， 作为内存的地址（门牌）</p>
 <p><img src="http://img.nixiaolei.com/2019-04-06-14-38-20.png" alt="内存地址"></p>
-<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>容纳内存地址的变量就是指针</p>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><blockquote>
+<p>指针其实也是可以运算的，但大多数情况没有意义，  一般用在计算存储空间</p>
+</blockquote>
+<p>容纳内存地址的变量就是指针</p>
 <p>C语言中， 指针也是有类型的， 因为不同的数据类型对应内存中的所占的大小不一样， 定义类型是为了从内存中拿出正确长度的数据， 比如： 短整型只占两个字节、 长整型占4和字节、  超长整型占8个字节、单精度浮点型占6个字节、 双精度浮点型占8个字节</p>
 <p>如果不正确定义指针的类型，就会导致从内存中拿出来的长度是错的， 也就是导致得到的值是错的</p>
+<p><img src="http://img.nixiaolei.com/2019-04-06-15-09-10.png" alt="理解指针"></p>
+<h4 id="🕵️‍一级指针结构"><a href="#🕵️‍一级指针结构" class="headerlink" title="🕵️‍一级指针结构"></a>🕵️‍一级指针结构</h4><p><img src="http://img.nixiaolei.com/2019-04-06-15-13-36.png" alt="一级指针结构"></p>
+<h4 id="🕵️‍二级指针结构"><a href="#🕵️‍二级指针结构" class="headerlink" title="🕵️‍二级指针结构"></a>🕵️‍二级指针结构</h4><p><img src="http://img.nixiaolei.com/2019-04-06-15-14-35.png" alt="二级指针结构"></p>
 <h4 id="🤒声明指针"><a href="#🤒声明指针" class="headerlink" title="🤒声明指针"></a>🤒声明指针</h4><blockquote>
 <p>一开始声明的指针我们只能给他一个Null或是 内存地址, 因为一个具体的值对于指针是没有意义的，</p>
 </blockquote>
 <p>声明一个整型的指针<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br></pre></td></tr></table></figure></p>
-<p><strong>二级指针及多级指针</strong></p>
-<blockquote>
+<h4 id="🧐直接寻址和间接寻址"><a href="#🧐直接寻址和间接寻址" class="headerlink" title="🧐直接寻址和间接寻址"></a>🧐直接寻址和间接寻址</h4><p>直接使用变量和利用指针访问的结构是一样的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(a);  <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">printf</span>( *p );  <span class="comment">// 10</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="🤒二级指针及多级指针"><a href="#🤒二级指针及多级指针" class="headerlink" title="🤒二级指针及多级指针"></a>🤒二级指针及多级指针</h4><blockquote>
 <p>不管是几级指针编译器都是能够通过的</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个变量， 会自动分配内存</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向变量a的指针</span></span><br><span class="line"><span class="keyword">int</span> * p_a = &amp;a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明一个指向指针的指针</span></span><br><span class="line"><span class="keyword">int</span> ** pp_a = &amp;p_a;</span><br></pre></td></tr></table></figure>
+<h4 id="指向函数的指针"><a href="#指向函数的指针" class="headerlink" title="指向函数的指针"></a>指向函数的指针</h4><blockquote>
+<p>函数它本身也在内存当中, 当我们看到一个指向函数的指针时就代表着函数调用， 回调函数就是基于指针的</p>
+</blockquote>
+<p>C语言的函数是有原型的</p>
+<p>声明一个两数相加函数的原型<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数返回类型及参数类型</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">( <span class="keyword">int</span>, <span class="keyword">int</span> )</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>实现函数<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> v1, <span class="keyword">int</span> v2)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> v1 + v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建指向函数的指针<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>*(<span class="keyword">int</span>, <span class="keyword">int</span>) p_func;</span><br><span class="line">p_func = add;</span><br></pre></td></tr></table></figure></p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>引用是对指针的封装， 现代语言不允许你直接去操作地址  因为现代语言都自带着垃圾回收机制， 在垃圾回收的过程中， 地址会经常改变，  改变地址的目的是为了提高内存的利用效率， 使内存连续</p>
+<h2 id="内存动态分配"><a href="#内存动态分配" class="headerlink" title="内存动态分配"></a>内存动态分配</h2><p>C语言主要分如下四个区</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">内存</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">特性 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">栈区</td>
+<td style="text-align:center">是一个确定的常数(1~2M) 不同平台会有不同大小，超出会提示stackoverflow</td>
+<td style="text-align:center">自动分配, 自动释放</td>
+</tr>
+<tr>
+<td style="text-align:center">堆区</td>
+<td style="text-align:center">用于动态内存分配</td>
+<td style="text-align:center">手动分配和释放 ， 可占用80%内存</td>
+</tr>
+<tr>
+<td style="text-align:center">全局区或静态区</td>
+<td style="text-align:center">在程序中明确被初始化的全局变量、静态变量（包括全局静态变量和局部静态变量）和常量数据（如字符串常量）</td>
+<td style="text-align:center">只初始化一次 </td>
+</tr>
+<tr>
+<td style="text-align:center">程序代码区</td>
+<td style="text-align:center">代码区指令根据程序设计流程依次执行，对于顺序指令，则只会执行一次（每个进程），如果反复，则需要使用跳转指令，如果进行递归，则需要借助栈来实现。</td>
+<td style="text-align:center">代码区的指令中包括操作码和要操作的对象（或对象地址引用）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>栈区： 还用来保存当前函数的局部变量</li>
+<li>堆区： 存放new出来的变量</li>
+<li>全局区或静态区: 存放全局变量及对象的静态变量</li>
+<li>程序代码区:  存放指令、代码， 以前的金山游侠修改器就是专门改程序代码区的</li>
+</ul>
 
       
     </div>
@@ -634,7 +689,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -717,7 +772,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🤯前端不限端"><span class="nav-number">1.</span> <span class="nav-text">🤯前端不限端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言沉浮录"><span class="nav-number">2.</span> <span class="nav-text">C语言沉浮录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言和JavaScript的异同"><span class="nav-number">3.</span> <span class="nav-text">C语言和JavaScript的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言与C-语言的区别"><span class="nav-number">4.</span> <span class="nav-text">C语言与C++语言的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解内存与指针"><span class="nav-number">5.</span> <span class="nav-text">理解内存与指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.1.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#🤒声明指针"><span class="nav-number">5.1.1.</span> <span class="nav-text">🤒声明指针</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#🤯前端不限端"><span class="nav-number">1.</span> <span class="nav-text">🤯前端不限端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言沉浮录"><span class="nav-number">2.</span> <span class="nav-text">C语言沉浮录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言和JavaScript的异同"><span class="nav-number">3.</span> <span class="nav-text">C语言和JavaScript的异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言与C-语言的区别"><span class="nav-number">4.</span> <span class="nav-text">C语言与C++语言的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解内存与指针"><span class="nav-number">5.</span> <span class="nav-text">理解内存与指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.1.</span> <span class="nav-text">指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#🕵️‍一级指针结构"><span class="nav-number">5.1.1.</span> <span class="nav-text">🕵️‍一级指针结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#🕵️‍二级指针结构"><span class="nav-number">5.1.2.</span> <span class="nav-text">🕵️‍二级指针结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#🤒声明指针"><span class="nav-number">5.1.3.</span> <span class="nav-text">🤒声明指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#🧐直接寻址和间接寻址"><span class="nav-number">5.1.4.</span> <span class="nav-text">🧐直接寻址和间接寻址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#🤒二级指针及多级指针"><span class="nav-number">5.1.5.</span> <span class="nav-text">🤒二级指针及多级指针</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指向函数的指针"><span class="nav-number">5.1.6.</span> <span class="nav-text">指向函数的指针</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">5.2.</span> <span class="nav-text">引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存动态分配"><span class="nav-number">6.</span> <span class="nav-text">内存动态分配</span></a></li></ol></div>
             
 
           </div>
@@ -751,7 +806,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">30.8k</span>
+    <span title="Site words total count">31.4k</span>
   
 </div>
 
