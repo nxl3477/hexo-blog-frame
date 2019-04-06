@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="倪晓磊的个人博客">
 <meta property="og:description" content="什么是壳想要破解别人的程序， 必然要对别人代码进行分析， 分析手段无非两种:  静态分析 动态分析  利用动态分析就可以绕过类似注册码的步骤 如何避免别人通过分析绕过注册码等步骤呢， 就需要对程序加一层壳，  当你程序在载入到内存的时候， 要先去检查一下环境，看看自身是否跑在调试器的环境里， 如果在调试器的环境，就要把调试器的环境破坏掉，不让你进行动态分析， 这就是加壳的一种手段 或者还有其他的手">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-06T07:58:55.965Z">
+<meta property="og:updated_time" content="2019-04-06T07:59:31.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单理解破解与脱壳">
 <meta name="twitter:description" content="什么是壳想要破解别人的程序， 必然要对别人代码进行分析， 分析手段无非两种:  静态分析 动态分析  利用动态分析就可以绕过类似注册码的步骤 如何避免别人通过分析绕过注册码等步骤呢， 就需要对程序加一层壳，  当你程序在载入到内存的时候， 要先去检查一下环境，看看自身是否跑在调试器的环境里， 如果在调试器的环境，就要把调试器的环境破坏掉，不让你进行动态分析， 这就是加壳的一种手段 或者还有其他的手">
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  326 字
+                  336 字
                 </span>
               
 
@@ -405,6 +405,9 @@
 <p>当你程序在载入到内存的时候， 要先去检查一下环境，看看自身是否跑在调试器的环境里， 如果在调试器的环境，就要把调试器的环境破坏掉，不让你进行动态分析，</p>
 <p>这就是加壳的一种手段</p>
 <p>或者还有其他的手段， 例如，把真正的程序压缩到其他地方， 当启动<code>exe</code>程序时再将真正的程序解压缩， 用来防止动态分析</p>
+<blockquote>
+<p>脱壳就是扒掉这层防护</p>
+</blockquote>
 <h3 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h3><p>静态分析就是直接去看别人的源代码， 当然别人写的C的源代码你是看不到的， 必须进行反编译， 但是反编译也不是那么的完美， 无法恢复回原来的样子， 会非常难以理解。</p>
 <h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>类似于<code>debugger</code>, 借助调试器，  可以看到代码的当前执行状况， 跳转地址、内存当中的状态</p>
 
@@ -698,7 +701,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">31.7k</span>
+    <span title="Site words total count">31.9k</span>
   
 </div>
 
