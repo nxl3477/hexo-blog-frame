@@ -2,7 +2,7 @@
 title: 面向对象设计原则之S.O.L.I.D
 date: 2019-03-24 09:39:12
 categories: 编程思想
-tags: [oop, SOLID, 编程原则]
+tags: [oop, 编程原则]
 ---
 
 
