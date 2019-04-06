@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="适配,Vue,">
+  <meta name="keywords" content="Vue,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="安装12npm i lib-flexible --savenpm install px2rem-loader 引入 main.js  1import &amp;apos;lib-flexible/flexible&amp;apos;  index.html  1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-">
-<meta name="keywords" content="适配,Vue">
+<meta name="description" content="add如果你下载的库, 特别是 Ui 库, 希望对脚手架结构产生影响, 那就选择   vue add xxx  npm如果不希望对脚手架结构产生影响, 只是单纯的使用, 比如 axios 这个插件那就选择   npm install xxx  谢谢最可爱的贝玺">
+<meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue-cli3脚手架配置px2rem适配方案">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/24/vue-cli3脚手架配置px2rem适配方案/index.html">
+<meta property="og:title" content="vue的add命令与npm的小区别">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/04/24/vue的add命令与npm的小区别/index.html">
 <meta property="og:site_name" content="倪晓磊的个人博客">
-<meta property="og:description" content="安装12npm i lib-flexible --savenpm install px2rem-loader 引入 main.js  1import &amp;apos;lib-flexible/flexible&amp;apos;  index.html  1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-">
+<meta property="og:description" content="add如果你下载的库, 特别是 Ui 库, 希望对脚手架结构产生影响, 那就选择   vue add xxx  npm如果不希望对脚手架结构产生影响, 只是单纯的使用, 比如 axios 这个插件那就选择   npm install xxx  谢谢最可爱的贝玺">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-24T06:27:45.239Z">
+<meta property="og:updated_time" content="2019-04-06T11:24:11.450Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue-cli3脚手架配置px2rem适配方案">
-<meta name="twitter:description" content="安装12npm i lib-flexible --savenpm install px2rem-loader 引入 main.js  1import &amp;apos;lib-flexible/flexible&amp;apos;  index.html  1&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-">
+<meta name="twitter:title" content="vue的add命令与npm的小区别">
+<meta name="twitter:description" content="add如果你下载的库, 特别是 Ui 库, 希望对脚手架结构产生影响, 那就选择   vue add xxx  npm如果不希望对脚手架结构产生影响, 只是单纯的使用, 比如 axios 这个插件那就选择   npm install xxx  谢谢最可爱的贝玺">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/24/vue-cli3脚手架配置px2rem适配方案/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/04/24/vue的add命令与npm的小区别/">
 
 
 
 
 
-  <title>vue-cli3脚手架配置px2rem适配方案 | 倪晓磊的个人博客</title>
+  <title>vue的add命令与npm的小区别 | 倪晓磊的个人博客</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/24/vue-cli3脚手架配置px2rem适配方案/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/24/vue的add命令与npm的小区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -292,7 +292,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">vue-cli3脚手架配置px2rem适配方案</h2>
+          <h2 class="post-title" itemprop="name headline">vue的add命令与npm的小区别</h2>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-24T14:26:51+08:00">
-                2019-03-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-24T14:42:25+08:00">
+                2019-04-24
               </time>
             
 
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  108 字
+                  77 字
                 </span>
               
 
@@ -395,19 +395,15 @@
       
 
       
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i lib-flexible --save</span><br><span class="line">npm install px2rem-loader</span><br></pre></td></tr></table></figure>
-<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><blockquote>
-<p>main.js</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &apos;lib-flexible/flexible&apos;</span><br></pre></td></tr></table></figure>
+        <h2 id="add"><a href="#add" class="headerlink" title="add"></a>add</h2><p>如果你下载的库, 特别是 Ui 库, 希望对脚手架结构产生影响,</p>
+<p>那就选择 </p>
 <blockquote>
-<p>index.html</p>
+<p>vue add xxx</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="根目录新建-vue-config-js-文件"><a href="#根目录新建-vue-config-js-文件" class="headerlink" title="根目录新建 vue.config.js 文件"></a>根目录新建 vue.config.js 文件</h2><blockquote>
-<p>复制如下代码， 重启， 搞定</p>
+<h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p>如果不希望对脚手架结构产生影响, 只是单纯的使用, 比如 axios 这个插件<br>那就选择 </p>
+<blockquote>
+<p>npm install xxx</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// vue.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  chainWebpack: config =&gt; &#123;</span><br><span class="line">    config.module</span><br><span class="line">      .rule(&apos;css&apos;)</span><br><span class="line">        .test(/\.css$/)</span><br><span class="line">        .oneOf(&apos;vue&apos;)</span><br><span class="line">        .resourceQuery(/\?vue/)</span><br><span class="line">        .use(&apos;px2rem&apos;)</span><br><span class="line">          .loader(&apos;px2rem-loader&apos;)</span><br><span class="line">          .options(&#123;</span><br><span class="line">            remUnit: 75</span><br><span class="line">          &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <div style="display: none;"><br>谢谢最可爱的贝玺<br></div>
 
 
@@ -473,7 +469,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.nixiaolei.com/2019/03/24/vue-cli3脚手架配置px2rem适配方案/" title="vue-cli3脚手架配置px2rem适配方案">http://blog.nixiaolei.com/2019/03/24/vue-cli3脚手架配置px2rem适配方案/</a>
+    <a href="http://blog.nixiaolei.com/2019/04/24/vue的add命令与npm的小区别/" title="vue的add命令与npm的小区别">http://blog.nixiaolei.com/2019/04/24/vue的add命令与npm的小区别/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -488,8 +484,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/适配/" rel="tag"># 适配</a>
-          
             <a href="/tags/Vue/" rel="tag"># Vue</a>
           
         </div>
@@ -503,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/24/【AOP】面向切面编程/" rel="next" title="【AOP】面向切面编程">
-                <i class="fa fa-chevron-left"></i> 【AOP】面向切面编程
+              <a href="/2019/04/24/vue-cli3脚手架配置px2rem适配方案/" rel="next" title="vue-cli3脚手架配置px2rem适配方案">
+                <i class="fa fa-chevron-left"></i> vue-cli3脚手架配置px2rem适配方案
               </a>
             
           </div>
@@ -513,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/24/vue的add命令与npm的小区别/" rel="prev" title="vue的add命令与npm的小区别">
-                vue的add命令与npm的小区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/24/vuecli3脚手架环境变量/" rel="prev" title="vuecli3脚手架环境变量">
+                vuecli3脚手架环境变量 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -598,7 +592,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,7 +603,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -620,7 +614,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -681,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入"><span class="nav-number">2.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根目录新建-vue-config-js-文件"><span class="nav-number">3.</span> <span class="nav-text">根目录新建 vue.config.js 文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#add"><span class="nav-number">1.</span> <span class="nav-text">add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm"><span class="nav-number">2.</span> <span class="nav-text">npm</span></a></li></ol></div>
             
 
           </div>
@@ -715,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32.8k</span>
+    <span title="Site words total count">33k</span>
   
 </div>
 

@@ -1,6 +1,6 @@
 ---
 title: vue-cli3脚手架配置px2rem适配方案
-date: 2019-03-24 14:26:51
+date: 2019-04-24 14:26:51
 categories: Vue
 tags: [适配, Vue]
 ---
