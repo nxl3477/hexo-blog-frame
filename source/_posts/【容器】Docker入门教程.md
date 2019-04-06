@@ -27,26 +27,54 @@ tags: [Docker, 容器]
   * 比虚拟机技术更为轻便、快捷
   * 隔离效果不如VM
 
-![Docker与VM](http://img.nixiaolei.com/2019-04-06-19-57-22.png)
 
+![Docker与VM](http://img.nixiaolei.com/2019-04-06-22-42-11.png)
 
 *** 
 总的来说， 虚拟机是在操作系统上又装了一个操作系统，运行操作系统特别消耗资源
 
-而`Docker`是一种类似于隔离的技术， 公用你宿主机上的内核， 在`Docker`中再装了一层`shell`   并且`Docker`和其他`Docker`之间是可以通过内核相互进行通信的(Linux进程之间必须经过内核)
+而`Docker`是一种类似于隔离的技术， 由`CPU` 和`Linux`内核提供的虚拟化技术， 公用你宿主机上的内核， 在`Docker`中再装了一层`shell`, 并且`Docker`和其他`Docker`之间是可以通过内核相互进行通信的(`Linux`进程之间必须经过内核)
+
+
+## 3.1 镜像与容器
+
+image是静态的概念， 比如： 你的`exe`文件
+
+container是动态的概念， 比如： 你执行`exe`后的进程
+
+## 4.1 Docker相关概念
+* Docker是CS架构，主要有两个概念：
+* Docker daemon:
+  * 运行在宿主机上
+  * Docker守护进程
+  * 用户通过Docker client(Docker命令)与Docker daemon交互
+* Docker client:
+  * Docker 命令行工具，是用户使用Docker的主要方式
+  * Docker client与Docker daemon通信并将结果返回给用户
+  * Docker client也可以通过socket或者RESTful api访问远程的
+  * Docker daemon
+
+## 4.2 相关概念详解
+
+`Docker`最底层是宿主的操作系统内核， 
+
+再上层就是底包， 底包就是存放`bash`以及`bash`所依赖的基本环境， 每个系统都有不一样的底包， 你可以自己去做底包， 也可以到[dockerHub](https://www.docker.com/products/docker-hub)里找
+
+![Docker结构](http://img.nixiaolei.com/2019-04-06-22-56-37.png)
+
+
+在此之上一层一层的往上累加，比如`Node`、`Mysql`啥的, 最后扔到容器里跑
+
+![Docker上层结构](http://img.nixiaolei.com/2019-04-06-23-14-37.png)
+
+
+## 5.1 Dockerfile
+* Dockerfile 概念
+* Dockerfile 文件格式
+* 构建镜像
+* 镜像标签
+* 修改容器内容
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![配置文件](http://img.nixiaolei.com/2019-04-06-23-15-51.png)
