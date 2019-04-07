@@ -42,7 +42,7 @@ tags: [Docker, 容器]
 ## python项目配置文件分析
 
 ```DockerFile
-# 前两行固定
+# 前两行固定写法~
 # 你的底包来源
 FROM centos
 # 作者(用于上传时使用)
