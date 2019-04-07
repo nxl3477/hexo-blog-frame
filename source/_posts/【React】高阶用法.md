@@ -143,3 +143,15 @@ class Demo extends Component {
 两种写法的效果是一样的：
 ![空地根节点](http://img.nixiaolei.com/2019-04-07-12-57-12.png)
 
+## PureComponent
+> 自动为状态组件添加`shouldComponentUpdate`函数
+
+```JavaScript
+import React, { PureComponent } from 'react'
+class TodoItem extends PureComponent {
+  
+}
+```
+
+
+

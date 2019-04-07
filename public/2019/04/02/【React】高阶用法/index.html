@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-07-11-28-59.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-07-12-57-12.png">
-<meta property="og:updated_time" content="2019-04-07T04:59:22.930Z">
+<meta property="og:updated_time" content="2019-04-07T08:46:38.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【React】高阶用法">
 <meta name="twitter:description" content="默认参数 当未传入props时使用预设的默认值  使用静态属性defaultProps来定义props的默认值, 避免未传props报错的情况123static defaultProps = &amp;#123;  thing: &quot;这是默认的props参数&quot;&amp;#125; demo1234567891011121314151617181920212223242526272829303132333435363">
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  426 字
+                  452 字
                 </span>
               
 
@@ -416,6 +416,10 @@
 <p>写法一：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure></p>
 <p>写法二 ：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用文档片段</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>hello world3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">Fragment</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>两种写法的效果是一样的：<br><img src="http://img.nixiaolei.com/2019-04-07-12-57-12.png" alt="空地根节点"></p>
+<h2 id="PureComponent"><a href="#PureComponent" class="headerlink" title="PureComponent"></a>PureComponent</h2><blockquote>
+<p>自动为状态组件添加<code>shouldComponentUpdate</code>函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; PureComponent &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItem</span> <span class="keyword">extends</span> <span class="title">PureComponent</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -588,7 +592,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认参数"><span class="nav-number">1.</span> <span class="nav-text">默认参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#demo"><span class="nav-number">1.1.</span> <span class="nav-text">demo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自由的render返回值类型"><span class="nav-number">2.</span> <span class="nav-text">自由的render返回值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回dom"><span class="nav-number">2.1.</span> <span class="nav-text">返回dom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回字符串"><span class="nav-number">2.2.</span> <span class="nav-text">返回字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回数组"><span class="nav-number">2.3.</span> <span class="nav-text">返回数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空的根节点"><span class="nav-number">3.</span> <span class="nav-text">空的根节点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#默认参数"><span class="nav-number">1.</span> <span class="nav-text">默认参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#demo"><span class="nav-number">1.1.</span> <span class="nav-text">demo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自由的render返回值类型"><span class="nav-number">2.</span> <span class="nav-text">自由的render返回值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回dom"><span class="nav-number">2.1.</span> <span class="nav-text">返回dom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回字符串"><span class="nav-number">2.2.</span> <span class="nav-text">返回字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回数组"><span class="nav-number">2.3.</span> <span class="nav-text">返回数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空的根节点"><span class="nav-number">3.</span> <span class="nav-text">空的根节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PureComponent"><span class="nav-number">4.</span> <span class="nav-text">PureComponent</span></a></li></ol></div>
             
 
           </div>
@@ -705,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.4k</span>
+    <span title="Site words total count">35.3k</span>
   
 </div>
 

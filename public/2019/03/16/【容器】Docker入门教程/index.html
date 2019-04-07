@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-22-56-37.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-06-23-14-37.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-07-10-26-12.png">
-<meta property="og:updated_time" content="2019-04-07T05:00:49.872Z">
+<meta property="og:updated_time" content="2019-04-07T05:02:55.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【容器】Docker入门教程">
 <meta name="twitter:description" content="1.1 Docker简介 Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。 Docker通常用于如下场景： web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或">
@@ -363,7 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  818 字
+                  820 字
                 </span>
               
 
@@ -462,7 +462,7 @@
 <li>修改容器内容</li>
 </ul>
 <p><img src="http://img.nixiaolei.com/2019-04-07-10-26-12.png" alt="配置文件"></p>
-<h2 id="6-1-配置文件分析"><a href="#6-1-配置文件分析" class="headerlink" title="6.1 配置文件分析"></a>6.1 配置文件分析</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 前两行固定</span></span><br><span class="line"><span class="comment"># 你的底包来源</span></span><br><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="comment"># 作者(用于上传时使用)</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> nxl &lt;nxl3477@foxmail.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN构建命令--只在构建镜像中使用    ( -y 表示全部yes)</span></span><br><span class="line"><span class="keyword">RUN</span> yum install gcc automake autoconf libtool make -y  </span><br><span class="line"><span class="comment"># python 依赖于 zlib</span></span><br><span class="line"><span class="keyword">RUN</span> yum install zlib zlib-devel libffi-devel -y</span><br><span class="line"><span class="comment"># 安装 wget</span></span><br><span class="line"><span class="keyword">RUN</span> yum install wget -y</span><br><span class="line"><span class="comment"># 下载python安装包</span></span><br><span class="line"><span class="keyword">RUN</span> wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz</span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line"><span class="keyword">RUN</span> tar -zxvf Python-3.7.0.tgz</span><br><span class="line"><span class="comment"># 切换目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span> Python-3.7.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译安装</span></span><br><span class="line"><span class="keyword">RUN</span> ./configure</span><br><span class="line"><span class="keyword">RUN</span> ls -al</span><br><span class="line"><span class="keyword">RUN</span> make &amp;&amp; make install </span><br><span class="line"></span><br><span class="line"><span class="comment"># CMD 运行命令， 唤起python自带的服务器</span></span><br><span class="line"><span class="keyword">CMD</span> python3 -m http.server</span><br></pre></td></tr></table></figure>
+<h2 id="6-1-配置文件分析"><a href="#6-1-配置文件分析" class="headerlink" title="6.1 配置文件分析"></a>6.1 配置文件分析</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 前两行固定写法~</span></span><br><span class="line"><span class="comment"># 你的底包来源</span></span><br><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="comment"># 作者(用于上传时使用)</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> nxl &lt;nxl3477@foxmail.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># RUN构建命令--只在构建镜像中使用    ( -y 表示全部yes)</span></span><br><span class="line"><span class="keyword">RUN</span> yum install gcc automake autoconf libtool make -y  </span><br><span class="line"><span class="comment"># python 依赖于 zlib</span></span><br><span class="line"><span class="keyword">RUN</span> yum install zlib zlib-devel libffi-devel -y</span><br><span class="line"><span class="comment"># 安装 wget</span></span><br><span class="line"><span class="keyword">RUN</span> yum install wget -y</span><br><span class="line"><span class="comment"># 下载python安装包</span></span><br><span class="line"><span class="keyword">RUN</span> wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz</span><br><span class="line"><span class="comment"># 解压缩</span></span><br><span class="line"><span class="keyword">RUN</span> tar -zxvf Python-3.7.0.tgz</span><br><span class="line"><span class="comment"># 切换目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span> Python-3.7.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译安装</span></span><br><span class="line"><span class="keyword">RUN</span> ./configure</span><br><span class="line"><span class="keyword">RUN</span> ls -al</span><br><span class="line"><span class="keyword">RUN</span> make &amp;&amp; make install </span><br><span class="line"></span><br><span class="line"><span class="comment"># CMD 运行命令， 唤起python自带的服务器</span></span><br><span class="line"><span class="keyword">CMD</span> python3 -m http.server</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -636,7 +636,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -753,7 +753,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">34.4k</span>
+    <span title="Site words total count">35.3k</span>
   
 </div>
 
