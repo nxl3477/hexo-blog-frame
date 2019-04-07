@@ -312,6 +312,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[【容器】docker命令手册]]></title>
+    <url>%2F2019%2F03%2F17%2F%E3%80%90%E5%AE%B9%E5%99%A8%E3%80%91docker%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C%2F</url>
+    <content type="text"><![CDATA[使用docker 查看所有命令 基本命令 命令 功能 示例 FROM 声明底包来源 FROM centos RUN 构建命令–只在构建镜像中使用 RUN yum install wget -y WORKDIR docker中必须用此切换目录 WORKDIR Python-3.7.0 CMD 运行命令 CMD python3 -m http.server docker build ‘dockerfile的路径’ 构建新镜像 进程相关命令 在docker client中使用 命令 功能 示例 docker ps 查看进城 docker ps docker kill ‘id’ 杀死指定容器 docker kill 123 docker rename 容器改名 docker restart 重启容器 docker rm 移除一个或多个’容器’(停止状态的容器) docker rmi 移除一个或多个’镜像’ python项目配置文件分析1234567891011121314151617181920212223242526# 前两行固定# 你的底包来源FROM centos# 作者(用于上传时使用)MAINTAINER nxl &lt;nxl3477@foxmail.com&gt;# RUN构建命令--只在构建镜像中使用 ( -y 表示全部yes)RUN yum install gcc automake autoconf libtool make -y # python 依赖于 zlibRUN yum install zlib zlib-devel libffi-devel -y# 安装 wgetRUN yum install wget -y# 下载python安装包RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz# 解压缩RUN tar -zxvf Python-3.7.0.tgz# 切换目录WORKDIR Python-3.7.0# 编译安装RUN ./configureRUN ls -alRUN make &amp;&amp; make install # CMD 运行命令， 唤起python自带的服务器CMD python3 -m http.server]]></content>
+      <categories>
+        <category>容器</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[css分层&命名规范]]></title>
     <url>%2F2019%2F03%2F16%2Fcss%E5%88%86%E5%B1%82-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%2F</url>
     <content type="text"><![CDATA[为什么要分层? CSS有语义化的命名约定和CSS层的分离， 将有助于它的可扩展性， 性能的提高和代码的组织管理。 避免大量的样式、 覆盖、 权重和很多！important, 分好层可以让团队命名统一规范， 方便维护。 有责任感地去命名你的选择器 有哪些分层理论? SMACSS BEM SUIT ACSS ITCSS BEMBEM和SMACCS非常类似， 主要用来如何给项目命名。一个简单命名更容易让别人一起工作。 比如选项卡导航是一个块(Block)， 这个块里的元素是其中标签之一（Element）, 而当前选项卡是一个修饰状态( Modifier ) block - 代表了更高级别的抽象或组件 block__element - 代表.block的后代， 用于形成一个完整的.block的整体。 block–modifier - 代表.block 的不同状态或不同版本。 修饰符使用的是_, 子模块使用的是__符号。 ( 不同一个-的原因是因为CSS单词连接 ) 12345678&lt;!-- container 是大容器 --&gt;&lt;div class="container"&gt; &lt;div class="menu"&gt; &lt;div class="menu--item menu--item__active"&gt;首页&lt;/div&gt; &lt;div class="menu--item"&gt;新闻&lt;/div&gt; &lt;div class="menu--item"&gt;消息&lt;/div&gt; &lt;/div&gt;&lt;/div&gt;]]></content>
@@ -350,7 +362,7 @@
   <entry>
     <title><![CDATA[【容器】Docker入门教程]]></title>
     <url>%2F2019%2F03%2F16%2F%E3%80%90%E5%AE%B9%E5%99%A8%E3%80%91Docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[1.1 Docker简介 Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。 Docker通常用于如下场景： web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或其他的后台应用； 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。 2.1 Docker vs. VM VM： 运行在宿主机之上的完整的操作系统 运行自身操作系统会占用较多的资源 Docker： Docker更加轻量高效 对系统资源的利用率很高 比虚拟机技术更为轻便、快捷 隔离效果不如VM 总的来说， 虚拟机是在操作系统上又装了一个操作系统，运行操作系统特别消耗资源 而Docker是一种类似于隔离的技术， 由CPU 和Linux内核提供的虚拟化技术， 公用你宿主机上的内核， 在Docker中再装了一层shell, 并且Docker和其他Docker之间是可以通过内核相互进行通信的(Linux进程之间必须经过内核) 3.1 镜像与容器image是静态的概念， 比如： 你的exe文件 container是动态的概念， 比如： 你执行exe后的进程 4.1 Docker相关概念 Docker是CS架构，主要有两个概念： Docker daemon: 运行在宿主机上 Docker守护进程 用户通过Docker client(Docker命令)与Docker daemon交互 Docker client: Docker 命令行工具，是用户使用Docker的主要方式 Docker client与Docker daemon通信并将结果返回给用户 Docker client也可以通过socket或者RESTful api访问远程的 Docker daemon 4.2 相关概念详解Docker最底层是宿主的操作系统内核， 再上层就是底包， 底包就是存放bash以及bash所依赖的基本环境， 每个系统都有不一样的底包， 你可以自己去做底包， 也可以到dockerHub里找 在此之上一层一层的往上累加，比如Node、Mysql啥的, 最后扔到容器里跑 5.1 Dockerfile Dockerfile 概念 Dockerfile 文件格式 构建镜像 镜像标签 修改容器内容]]></content>
+    <content type="text"><![CDATA[1.1 Docker简介 Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。 Docker通常用于如下场景： web应用的自动化打包和发布； 自动化测试和持续集成、发布； 在服务型环境中部署和调整数据库或其他的后台应用； 从头编译或者扩展现有的OpenShift或Cloud Foundry平台来搭建自己的PaaS环境。 2.1 Docker vs. VM VM： 运行在宿主机之上的完整的操作系统 运行自身操作系统会占用较多的资源 Docker： Docker更加轻量高效 对系统资源的利用率很高 比虚拟机技术更为轻便、快捷 隔离效果不如VM 总的来说， 虚拟机是在操作系统上又装了一个操作系统，运行操作系统特别消耗资源 而Docker是一种类似于隔离的技术， 由CPU 和Linux内核提供的虚拟化技术， 公用你宿主机上的内核， 在Docker中再装了一层shell, 并且Docker和其他Docker之间是可以通过内核相互进行通信的(Linux进程之间必须经过内核) 3.1 镜像与容器image是静态的概念， 比如： 你的exe文件 container是动态的概念， 比如： 你执行exe后的进程 4.1 Docker相关概念 Docker是CS架构，主要有两个概念： Docker daemon: 运行在宿主机上 Docker守护进程 用户通过Docker client(Docker命令)与Docker daemon交互 Docker client: Docker 命令行工具，是用户使用Docker的主要方式 Docker client与Docker daemon通信并将结果返回给用户 Docker client也可以通过socket或者RESTful api访问远程的 Docker daemon 4.2 相关概念详解Docker最底层是宿主的操作系统内核， 再上层就是底包， 底包就是存放bash以及bash所依赖的基本环境， 每个系统都有不一样的底包， 你可以自己去做底包， 也可以到dockerHub里找 在此之上一层一层的往上累加，比如Node、Mysql啥的, 最后扔到容器里跑 5.1 Dockerfile 脚本 规定了如何创建Image Dockerfile 概念 Dockerfile 文件格式 构建镜像 镜像标签 修改容器内容 6.1 配置文件分析1234567891011121314151617181920212223242526# 前两行固定# 你的底包来源FROM centos# 作者(用于上传时使用)MAINTAINER nxl &lt;nxl3477@foxmail.com&gt;# RUN构建命令--只在构建镜像中使用 ( -y 表示全部yes)RUN yum install gcc automake autoconf libtool make -y # python 依赖于 zlibRUN yum install zlib zlib-devel libffi-devel -y# 安装 wgetRUN yum install wget -y# 下载python安装包RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz# 解压缩RUN tar -zxvf Python-3.7.0.tgz# 切换目录WORKDIR Python-3.7.0# 编译安装RUN ./configureRUN ls -alRUN make &amp;&amp; make install # CMD 运行命令， 唤起python自带的服务器CMD python3 -m http.server]]></content>
       <categories>
         <category>容器</category>
       </categories>

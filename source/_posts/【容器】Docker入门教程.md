@@ -68,7 +68,9 @@ container是动态的概念， 比如： 你执行`exe`后的进程
 ![Docker上层结构](http://img.nixiaolei.com/2019-04-06-23-14-37.png)
 
 
-## 5.1 Dockerfile
+## 5.1 Dockerfile 脚本
+> 规定了如何创建Image
+
 * Dockerfile 概念
 * Dockerfile 文件格式
 * 构建镜像
@@ -76,5 +78,36 @@ container是动态的概念， 比如： 你执行`exe`后的进程
 * 修改容器内容
 
 
+![配置文件](http://img.nixiaolei.com/2019-04-07-10-26-12.png)
 
-![配置文件](http://img.nixiaolei.com/2019-04-06-23-15-51.png)
+
+## 6.1 配置文件分析
+
+```DockerFile
+# 前两行固定
+# 你的底包来源
+FROM centos
+# 作者(用于上传时使用)
+MAINTAINER nxl <nxl3477@foxmail.com>
+
+# RUN构建命令--只在构建镜像中使用    ( -y 表示全部yes)
+RUN yum install gcc automake autoconf libtool make -y  
+# python 依赖于 zlib
+RUN yum install zlib zlib-devel libffi-devel -y
+# 安装 wget
+RUN yum install wget -y
+# 下载python安装包
+RUN wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
+# 解压缩
+RUN tar -zxvf Python-3.7.0.tgz
+# 切换目录
+WORKDIR Python-3.7.0
+
+# 编译安装
+RUN ./configure
+RUN ls -al
+RUN make && make install 
+
+# CMD 运行命令， 唤起python自带的服务器
+CMD python3 -m http.server
+```

@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.nixiaolei.com/2019/04/24/vue-cli3%E8%84%9A%E6%89%8B%E6%9E%B6%E9%85%8D%E7%BD%AEpx2rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2019-04-07T02:50:36.923Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.nixiaolei.com/2019/03/16/%E3%80%90%E5%AE%B9%E5%99%A8%E3%80%91Docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</loc>
     
-    <lastmod>2019-04-06T15:16:14.136Z</lastmod>
+    <lastmod>2019-04-07T02:49:37.063Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.nixiaolei.com/2019/03/17/%E3%80%90%E5%AE%B9%E5%99%A8%E3%80%91docker%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</loc>
+    
+    <lastmod>2019-04-07T02:49:05.433Z</lastmod>
     
   </url>
   
@@ -33,13 +47,6 @@
     <loc>http://blog.nixiaolei.com/2019/04/24/vuecli3%E8%84%9A%E6%89%8B%E6%9E%B6%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</loc>
     
     <lastmod>2019-04-06T11:24:06.099Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/04/24/vue-cli3%E8%84%9A%E6%89%8B%E6%9E%B6%E9%85%8D%E7%BD%AEpx2rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</loc>
-    
-    <lastmod>2019-04-06T11:24:02.110Z</lastmod>
     
   </url>
   
