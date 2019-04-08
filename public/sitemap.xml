@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.nixiaolei.com/2019/04/08/%E3%80%90React%E3%80%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8immutableJs/</loc>
+    
+    <lastmod>2019-04-08T14:55:28.049Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.nixiaolei.com/2019/03/29/%E7%90%86%E8%A7%A3Iaas%E3%80%81PaaS%E3%80%81SaaS%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
+    
+    <lastmod>2019-04-08T13:12:50.174Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.nixiaolei.com/2019/03/28/%E3%80%90%E5%AE%B9%E5%99%A8%E3%80%91%E6%90%AD%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AAdocker%E7%8E%AF%E5%A2%83/</loc>
     
     <lastmod>2019-04-08T13:10:32.560Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>http://blog.nixiaolei.com/2019/04/24/vue-cli3%E8%84%9A%E6%89%8B%E6%9E%B6%E9%85%8D%E7%BD%AEpx2rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</loc>
     
     <lastmod>2019-04-07T02:50:36.923Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/03/29/%E7%90%86%E8%A7%A3Iaas%E3%80%81PaaS%E3%80%81SaaS%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
-    
-    <lastmod>2019-04-06T11:40:32.079Z</lastmod>
     
   </url>
   
