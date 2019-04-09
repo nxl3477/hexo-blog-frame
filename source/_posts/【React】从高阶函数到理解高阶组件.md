@@ -35,6 +35,7 @@ function hoc(fn) {
 在不修改原有组件的情况下， 为其添加一个生命周期
 
 ```JavaScript
+// 接收一个组件参数
 const MyContainer = (WrappedComponent) => {
   return class extends Component {
 
@@ -45,6 +46,7 @@ const MyContainer = (WrappedComponent) => {
 
     render() {
       return (
+        // 传入的组件
         <WrappedComponent />
       )
     }
