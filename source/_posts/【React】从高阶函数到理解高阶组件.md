@@ -57,6 +57,13 @@ export default MyContainer;
 
 
 
+## 随处可见的高阶函数
+
+node的`express`框架中, 你的`app.use`就是典型的高阶组件
+
+
+
+
 
 
 

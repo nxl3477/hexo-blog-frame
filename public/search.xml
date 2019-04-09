@@ -37,7 +37,7 @@
   <entry>
     <title><![CDATA[【React】从高阶函数到理解高阶组件]]></title>
     <url>%2F2019%2F04%2F09%2F%E3%80%90React%E3%80%91%E4%BB%8E%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%E5%88%B0%E7%90%86%E8%A7%A3%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[高阶组件其实就是高阶函数 高阶函数的概念千万别和普通回调搞混， 高阶函数的必要条件： 一定要返回一个新函数 非入侵 一句话理解高阶函数本来我没有的，我很垃圾， 通过把我交给别人， 在我身上装了额外的东西， 使我变的拥有了某种能力 举个例子: 人和坦克， 本来人是不能发射炮弹的， 但是人钻进了坦克， 就可以发射炮弹了， 人还是人（自身未变）， 只是在坦克里了 一个例子理解高阶函数一个简单的不能再简单的高阶函数1234567function hoc(fn) &#123; return () =&gt; &#123; console.log('start') fn() console.log('end') &#125;&#125; 一个例子理解高阶组件在不修改原有组件的情况下， 为其添加一个生命周期 1234567891011121314151617const MyContainer = (WrappedComponent) =&gt; &#123; return class extends Component &#123; // 新增的生命周期 componentwillmount() &#123; console.log('增加一个生命周期') &#125; render() &#123; return ( // 传入的组件 &lt;WrappedComponent /&gt; ) &#125; &#125;&#125;export default MyContainer;]]></content>
+    <content type="text"><![CDATA[高阶组件其实就是高阶函数 高阶函数的概念千万别和普通回调搞混， 高阶函数的必要条件： 一定要返回一个新函数 非入侵 一句话理解高阶函数本来我没有的，我很垃圾， 通过把我交给别人， 在我身上装了额外的东西， 使我变的拥有了某种能力 举个例子: 人和坦克， 本来人是不能发射炮弹的， 但是人钻进了坦克， 就可以发射炮弹了， 人还是人（自身未变）， 只是在坦克里了 一个例子理解高阶函数一个简单的不能再简单的高阶函数1234567function hoc(fn) &#123; return () =&gt; &#123; console.log('start') fn() console.log('end') &#125;&#125; 一个例子理解高阶组件在不修改原有组件的情况下， 为其添加一个生命周期 123456789101112131415161718// 接收一个组件参数const MyContainer = (WrappedComponent) =&gt; &#123; return class extends Component &#123; // 新增的生命周期 componentwillmount() &#123; console.log('增加一个生命周期') &#125; render() &#123; return ( // 传入的组件 &lt;WrappedComponent /&gt; ) &#125; &#125;&#125;export default MyContainer; 随处可见的高阶函数node的express框架中, 你的app.use就是典型的高阶组件]]></content>
       <categories>
         <category>React</category>
       </categories>
@@ -390,6 +390,11 @@
         <tag>css</tag>
         <tag>命名规范</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[倪晓磊的个人简历]]></title>
+    <url>%2F2019%2F03%2F16%2F%E5%80%AA%E6%99%93%E7%A3%8A%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86%2F</url>
+    <content type="text"><![CDATA[应聘岗位Web前端开发 联系方式 手机：17367070484 Email：nxl3477@gmail.com QQ: 634926049 微信号：17367070484 个人信息 倪晓磊 / 男 / 1998 杭州科技职业技术学院 / 计算机 工作年限：0.8年 Github：https://github.com/nixiaolei 期望职位：Web前端开发 期望城市：杭州 掌握技能HTML 5 / CSS3 熟练使用 HTML 5、CSS3。 能够编写语义化的 HTML， 能够完成比较复杂的布局。 能够使用 CSS3 实现基本动效。 熟悉 Sass 、Less 等 CSS 预处理工具。 熟悉移动端适配解决方案。 能够解决基本的手机端网页兼容问题。 JavaScript 熟练使用原生 JavaScript、ES6/7等， 能够运用模块化的方式编程。 熟悉使用 React、Redux、Vue、Vuex ，了解MVVM 框架思想。 熟练使用jQuery， 并尝试看过jQuery源码。 Node.js 熟练使用 Koa2、Express 框架进行web应用开发，对 Hapi、egg 等其他框架也有所学习。 熟练使用 Node.js编写爬虫， 了解 robots协议。 能够使用 pm2 进行 Node.js 项目部署。 了解Node.js的“异步机制”以及 GC 原理。 了解SPA预渲染、SSR方案 及BFF架构。 webpack 熟练webpack的配置。 能够搭建简单的工程化项目， 如: Vue-cli脚手架。 能够对 webpack 作基本的性能优化， 并尝试在项目中使用过。 了解webpack插件开发。 其他 能使用 Nginx 进行 ip_hash 指令配置、 反向代理、负载均衡以及权重分配。 熟悉 Git 版本管理工具。 熟练使用 Photoshop 进行图片处理。 工作经历 都市快报 - 快房网（ 2018年7月 ~ 2018年12月 ） 杭州喔图云摄影（ 2018年12月 ~ 至今 ） 项目经历杭州购房摇号登记系统 Vue全家桶 面向房地产商的购房审核系统，是小程序“杭州最新摇号楼盘一览”的后台系统， 小程序可在微信小程序中搜索到。 作为该项目唯一的前端，在没有产品指导的情况下， 我不但完成了网站界面的开发工作， 更是为解决用户参与摇号与楼盘人员审核之间效率低下的痛点提出了自己的多种方案建议。 从开始的审核资料图文混乱改版至图文联动审核， 从开始的审核进度紊乱容易出现重复审核的问题到最后每个审核项都可标记。 期间还负责为使用方现场演示和培训， 并收集改进意见。据使用方反馈，改版前后审核效率提升二倍之多。正因此该系统获得了相当不错的口碑。 浙江省银行协防系统 Vue全家桶、 vw、 weui 该项目服务于”浙江省银行协会”，可在 “浙江省银行协会” 微信公众号的”协防信息”板块进入。 我负责开发移动端网页，在这过程中我学会了使用vw适配方案来解决移动端的尺寸适配问题， 期间也遇到了很多的兼容方面问题， 在此过程中丰富了对各个手机兼容问题的经验。 仿今日头条小程序 React全家桶、WePY、Node.js、Koa2、pm2、Nginx、 MySQL、 Ant Design 毕设项目，项目包括小程序及配套的后台系统。 在此过程中我尽可能使用了自己未掌握的技术，尝试用koa-jwt验证token， 用Node.js开子进程爬取今日头条与西瓜视频数据存入MySQL、react-loadable异步加载页面优化后台系统体验、尝试在本地使用pm2部署项目、用Nginx做反向代理与负载均衡。 致谢感谢您花时间阅读我的简历，期待能有机会和您共事。]]></content>
   </entry>
   <entry>
     <title><![CDATA[【css-doodle】 css web-component入门]]></title>

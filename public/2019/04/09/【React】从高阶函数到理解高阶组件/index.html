@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="倪晓磊的个人博客">
 <meta property="og:description" content="高阶组件其实就是高阶函数 高阶函数的概念千万别和普通回调搞混， 高阶函数的必要条件：  一定要返回一个新函数 非入侵  一句话理解高阶函数本来我没有的，我很垃圾，  通过把我交给别人， 在我身上装了额外的东西， 使我变的拥有了某种能力 举个例子:  人和坦克， 本来人是不能发射炮弹的， 但是人钻进了坦克， 就可以发射炮弹了， 人还是人（自身未变）， 只是在坦克里了 一个例子理解高阶函数一个简单的不">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-09T14:45:55.489Z">
+<meta property="og:updated_time" content="2019-04-09T14:53:35.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【React】从高阶函数到理解高阶组件">
 <meta name="twitter:description" content="高阶组件其实就是高阶函数 高阶函数的概念千万别和普通回调搞混， 高阶函数的必要条件：  一定要返回一个新函数 非入侵  一句话理解高阶函数本来我没有的，我很垃圾，  通过把我交给别人， 在我身上装了额外的东西， 使我变的拥有了某种能力 举个例子:  人和坦克， 本来人是不能发射炮弹的， 但是人钻进了坦克， 就可以发射炮弹了， 人还是人（自身未变）， 只是在坦克里了 一个例子理解高阶函数一个简单的不">
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  270 字
+                  306 字
                 </span>
               
 
@@ -405,7 +405,8 @@
 <p>举个例子:  人和坦克， 本来人是不能发射炮弹的， 但是人钻进了坦克， 就可以发射炮弹了， 人还是人（自身未变）， 只是在坦克里了</p>
 <h2 id="一个例子理解高阶函数"><a href="#一个例子理解高阶函数" class="headerlink" title="一个例子理解高阶函数"></a>一个例子理解高阶函数</h2><p>一个简单的不能再简单的高阶函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoc</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'start'</span>)</span><br><span class="line">    fn()</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="一个例子理解高阶组件"><a href="#一个例子理解高阶组件" class="headerlink" title="一个例子理解高阶组件"></a>一个例子理解高阶组件</h2><p>在不修改原有组件的情况下， 为其添加一个生命周期</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyContainer = <span class="function">(<span class="params">WrappedComponent</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 新增的生命周期</span></span><br><span class="line">    componentwillmount() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'增加一个生命周期'</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// 传入的组件</span></span><br><span class="line">        &lt;WrappedComponent /&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> MyContainer;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收一个组件参数</span></span><br><span class="line"><span class="keyword">const</span> MyContainer = <span class="function">(<span class="params">WrappedComponent</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 新增的生命周期</span></span><br><span class="line">    componentwillmount() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'增加一个生命周期'</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        <span class="comment">// 传入的组件</span></span><br><span class="line">        &lt;WrappedComponent /&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> MyContainer;</span><br></pre></td></tr></table></figure>
+<h2 id="随处可见的高阶函数"><a href="#随处可见的高阶函数" class="headerlink" title="随处可见的高阶函数"></a>随处可见的高阶函数</h2><p>node的<code>express</code>框架中, 你的<code>app.use</code>就是典型的高阶组件</p>
 
       
     </div>
@@ -578,7 +579,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一句话理解高阶函数"><span class="nav-number">1.</span> <span class="nav-text">一句话理解高阶函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个例子理解高阶函数"><span class="nav-number">2.</span> <span class="nav-text">一个例子理解高阶函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个例子理解高阶组件"><span class="nav-number">3.</span> <span class="nav-text">一个例子理解高阶组件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一句话理解高阶函数"><span class="nav-number">1.</span> <span class="nav-text">一句话理解高阶函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个例子理解高阶函数"><span class="nav-number">2.</span> <span class="nav-text">一个例子理解高阶函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个例子理解高阶组件"><span class="nav-number">3.</span> <span class="nav-text">一个例子理解高阶组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随处可见的高阶函数"><span class="nav-number">4.</span> <span class="nav-text">随处可见的高阶函数</span></a></li></ol></div>
             
 
           </div>
@@ -695,7 +696,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.7k</span>
+    <span title="Site words total count">38.7k</span>
   
 </div>
 
