@@ -184,9 +184,21 @@ class TodoList extends PureComponent {
 
 
 ## immutableJs
+> Facebook 工程师 Lee Byron 花费 3 年时间打造，与 React 同期出现，但没有被默认放到 React 工具集里（React 提供了简化的 Helper）。它内部实现了一套完整的 Persistent Data Structure，还有很多易用的数据类型。像Collection、List、Map、Set、Record、Seq。有非常全面的map、filter、groupBy、reduce、find函数式操作方法。同时 API 也尽量与 Object 或 Array 类似。
 
 
+使用 `immutableJs` 避免这个副作用的一种实现是按值传递，也就是拷贝一份再传递过去，有深层结构就深拷贝。深拷贝在只做局部修改的时候做了很多无用功，于是`ImmutableJs`做了性能优化。
 
 
+### 使用它带来的好处
+
+网上找了个图，假如我们要修改左图中黄色节点的子节点4，那么Immutable.js只需要更新右图中的绿色节点，其余节点不需拷贝，继续复用。也就是说，Immutable.js会更新从根节点到所修改节点路径上的所有节点，由于修改了根节点，所以返回一个新对象，这也解释了为什么能控制副作用。
+
+![更新树](http://img.nixiaolei.com/2019-04-09-21-43-20.png)
+
+
+1. 假如你在组件state中保存了一份有深层结构的引用类型的数据，如果没有Immutable.js，你需要深拷贝一份再做修改。而用Immutable.js将state中的数据包装一下，不需深拷贝就可以直接修改。
+2. 由于修改后返回的是新对象，React.js只需要在oldState.obj === newState.obj这一层就能判断出obj产生了变化，不需要深入obj的深层结构。
+3. 带来几种操作方便的数据结构和API
 
 
