@@ -10,6 +10,7 @@ tags: [React, 性能优化]
 
 > React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。
 
+利用`memo`我们就能函数组件创造为`Purecomponent`
 
 总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示下具体如何使用
 

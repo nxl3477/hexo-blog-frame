@@ -30,19 +30,42 @@
         <category>Vue</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
         <tag>适配</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[【React】为函数组件创造shouldComponentUpdate]]></title>
-    <url>%2F2019%2F04%2F12%2F%E3%80%90React%E3%80%91%E4%B8%BA%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E5%88%9B%E9%80%A0shouldComponentUpdate%2F</url>
-    <content type="text"><![CDATA[React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo() React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。 总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示下具体如何使用 先创建一个普通的函数组件这是一个最普通的函数组件， 接收一个name的props参数12345// 创建一个函数组件function Child(&#123; name &#125;) &#123; console.log('I am rendering') return &lt;div&gt;Memo组件 name =&gt; &#123; name &#125;&lt;/div&gt;&#125; 显式地shouldComponentUpdate然后我们为其量身定制一个shouldComponentUpdate1234567function areEqual(prevProps, nextProps) &#123; if( prevProps.name == nextProps.name ) &#123; return true &#125; else &#123; return false &#125;&#125; 产生出一个新组件利用memo这个高阶函数，我们创造出一个新的组件，这将会是个拥有shouldComponentUpdate的函数组件12import React, &#123; memo, Component &#125; from 'react'const DemoComponent = memo(Child, areEqual) 查看结果最后我们将其放入render函数， 让它渲染出来， 并传入刚刚设定的name参数1234567891011export default class Menotest extends Component &#123; render() &#123; return ( &lt;div&gt; &#123;/* seconds作为Props传入 */&#125; &lt;DemoComponent name="小明" /&gt; &lt;/div&gt; ) &#125;&#125; 结果如下: 完整代码123456789101112131415161718192021222324252627import React, &#123; memo, Component &#125; from 'react'// 创建一个函数组件function Child(&#123; name &#125;) &#123; console.log('I am rendering') return &lt;div&gt;Memo组件 name =&gt; &#123; name &#125;&lt;/div&gt;&#125;// 注意 函数组件没有state , 显式的shouldComponentUpdatefunction areEqual(prevProps, nextProps) &#123; if( prevProps.name == nextProps.name ) &#123; return true &#125; else &#123; return false &#125;&#125;const DemoComponent = memo(Child, areEqual)export default class Menotest extends Component &#123; render() &#123; return ( &lt;div&gt; &#123;/* seconds作为Props传入 */&#125; &lt;DemoComponent name="小明" /&gt; &lt;/div&gt; ) &#125;&#125;]]></content>
+    <title><![CDATA[【React】react16中如何使用ref]]></title>
+    <url>%2F2019%2F04%2F12%2F%E3%80%90React%E3%80%91react16%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ref%2F</url>
+    <content type="text"><![CDATA[在 React16 新版本中，新引入了 React.createRef 与 React.forwardRef 两个 API，有计划移除老的 string ref，使 ref 的使用更加便捷与明确。如果你的应用已经升级到 React16.3+ 版本，那就放心大胆使用 React.createRef 吧，如果暂时没有的话，建议使用 callback ref 来代替 string ref。 新版的ref内部使用Symbol来作为标识， 可以猜测出，React的用意是想避免string ref可能引起重复的问题 关联ref使用新版本的ref12345678910111213141516export default class Reftest extends Component &#123; constructor(props) &#123; super(props); // 创建ref this.myRef = React.createRef(); &#125; componentDidMount() &#123; // 打印ref console.log(this.myRef) this.myRef.current.focus(); &#125; render() &#123; // 挂载 ref return &lt;input ref=&#123;this.myRef&#125; /&gt;; &#125;&#125; 传递和转发ref利用 React.forwardRef 传递复用 ref 123456789101112131415161718192021import React, &#123; Component &#125; from 'react'const TargetComponent = React.forwardRef((props, ref) =&gt; &#123; return &lt;input type="text" ref=&#123;ref&#125; /&gt;&#125;)export default class Reftest extends Component &#123; constructor(props) &#123; super(props); // 创建ref this.myRef = React.createRef(); &#125; componentDidMount() &#123; // 改变value this.myRef.current.value = "传递ref成功" &#125; render() &#123; // 挂载 ref, 让组件也保持ref写法 return &lt;TargetComponent ref=&#123;this.myRef&#125; /&gt; &#125;&#125; 结果如下: 参考文献: https://blog.csdn.net/qq_24147051/article/details/81218688]]></content>
       <categories>
         <category>React</category>
       </categories>
       <tags>
         <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【React】使用Context避免多层嵌套]]></title>
+    <url>%2F2019%2F04%2F12%2F%E3%80%90React%E3%80%91%E4%BD%BF%E7%94%A8Context%E9%81%BF%E5%85%8D%E5%A4%9A%E5%B1%82%E5%B5%8C%E5%A5%97%2F</url>
+    <content type="text"><![CDATA[用过redux + react-redux的同学，应该会觉得新的Context API很眼熟。而有看过react-redux源码的同学就知道，react-redux本身就是基于旧版本的Context API实现的。 既然已经有了现成的解决方案，为什么还会有新的Context API呢？ 现有Context API的实现存在一定问题：比如当父组件的shouldComponentUpdate性能优化，可能会导致消费了context数据的子组件不更新。 降低复杂度：类似redux全家桶这样的解决方案，给项目引入了一定的复杂度，尤其是对方案了解不足的同学，遇到问题可能一筹莫展。新Context API的引入，一定程度上可以减少不少项目对redux全家桶的依赖。 解决多层组件嵌套 创建一个上下文利用新的API创建一个上下文， 接收返回的Provider, Consumer12import React, &#123; Component &#125; from 'react'const &#123; Provider, Consumer &#125; = React.createContext("default") 定义父容器在此父容器内部使用Provider包裹住插槽传入的子组件， 传入Provider的值和state挂钩， 并且我将两个值都实现了双向绑定，以便于查看使用context方法传递的变量能否及时刷新 12345678910111213141516171819202122class Parent extends Component &#123; state = &#123; name: "张三", age: 12 &#125; render() &#123; const &#123; name, age &#125; = this.state return ( &lt;div&gt; 姓名： &lt;input onChange=&#123; e=&gt; this.setState(&#123; name: e.target.value &#125;)&#125; value=&#123;name&#125; /&gt; 年龄: &lt;input onChange=&#123; e=&gt; this.setState(&#123; age: e.target.value &#125;)&#125; value=&#123;age&#125; /&gt; &lt;Provider value=&#123;&#123; name, age &#125;&#125;&gt; &#123;this.props.children&#125; &lt;/Provider&gt; &lt;/div&gt; ) &#125;&#125; 创建两个子组件两个子组件分别用接收一个参数， 当然你也可以接收多个的123456789101112131415161718192021222324// 我用来展示namefunction Child01() &#123; return ( &lt;Consumer&gt; &#123; value =&gt; ( &lt;div&gt;&#123;value.name&#125;&lt;/div&gt; ) &#125; &lt;/Consumer&gt; )&#125;// 我用来展示agefunction Child02() &#123; return ( &lt;Consumer&gt; &#123; value =&gt; ( &lt;div&gt;&#123;value.age&#125;&lt;/div&gt; ) &#125; &lt;/Consumer&gt; )&#125; 组件整合用Parent组件将两个Child包裹， 也就是上面说的插槽123456export default () =&gt; ( &lt;Parent &gt; &lt;Child01 /&gt; &lt;Child02 /&gt; &lt;/Parent&gt;) 最终效果: 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455import React, &#123; Component &#125; from 'react'const &#123; Provider, Consumer &#125; = React.createContext("default")class Parent extends Component &#123; state = &#123; name: "张三", age: 12 &#125; render() &#123; const &#123; name, age &#125; = this.state return ( &lt;div&gt; 姓名： &lt;input onChange=&#123; e=&gt; this.setState(&#123; name: e.target.value &#125;)&#125; value=&#123;name&#125; /&gt; 年龄: &lt;input onChange=&#123; e=&gt; this.setState(&#123; age: e.target.value &#125;)&#125; value=&#123;age&#125; /&gt; &lt;Provider value=&#123;&#123; name, age &#125;&#125;&gt; &#123;this.props.children&#125; &lt;/Provider&gt; &lt;/div&gt; ) &#125;&#125;function Child01() &#123; return ( &lt;Consumer&gt; &#123; value =&gt; ( &lt;div&gt;&#123;value.name&#125;&lt;/div&gt; ) &#125; &lt;/Consumer&gt; )&#125;function Child02() &#123; return ( &lt;Consumer&gt; &#123; value =&gt; ( &lt;div&gt;&#123;value.age&#125;&lt;/div&gt; ) &#125; &lt;/Consumer&gt; )&#125;export default () =&gt; ( &lt;Parent &gt; &lt;Child01 /&gt; &lt;Child02 /&gt; &lt;/Parent&gt;)]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【React】为函数组件创造shouldComponentUpdate]]></title>
+    <url>%2F2019%2F04%2F12%2F%E3%80%90React%E3%80%91%E4%B8%BA%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E5%88%9B%E9%80%A0shouldComponentUpdate%2F</url>
+    <content type="text"><![CDATA[React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo() React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。 利用memo我们就能函数组件创造为Purecomponent 总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示下具体如何使用 先创建一个普通的函数组件这是一个最普通的函数组件， 接收一个name的props参数12345// 创建一个函数组件function Child(&#123; name &#125;) &#123; console.log('I am rendering') return &lt;div&gt;Memo组件 name =&gt; &#123; name &#125;&lt;/div&gt;&#125; 显式地shouldComponentUpdate然后我们为其量身定制一个shouldComponentUpdate1234567function areEqual(prevProps, nextProps) &#123; if( prevProps.name == nextProps.name ) &#123; return true &#125; else &#123; return false &#125;&#125; 产生出一个新组件利用memo这个高阶函数，我们创造出一个新的组件，这将会是个拥有shouldComponentUpdate的函数组件12import React, &#123; memo, Component &#125; from 'react'const DemoComponent = memo(Child, areEqual) 查看结果最后我们将其放入render函数， 让它渲染出来， 并传入刚刚设定的name参数1234567891011export default class Menotest extends Component &#123; render() &#123; return ( &lt;div&gt; &#123;/* seconds作为Props传入 */&#125; &lt;DemoComponent name="小明" /&gt; &lt;/div&gt; ) &#125;&#125; 结果如下: 完整代码123456789101112131415161718192021222324252627import React, &#123; memo, Component &#125; from 'react'// 创建一个函数组件function Child(&#123; name &#125;) &#123; console.log('I am rendering') return &lt;div&gt;Memo组件 name =&gt; &#123; name &#125;&lt;/div&gt;&#125;// 注意 函数组件没有state , 显式的shouldComponentUpdatefunction areEqual(prevProps, nextProps) &#123; if( prevProps.name == nextProps.name ) &#123; return true &#125; else &#123; return false &#125;&#125;const DemoComponent = memo(Child, areEqual)export default class Menotest extends Component &#123; render() &#123; return ( &lt;div&gt; &#123;/* seconds作为Props传入 */&#125; &lt;DemoComponent name="小明" /&gt; &lt;/div&gt; ) &#125;&#125;]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>性能优化</tag>
       </tags>
   </entry>
   <entry>
@@ -54,6 +77,7 @@
       </categories>
       <tags>
         <tag>React</tag>
+        <tag>性能优化</tag>
       </tags>
   </entry>
   <entry>
@@ -128,6 +152,7 @@
       </categories>
       <tags>
         <tag>React</tag>
+        <tag>性能优化</tag>
       </tags>
   </entry>
   <entry>
@@ -139,6 +164,7 @@
       </categories>
       <tags>
         <tag>React</tag>
+        <tag>性能优化</tag>
       </tags>
   </entry>
   <entry>

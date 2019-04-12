@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="React,">
+  <meta name="keywords" content="React,性能优化,">
 
 
 
@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示">
-<meta name="keywords" content="React">
+<meta name="description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  利用memo我们就能函数组件创造为Purecomponent 总之就">
+<meta name="keywords" content="React,性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【React】为函数组件创造shouldComponentUpdate">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/04/12/【React】为函数组件创造shouldComponentUpdate/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示">
+<meta property="og:description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  利用memo我们就能函数组件创造为Purecomponent 总之就">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-04-12-22-30-31.png">
-<meta property="og:updated_time" content="2019-04-12T14:31:01.153Z">
+<meta property="og:updated_time" content="2019-04-12T14:35:02.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【React】为函数组件创造shouldComponentUpdate">
-<meta name="twitter:description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示">
+<meta name="twitter:description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  利用memo我们就能函数组件创造为Purecomponent 总之就">
 <meta name="twitter:image" content="http://img.nixiaolei.com/2019-04-12-22-30-31.png">
 
 
@@ -360,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  430 字
+                  444 字
                 </span>
               
 
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -401,6 +401,7 @@
 <blockquote>
 <p>React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。</p>
 </blockquote>
+<p>利用<code>memo</code>我们就能函数组件创造为<code>Purecomponent</code></p>
 <p>总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示下具体如何使用</p>
 <h2 id="先创建一个普通的函数组件"><a href="#先创建一个普通的函数组件" class="headerlink" title="先创建一个普通的函数组件"></a>先创建一个普通的函数组件</h2><p>这是一个最普通的函数组件， 接收一个<code>name</code>的<code>props</code>参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个函数组件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">&#123; name &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'I am rendering'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Memo组件 name =&gt; &#123; name &#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="显式地shouldComponentUpdate"><a href="#显式地shouldComponentUpdate" class="headerlink" title="显式地shouldComponentUpdate"></a>显式地shouldComponentUpdate</h2><p>然后我们为其量身定制一个<code>shouldComponentUpdate</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">areEqual</span>(<span class="params">prevProps, nextProps</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( prevProps.name == nextProps.name ) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -475,6 +476,8 @@
           
             <a href="/tags/React/" rel="tag"># React</a>
           
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+          
         </div>
       
 
@@ -496,8 +499,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/24/vue-cli3脚手架配置px2rem适配方案/" rel="prev" title="vue-cli3脚手架配置px2rem适配方案">
-                vue-cli3脚手架配置px2rem适配方案 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/12/【React】使用Context避免多层嵌套/" rel="prev" title="【React】使用Context避免多层嵌套">
+                【React】使用Context避免多层嵌套 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -581,7 +584,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -603,7 +606,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -698,7 +701,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">45.3k</span>
+    <span title="Site words total count">46.4k</span>
   
 </div>
 
