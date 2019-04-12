@@ -173,7 +173,7 @@ class Test extends Component {
 
 ## 处理异步-Hooks版本
 
-Hooks 处理异步只需要短短的几行
+Hooks 处理异步只需要短短的几行，就有了相同的效果
 ```Js
 import { useFetch } from 'react-hooks-fetch'
 
