@@ -2,7 +2,7 @@
 title: 【React】react16.6中如何处理异步&&按需加载
 date: 2019-04-11 21:48:06
 categories: React
-tags: React
+tags: [React, 性能优化]
 ---
 
 当前大部分 `React` 应用需要使用 `code splitting` 的时候，都选择使用优秀的 `react-loadable` 来处理检测代码段是否已加载。然而，随着`React v16.6` 的发布，我们有一个非常难得的机会 ，可以删除我们的第三方依赖！

@@ -2,7 +2,7 @@
 title: 【React】PureComponent解决了什么问题
 date: 2019-04-04 15:10:16
 categories: React
-tags: React
+tags: [React, 性能优化]
 ---
 
 `PureComponent` 是和 `shouldComponentUpdate`这个生命周期息息相关的
