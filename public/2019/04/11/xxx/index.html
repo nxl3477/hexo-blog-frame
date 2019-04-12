@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hexo,">
+  <meta name="keywords" content="React,">
 
 
 
@@ -79,21 +79,22 @@
 
 
 
-<meta name="description" content="首先需要修改_config.yml配置文件post_asset_folder项为true 使用命令创建博客1hexo new 你的文章名称 他会生成.md文件及一个对应的文件夹， 我们将图片放到该文件夹中 方法一在文章中这样插入图片1&amp;#123;% asset_img 这是一个新的博客的图片.jpg 这是一个新的博客的图片的说明 %&amp;#125; 效果如下:  方法二 这个方法在首页无法正常预">
-<meta name="keywords" content="hexo">
+<meta name="description" content="当前大部分 React 应用需要使用 code splitting 的时候，都选择使用优秀的 react-loadable 来处理检测代码段是否已加载。然而，随着React v16.6 的发布，我们有一个非常难得的机会 ，可以删除我们的第三方依赖！ React.Suspense是一个新添加到核心React库中的功能，他的功能基本和 react-loadable 一致，所以不用多说，让我们来看看用">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo中如何使用本地图片">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/03/16/hexo中如何使用本地图片/index.html">
+<meta property="og:title" content="【React】react16.6中如何处理异步&amp;&amp;按需加载">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/04/11/xxx/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="首先需要修改_config.yml配置文件post_asset_folder项为true 使用命令创建博客1hexo new 你的文章名称 他会生成.md文件及一个对应的文件夹， 我们将图片放到该文件夹中 方法一在文章中这样插入图片1&amp;#123;% asset_img 这是一个新的博客的图片.jpg 这是一个新的博客的图片的说明 %&amp;#125; 效果如下:  方法二 这个方法在首页无法正常预">
+<meta property="og:description" content="当前大部分 React 应用需要使用 code splitting 的时候，都选择使用优秀的 react-loadable 来处理检测代码段是否已加载。然而，随着React v16.6 的发布，我们有一个非常难得的机会 ，可以删除我们的第三方依赖！ React.Suspense是一个新添加到核心React库中的功能，他的功能基本和 react-loadable 一致，所以不用多说，让我们来看看用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.nixiaolei.com/pika.png">
-<meta property="og:image" content="http://img.nixiaolei.com/pika.png">
-<meta property="og:updated_time" content="2019-03-20T14:45:28.787Z">
+<meta property="og:image" content="http://img.nixiaolei.com/suspense01.gif">
+<meta property="og:image" content="http://img.nixiaolei.com/lasy01.gif">
+<meta property="og:image" content="http://img.nixiaolei.com/lazy02.gif">
+<meta property="og:updated_time" content="2019-04-11T15:15:34.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo中如何使用本地图片">
-<meta name="twitter:description" content="首先需要修改_config.yml配置文件post_asset_folder项为true 使用命令创建博客1hexo new 你的文章名称 他会生成.md文件及一个对应的文件夹， 我们将图片放到该文件夹中 方法一在文章中这样插入图片1&amp;#123;% asset_img 这是一个新的博客的图片.jpg 这是一个新的博客的图片的说明 %&amp;#125; 效果如下:  方法二 这个方法在首页无法正常预">
-<meta name="twitter:image" content="http://img.nixiaolei.com/pika.png">
+<meta name="twitter:title" content="【React】react16.6中如何处理异步&amp;&amp;按需加载">
+<meta name="twitter:description" content="当前大部分 React 应用需要使用 code splitting 的时候，都选择使用优秀的 react-loadable 来处理检测代码段是否已加载。然而，随着React v16.6 的发布，我们有一个非常难得的机会 ，可以删除我们的第三方依赖！ React.Suspense是一个新添加到核心React库中的功能，他的功能基本和 react-loadable 一致，所以不用多说，让我们来看看用">
+<meta name="twitter:image" content="http://img.nixiaolei.com/suspense01.gif">
 
 
 
@@ -123,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/03/16/hexo中如何使用本地图片/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/04/11/xxx/">
 
 
 
 
 
-  <title>hexo中如何使用本地图片 | 倪晓磊的博客</title>
+  <title>【React】react16.6中如何处理异步&&按需加载 | 倪晓磊的博客</title>
   
 
 
@@ -278,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/03/16/hexo中如何使用本地图片/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/11/xxx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -295,7 +296,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">hexo中如何使用本地图片</h2>
+          <h2 class="post-title" itemprop="name headline">【React】react16.6中如何处理异步&&按需加载</h2>
         
 
         <div class="post-meta">
@@ -307,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-16T11:20:19+08:00">
-                2019-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-11T21:48:06+08:00">
+                2019-04-11
               </time>
             
 
@@ -330,8 +331,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
                   </a>
                 </span>
 
@@ -361,7 +362,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  198 字
+                  1.2k 字
                 </span>
               
 
@@ -377,7 +378,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -398,27 +399,34 @@
       
 
       
-        <script type="text/javascript" src="/js/src/bai.js"></script>
-
-
-<p>首先需要修改<code>_config.yml</code>配置文件<code>post_asset_folder</code>项为<code>true</code></p>
-<p>使用命令创建博客<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 你的文章名称</span><br></pre></td></tr></table></figure></p>
-<p>他会生成<code>.md</code>文件及一个对应的文件夹， 我们将图片放到该文件夹中</p>
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>在文章中这样插入图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img 这是一个新的博客的图片.jpg 这是一个新的博客的图片的说明 %&#125;</span><br></pre></td></tr></table></figure></p>
-<p>效果如下:</p>
-<p><img src="http://img.nixiaolei.com/pika.png" alt="皮卡皮卡"></p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><blockquote>
-<p>这个方法在首页无法正常预览图片</p>
+        <p>当前大部分 <code>React</code> 应用需要使用 <code>code splitting</code> 的时候，都选择使用优秀的 <code>react-loadable</code> 来处理检测代码段是否已加载。然而，随着<code>React v16.6</code> 的发布，我们有一个非常难得的机会 ，可以删除我们的第三方依赖！</p>
+<p><a href="https://reactjs.org/docs/code-splitting.html" target="_blank" rel="noopener">React.Suspense</a>是一个新添加到核心React库中的功能，他的功能基本和 <code>react-loadable</code> 一致，所以不用多说，让我们来看看用 <code>React.Suspense</code> 替换 <code>react-loadable</code>。</p>
+<p><code>Suspense</code> 的好处是不一定只能处理组件的按需加载， 也能用来处理其他的异步事件</p>
+<h2 id="处理异步"><a href="#处理异步" class="headerlink" title="处理异步"></a>处理异步</h2><blockquote>
+<p>自己实现流程</p>
 </blockquote>
-<p>安装一下这个插件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-<p>在文章中这样插入图片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![这是一张图片](xxxx.png)</span><br></pre></td></tr></table></figure></p>
-<p>效果如下:</p>
-<p><img src="http://img.nixiaolei.com/pika.png" alt="皮卡皮卡"></p>
-<p>参考文献</p>
-<blockquote>
-<p><a href="http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/" target="_blank" rel="noopener">http://etrd.org/2017/01/23/hexo%E4%B8%AD%E5%AE%8C%E7%BE%8E%E6%8F%92%E5%85%A5%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87/</a></p>
-</blockquote>
+<p>首先创建一个<code>Promise</code> ， 模拟一个异步请求<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchApi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(<span class="string">'data resolved'</span>)</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现处理<code>promise</code>异步的逻辑<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Suspense, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="comment">// 创建Fetcher </span></span><br><span class="line"><span class="keyword">var</span> cached = &#123;&#125;</span><br><span class="line"><span class="comment">// 接收一个为promise 的参数</span></span><br><span class="line"><span class="keyword">const</span> createFetcher = <span class="function"><span class="params">promiseTask</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 将ref 复制为 cached</span></span><br><span class="line">  <span class="keyword">let</span> ref = cached</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 返回一个 promise</span></span><br><span class="line">    <span class="keyword">const</span> task = promiseTask()</span><br><span class="line">    <span class="comment">// task</span></span><br><span class="line">    task.then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// ref 复制为 res, 也就是promise 的返回结果</span></span><br><span class="line">      ref = res</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">//  ------注意此处的 console --------</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'进入ref === cached的判断'</span>)</span><br><span class="line">    <span class="comment">// 如果 ref 没有发生改变， 仍旧和cached相等</span></span><br><span class="line">    <span class="keyword">if</span> (ref === cached) &#123;</span><br><span class="line">      <span class="comment">// 抛出 task </span></span><br><span class="line">      <span class="keyword">throw</span> task</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 得到结果输出</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'🍎'</span>, ref)</span><br><span class="line">    <span class="comment">// 正常返回 ref ， 此时已是promise 的结果</span></span><br><span class="line">    <span class="keyword">return</span> ref</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们将异步事件传入刚刚定义的<code>createFtecher</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> requestData = createFetcher(fetchApi)</span><br></pre></td></tr></table></figure></p>
+<p>创建一个函数组件， 用于显示处理好的异步结果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuspenseComp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> data = requestData()</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">className</span>=<span class="string">"name"</span>&gt;</span>&#123;data&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重点来了， 使用<code>Suspense</code>组件包裹住， 使用<code>fallback</code>参数传入未加载完成的时候的样式, 我们这里传入一个<code>loading</code>的文字意思意思<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Suspense fallback=&#123;&lt;div&gt;loading&lt;<span class="regexp">/div&gt;&#125; &gt;</span></span><br><span class="line"><span class="regexp">        &lt;SuspenseComp /</span>&gt;</span><br><span class="line">      &lt;<span class="regexp">/Suspense&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>来看一下效果， 在经过一段事件的Loading 后成功的显示除了我们在<code>setTimeout</code>中返回的文字</p>
+<p><img src="http://img.nixiaolei.com/suspense01.gif" alt="实现效果"></p>
+<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><p>仔细观看上面的效果图</p>
+<p>我们看到<code>进入ref === cached的判断</code> 这条语句出现了二次， 继而才出现了最终结果<code>data resolved</code>，<br>还记得在<code>createFetcher</code>函数中抛出的<code>task</code>吗， 它就是利用这样一种方法， 抛出错误，让<code>Suspense</code> 来接收， 如果抛出了错误， 就隔一会继续来一次， </p>
+<p>其实就可以理解为轮询</p>
+<h2 id="处理组件"><a href="#处理组件" class="headerlink" title="处理组件"></a>处理组件</h2><p>组件就比上面简单多了, </p>
+<p><code>React</code>就提供了一个 <code>lazy</code>方法</p>
+<p>我们只需要这样即可， 非常的快捷<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lazy(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"./xxx"</span>))</span><br></pre></td></tr></table></figure></p>
+<p>来看看实际如何使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入`lazy` 和 `Suspense`</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Suspense, Component, lazy &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载异步组件</span></span><br><span class="line"><span class="keyword">const</span> LazyComp = lazy(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"./lazy"</span>))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Suspense fallback=&#123;&lt;div&gt;loading&lt;<span class="regexp">/div&gt;&#125; &gt;</span></span><br><span class="line"><span class="regexp">          &#123; /</span>* lazy 组件 *<span class="regexp">/ &#125;</span></span><br><span class="line"><span class="regexp">          &lt;LazyComp /</span>&gt; </span><br><span class="line">        &lt;<span class="regexp">/Suspense&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被加载的lazy组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lazy</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        my name lazy</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>来， 让我们看一下效果</p>
+<p><img src="http://img.nixiaolei.com/lasy01.gif" alt="实现效果"></p>
+<h2 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h2><p>那上面两个例子中的组件<code>SuspenseComp</code> 和  <code>LazyComp</code> 都放在<code>Suspense</code> 里面呢，到底是各管各的还是一起完成呢？ 让我们实践一下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Suspense fallback=&#123;&lt;div&gt;loading&lt;<span class="regexp">/div&gt;&#125; &gt;</span></span><br><span class="line"><span class="regexp">        &lt;SuspenseComp /</span>&gt;</span><br><span class="line">        &lt;LazyComp /&gt;</span><br><span class="line">      &lt;<span class="regexp">/Suspense&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下:<br><img src="http://img.nixiaolei.com/lazy02.gif" alt="实现效果"></p>
+<p>我们可以看到,尽管<code>SuspenseComp</code> 和<code>LazyComp</code> 加载速度不同, 但是它仍旧是等待<code>Suspense</code> 中的所有组件都加载完成后才显示出来</p>
+<h2 id="处理异步-Hooks版本"><a href="#处理异步-Hooks版本" class="headerlink" title="处理异步-Hooks版本"></a>处理异步-Hooks版本</h2><p>Hooks 处理异步只需要短短的几行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useFetch &#125; <span class="keyword">from</span> <span class="string">'react-hooks-fetch'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuspenseComp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;error, data&#125; = useFetch(<span class="string">"a.php"</span>)</span><br><span class="line">  <span class="keyword">if</span>( error ) <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>出错了🙂<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">  <span class="keyword">if</span>( !data ) <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>result&#123;data.title&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>真香</p>
+<h2 id="非Hooks版本全部代码"><a href="#非Hooks版本全部代码" class="headerlink" title="非Hooks版本全部代码"></a>非Hooks版本全部代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Suspense, Component, lazy &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// React 自带的lazy组件，自己会编译 （避免被webpack打包成js）</span></span><br><span class="line"><span class="keyword">const</span> LazyComp = lazy(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">"./lazy"</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchApi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      resolve(<span class="string">'data resolved'</span>)</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建Fetcher </span></span><br><span class="line"><span class="keyword">var</span> cached = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> createFetcher = <span class="function"><span class="params">promiseTask</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> ref = cached</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 返回一个promise</span></span><br><span class="line">    <span class="keyword">const</span> task = promiseTask()</span><br><span class="line">    task.then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      ref = res</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'进入ref === cached的判断'</span>)</span><br><span class="line">    <span class="keyword">if</span> (ref === cached) &#123;</span><br><span class="line">      <span class="keyword">throw</span> task</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 得到结果输出</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'🍎'</span>, ref)</span><br><span class="line">    <span class="keyword">return</span> ref</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> requestData = createFetcher(fetchApi)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SuspenseComp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> data = requestData()</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">className</span>=<span class="string">"name"</span>&gt;</span>&#123;data&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Suspense fallback=&#123;&lt;div&gt;loading&lt;<span class="regexp">/div&gt;&#125; &gt;</span></span><br><span class="line"><span class="regexp">          &lt;SuspenseComp /</span>&gt;</span><br><span class="line">          &lt;LazyComp /&gt;</span><br><span class="line">        &lt;<span class="regexp">/Suspense&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Test</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -468,7 +476,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.nixiaolei.com/2019/03/16/hexo中如何使用本地图片/" title="hexo中如何使用本地图片">http://blog.nixiaolei.com/2019/03/16/hexo中如何使用本地图片/</a>
+    <a href="http://blog.nixiaolei.com/2019/04/11/xxx/" title="【React】react16.6中如何处理异步&&按需加载">http://blog.nixiaolei.com/2019/04/11/xxx/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -483,7 +491,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/React/" rel="tag"># React</a>
           
         </div>
       
@@ -496,14 +504,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/04/10/原生实现一个ajax/" rel="next" title="原生实现一个ajax">
+                <i class="fa fa-chevron-left"></i> 原生实现一个ajax
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/16/手摸手AngularJs入门教程/" rel="prev" title="手摸手AngularJs入门教程">
-                手摸手AngularJs入门教程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/24/vue-cli3脚手架配置px2rem适配方案/" rel="prev" title="vue-cli3脚手架配置px2rem适配方案">
+                vue-cli3脚手架配置px2rem适配方案 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -670,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">2.</span> <span class="nav-text">方法二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理异步"><span class="nav-number">1.</span> <span class="nav-text">处理异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理分析"><span class="nav-number">1.1.</span> <span class="nav-text">原理分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理组件"><span class="nav-number">2.</span> <span class="nav-text">处理组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载顺序"><span class="nav-number">3.</span> <span class="nav-text">加载顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理异步-Hooks版本"><span class="nav-number">4.</span> <span class="nav-text">处理异步-Hooks版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非Hooks版本全部代码"><span class="nav-number">5.</span> <span class="nav-text">非Hooks版本全部代码</span></a></li></ol></div>
             
 
           </div>
