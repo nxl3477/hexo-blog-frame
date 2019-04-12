@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.nixiaolei.com/2019/04/02/%E3%80%90React%E3%80%91%E9%AB%98%E9%98%B6%E7%94%A8%E6%B3%95/</loc>
+    <lastmod>2019-04-12</lastmod>
+  </url>  <url>
+    <loc>http://blog.nixiaolei.com/2019/04/12/%E3%80%90React%E3%80%91memo%E4%B8%BA%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E5%88%9B%E9%80%A0shouldComponentUpdate/</loc>
+    <lastmod>2019-04-12</lastmod>
+  </url>  <url>
+    <loc>http://blog.nixiaolei.com/2019/04/12/%E3%80%90React%E3%80%91react16%E6%96%B0%E5%A2%9E%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    <lastmod>2019-04-12</lastmod>
+  </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/04/12/%E3%80%90React%E3%80%91react16%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8ref/</loc>
     <lastmod>2019-04-12</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/04/12/%E3%80%90React%E3%80%91%E4%BD%BF%E7%94%A8Context%E9%81%BF%E5%85%8D%E5%A4%9A%E5%B1%82%E5%B5%8C%E5%A5%97/</loc>
-    <lastmod>2019-04-12</lastmod>
-  </url>  <url>
-    <loc>http://blog.nixiaolei.com/2019/04/12/%E3%80%90React%E3%80%91%E4%B8%BA%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E5%88%9B%E9%80%A0shouldComponentUpdate/</loc>
     <lastmod>2019-04-12</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/04/04/%E3%80%90React%E3%80%91PureComponent%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98/</loc>
@@ -41,9 +47,6 @@
     <lastmod>2019-04-09</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/03/20/%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E5%90%88/</loc>
-    <lastmod>2019-04-09</lastmod>
-  </url>  <url>
-    <loc>http://blog.nixiaolei.com/2019/04/02/%E3%80%90React%E3%80%91%E9%AB%98%E9%98%B6%E7%94%A8%E6%B3%95/</loc>
     <lastmod>2019-04-09</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/03/29/%E7%90%86%E8%A7%A3Iaas%E3%80%81PaaS%E3%80%81SaaS%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>

@@ -1,5 +1,5 @@
 ---
-title: 【React】为函数组件创造shouldComponentUpdate
+title: 【React】memo为函数组件创造shouldComponentUpdate
 date: 2019-04-12 22:09:22
 categories: React 
 tags: [React, 性能优化]

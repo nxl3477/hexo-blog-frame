@@ -153,6 +153,19 @@ class TodoItem extends PureComponent {
 }
 ```
 
+## 更安全的数据类型
+使用`immutableJs`
+
+
+## 处理异步任务及组件
+站内搜索 `react16.6中如何处理异步`
+
+## 为函数组件做性能优化
+站内搜索 `memo`
+
+
+## 新版ref用法
+站内搜索 `react16中如何使用ref`
 
 
 
