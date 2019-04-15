@@ -95,3 +95,16 @@ useEffect(() => {
   }
 }, [count])
 ```
+
+| api | ability | 
+| :------: | :------: | 
+| state | 返回有状态值, 以及更新这个状态值的函数 | 
+| useEffect | 接收包含命令式， 可能有副作用代码的函数 |
+| useContext | 接受上下文对象（从React.createContext返回的值） |
+| useReducer  | useState的替代方案 |
+| useCallback | 返回一个回忆的memoized版本， |
+| useMemo | 纯的一个记忆函数 |
+| useRef | 返回一个可变的ref对象 |
+| useImperativeMethods  | 自定义使用ref时公开给父组件的实例值 |
+| useMutationEffect  | 更新兄弟组件之前， 它dom改变前执行 |
+| useLayoutEffect  | Dom改变后同步触发 |
