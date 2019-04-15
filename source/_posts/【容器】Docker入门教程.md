@@ -1,8 +1,8 @@
 ---
 title: 【容器】Docker入门教程
 date: 2019-03-16 18:00:14
-categories: 容器
-tags: [Docker, 容器]
+categories: 容器技术
+tags: [Docker, 容器技术]
 ---
 
 ## 1.1 Docker简介

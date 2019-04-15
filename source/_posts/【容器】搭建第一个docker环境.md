@@ -1,8 +1,8 @@
 ---
 title: 【容器】搭建第一个docker环境
 date: 2019-03-28 21:01:02
-categories: 容器
-tags: [Docker, 容器]
+categories: 容器技术
+tags: [Docker, 容器技术]
 ---
 
 

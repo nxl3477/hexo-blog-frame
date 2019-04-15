@@ -1,8 +1,8 @@
 ---
 title: 【容器】docker命令手册
 date: 2019-03-17 10:33:00
-categories: 容器
-tags: [Docker, 容器]
+categories: 容器技术
+tags: [Docker, 容器技术]
 ---
 
 
