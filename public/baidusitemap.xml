@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.nixiaolei.com/2019/04/15/%E3%80%90React%E3%80%91%E9%9D%A9%E5%91%BD%E6%80%A7%E7%9A%84fiber%E6%9E%B6%E6%9E%84/</loc>
+    <lastmod>2019-04-15</lastmod>
+  </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/04/14/%E3%80%90React%E3%80%91%E6%8B%A5%E6%8A%B1%E5%87%BD%E6%95%B0%E7%BB%84%E4%BB%B6%E7%9A%84Hooks/</loc>
     <lastmod>2019-04-15</lastmod>
   </url>  <url>
