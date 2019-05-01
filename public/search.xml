@@ -1,9 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【数据结构】线性表之顺序表]]></title>
+    <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[顺序表优点顺序表的优势在于比链表要更节省内存， 因为无需存储额外的指针 缺点但缺点在于， 线性表申请完内存后， 无法进行缩放内存， 你需要用多大你就一次性连续申请多大， 如果你后期需要变更， 只能申请新的 并且当你需要在顺序表中插入数据时， 需要将插入目标位置后面的数据全部向后挪动， 这非常的耗费性能， 链表则不用， 只需要切换一下指针即可]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【数据结构】线性表之链表]]></title>
+    <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E4%B9%8B%E9%93%BE%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[链表如果按存储结构来分， 是属于链式存储结构 链表的每一项数据元素之间有衔接关系(圈起来要考) 链表的优势在于灵活，不受申请时的内存大小约束，链表插入数据， 只需要切换一下指针即可 链表链表分为： 单向链表 双向链表 单向链表链表在每一个数据元素中分为两个部分， 一个用来存储自身的数据， 另一部分存储下一项的指针（称为后继指针） 双向链表双向链表顾名思义， 就是支持两个方向的链表（前驱和后继）]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【数据结构】线性表之队列]]></title>
+    <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E4%B9%8B%E9%98%9F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[队列是一种被限制操作的线性表。 FIFO（First In First Out）， 遵循选入先出 用途：消息队列、视频弹幕]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【数据结构】什么是线性表]]></title>
+    <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E6%80%A7%E8%A1%A8%2F</url>
+    <content type="text"><![CDATA[线性表线性结构中的数据元素之间是一对一的关系。也就是数据元素一个接一个地排列。 用来存放特定的某一个类型的元素 物理结构为顺序表和链表（链式结构） 关于存放特定类型元素的解释: Java等语言的泛型实际上也是在遵守这一规则， 因为他们的基类相同JS也是如此， 因为js万物皆对象， 存储时都会被一个容器给包裹了， 所以类型相同 顺序表与链表对比 顺序表: 不灵活，省内存 链表： 灵活， 多耗一点内存 顺序表的优势在于比链表要更节省内存， 因为无需存储额外的指针 但缺点在于， 线性表申请完内存后， 无法进行缩放内存， 你需要用多大你就一次性连续申请多大， 如果你后期需要变更， 只能申请新的 线性表的衍生结构 可在本站中搜索 栈 队列 串]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【数据结构】什么是集合]]></title>
+    <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%86%E5%90%88%2F</url>
+    <content type="text"><![CDATA[集合数据结构中的集合关系就类似于数学中的集合。 集合中的数据成员是无序的。 每个数据成员在集合中不能重复，仅且只出现一次。]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【数据结构】线性表之'栈']]></title>
+    <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E4%B9%8B'%E6%A0%88'%2F</url>
+    <content type="text"><![CDATA[栈是一种被限制操作的线性表。 LIFO（Last In First Out），后入先出 用途： 解决括号匹配检查 浏览器的后退或编辑器的undo功能]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[数据结构与算法基础学习笔记]]></title>
     <url>%2F2019%2F05%2F01%2F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[基本概念 数据只要能被数字化就可以称为数据 数据对象可以完整的描述一件东西，通常是产生在内存中的文件， 链表、队列等都算数据对象 数据元素存在于数据对象中的一份一份的数据，就是数据元素 数据项用来描述某一特征的， 可以参考对象的属性， 但不完全相同 浅析数据结构数据元素相互之间的关系称为结构。数据结构是与算法紧密结合的 逻辑结构：反映数据元素之间的逻辑关系。 存储结构：数据结构在计算机中的表示。 算法：对数据的操作]]></content>
+    <content type="text"><![CDATA[基本概念 数据只要能被数字化就可以称为数据 数据对象可以完整的描述一件东西，通常是产生在内存中的文件， 链表、队列等都算数据对象 数据元素存在于数据对象中的一份一份的数据，就是数据元素 数据项用来描述某一特征的， 可以参考对象的属性， 但不完全相同 浅析数据结构数据元素相互之间的关系称为结构。数据结构是与算法紧密结合的 逻辑结构：反映数据元素之间的逻辑关系。 存储结构：数据结构在计算机中的表示。 算法：对数据的操作 基本逻辑结构 内存与存储结构按照在内存中存储的方式来区分， 简单了解计一些算机中内存相关的知识： 内存的原理与构造。 地址、指针与引用。 存储结构与内存管理]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -63,8 +129,8 @@
         <category>Vue</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
         <tag>适配</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -652,8 +718,8 @@
         <category>CSS</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
         <tag>css</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -664,9 +730,9 @@
         <category>学习技巧</category>
       </categories>
       <tags>
-        <tag>css</tag>
         <tag>学习技巧</tag>
         <tag>学习渠道</tag>
+        <tag>css</tag>
       </tags>
   </entry>
   <entry>
