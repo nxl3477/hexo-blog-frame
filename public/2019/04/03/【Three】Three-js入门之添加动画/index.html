@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="05q8BlYpNjXZYUDSdiPGL1DqJauEoquptd_o08ZaUSs">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my_favicon_small.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/my_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/my_favicon_small.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="图形学,ThreeJs,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文基于”Three.js入门之添加材质和灯光” 文章之后 帧率辅助库 在官网下载到的three文件中的 /examples/js/libs/stats.min.js 可以找到  这个是一个three 开发者之一写的库， 可以给我提供检测动画流畅度的数据， 引入方式和three一样 如何使用呢，  创建一个dom我们给他预留一个dom123&amp;lt;body&amp;gt;  &amp;lt;div id=&quot;sta">
+<meta name="keywords" content="图形学,ThreeJs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Three】Three.js入门之添加动画">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/04/03/【Three】Three-js入门之添加动画/index.html">
+<meta property="og:site_name" content="倪晓磊的博客">
+<meta property="og:description" content="本文基于”Three.js入门之添加材质和灯光” 文章之后 帧率辅助库 在官网下载到的three文件中的 /examples/js/libs/stats.min.js 可以找到  这个是一个three 开发者之一写的库， 可以给我提供检测动画流畅度的数据， 引入方式和three一样 如何使用呢，  创建一个dom我们给他预留一个dom123&amp;lt;body&amp;gt;  &amp;lt;div id=&quot;sta">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-05-03-20-55-25.png">
+<meta property="og:image" content="http://img.nixiaolei.com/J2oeAVFEnQ.gif">
+<meta property="og:image" content="http://img.nixiaolei.com/three-ball-action.gif">
+<meta property="og:updated_time" content="2019-05-03T13:27:53.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Three】Three.js入门之添加动画">
+<meta name="twitter:description" content="本文基于”Three.js入门之添加材质和灯光” 文章之后 帧率辅助库 在官网下载到的three文件中的 /examples/js/libs/stats.min.js 可以找到  这个是一个three 开发者之一写的库， 可以给我提供检测动画流畅度的数据， 引入方式和three一样 如何使用呢，  创建一个dom我们给他预留一个dom123&amp;lt;body&amp;gt;  &amp;lt;div id=&quot;sta">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-05-03-20-55-25.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/04/03/【Three】Three-js入门之添加动画/">
+
+
+
+
+
+  <title>【Three】Three.js入门之添加动画 | 倪晓磊的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪晓磊的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-类别">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            类别
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/03/【Three】Three-js入门之添加动画/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="a磊的前端梦">
+      <meta itemprop="description" content="挑战10000小时定律">
+      <meta itemprop="image" content="/images/myavatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪晓磊的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【Three】Three.js入门之添加动画</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T17:47:05+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图形学/" itemprop="url" rel="index">
+                    <span itemprop="name">图形学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文基于”Three.js入门之添加材质和灯光” 文章之后</p>
+<h2 id="帧率辅助库"><a href="#帧率辅助库" class="headerlink" title="帧率辅助库"></a>帧率辅助库</h2><blockquote>
+<p>在官网下载到的three文件中的 <code>/examples/js/libs/stats.min.js</code> 可以找到</p>
+</blockquote>
+<p>这个是一个three 开发者之一写的库， 可以给我提供检测动画流畅度的数据， 引入方式和<code>three</code>一样</p>
+<p>如何使用呢， </p>
+<h3 id="创建一个dom"><a href="#创建一个dom" class="headerlink" title="创建一个dom"></a>创建一个dom</h3><p>我们给他预留一个<code>dom</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"stats-output"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="初始化统计对象"><a href="#初始化统计对象" class="headerlink" title="初始化统计对象"></a>初始化统计对象</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化统计对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initStats</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 创建实例</span></span><br><span class="line">  <span class="keyword">var</span> stats = <span class="keyword">new</span> Stats()</span><br><span class="line">  <span class="comment">// 设置模式， 0 显示 fps, 1 检测渲染时间</span></span><br><span class="line">  stats.setMode(<span class="number">0</span>) </span><br><span class="line">  <span class="comment">// 样式设置</span></span><br><span class="line">  stats.domElement.style.position = <span class="string">'absolute'</span></span><br><span class="line">  stats.domElement.style.left = <span class="string">"0px"</span></span><br><span class="line">  stats.domElement.style.top = <span class="string">"0px"</span></span><br><span class="line">  <span class="comment">// 加入刚才的dom</span></span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'stats-output'</span>).appendChild(stats.domElement)</span><br><span class="line">  <span class="keyword">return</span> stats</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="在每一帧动画期间更新"><a href="#在每一帧动画期间更新" class="headerlink" title="在每一帧动画期间更新"></a>在每一帧动画期间更新</h3><p>因为这里我们的动画使用的是<code>requestAnimationFrame</code>, 所以我们在每次调用该方法时， 去更新一下统计对象即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 更新统计对象</span></span><br><span class="line">  stats.update()</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 主循环</span></span><br><span class="line">  requestAnimationFrame(render)</span><br><span class="line">  <span class="comment">// 渲染当前的场景</span></span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查看一下结果"><a href="#查看一下结果" class="headerlink" title="查看一下结果"></a>查看一下结果</h3><p>这些都做好以后，打开浏览器， 左上角就可以看到我们刚刚创建的统计对象了</p>
+<p><img src="http://img.nixiaolei.com/2019-05-03-20-55-25.png" alt="统计对象"></p>
+<h2 id="创建动画"><a href="#创建动画" class="headerlink" title="创建动画"></a>创建动画</h2><p>因为js定时器的种种问题， 计时不准确，  无法预估浏览器算力等等问题， 所以<code>requestAnimationFrame</code><br>是我们做动画时的首选， 它可以根据浏览器的具体繁忙情况自动控制帧率</p>
+<h3 id="创建主循环"><a href="#创建主循环" class="headerlink" title="创建主循环"></a>创建主循环</h3><p>先把之前的最后一步的渲染操作放入<code>requestAnimationFrame</code> 这个主循环， </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  stats.update() <span class="comment">// 上面👆使用的帧率统计</span></span><br><span class="line">  <span class="comment">// 回调传入自身</span></span><br><span class="line">  requestAnimationFrame(render)</span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 将renderer的输出挂到body</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(renderer.domElement)</span><br><span class="line">render()</span><br></pre></td></tr></table></figure>
+<p>这样，我们的主循环就创建好了， 但是还不够， 如果你刷新浏览器， 你看到的依旧是静止的， 因为你的代码没有任何变化， 所以， 我们就尝试着让他发生一些变化</p>
+<h3 id="让正方体动起来"><a href="#让正方体动起来" class="headerlink" title="让正方体动起来"></a>让正方体动起来</h3><p>我们让正方体旋转起来， 我们在每一帧都修改一下这个正方体的 <code>x,y,z</code> 坐标位置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  stats.update() <span class="comment">// 上面👆使用的帧率统计</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// -------转动方块--------</span></span><br><span class="line">  cube.rotation.x += <span class="number">0.02</span></span><br><span class="line">  cube.rotation.y += <span class="number">0.02</span></span><br><span class="line">  cube.rotation.z += <span class="number">0.02</span></span><br><span class="line">  <span class="comment">// ----------------------</span></span><br><span class="line"></span><br><span class="line">  requestAnimationFrame(render)</span><br><span class="line">  renderer.render(scene, camera)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就这三行代码就可以了， 让我们看看现在的效果</p>
+<p><img src="http://img.nixiaolei.com/J2oeAVFEnQ.gif" alt="旋转立方体"></p>
+<p>我们可以看到， 立方体运动行径诡异啊， 但是很cool</p>
+<h3 id="让球动起来"><a href="#让球动起来" class="headerlink" title="让球动起来"></a>让球动起来</h3><p>让球动起来也很简单， 但是我们想让他动的稍微炫酷一点， 让他跳来跳去， 这就需要用到一点数学知识了， 利用三角函数我们实现一下球的弹跳</p>
+<p>我们在函数外记录了一个 <code>Step</code> 用来每次增长， 然后球的<code>x, y</code> 就会每次都根据三角函数的曲线规律来造成一高一低的效果， 而且是抛物线</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> step = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    stats.update()</span><br><span class="line">    <span class="comment">// 转动方块</span></span><br><span class="line">    cube.rotation.x += <span class="number">0.02</span></span><br><span class="line">    cube.rotation.y += <span class="number">0.02</span></span><br><span class="line">    cube.rotation.z += <span class="number">0.02</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// --------球体跳跃------------</span></span><br><span class="line">    step += <span class="number">0.04</span>;</span><br><span class="line">    sphere.position.x = <span class="number">20</span> + ( <span class="number">10</span> * <span class="built_in">Math</span>.cos( step ))</span><br><span class="line">    sphere.position.y = <span class="number">2</span> + ( <span class="number">10</span> * <span class="built_in">Math</span>.abs( <span class="built_in">Math</span>.sin(step) ))</span><br><span class="line">    <span class="comment">// ---------------------------</span></span><br><span class="line"></span><br><span class="line">    requestAnimationFrame(render)</span><br><span class="line">    renderer.render(scene, camera)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看一下现在的效果图<br><img src="http://img.nixiaolei.com/three-ball-action.gif" alt="球体运动"></p>
+<h2 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h2><blockquote>
+<p>git地址: <a href="https://0x9.me/ohetH" target="_blank" rel="noopener">https://0x9.me/ohetH</a></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>第一个ThreeJs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    body &#123;</span></span><br><span class="line"><span class="undefined">        margin: 0;</span></span><br><span class="line"><span class="undefined">        overflow: hidden;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"stats-output"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../three.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 游戏帧率辅助库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../stats.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 增加统计功能</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> stats = initStats()</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置场景,</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene();</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置相机                      视角,  宽度/高度,   近距离点,  远距点</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">50</span>, <span class="built_in">window</span>.innerWidth / <span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span></span><br><span class="line"><span class="undefined">    camera.position.x = -30</span></span><br><span class="line"><span class="undefined">    camera.position.y = 40</span></span><br><span class="line"><span class="undefined">    camera.position.z = 30</span></span><br><span class="line"><span class="javascript">    camera.lookAt(scene.position) <span class="comment">// 看向场景的中央</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置绘制对象---基于Webgl的渲染器</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer()</span></span><br><span class="line"><span class="javascript">    renderer.setClearColor(<span class="keyword">new</span> THREE.Color(<span class="number">0xeeeeee</span>));</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 控制渲染尺寸</span></span></span><br><span class="line"><span class="javascript">    renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 打开阴影</span></span></span><br><span class="line"><span class="javascript">    renderer.shadowMapEnabled = <span class="literal">true</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置辅助测试工具</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> axes = <span class="keyword">new</span> THREE.AxisHelper(<span class="number">20</span>)</span></span><br><span class="line"><span class="undefined">    scene.add(axes)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置平面</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeGeometry = <span class="keyword">new</span> THREE.PlaneGeometry(<span class="number">70</span>, <span class="number">50</span>, <span class="number">1</span>, <span class="number">1</span>) <span class="comment">//设置宽高和段度</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;<span class="attr">color</span>: <span class="number">0xcccccc</span>&#125;) <span class="comment">// 设置颜色</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> plane = <span class="keyword">new</span> THREE.Mesh(planeGeometry, planeMaterial)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置旋转角度</span></span></span><br><span class="line"><span class="javascript">    plane.rotation.x = <span class="number">-0.5</span> * <span class="built_in">Math</span>.PI;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置坐标</span></span></span><br><span class="line"><span class="undefined">    plane.position.x = 15</span></span><br><span class="line"><span class="undefined">    plane.position.y = 0</span></span><br><span class="line"><span class="undefined">    plane.position.z = 0</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    plane.receiveShadow = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 加入场景</span></span></span><br><span class="line"><span class="undefined">    scene.add(plane)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置立方体</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> cubeGeometry = <span class="keyword">new</span> THREE.CubeGeometry(<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>)  <span class="comment">//设置宽高和段度</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置基础材质</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;<span class="attr">color</span>: <span class="number">0xff0000</span>&#125;) <span class="comment">// 设置颜色和打开线框</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置坐标</span></span></span><br><span class="line"><span class="undefined">    cube.position.x = 4</span></span><br><span class="line"><span class="undefined">    cube.position.y = 3</span></span><br><span class="line"><span class="undefined">    cube.position.z = 0</span></span><br><span class="line"><span class="javascript">    cube.castShadow = <span class="literal">true</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 加入场景</span></span></span><br><span class="line"><span class="undefined">    scene.add(cube)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置球面体</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> sphereGemometry = <span class="keyword">new</span> THREE.SphereGeometry(<span class="number">4</span>, <span class="number">20</span>, <span class="number">20</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> sphereMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0x7777ff</span> &#125;)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> sphere = <span class="keyword">new</span> THREE.Mesh(sphereGemometry, sphereMaterial)</span></span><br><span class="line"><span class="undefined">    sphere.position.x = 20</span></span><br><span class="line"><span class="undefined">    sphere.position.y = 4</span></span><br><span class="line"><span class="undefined">    sphere.position.z = -2</span></span><br><span class="line"><span class="javascript">    sphere.castShadow = <span class="literal">true</span> </span></span><br><span class="line"><span class="undefined">    scene.add(sphere)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    /*</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="undefined">    *  添加材质和灯光</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="undefined">    * */</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置点光源</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> spotLight = <span class="keyword">new</span> THREE.SpotLight(<span class="number">0xffffff</span>);</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 设置位置</span></span></span><br><span class="line"><span class="undefined">    spotLight.position.set(-40, 60, -10)</span></span><br><span class="line"><span class="javascript">    spotLight.castShadow = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 添加进点光源</span></span></span><br><span class="line"><span class="undefined">    scene.add(spotLight)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined">    /*</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="undefined">    * 引入动画</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="undefined">    * */</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> step = <span class="number">0</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        stats.update()</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 转动方块</span></span></span><br><span class="line"><span class="undefined">        cube.rotation.x += 0.02</span></span><br><span class="line"><span class="undefined">        cube.rotation.y += 0.02</span></span><br><span class="line"><span class="undefined">        cube.rotation.z += 0.02</span></span><br><span class="line"><span class="undefined">        </span></span><br><span class="line"><span class="javascript">        <span class="comment">// 球体跳跃</span></span></span><br><span class="line"><span class="undefined">        step += 0.04;</span></span><br><span class="line"><span class="javascript">        sphere.position.x = <span class="number">20</span> + ( <span class="number">10</span> * <span class="built_in">Math</span>.cos( step ))</span></span><br><span class="line"><span class="javascript">        sphere.position.y = <span class="number">2</span> + ( <span class="number">10</span> * <span class="built_in">Math</span>.abs( <span class="built_in">Math</span>.sin(step) ))</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        requestAnimationFrame(render)</span></span><br><span class="line"><span class="undefined">        renderer.render(scene, camera)</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"> </span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    /*</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="undefined">    * 输出</span></span><br><span class="line"><span class="undefined">    *</span></span><br><span class="line"><span class="undefined">    * */</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 初始化统计对象</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">initStats</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> stats = <span class="keyword">new</span> Stats()</span></span><br><span class="line"><span class="javascript">        stats.setMode(<span class="number">0</span>) <span class="comment">// 0 显示fps, 1 检测渲染时间</span></span></span><br><span class="line"><span class="javascript">        stats.domElement.style.position = <span class="string">'absolute'</span></span></span><br><span class="line"><span class="javascript">        stats.domElement.style.left = <span class="string">"0px"</span></span></span><br><span class="line"><span class="javascript">        stats.domElement.style.top = <span class="string">"0px"</span></span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.getElementById(<span class="string">'stats-output'</span>).appendChild(stats.domElement)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> stats</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 将renderer的输出挂到body</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.body.appendChild(renderer.domElement)</span></span><br><span class="line"><span class="undefined">    render()</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>你的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="a磊的前端梦 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="a磊的前端梦 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    a磊的前端梦
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.nixiaolei.com/2019/04/03/【Three】Three-js入门之添加动画/" title="【Three】Three.js入门之添加动画">http://blog.nixiaolei.com/2019/04/03/【Three】Three-js入门之添加动画/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="http://blog.nixiaolei.com/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图形学/" rel="tag"># 图形学</a>
+          
+            <a href="/tags/ThreeJs/" rel="tag"># ThreeJs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/03/【Three】Three-js入门之添加材质和灯光/" rel="next" title="【Three】Three.js入门之添加材质和灯光">
+                <i class="fa fa-chevron-left"></i> 【Three】Three.js入门之添加材质和灯光
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/03/【Three】Three-js入门之几何和网格对象/" rel="prev" title="【Three】Three.js入门之几何和网格对象">
+                【Three】Three.js入门之几何和网格对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/myavatar.jpg" alt="a磊的前端梦">
+            
+              <p class="site-author-name" itemprop="name">a磊的前端梦</p>
+              <p class="site-description motion-element" itemprop="description">挑战10000小时定律</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/nixiaolei" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:nxl3477@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://plus.google.com/nxl3477" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://segmentfault.com/u/nixiaolei" target="_blank" title="sf思否">
+                      
+                        <i class="fa fa-fw fa-bookmark"></i>sf思否</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#帧率辅助库"><span class="nav-number">1.</span> <span class="nav-text">帧率辅助库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个dom"><span class="nav-number">1.1.</span> <span class="nav-text">创建一个dom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化统计对象"><span class="nav-number">1.2.</span> <span class="nav-text">初始化统计对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在每一帧动画期间更新"><span class="nav-number">1.3.</span> <span class="nav-text">在每一帧动画期间更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看一下结果"><span class="nav-number">1.4.</span> <span class="nav-text">查看一下结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建动画"><span class="nav-number">2.</span> <span class="nav-text">创建动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建主循环"><span class="nav-number">2.1.</span> <span class="nav-text">创建主循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让正方体动起来"><span class="nav-number">2.2.</span> <span class="nav-text">让正方体动起来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让球动起来"><span class="nav-number">2.3.</span> <span class="nav-text">让球动起来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全部代码"><span class="nav-number">3.</span> <span class="nav-text">全部代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a磊的前端梦</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">57.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
