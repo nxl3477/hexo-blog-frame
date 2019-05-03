@@ -1,6 +1,6 @@
 ---
 title: 【SSR】nuxt.js服务端渲染体验笔记
-date: 2019-05-02 18:16:27
+date: 2019-04-02 18:16:27
 categories: [SSR, SEO, Vue]
 tags: SEO
 ---
