@@ -1,8 +1,8 @@
 ---
 title: 【Three】Three.js入门学习笔记
 date: 2019-04-02 09:47:55
-categories: [图形学, ThreeJs]
-tags: 图形学
+categories: 图形学
+tags: [图形学, ThreeJs]
 ---
 
 

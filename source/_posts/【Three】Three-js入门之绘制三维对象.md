@@ -1,8 +1,8 @@
 ---
 title: 【Three】Three.js入门之绘制三维对象
 date: 2019-04-02 09:47:58
-categories: [图形学, ThreeJs]
-tags: 图形学
+categories: 图形学
+tags: [图形学, ThreeJs]
 ---
 
 * Plane ( 平面 ) 二维矩形，渲染结果是在屏幕中央有个灰色矩形
