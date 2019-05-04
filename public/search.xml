@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【Three】Three.js入门之相机]]></title>
+    <url>%2F2019%2F05%2F03%2F%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E7%9B%B8%E6%9C%BA%2F</url>
+    <content type="text"><![CDATA[有两种相机 近交投影 正交投影 近交投影和真实世界中我们所看到的物体一样， 近大远小 透视投影照相机 THREE.PerspectiveCamera(fov, aspect, near, far) fov —- 视野宽度 aspect —- 长宽比， 推荐使用 window.innerWidth / window.innerHeight near —- 近裁面， 推荐值 0.1 far —- 远裁面， 推荐值 1000， 值太大影响性能， 值太小场景显示不全 正交投影 建模类软件使用的比较多 正交投影就像老师在黑板上画的立方体，保证三维世界平行的线到了二维世界也是平行的， 不存在近大远小的概念， 正交投影相机 THREE.OrthographicCamera(left, right, top, bottom, near, far) // near far决定远近范围 left —- 左边界 right —- 右边界 top —- 上边界 bottom —- 下边界 near —- 近裁面 far —- 远裁面 camera.lookAt —- 设置目标点 在Three中， 创建正交投影相机的参数决定了所看到的视景体, 视景体内部的物体才能显示在屏幕上，视景体外部的就会被裁剪掉 图中灰色区域就是视景体 摄影机效果比对说概念总是比较抽象， 我们来实际操作一下， 大概思路就是， 首先将立方体铺满平面， 然后我们使用定时器来切换相机类型 ， 以此来区别出两种相机的效果 第一步—-将立方体铺满平面利用我们之前设定的面的宽高， 计算出一列应该有多少立方体， 一行应该有多少立方体， 然后将其排列好， 添加入场景 1234567891011121314151617181920// 将立方体铺满屏幕var cubeGeometry = new THREE.BoxGeometry(4,4,4)for ( var j=0; j &lt; planeGeometry.parameters.height / 5 ;j++) &#123; // 面高 50 for ( var i=0; i &lt; planeGeometry.parameters.width / 5 ; i++) &#123; // 面宽 70 // 随机生成 var rnd = Math.random() * 0.75 + 0.25 // 添加材质 var cubeMaterial = new THREE.MeshLambertMaterial() // 添加颜色 cubeMaterial.color = new THREE.Color(rnd, 0, 0) // 创建立方体 var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 设置立方体的位置 cube.position.x = -(planeGeometry.parameters.width / 2) + 2 +(i * 5) cube.position.y = 2 cube.position.z = -(planeGeometry.parameters.height / 2) + 2 +(j * 5) // 立方体加入场景 scene.add(cube) &#125;&#125; 第二步—-用键盘控制相机角度每当按下左右键时， 就调整相机的y 轴方向的旋转角度， 然后重新绘制场景 1234567891011121314151617// 绑定键盘事件document.onkeydown = function(e) &#123; switch(e.keyCode) &#123; case 37: camera.rotation.y += 0.02 render() break; case 39: camera.rotation.y -= 0.02 render() break; &#125;&#125;function render() &#123; renderer.render(scene, camera)&#125;render() 第三步—-利用定时器切换摄像机的模式利用定时器切换 相机的模式，然后就会在下次一用户按下键盘时被渲染出来 12345678910111213141516171819202122232425262728293031323334// 用于切换相机模式var controls = new function () &#123; this.perspective = "Perspective" this.switchCamera = function () &#123; if( camera instanceof THREE.PerspectiveCamera ) &#123; console.log('Orthographic') this.perspective = 'Orthographic' camera = new THREE.OrthographicCamera ( window.innerWidth / -16, window.innerWidth / 16, window.innerHeight / -16, window.innerHeight / 16, -200, 500 ) camera.position.x = -20 camera.position.y = 60 camera.position.z = 50 camera.lookAt(scene.position) &#125;else &#123; console.log('Perspective') this.perspective = "Perspective" camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000) camera.position.x = -20 camera.position.y = 60 camera.position.z = 50 camera.lookAt(scene.position) &#125; &#125;&#125;// 切换相机模式setInterval(() =&gt; &#123; controls.switchCamera()&#125;, 2000) 查看效果随着我不断地按下键盘的方向键， 画布被重新渲染， 我们可以看到两种相机的不同效果在来回切换]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学</tag>
+        <tag>ThreeJs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【数据结构】线性表之顺序表]]></title>
     <url>%2F2019%2F05%2F01%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E7%BA%BF%E6%80%A7%E8%A1%A8%E4%B9%8B%E9%A1%BA%E5%BA%8F%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[顺序表优点顺序表的优势在于比链表要更节省内存， 因为无需存储额外的指针 缺点但缺点在于， 线性表申请完内存后， 无法进行缩放内存， 你需要用多大你就一次性连续申请多大， 如果你后期需要变更， 只能申请新的 并且当你需要在顺序表中插入数据时， 需要将插入目标位置后面的数据全部向后挪动， 这非常的耗费性能， 链表则不用， 只需要切换一下指针即可]]></content>
@@ -320,6 +332,18 @@
       <tags>
         <tag>React</tag>
         <tag>性能优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【Three】Three.js入门之光源]]></title>
+    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[光源也分为很多种 AmbientLight —- 环境光 PonitLight —- 点光源 SpotLight —- 聚光灯 DirectionalLight —- 平行光 然后还有各种高级的光照效果 光源种类描述 具体内容在站内搜索光源的关键字， 如：环境光， 篇幅太长不在此处描述 环境光 AmbientLight 基础光源， 影响整个场景的光源 点光源 PonitLight 空间中的一个点， 朝所有方向发射光源 聚光灯 SpotLight 具有锥形效果的聚光灯光源 平行光无限光， 模拟远处太阳的光辉 高级光照效果 半球光 平面光 镜头眩光]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学</tag>
+        <tag>ThreeJs</tag>
       </tags>
   </entry>
   <entry>
