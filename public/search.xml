@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【JS】什么是GO-EC-VO-AO]]></title>
+    <url>%2F2019%2F06%2F10%2F%E3%80%90JS%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AFAO-VO-GO%2F</url>
+    <content type="text"><![CDATA[GO glbal Context 全局执行上下文 首先在js执行的时候会创建一个GO， 被压入 ESC Stack 栈底 EC execution 执行上下文 在每个函数执行的时候会创建一个EC（执行上下文） 在函数执行上下文中， 还会有两个东西被创建出来： AO、VO AO Activation Object 活动对象 VO Variable object 变量对象 上面的这些也就构成了 ECS Stack 函数执行栈 ESC Stack executions statck 执行上下文栈 很多个函数存在一起的时候会存在一个ESC Stack 所谓的 stack 它就是一个栈， 先进入 当js开始运行时就创建一个 globalContext 压入栈底， 也就是单体内置对象Global, 在浏览器中通常是 window 被压入栈的情况大致如下123ECStatck = [ globalContext] 当一段代码执行了好多函数时， 比如这样一段代码:12345678910function fun3() &#123;&#125;function fun2() &#123; fun3()&#125;function fun1() &#123; fun2()&#125;fun1() 实际入栈过程是这样的:123456ECStatck = [ fun3, fun2, fun1, globalContext] 当一个函数入栈， 它所属的变量也随之入栈， 当函数出栈， 变量也就跟着出栈了， 你肯定会疑惑闭包呢， 函数出栈了， 那闭包去哪了 其实，js的闭包是存在堆里的， 跟普通函数不一样， 所以不会跟着出栈函数一起被回收]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>js执行机制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【js机制】什么是AO-VO-GO]]></title>
     <url>%2F2019%2F06%2F10%2F%E4%BB%80%E4%B9%88%E6%98%AFAO-VO-GO%2F</url>
     <content type="text"><![CDATA[go global context 全局上下文 js在执行的时候， 首先会创建一个这样的上下文]]></content>
@@ -62,7 +74,7 @@
   <entry>
     <title><![CDATA[【数据结构】什么是树]]></title>
     <url>%2F2019%2F06%2F02%2F%E3%80%90%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AF%E6%A0%91%2F</url>
-    <content type="text"><![CDATA[树是由若干个有限节点组成的一个具有层次关系的集合 树的特点 数学基础是: 图论 一棵树中每两个点之间都有且只有一条路 一颗有N个点的树有N-1条边 结构与名称 像图中的圈我们称之为“节点”， 节点与节点之间的线称之为“边”， 最起始的节点叫“根” 一个节点下面的节点成为该节点的子节点， 该节点是其子节点的父节点 节点的层级用“深”来表示， 并且以0开始计数 当节点不再分叉时， 末尾的节点称为“叶子节点” 一个节点的子节点数量称为“度”， 如果一个节点有3个子节点， 那么它的度为3， 当度为0时就是叶子节点 一个节点到另一个节点之间的连线 称为“路径” 树和非树的典型 空树是指，有了树的结构， 但是还没有填充节点 树的遍历 树的遍历分为，两大类， 四小类 按照某种规则， 不重复地访问某种树的所有节点 先序遍历(深度优先) 中序遍历(深度优先) 后续遍历(深度优先) 层序遍历(广度优先) 先、中、后都是针对的根节点来说的， 并且树是一种自相似的结构， 可以采用递归， 所以比较好记忆 1.先序遍历 左、中、右 优先访问根节点， 然后访问其左子树， 如果左子节点还有其左子节点， 再继续往下访问其左子节点， 直至没有， 然后访问其节点的父节点， 最后访问其父节点的右子节点， 就这样一层一层向上，直至根节点的整个左子树遍历完， 去对右子树做同样的操作 2. 中序遍历 中、左、右 优先访问左子树， 然后访问根节点， 最后访问右节点 3. 后序遍历 左、 右、 中 优先访问左子树、 然后访问右子树， 最后访问根节点 4. 层序遍历广度优先逐层访问节点， 直至该层没有， 然后再往下扎 树的衍生无序树: 树中任意节点的子节点之间没有顺序关系， 这种树称为无序树， 也称为自由树 有序树： 树中任意节点的子结点之间有顺序关系 二叉树： 每个节点最多含有两个子树的树称为二叉树 完全二叉树： 除了最后一层， 其他各层节点数都达到最大 满二叉树： 每一层上的节点数都是最大节点数 霍夫曼树： 带权路径最短的二叉树， 也叫最优二叉树 排序算法的复杂度与稳定性 关于查找算法]]></content>
+    <content type="text"><![CDATA[树是由若干个有限节点组成的一个具有层次关系的集合 树的特点 数学基础是: 图论 一棵树中每两个点之间都有且只有一条路 一颗有N个点的树有N-1条边 结构与名称 像图中的圈我们称之为“节点”， 节点与节点之间的线称之为“边”， 最起始的节点叫“根” 一个节点下面的节点成为该节点的子节点， 该节点是其子节点的父节点 节点的层级用“深”来表示， 并且以0开始计数 当节点不再分叉时， 末尾的节点称为“叶子节点” 一个节点的子节点数量称为“度”， 如果一个节点有3个子节点， 那么它的度为3， 当度为0时就是叶子节点 一个节点到另一个节点之间的连线 称为“路径” 树和非树的典型 空树是指，有了树的结构， 但是还没有填充节点 树的遍历 树的遍历分为，两大类， 四小类 按照某种规则， 不重复地访问某种树的所有节点 先序遍历(深度优先) 中序遍历(深度优先) 后续遍历(深度优先) 层序遍历(广度优先) 先、 中、后都是针对的根节点来说的， 并且树是一种自相似的结构， 可以采用递归， 所以比较好记忆 1.先序遍历 左、中、右 优先访问根节点， 然后访问其左子树， 如果左子节点还有其左子节点， 再继续往下访问其左子节点， 直至没有， 然后访问其节点的父节点， 最后访问其父节点的右子节点， 就这样一层一层向上，直至根节点的整个左子树遍历完， 去对右子树做同样的操作 2. 中序遍历 中、左、右 优先访问左子树， 然后访问根节点， 最后访问右节点 3. 后序遍历 左、 右、 中 优先访问左子树、 然后访问右子树， 最后访问根节点 4. 层序遍历广度优先逐层访问节点， 直至该层没有， 然后再往下扎 树的衍生无序树: 树中任意节点的子节点之间没有顺序关系， 这种树称为无序树， 也称为自由树 有序树： 树中任意节点的子结点之间有顺序关系 二叉树： 每个节点最多含有两个子树的树称为二叉树 完全二叉树： 除了最后一层， 其他各层节点数都达到最大 满二叉树： 每一层上的节点数都是最大节点数 霍夫曼树： 带权路径最短的二叉树， 也叫最优二叉树 排序算法的复杂度与稳定性 关于查找算法]]></content>
       <categories>
         <category>数据结构</category>
       </categories>
@@ -221,8 +233,8 @@
         <category>Vue</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
         <tag>适配</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -427,6 +439,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[【Three】Three.js光源入门之点光源]]></title>
+    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%82%B9%E5%85%89%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[点光源是一种单点发光照亮物体的光源 基础介绍 照射所有方向的光源，例如照明弹 点光源是单点发光方式 点光源不会产生阴影， 减少GPU 的负担 调用方法1THREE.PointLight(hex, intensity, distance) clone() —- 复制当前颜色。 color 光源颜色 intensity —- 光照强度 distance —- 光源照射的距离 position —- 光源所在位置 测试点光源测试方法和大体上和环境光是一样的， 但是点光源和环境光不同的是， 他有个特点， 它能产生阴影 那我们就创建一个点光源和几个几何物体， 顺便移动一下点光源， 看看阴影是如何变化的 创建立方体1234567// 立方体var cubeGeomtry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial)cube.position.set(0, 6, 0)commonObj.scene.add(cube) 创建球体123456// 球体var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 创建点光源1234// 添加点光源var pointLight = new THREE.PointLight(0xffffff)pointLight.position.set(-40, 60, -10)commonObj.scene.add(pointLight) 让点光源动起来1234567function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera)&#125;render() 最终效果我们可以看到， 随着点光源的不断发生位置变动， 我们可以看到阴影发生逐渐的发生变化 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeomtry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial) cube.position.set(0, 6, 0) commonObj.scene.add(cube) // 球体 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 30, 25) commonObj.camera.lookAt(commonObj.scene.position) // 添加点光源 var pointLight = new THREE.PointLight(0xffffff) pointLight.position.set(-40, 60, -10) commonObj.scene.add(pointLight) function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera) &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学</tag>
+        <tag>ThreeJs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【Three】Three.js光源入门之环境光]]></title>
     <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%85%89%2F</url>
     <content type="text"><![CDATA[环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果 环境光 AmbientLight 它是一种基础光源， 影响整个场景的光源 环境光没有明确的光源位置， 在各处形成的亮度也是一致的。 它不会影响阴影的产生。 不能将环境光作为场景中唯一的光源。 在Three中使用 THREE.AmbientLight(hex) add(color) 添加到当前颜色上 clone 复制当前颜色 如果只有环境光没有物同样是看不见东西的， 所以想测试环境光， 得先创建物体， 看一下下面两幅图: 这是正常环境光情况下的物体 然后我们把环境光调暗一点: 可以看到， 两张图中鲜艳的绿色明显的暗淡了 环境光换色刚刚我们只是调整了亮度明暗， 现在我们试试给环境光换个颜色， 就换个红色吧， 红色的灯感觉蛮吓人的 我们发现， 立方体好像少了一个， 这是因为一个不透明的物体 ， 我们所看到的颜色其实是他反射出来的颜色， 而绿色立方体无法反射红色通道的颜色， 所以， 绿色立方体在我们看上去就像是隐藏了一样， 实际上是黑了， 而我们的白色， 他能反射所有颜色， 所以是他就变红了 如何添加1scene.add(new THREE.AmbientLight(0xff0000)) 实际操作一下大体思路， 我们创建一个面，和一个立方体， 先不投射任何的光，看看是什么效果， 然后我们最后放上环境光，看一下效果 第一步-创建好立方体和面123456789101112131415161718var commonObj = common() var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) document.body.appendChild(commonObj.renderer.domElement) commonObj.renderer.render(commonObj.scene, commonObj.camera) 此时浏览器中的效果 可以看到， 此时尽管我们给物体设定了他的颜色， 但我们看到的不管是面还是立方体都依旧是黑色。 第二步-添加光源上帝说要有光， 我们给添加一个环境光试试 12// 环境光commonObj.scene.add(new THREE.AmbientLight()) // 默认白光 好， 就这行代码，就算是加上了 第三步-改变环境光颜色环境光默认是白色， 那我们可不可以试着改变一下， 把环境光改为红色？ 是不是会很吓人 12// 环境光commonObj.scene.add(new THREE.AmbientLight(0xff0000)) // 设置红色 此时原本白色的面，也变为了红色， 感觉好刺眼， 吓得我赶紧关了 完整代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; // 公共的方法 function common() &#123; var scene = new THREE.Scene() var renderer = new THREE.WebGLRenderer() renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0)) renderer.setSize(window.innerWidth, window.innerHeight) renderer.shadowMapEnabled = true // 创建面 var planeGeometry = new THREE.PlaneGeometry(60, 30) // 材质 var planeMaterial = new THREE.MeshLambertMaterial(&#123;color: 0xffffff&#125;) var plane = new THREE.Mesh(planeGeometry, planeMaterial) plane.rotation.x = -0.5 * Math.PI plane.position.set(15, 0, 10) scene.add(plane) var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000) return &#123; scene, renderer, plane, camera &#125; &#125; // 开始创建 var commonObj = common() var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) // 环境光 commonObj.scene.add(new THREE.AmbientLight()) document.body.appendChild(commonObj.renderer.domElement) commonObj.renderer.render(commonObj.scene, commonObj.camera)&lt;/script&gt;&lt;/html&gt;]]></content>
@@ -442,18 +466,6 @@
     <title><![CDATA[【Three】Three.js入门之光源]]></title>
     <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90%2F</url>
     <content type="text"><![CDATA[光源也分为很多种 AmbientLight —- 环境光 PonitLight —- 点光源 SpotLight —- 聚光灯 DirectionalLight —- 平行光 然后还有各种高级的光照效果 光源种类描述 具体内容在站内搜索光源的关键字， 如：环境光， 篇幅太长不在此处描述 环境光 AmbientLight 基础光源， 影响整个场景的光源 点光源 PonitLight 空间中的一个点， 朝所有方向发射光源 聚光灯 SpotLight 具有锥形效果的聚光灯光源 平行光无限光， 模拟远处太阳的光辉 高级光照效果 半球光 平面光 镜头眩光]]></content>
-      <categories>
-        <category>图形学</category>
-      </categories>
-      <tags>
-        <tag>图形学</tag>
-        <tag>ThreeJs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【Three】Three.js光源入门之点光源]]></title>
-    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%82%B9%E5%85%89%E6%BA%90%2F</url>
-    <content type="text"><![CDATA[点光源是一种单点发光照亮物体的光源 基础介绍 照射所有方向的光源，例如照明弹 点光源是单点发光方式 点光源不会产生阴影， 减少GPU 的负担 调用方法1THREE.PointLight(hex, intensity, distance) clone() —- 复制当前颜色。 color 光源颜色 intensity —- 光照强度 distance —- 光源照射的距离 position —- 光源所在位置 测试点光源测试方法和大体上和环境光是一样的， 但是点光源和环境光不同的是， 他有个特点， 它能产生阴影 那我们就创建一个点光源和几个几何物体， 顺便移动一下点光源， 看看阴影是如何变化的 创建立方体1234567// 立方体var cubeGeomtry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial)cube.position.set(0, 6, 0)commonObj.scene.add(cube) 创建球体123456// 球体var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 创建点光源1234// 添加点光源var pointLight = new THREE.PointLight(0xffffff)pointLight.position.set(-40, 60, -10)commonObj.scene.add(pointLight) 让点光源动起来1234567function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera)&#125;render() 最终效果我们可以看到， 随着点光源的不断发生位置变动， 我们可以看到阴影发生逐渐的发生变化 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeomtry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial) cube.position.set(0, 6, 0) commonObj.scene.add(cube) // 球体 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 30, 25) commonObj.camera.lookAt(commonObj.scene.position) // 添加点光源 var pointLight = new THREE.PointLight(0xffffff) pointLight.position.set(-40, 60, -10) commonObj.scene.add(pointLight) function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera) &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
       <categories>
         <category>图形学</category>
       </categories>
