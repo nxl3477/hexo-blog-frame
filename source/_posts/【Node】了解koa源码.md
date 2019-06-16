@@ -154,8 +154,17 @@ function compose (middleware) {
 ```
 
 
+得出的一个整体结构就是
+```Js
+console.log(1)
+  console.log(1)
+    console.log(1)
+      Promise.resolve() // 中间件全部执行完毕
+    console.log(1)
+  console.log(1)
+console.log(1)
+```
 
 
-
-
+![2019-06-16-23-33-51](http://img.nixiaolei.com/2019-06-16-23-33-51.png)
 
