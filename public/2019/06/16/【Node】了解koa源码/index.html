@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,AO,VO,GO,作用域,">
+  <meta name="keywords" content="NodeJs,Koa,源码,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="go global context 全局上下文  js在执行的时候， 首先会创建一个这样的上下文">
-<meta name="keywords" content="JavaScript,AO,VO,GO,作用域">
+<meta name="description" content="想要查看源码， 首先我们1npm i Koa -S 打开node_modules， 找到koa目录下的application 文件， 我们可以看到平时使用的 app 及其相关方法就在这里, 删除了不必要的代码后， 我们看看简易版 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647">
+<meta name="keywords" content="NodeJs,Koa,源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【js机制】什么是AO-VO-GO">
-<meta property="og:url" content="http://blog.nixiaolei.com/2019/06/10/什么是AO-VO-GO/index.html">
+<meta property="og:title" content="【Node】了解koa源码">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/06/16/【Node】了解koa源码/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="go global context 全局上下文  js在执行的时候， 首先会创建一个这样的上下文">
+<meta property="og:description" content="想要查看源码， 首先我们1npm i Koa -S 打开node_modules， 找到koa目录下的application 文件， 我们可以看到平时使用的 app 及其相关方法就在这里, 删除了不必要的代码后， 我们看看简易版 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-09T16:40:34.668Z">
+<meta property="og:updated_time" content="2019-06-16T15:21:59.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【js机制】什么是AO-VO-GO">
-<meta name="twitter:description" content="go global context 全局上下文  js在执行的时候， 首先会创建一个这样的上下文">
+<meta name="twitter:title" content="【Node】了解koa源码">
+<meta name="twitter:description" content="想要查看源码， 首先我们1npm i Koa -S 打开node_modules， 找到koa目录下的application 文件， 我们可以看到平时使用的 app 及其相关方法就在这里, 删除了不必要的代码后， 我们看看简易版 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/2019/06/10/什么是AO-VO-GO/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/06/16/【Node】了解koa源码/">
 
 
 
 
 
-  <title>【js机制】什么是AO-VO-GO | 倪晓磊的博客</title>
+  <title>【Node】了解koa源码 | 倪晓磊的博客</title>
   
 
 
@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/06/10/什么是AO-VO-GO/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/06/16/【Node】了解koa源码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -292,7 +292,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">【js机制】什么是AO-VO-GO</h2>
+          <h2 class="post-title" itemprop="name headline">【Node】了解koa源码</h2>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T00:33:03+08:00">
-                2019-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-16T22:29:06+08:00">
+                2019-06-16
               </time>
             
 
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/NodeJs/" itemprop="url" rel="index">
+                    <span itemprop="name">NodeJs</span>
                   </a>
                 </span>
 
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  28 字
+                  543 字
                 </span>
               
 
@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -395,10 +395,11 @@
       
 
       
-        <h2 id="go"><a href="#go" class="headerlink" title="go"></a>go</h2><blockquote>
-<p>global context 全局上下文</p>
-</blockquote>
-<p>js在执行的时候， 首先会创建一个这样的上下文</p>
+        <p>想要查看源码， 首先我们<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i Koa -S</span><br></pre></td></tr></table></figure></p>
+<p>打开<code>node_modules</code>， 找到koa目录下的application 文件，</p>
+<p>我们可以看到平时使用的 app 及其相关方法就在这里, 删除了不必要的代码后， 我们看看简易版</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="class"><span class="keyword">class</span> <span class="title">Application</span> <span class="keyword">extends</span> <span class="title">Emitter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.proxy = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">this</span>.middleware = [];</span><br><span class="line">    <span class="keyword">this</span>.subdomainOffset = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">this</span>.env = process.env.NODE_ENV || <span class="string">'development'</span>;</span><br><span class="line">    <span class="keyword">this</span>.context = <span class="built_in">Object</span>.create(context);</span><br><span class="line">    <span class="keyword">this</span>.request = <span class="built_in">Object</span>.create(request);</span><br><span class="line">    <span class="keyword">this</span>.response = <span class="built_in">Object</span>.create(response);</span><br><span class="line">    <span class="keyword">if</span> (util.inspect.custom) &#123;</span><br><span class="line">      <span class="keyword">this</span>[util.inspect.custom] = <span class="keyword">this</span>.inspect;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  listen(...args) &#123;</span><br><span class="line">    debug(<span class="string">'listen'</span>);</span><br><span class="line">    <span class="keyword">const</span> server = http.createServer(<span class="keyword">this</span>.callback());</span><br><span class="line">    <span class="keyword">return</span> server.listen(...args);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  toJSON() &#123;</span><br><span class="line">    <span class="keyword">return</span> only(<span class="keyword">this</span>, [</span><br><span class="line">      <span class="string">'subdomainOffset'</span>,</span><br><span class="line">      <span class="string">'proxy'</span>,</span><br><span class="line">      <span class="string">'env'</span></span><br><span class="line">    ]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  inspect() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.toJSON();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  use(fn) &#123;</span><br><span class="line">    <span class="keyword">this</span>.middleware.push(fn);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  callback() &#123;</span><br><span class="line">    <span class="keyword">const</span> fn = compose(<span class="keyword">this</span>.middleware);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> handleRequest = <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> ctx = <span class="keyword">this</span>.createContext(req, res);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.handleRequest(ctx, fn);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> handleRequest;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleRequest(ctx, fnMiddleware) &#123;</span><br><span class="line">    <span class="keyword">const</span> res = ctx.res;</span><br><span class="line">    res.statusCode = <span class="number">404</span>;</span><br><span class="line">    <span class="keyword">const</span> onerror = <span class="function"><span class="params">err</span> =&gt;</span> ctx.onerror(err);</span><br><span class="line">    <span class="keyword">const</span> handleResponse = <span class="function"><span class="params">()</span> =&gt;</span> respond(ctx);</span><br><span class="line">    onFinished(res, onerror);</span><br><span class="line">    <span class="keyword">return</span> fnMiddleware(ctx).then(handleResponse).catch(onerror);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  createContext(req, res) &#123;</span><br><span class="line">    <span class="keyword">const</span> context = <span class="built_in">Object</span>.create(<span class="keyword">this</span>.context);</span><br><span class="line">    <span class="keyword">const</span> request = context.request = <span class="built_in">Object</span>.create(<span class="keyword">this</span>.request);</span><br><span class="line">    <span class="keyword">const</span> response = context.response = <span class="built_in">Object</span>.create(<span class="keyword">this</span>.response);</span><br><span class="line">    context.app = request.app = response.app = <span class="keyword">this</span>;</span><br><span class="line">    context.req = request.req = response.req = req;</span><br><span class="line">    context.res = request.res = response.res = res;</span><br><span class="line">    request.ctx = response.ctx = context;</span><br><span class="line">    request.response = response;</span><br><span class="line">    response.request = request;</span><br><span class="line">    context.originalUrl = request.originalUrl = req.url;</span><br><span class="line">    context.state = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Default error handler.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @param &#123;Error&#125; err</span></span><br><span class="line"><span class="comment">   * @api private</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  onerror(err) &#123;</span><br><span class="line">    <span class="keyword">const</span> msg = err.stack || err.toString();</span><br><span class="line">    <span class="built_in">console</span>.error(msg.replace(<span class="regexp">/^/gm</span>, <span class="string">'  '</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">respond</span>(<span class="params">ctx</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> res = ctx.res;</span><br><span class="line">  <span class="keyword">let</span> body = ctx.body;</span><br><span class="line">  <span class="keyword">const</span> code = ctx.status;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// body: json</span></span><br><span class="line">  body = <span class="built_in">JSON</span>.stringify(body);</span><br><span class="line">  res.end(body);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="灵魂部分"><a href="#灵魂部分" class="headerlink" title="灵魂部分"></a>灵魂部分</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span> (<span class="params">middleware</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(middleware)) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Middleware stack must be an array!'</span>)</span><br><span class="line">  <span class="comment">// 检测中间件类型</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> fn <span class="keyword">of</span> middleware) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Middleware must be composed of functions!'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">context, next</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// last called middleware #</span></span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">return</span> dispatch(<span class="number">0</span>) <span class="comment">// 执行整这个函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">      index = i</span><br><span class="line">      <span class="comment">// 取出当前中间件</span></span><br><span class="line">      <span class="keyword">let</span> fn = middleware[i]</span><br><span class="line">      <span class="comment">// 如果索引跟中间件长度一样了,实际上就等于访问完了, fn是空,  next 也是空, 这里应该是保证一下next 确实不存在</span></span><br><span class="line">      <span class="keyword">if</span> (i === middleware.length) fn = next</span><br><span class="line">      <span class="comment">// 最后一个中间件没有 next 就熄火了</span></span><br><span class="line">      <span class="keyword">if</span> (!fn) <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve()</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// fn 就是中间件,  中间件接收两个参数, context 和 Next</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(fn(context, dispatch.bind(<span class="literal">null</span>, i + <span class="number">1</span>)));</span><br><span class="line">      &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        <span class="comment">// 出错</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -448,7 +449,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://blog.nixiaolei.com/2019/06/10/什么是AO-VO-GO/" title="【js机制】什么是AO-VO-GO">http://blog.nixiaolei.com/2019/06/10/什么是AO-VO-GO/</a>
+    <a href="http://blog.nixiaolei.com/2019/06/16/【Node】了解koa源码/" title="【Node】了解koa源码">http://blog.nixiaolei.com/2019/06/16/【Node】了解koa源码/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -463,15 +464,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            <a href="/tags/NodeJs/" rel="tag"># NodeJs</a>
           
-            <a href="/tags/AO/" rel="tag"># AO</a>
+            <a href="/tags/Koa/" rel="tag"># Koa</a>
           
-            <a href="/tags/VO/" rel="tag"># VO</a>
-          
-            <a href="/tags/GO/" rel="tag"># GO</a>
-          
-            <a href="/tags/作用域/" rel="tag"># 作用域</a>
+            <a href="/tags/源码/" rel="tag"># 源码</a>
           
         </div>
       
@@ -484,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/08/【算法】递归算法/" rel="next" title="【算法】递归算法">
-                <i class="fa fa-chevron-left"></i> 【算法】递归算法
+              <a href="/2019/06/16/【JS】递归、尾递归与尾调用/" rel="next" title="【JS】递归、尾递归与尾调用">
+                <i class="fa fa-chevron-left"></i> 【JS】递归、尾递归与尾调用
               </a>
             
           </div>
@@ -493,10 +490,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/10/【JS】什么是AO-VO-GO/" rel="prev" title="【JS】什么是GO-EC-VO-AO">
-                【JS】什么是GO-EC-VO-AO <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,7 +572,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-count">92</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -601,7 +594,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -662,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go"><span class="nav-number">1.</span> <span class="nav-text">go</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#灵魂部分"><span class="nav-number">1.</span> <span class="nav-text">灵魂部分</span></a></li></ol></div>
             
 
           </div>
@@ -696,7 +689,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64.8k</span>
+    <span title="Site words total count">66.3k</span>
   
 </div>
 
