@@ -1,5 +1,5 @@
 ---
-title: 【React】革命性的fiber架构
+title: 【React】fiber带来的API
 date: 2019-04-15 23:03:00
 categories: React
 tags: React

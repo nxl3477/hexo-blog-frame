@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.nixiaolei.com/2019/04/15/%E3%80%90React%E3%80%91%E9%9D%A9%E5%91%BD%E6%80%A7%E7%9A%84fiber%E6%9E%B6%E6%9E%84/</loc>
+    
+    <lastmod>2019-06-30T04:33:48.205Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.nixiaolei.com/2019/06/30/%E3%80%90JS%E3%80%91%E5%85%B3%E4%BA%8ErequestIdleCallback%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8/</loc>
+    
+    <lastmod>2019-06-30T04:31:48.745Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.nixiaolei.com/2019/06/30/%E3%80%90React%E3%80%91Fiber%E6%9E%B6%E6%9E%84/</loc>
+    
+    <lastmod>2019-06-29T17:23:07.762Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.nixiaolei.com/2019/06/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%90%86%E8%A7%A3Dom-diff/</loc>
     
-    <lastmod>2019-06-29T15:58:05.672Z</lastmod>
+    <lastmod>2019-06-29T16:19:10.081Z</lastmod>
     
   </url>
   
@@ -26,13 +47,6 @@
     <loc>http://blog.nixiaolei.com/2019/06/10/%E3%80%90JS%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AFAO-VO-GO/</loc>
     
     <lastmod>2019-06-16T14:16:23.647Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/06/10/%E3%80%90JS%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AFAO-VO/</loc>
-    
-    <lastmod>2019-06-16T14:16:23.251Z</lastmod>
     
   </url>
   
@@ -250,13 +264,6 @@
     <loc>http://blog.nixiaolei.com/2019/04/16/%E3%80%90React%E3%80%91Flux%E6%9E%B6%E6%9E%84%E6%98%AF%E4%BB%80%E4%B9%88/</loc>
     
     <lastmod>2019-04-16T14:29:05.214Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.nixiaolei.com/2019/04/15/%E3%80%90React%E3%80%91%E9%9D%A9%E5%91%BD%E6%80%A7%E7%9A%84fiber%E6%9E%B6%E6%9E%84/</loc>
-    
-    <lastmod>2019-04-15T15:05:59.621Z</lastmod>
     
   </url>
   

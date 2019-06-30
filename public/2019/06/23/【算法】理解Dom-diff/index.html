@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-06-29-21-05-31.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-06-29-20-58-31.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-06-29-21-22-26.png">
-<meta property="og:updated_time" content="2019-06-29T15:58:05.672Z">
+<meta property="og:updated_time" content="2019-06-29T16:19:10.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【算法】理解Dom-diff">
 <meta name="twitter:description" content="算法复杂度比较两棵DOM树的差异是 Virtual Dom 算法最核心的部分， 这也是所谓的Virtual Dom的 diff算法。 两个树的完全的diff算法是一个时间复杂度为 O（n^3） 的问题。 但是在前端当中， 你很少会跨越层级地移动Dom元素。 所以 Virtual Dom只会对同一个层级的元素进行对比。 下面的div指挥和同一层级的div对比， 第二层级的智慧跟第二层级对比。 这样算">
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k 字
+                  1.5k 字
                 </span>
               
 
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -430,10 +430,17 @@
 <li>对比头尾、 尾头， 如果相同，则头尾先互相拷贝插入， 然后删除旧的</li>
 <li>如果 <code>newStart</code> 和 <code>oldStart</code> 相对比， <code>newStart</code>有但<code>oldStart</code>没有此节点， 则将 <code>newStart</code> 对应的节点插入至 <code>oldStart</code>节点的前面， 并且将 <code>newStart</code>指针前进一格， 而<code>oldStart</code>指针不动， 直至找到匹配<br><img src="http://img.nixiaolei.com/2019-06-29-20-58-31.png" alt="2019-06-29-20-58-31"></li>
 <li>如果<code>oldEnd</code> 和 newEnd 不同时， 则将oldEnd 的元素先打上删除标记， 然后前进一格，  newEnd 元素则停留在原处，直至找到匹配<br><img src="http://img.nixiaolei.com/2019-06-29-21-22-26.png" alt="2019-06-29-21-22-26"></li>
-<li>如果key不相同， 则也判定为不相同</li>
 <li>对比阶段， 对比类型， 如果类型不同就直接放弃没必要继续对比了</li>
 </ol>
 <p>最终start 与 end 交汇后， 遍历一遍 oldTree ,将标记为删除的节点删除掉</p>
+<h3 id="Vue-为什么需要key"><a href="#Vue-为什么需要key" class="headerlink" title="Vue 为什么需要key"></a>Vue 为什么需要key</h3><p>首先， 如果不使用key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。使用key，它会基于key的变化重新排列元素顺序，并且会移除key不存在的元素。</p>
+<p>并且， diff算法就可以快速切正确的找到此节点， 找到正确的位置插入新的节点，</p>
+<p>降低节点查找时间， 当有插入节点需要时， 有Key 的话就可以 类似于索引访问的形式直达目标节点，  而不是遍历一遍所有节点来查找目标节点</p>
+<p><strong>利用key的小技巧</strong><br>它也可以用于强制替换元素/组件而不是重复使用它。当你遇到如下场景时它可能会很有用:</p>
+<p>完整地触发组件的生命周期钩子<br>触发过渡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition&gt;</span><br><span class="line">  &lt;span :key=&quot;text&quot;&gt;&#123;&#123; text &#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/transition&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>总结</strong></p>
+<p>key是为了降低diff时的节点查找复杂度， 并且如果节点的key都不相同或者是说key都变了，那就直接判定为dom发生变化， 渲染新的</p>
 
       
     </div>
@@ -521,6 +528,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/06/30/【React】Fiber架构/" rel="prev" title="【React】Fiber架构">
+                【React】Fiber架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -602,7 +613,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">95</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -624,7 +635,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -685,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法复杂度"><span class="nav-number">1.</span> <span class="nav-text">算法复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比方式"><span class="nav-number">2.</span> <span class="nav-text">对比方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践一下"><span class="nav-number">3.</span> <span class="nav-text">实践一下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟dom结构"><span class="nav-number">3.1.</span> <span class="nav-text">模拟dom结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比差异"><span class="nav-number">3.2.</span> <span class="nav-text">对比差异</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-对dom-diff的优化"><span class="nav-number">4.</span> <span class="nav-text">Vue 对dom-diff的优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法复杂度"><span class="nav-number">1.</span> <span class="nav-text">算法复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比方式"><span class="nav-number">2.</span> <span class="nav-text">对比方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践一下"><span class="nav-number">3.</span> <span class="nav-text">实践一下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟dom结构"><span class="nav-number">3.1.</span> <span class="nav-text">模拟dom结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比差异"><span class="nav-number">3.2.</span> <span class="nav-text">对比差异</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-对dom-diff的优化"><span class="nav-number">4.</span> <span class="nav-text">Vue 对dom-diff的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-为什么需要key"><span class="nav-number">4.1.</span> <span class="nav-text">Vue 为什么需要key</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -719,7 +730,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">68.3k</span>
+    <span title="Site words total count">68.5k</span>
   
 </div>
 
