@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.nixiaolei.com/2019/06/30/%E3%80%90React%E3%80%91Fiber%E6%9E%B6%E6%9E%84/</loc>
+    <lastmod>2019-06-30</lastmod>
+  </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/06/30/%E3%80%90JS%E3%80%91%E5%85%B3%E4%BA%8ErequestIdleCallback%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8/</loc>
     <lastmod>2019-06-30</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/04/15/%E3%80%90React%E3%80%91%E9%9D%A9%E5%91%BD%E6%80%A7%E7%9A%84fiber%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2019-06-30</lastmod>
-  </url>  <url>
-    <loc>http://blog.nixiaolei.com/2019/06/30/%E3%80%90React%E3%80%91Fiber%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2019-06-29</lastmod>
   </url>  <url>
     <loc>http://blog.nixiaolei.com/2019/06/23/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%90%86%E8%A7%A3Dom-diff/</loc>
     <lastmod>2019-06-29</lastmod>
