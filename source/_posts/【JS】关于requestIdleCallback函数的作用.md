@@ -20,13 +20,47 @@ requestIdleCallback 会在浏览器每一帧的空闲时期依次调用函数，
 ![2019-06-30-12-36-16](http://img.nixiaolei.com/2019-06-30-12-36-16.png)
 
 
+并且我们还可以通过 `deadline.timeRemaining`方法来查看该帧期间的剩余时间
+
+
+## Demo
+首先尝试搭建一个最简单的demo ,打印一下 deadline 、剩余时间 和 该函数的返回值
+```Js
+const id = window.requestIdleCallback((deadline) => {
+  // 剩余时间， 单位ms, 指的是该帧的剩余时间
+  console.log(deadline.timeRemaining())
+  // 表示该帧里面没有执行回调， 超时了
+  console.log(deadline)
+}, {
+  // 1. 即超时时间， 不提供的话浏览器会自己去算
+  // 2. 如果给定 timeout ， 那到了时间， 都会立刻执行回调 callback
+  timeout: 1000
+})
+
+console.log(id)
+```
+
+返回结果:
+
+![2019-06-30-12-48-25](http://img.nixiaolei.com/2019-06-30-12-48-25.png)
+
+我们可以看到：
+1. 该函数的返回结果(id)的值： 1
+2. 浏览器本帧的剩余空闲时间: 1.2750000000000001
+3. 回调接收的 `deadline`方法， 里面有一个 didTimeout 属性
 
 
 
+## 如何取消requestIdleCallback
+
+将 requestIdleCallback 的返回值（一个无符号长整数），可以把它传入 Window.cancelIdleCallback() 方法，来结束回调
 
 
+## 如何实现 polyfill
+requestIdleCallback 这个方法浏览器的兼容相当差， 那怎么办， React16 Fiber中也使用了， 别人是如何解决的呢？
 
+答案是： `requestAnimationFrame`
 
+![2019-06-30-12-59-21](http://img.nixiaolei.com/2019-06-30-12-59-21.png)
 
-
-
+利用回调接收的 DOMHighResTimeStamp 参数， 计算出每一帧所花费的时间， 自己去实现一个 `requestIdleCallback` 的polyfill ,  简直完美
