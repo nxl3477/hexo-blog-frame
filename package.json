@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "deploy": "hexo clean && hexo g -d",
+    "deploy": "sudo hexo clean && sudo hexo g -d",
     "dev": "hexo clean && hexo g && hexo s",
     "publish": "sh deploy.sh"
   },
