@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[【错误】jest进行单元测试时提示router-view 未注册报错了]]></title>
-    <url>%2F2019%2F09%2F10%2F%E3%80%90%E9%94%99%E8%AF%AF%E3%80%91jest%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%97%B6%E6%8F%90%E7%A4%BArouter-view-%E6%9C%AA%E6%B3%A8%E5%86%8C%E6%8A%A5%E9%94%99%E4%BA%86%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[【记录】小程序中如何引入iconfont 字体图标]]></title>
+    <url>%2F2019%2F09%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%A6%82%E4%BD%95%E5%BC%95%E5%85%A5iconfont-%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87%2F</url>
+    <content type="text"><![CDATA[icon引入小程序需要将字体文件转换成base64格式，所以 先解压压缩包 找到ttf格式文件 上传到平台转化为base64格式 下载压缩包 将css文件名改为wxss 放入项目样式文件夹 字体文件转换成base64格式的链接 https://transfonter.org/ 参考文档 https://www.cnblogs.com/minimo/p/8795774.html]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【记录】vue-cli3 jest单元测试报错（不支持ES6)]]></title>
+    <url>%2F2019%2F09%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91vue-cli3-jest%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%8A%A5%E9%94%99%EF%BC%88%E4%B8%8D%E6%94%AF%E6%8C%81ES6%2F</url>
+    <content type="text"><![CDATA[在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法: 用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【记录】ios无法播放部分mp4视频怎么办]]></title>
+    <url>%2F2019%2F09%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91ios%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BE%E9%83%A8%E5%88%86mp4%E8%A7%86%E9%A2%91%E6%80%8E%E4%B9%88%E5%8A%9E%2F</url>
+    <content type="text"><![CDATA[今天遇到了， 安卓可以播放某个mp4视频，但是ios就是无法播放 抓耳挠腮半天， 才得知， 原来是视频的压缩级别的问题，ios对 mp4的压缩级别支持有限， 最后我转成MPEG-4编码格式， 完美运行（当然其他的编码格式也行， 我只是随便使用了下） mac可以使用handBreak转一下 参考文档 https://www.jianshu.com/p/31f0593496ef]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【记录】a 标签下载视频却跳去播放的问题]]></title>
+    <url>%2F2019%2F09%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91a-%E6%A0%87%E7%AD%BE%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E5%8D%B4%E8%B7%B3%E5%8E%BB%E6%92%AD%E6%94%BE%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[明明写了 a 标签， 也加了 download属性， 但是还是跳去播放视频了， 原来，如果想下载视频， 你得在 a 标签的视频链接地址后面带个参数?filename=xxx 比如: 1www.aaa.com/video?filename=xxx]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【记录】mac 下 ssh 连接gitHub死活不成功的问题]]></title>
+    <url>%2F2019%2F09%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91mac-%E4%B8%8B-ssh-%E8%BF%9E%E6%8E%A5gitHub%E6%AD%BB%E6%B4%BB%E4%B8%8D%E6%88%90%E5%8A%9F%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[当我想要克隆一个项目时， 出了点小意外， 使用https 使用非常顺畅， 但是换成 ssh的方式就出问题了。死活行不通 git clone 一直提示这样的错误1234Cloning into &apos;xxx&apos;...zsh:1: command not found: connectssh_exchange_identification: Connection closed by remote hostfatal: Could not read from remote repository. 或是这样的错误:123456Cloning into &apos;xxx&apos;git@github.com: Permission denied (publickey).fatal: Could not read from remote repository.Please make sure you have the correct access rightsand the repository exists. 不止配置了一遍gitHub 的 ssh key 敢确信绝对没问题， 寻遍整个互联网依旧没有找到答案. 后来我发现原因时因为： 我创建的 ssh公钥没有被系统所使用, 因为默认只有is_rsa, 如果你自定义了那就需要添加 需要添加一下你创建的公钥， 告诉系统可以使用 1ssh-add -K ~/.ssh/你的ssh key名称(不带.pub) 比如：1ssh-add -K ~/.ssh/github_rsa 于是， clone 顺利 附上创建密钥的命令: ssh-keygen -t rsa -C “your_email@youremail.com“ 参考文献: http://shinancao.cn/2016/12/18/Programming-Git-1/]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【记录】jest进行单元测试时提示router-view 未注册报错了]]></title>
+    <url>%2F2019%2F09%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91jest%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%97%B6%E6%8F%90%E7%A4%BArouter-view-%E6%9C%AA%E6%B3%A8%E5%86%8C%E6%8A%A5%E9%94%99%E4%BA%86%2F</url>
+    <content type="text"><![CDATA[当我想要克隆一个项目时， 出了点小意外， 使用https 使用非常顺畅， 但是换成 ssh的方式就出问题了。死活行不通 git clone 一直提示这样的错误1234Cloning into &apos;xxx&apos;...zsh:1: command not found: connectssh_exchange_identification: Connection closed by remote hostfatal: Could not read from remote repository. 或是这样的错误:123456Cloning into &apos;xxx&apos;git@github.com: Permission denied (publickey).fatal: Could not read from remote repository.Please make sure you have the correct access rightsand the repository exists. 不止配置了一遍gitHub 的 ssh key 敢确信绝对没问题， 寻遍整个互联网依旧没有找到答案. 后来我发现原因时因为： 我创建的 ssh公钥没有被系统所使用, 因为默认只有is_rsa, 如果你自定义了那就需要添加 需要添加一下你创建的公钥， 告诉系统可以使用 1ssh-add -K ~/.ssh/你的ssh key名称(不带.pub) 比如：1ssh-add -K ~/.ssh/github_rsa 于是， clone 顺利 附上创建密钥的命令: ssh-keygen -t rsa -C “your_email@youremail.com“ 参考文献: http://shinancao.cn/2016/12/18/Programming-Git-1/]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[【Redux】react、redux与函数式编程]]></title>
@@ -244,14 +305,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[webpack + ts + antd 按需加载无效处理]]></title>
-    <url>%2F2019%2F05%2F10%2F%E3%80%90%E9%94%99%E8%AF%AF%E3%80%91webpack-ts-antd-%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD%E6%97%A0%E6%95%88%E5%A4%84%E7%90%86%2F</url>
+    <title><![CDATA[【记录】webpack + ts + antd 按需加载无效处理]]></title>
+    <url>%2F2019%2F05%2F10%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91webpack-ts-antd-%E6%8C%89%E9%9C%80%E5%8A%A0%E8%BD%BD%E6%97%A0%E6%95%88%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[webpack加 babel 本来搭配 babel-plugin-import 可以实现插件的按需引入， 但是时代在变化啊， 现在流行ts 了， 你一定会想在你的项目中加入它， 你也一定会搜索到 ‘ts-loader’ 的种种， 但效果不尽如人意， 使用了’ts-loader’ 之后， 你会发现， 按需引入怎么配置都失败了， 于是你一定会尝试这样12345678&#123; test: /\.tsx?$/, exclude: /node_modules/, use: [ loader: &apos;babel-loader&apos;, loader: &apos;ts-loader&apos;, ]&#125; 先把ts 转成 es6, 然后用babel把ES6 转为 es5 但现在不是那种上古洪荒时代了， babel 统一添加， 让我们可以不需要在编译两轮了 在 babel 7 中，我们使用新的 @babel/preset-typescript (其集成了 @babel/plugin-transform-typescript) 我们的 .babelrc 配置将变成这样： 1234567&#123; &quot;presets&quot;: [ &quot;@babel/env&quot;, &quot;@babel/react&quot;, &quot;@babel/typescript&quot; ]&#125; 参考地址: https://github.com/frontend9/fe9-library/issues/23 https://www.jishuwen.com/d/2MbR/zh-tw]]></content>
       <categories>
-        <category>错误记录</category>
+        <category>记录</category>
       </categories>
       <tags>
-        <tag>错误记录</tag>
+        <tag>记录</tag>
       </tags>
   </entry>
   <entry>
@@ -589,6 +650,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[【Three】Three.js光源入门之聚光灯]]></title>
+    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E8%81%9A%E5%85%89%E7%81%AF%2F</url>
+    <content type="text"><![CDATA[聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。 基础特性 具有锥形效果的光源， 能够朝着一个方向投射光线 最常用到的光源， 它可以产生阴影 锥形效果， 类似电筒光照效果 光照效果样例 使用方式 THREE.SpotLight(hex, intensity, distance, angle, exponent) castShadow —- 如果设置为true, 这个光源就会产生阴影。target —- 决定光照方向。angle —- 光照的角度， 默认值是 Math.PI / 3 实践一下按照惯例， 我们测试灯光需要有几何物体才能体现出来， 因为聚光灯是中心最亮， 逐渐向外变暗， 所以我们创建几个立方体， 然后想办法摆动一下聚光灯的位置和角度看看具体效果 第一步-创建立方体12345678// 立方体var cubeGeometry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)// 打开立方体的阴影cube.castShadow = truecube.position.set(-4, 2.5, 0)commonObj.scene.add(cube) // 调整相机位置 第二步-创建球体123456// 圆球var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 第三步-创建聚光灯创建聚光灯并将聚光灯的目标调整为刚才创建的 球体 123456789 // 聚光灯光源var spotLight = new THREE.SpotLight('#ffffff')spotLight.position.x = -40spotLight.position.y = 60spotLight.position.z = -12// 选择照射目标sphere.target = sphere// 加入场景commonObj.scene.add(spotLight) 第四步-用键盘控制聚光灯的角度及位置键盘方向的上下键控制聚光灯的角度，左右键控制聚光灯的位置 123456789101112131415161718192021222324// 设置初始角度var angleNUM = 3document.onkeydown = function (e) &#123; // 上键 控制聚光灯角度 switch(e.keyCode) &#123; case 38: angleNUM += 1 break; // 下键 case 40: angleNUM -= 1 if( angleNUM &lt; 1 ) &#123; angleNUM = 1 &#125; break // 左右键控制聚光灯位移 case 37: spotLight.position.x += 2 break case 39: spotLight.position.x -= 2 break &#125;&#125; 第五步-实时渲染在每一帧时根据当前的情况调整聚光灯的角度 12345function render() &#123; window.requestAnimationFrame(render) commonObj.renderer.render(commonObj.scene, commonObj.camera) spotLight.angle = Math.PI / angleNUM&#125; 最终效果该图中， 前半段我先按了上下键来调整聚光灯角度， 后半段我按了左右键来控制聚光灯位置 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 // 圆球 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) // 聚光灯光源 var spotLight = new THREE.SpotLight('#ffffff') spotLight.position.x = -40 spotLight.position.y = 60 spotLight.position.z = -12 // 选择照射目标 sphere.target = sphere commonObj.scene.add(spotLight) function render() &#123; window.requestAnimationFrame(render) commonObj.renderer.render(commonObj.scene, commonObj.camera) spotLight.angle = Math.PI / angleNUM &#125; // 设置初始角度 var angleNUM = 3 document.onkeydown = function (e) &#123; // 上键 控制聚光灯角度 switch(e.keyCode) &#123; case 38: angleNUM += 1 break; // 下键 case 40: angleNUM -= 1 if( angleNUM &lt; 1 ) &#123; angleNUM = 1 &#125; break // 聚光灯位移 case 37: spotLight.position.x += 2 break case 39: spotLight.position.x -= 2 break &#125; &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学</tag>
+        <tag>ThreeJs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【Three】Three.js入门之光源]]></title>
     <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90%2F</url>
     <content type="text"><![CDATA[光源也分为很多种 AmbientLight —- 环境光 PonitLight —- 点光源 SpotLight —- 聚光灯 DirectionalLight —- 平行光 然后还有各种高级的光照效果 光源种类描述 具体内容在站内搜索光源的关键字， 如：环境光， 篇幅太长不在此处描述 环境光 AmbientLight 基础光源， 影响整个场景的光源 点光源 PonitLight 空间中的一个点， 朝所有方向发射光源 聚光灯 SpotLight 具有锥形效果的聚光灯光源 平行光无限光， 模拟远处太阳的光辉 高级光照效果 半球光 平面光 镜头眩光]]></content>
@@ -604,18 +677,6 @@
     <title><![CDATA[【Three】Three.js光源入门之点光源]]></title>
     <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%82%B9%E5%85%89%E6%BA%90%2F</url>
     <content type="text"><![CDATA[点光源是一种单点发光照亮物体的光源 基础介绍 照射所有方向的光源，例如照明弹 点光源是单点发光方式 点光源不会产生阴影， 减少GPU 的负担 调用方法1THREE.PointLight(hex, intensity, distance) clone() —- 复制当前颜色。 color 光源颜色 intensity —- 光照强度 distance —- 光源照射的距离 position —- 光源所在位置 测试点光源测试方法和大体上和环境光是一样的， 但是点光源和环境光不同的是， 他有个特点， 它能产生阴影 那我们就创建一个点光源和几个几何物体， 顺便移动一下点光源， 看看阴影是如何变化的 创建立方体1234567// 立方体var cubeGeomtry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial)cube.position.set(0, 6, 0)commonObj.scene.add(cube) 创建球体123456// 球体var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 创建点光源1234// 添加点光源var pointLight = new THREE.PointLight(0xffffff)pointLight.position.set(-40, 60, -10)commonObj.scene.add(pointLight) 让点光源动起来1234567function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera)&#125;render() 最终效果我们可以看到， 随着点光源的不断发生位置变动， 我们可以看到阴影发生逐渐的发生变化 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeomtry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial) cube.position.set(0, 6, 0) commonObj.scene.add(cube) // 球体 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 30, 25) commonObj.camera.lookAt(commonObj.scene.position) // 添加点光源 var pointLight = new THREE.PointLight(0xffffff) pointLight.position.set(-40, 60, -10) commonObj.scene.add(pointLight) function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera) &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
-      <categories>
-        <category>图形学</category>
-      </categories>
-      <tags>
-        <tag>图形学</tag>
-        <tag>ThreeJs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[【Three】Three.js光源入门之聚光灯]]></title>
-    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E8%81%9A%E5%85%89%E7%81%AF%2F</url>
-    <content type="text"><![CDATA[聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。 基础特性 具有锥形效果的光源， 能够朝着一个方向投射光线 最常用到的光源， 它可以产生阴影 锥形效果， 类似电筒光照效果 光照效果样例 使用方式 THREE.SpotLight(hex, intensity, distance, angle, exponent) castShadow —- 如果设置为true, 这个光源就会产生阴影。target —- 决定光照方向。angle —- 光照的角度， 默认值是 Math.PI / 3 实践一下按照惯例， 我们测试灯光需要有几何物体才能体现出来， 因为聚光灯是中心最亮， 逐渐向外变暗， 所以我们创建几个立方体， 然后想办法摆动一下聚光灯的位置和角度看看具体效果 第一步-创建立方体12345678// 立方体var cubeGeometry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeometry, cubeMaterial)// 打开立方体的阴影cube.castShadow = truecube.position.set(-4, 2.5, 0)commonObj.scene.add(cube) // 调整相机位置 第二步-创建球体123456// 圆球var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 第三步-创建聚光灯创建聚光灯并将聚光灯的目标调整为刚才创建的 球体 123456789 // 聚光灯光源var spotLight = new THREE.SpotLight('#ffffff')spotLight.position.x = -40spotLight.position.y = 60spotLight.position.z = -12// 选择照射目标sphere.target = sphere// 加入场景commonObj.scene.add(spotLight) 第四步-用键盘控制聚光灯的角度及位置键盘方向的上下键控制聚光灯的角度，左右键控制聚光灯的位置 123456789101112131415161718192021222324// 设置初始角度var angleNUM = 3document.onkeydown = function (e) &#123; // 上键 控制聚光灯角度 switch(e.keyCode) &#123; case 38: angleNUM += 1 break; // 下键 case 40: angleNUM -= 1 if( angleNUM &lt; 1 ) &#123; angleNUM = 1 &#125; break // 左右键控制聚光灯位移 case 37: spotLight.position.x += 2 break case 39: spotLight.position.x -= 2 break &#125;&#125; 第五步-实时渲染在每一帧时根据当前的情况调整聚光灯的角度 12345function render() &#123; window.requestAnimationFrame(render) commonObj.renderer.render(commonObj.scene, commonObj.camera) spotLight.angle = Math.PI / angleNUM&#125; 最终效果该图中， 前半段我先按了上下键来调整聚光灯角度， 后半段我按了左右键来控制聚光灯位置 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 // 圆球 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) // 聚光灯光源 var spotLight = new THREE.SpotLight('#ffffff') spotLight.position.x = -40 spotLight.position.y = 60 spotLight.position.z = -12 // 选择照射目标 sphere.target = sphere commonObj.scene.add(spotLight) function render() &#123; window.requestAnimationFrame(render) commonObj.renderer.render(commonObj.scene, commonObj.camera) spotLight.angle = Math.PI / angleNUM &#125; // 设置初始角度 var angleNUM = 3 document.onkeydown = function (e) &#123; // 上键 控制聚光灯角度 switch(e.keyCode) &#123; case 38: angleNUM += 1 break; // 下键 case 40: angleNUM -= 1 if( angleNUM &lt; 1 ) &#123; angleNUM = 1 &#125; break // 聚光灯位移 case 37: spotLight.position.x += 2 break case 39: spotLight.position.x -= 2 break &#125; &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
       <categories>
         <category>图形学</category>
       </categories>
@@ -1022,14 +1083,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[工具目录]]></title>
-    <url>%2F2019%2F03%2F17%2F%E3%80%90%E5%B7%A5%E5%85%B7%E3%80%91%E5%B7%A5%E5%85%B7%E7%9B%AE%E5%BD%95%2F</url>
+    <title><![CDATA[【记录】工具目录]]></title>
+    <url>%2F2019%2F03%2F17%2F%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91%E5%B7%A5%E5%85%B7%E7%9B%AE%E5%BD%95%2F</url>
     <content type="text"><![CDATA[这里存放各种可能用到的用不到的东西， 真用到时方便查找😄 当然平日里经常用到的， 耳熟能详的， 我就不放进来了， 主要是起个备忘录的作用 CSS兼容查询 https://caniuse.com/ https://cssdb.org/ 动画 贝塞尔: http://cubic-bezier.com/#.17,.67,.83,.67 可生成matrix的网站 名称 网址 matrix3d http://ds-overdesign.com/transform/matrix3d.html CSS-Matrix3d https://github.com/Zhangdroid/CSS-Matrix3d matrix http://meyerweb.com/eric/tools/matrix/ tools http://www.f2e.name/case/css3/tools.html 高逼格 web component CSS: https://css-doodle.com/ PostCss 值得收藏的插件 功能 插件名 运行时变量 POSTCSS-CUSTOM-PROPERTIES 与SCSS一致的变量实现 POSTCSS-SIMPLE-VARS 实现类似SASS的@MIXIN的功能 POSTCSS-MIXINS 实现类似SASS的继承功能 POSTCSS-EXTEND 实现类似SASS的IMPORT POSTCSS-IMPORT 面向未来 CSSNext 修复过去（兼容IE，zomm、一像素留白等） CSS Grace Node框架 功能 插件名 周边生态 帮助实现DI的库 Awilix awilix-koa 实现控制反转&amp;构造注入的框架 InversifyJS inversify-koa-utils 性能测试 功能 名称 性能测试 Benchmark.js webpack4功能性能类 功能 插件名 自动插入html及静态文件 HtmlWebpackPlugin【配置自动注入loading（监测资源）】 抽离css文件 MiniCssExtractPlugin 清空指定目录 CleanWebpackPlugin js 深度 tree sharking 基于ES6模块 webpack-deep-scope-plugin css tree sharking PurifyCSSPlugin 多核打包件 [需要babel] uglifyjs-webpack-plugin[官方], happypack 前端缓存负载【自动生成缓存文件】 Webpack Manifest Plugin js 压缩 以及 es压缩 多核压缩 webpack-parallel-uglify-plugin, happypack hint css 多核压缩css css-nano, optimize-css-assets-webpack-plugin js 转 ast静态语法分析树 acorn , acorn-walk 能对html进行hint 以及 fix 的插件 html-minifier, html-minifier-lint 搬运静态文件 copy-webpack-plugin 优化体验类 功能 插件名 监测 webpack 打包速度 speed-measure-webpack-plugin 打包成功通知 webpack-build-notifier 显示打包进度 progress-bar-webpack-plugin 信息面板优化 webpack-dashboard[需要配置Pagejson]， webpack-jarvis[网页中浏览] 修改cmd 标题 node-bash-title[ github ][cmder 无效] loader 功能 插件名 缓存Loader结果 cache-loader JavaScript颜色提取 RGBaster TypeScript运行工具 功能 插件名 周边生态 在node中不用编译就运行 ts-node ts-node-dev 热重启 Linuxvim 快速学习vim的网站: https://vim-adventures.com/ 算法学习帮助 算法过程可视化: https://algorithm-visualizer.org/branch-and-bound/binary-search k8s 中文手册: https://www.kubernetes.org.cn/docs Chart 应用仓库: https://hub.kubeapps.com/ 图形学 算法生成图像: https://blog.csdn.net/zhangpiu/article/details/49511107s canvas 库 提供基础的canvas效果库： http://spritejs.org/#/ 物理引擎 cocos2D： https://cocos2d-x.org/products phaser： http://phaser.io/ Three stats.min.js 显示动画帧率 性能优化更新算法（文件增量更新） mt.js (https://github.com/mtjs/mt)]]></content>
       <categories>
-        <category>目录</category>
+        <category>记录</category>
       </categories>
       <tags>
-        <tag>目录</tag>
+        <tag>记录</tag>
       </tags>
   </entry>
   <entry>
