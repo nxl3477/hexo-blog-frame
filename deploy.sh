@@ -3,8 +3,8 @@ npm run deploy
 
 
 # 把项目文件上传至Github, 需要先配置ssh免密
-git add .
+sudo git add .
 
-git commit -am "deploy"
+sudo git commit -am "deploy"
 
-git push 
+sudo git push 
