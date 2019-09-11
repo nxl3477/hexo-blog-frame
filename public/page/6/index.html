@@ -1751,7 +1751,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之聚光灯/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之环境光/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -1770,7 +1770,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/" itemprop="url">【Three】Three.js光源入门之聚光灯</a></h2>
+                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之环境光/" itemprop="url">【Three】Three.js光源入门之环境光</a></h2>
         
 
         <div class="post-meta">
@@ -1836,7 +1836,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  982 字
+                  1.1k 字
                 </span>
               
 
@@ -1875,19 +1875,20 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
       
         
           
-          聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。
-基础特性
-具有锥形效果的光源， 能够朝着一个方向投射光线
-最常用到的光源， 它可以产生阴影
-锥形效果， 类似电筒光照效果
+          环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果
+环境光
+AmbientLight 
 
-光照效果样例
-使用方式
-THREE.SpotLight(hex, intensity, distance, ang
+它是一种基础光源， 影响整个场景的光源
+环境光没有明确的光源位置， 在各处形成的亮度也是一致的。
+它不会影响阴影的产生。
+不能将环境光作为场景中唯一的光源。
+在Three中使用
+T
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/#more" rel="contents">
+            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之环境光/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1938,7 +1939,7 @@ THREE.SpotLight(hex, intensity, distance, ang
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js入门之光源/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之点光源/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -1957,7 +1958,7 @@ THREE.SpotLight(hex, intensity, distance, ang
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/04/【Three】Three-js入门之光源/" itemprop="url">【Three】Three.js入门之光源</a></h2>
+                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之点光源/" itemprop="url">【Three】Three.js光源入门之点光源</a></h2>
         
 
         <div class="post-meta">
@@ -2023,7 +2024,7 @@ THREE.SpotLight(hex, intensity, distance, ang
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  156 字
+                  641 字
                 </span>
               
 
@@ -2039,7 +2040,7 @@ THREE.SpotLight(hex, intensity, distance, ang
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -2062,22 +2063,19 @@ THREE.SpotLight(hex, intensity, distance, ang
       
         
           
-          光源也分为很多种
+          点光源是一种单点发光照亮物体的光源
+基础介绍
+照射所有方向的光源，例如照明弹
+点光源是单点发光方式
+点光源不会产生阴影， 减少GPU 的负担
 
-AmbientLight —- 环境光
-PonitLight —- 点光源
-SpotLight —- 聚光灯
-DirectionalLight —- 平行光
+调用方法1THREE.PointLight(hex, intensity, distance)
 
-然后还有各种高级的光照效果
-光源种类描述
-具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述
-
-环境
+clone() —- 复制当前颜色。 color 光源颜色
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/04/【Three】Three-js入门之光源/#more" rel="contents">
+            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之点光源/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2268,7 +2266,7 @@ DirectionalLight —- 平行光
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">78.5k</span>
+    <span title="Site words total count">78.6k</span>
   
 </div>
 

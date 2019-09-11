@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法:  用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️">
+<meta name="description" content="在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法:  用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️ 最后发现只需要把 babel-jest版本降一下就可以了， 1&amp;quot;babe">
 <meta name="keywords" content="记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【记录】vue-cli3  jest单元测试报错（不支持ES6)">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/09/10/【记录】vue-cli3-jest单元测试报错（不支持ES6/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法:  用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️">
+<meta property="og:description" content="在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法:  用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️ 最后发现只需要把 babel-jest版本降一下就可以了， 1&amp;quot;babe">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-10T12:17:00.565Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-09-11-11-08-34.png">
+<meta property="og:updated_time" content="2019-09-11T03:09:32.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【记录】vue-cli3  jest单元测试报错（不支持ES6)">
-<meta name="twitter:description" content="在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法:  用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️">
+<meta name="twitter:description" content="在使用公司项目想尝试单元测试的时候， 公司使用的是jest, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决 最后的解决办法:  用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️ 最后发现只需要把 babel-jest版本降一下就可以了， 1&amp;quot;babe">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-09-11-11-08-34.png">
 
 
 
@@ -358,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  123 字
+                  166 字
                 </span>
               
 
@@ -398,6 +400,9 @@
         <p>在使用公司项目想尝试单元测试的时候， 公司使用的是<code>jest</code>, 发现提示了ES6相关的语法错误提示， 网上百度好多， 各种尝试依旧未能解决</p>
 <p>最后的解决办法: </p>
 <p>用vue-cli3 重新创建了一个带单元测试的项目， 然后发现运行成功， 于是把该项目的单元测试相关依赖版本拷贝到公司项目里， 于是公司项目成功运行 ， ✌️</p>
+<p>最后发现只需要把 <code>babel-jest</code>版本降一下就可以了，<br><img src="http://img.nixiaolei.com/2019-09-11-11-08-34.png" alt="2019-09-11-11-08-34"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;babel-jest&quot;: &quot;^23.6.0&quot;,</span><br></pre></td></tr></table></figure>
+<p>如果不生效记得把 package.lock文件删了</p>
 
       
     </div>
@@ -662,7 +667,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">78.5k</span>
+    <span title="Site words total count">78.6k</span>
   
 </div>
 
