@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="05q8BlYpNjXZYUDSdiPGL1DqJauEoquptd_o08ZaUSs">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my_favicon_small.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/my_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/my_favicon_small.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DomDiff,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="算法复杂度比较两棵DOM树的差异是 Virtual Dom 算法最核心的部分， 这也是所谓的Virtual Dom的 diff算法。 两个树的完全的diff算法是一个时间复杂度为 O（n^3） 的问题。 但是在前端当中， 你很少会跨越层级地移动Dom元素。 所以 Virtual Dom只会对同一个层级的元素进行对比。 下面的div指挥和同一层级的div对比， 第二层级的智慧跟第二层级对比。 这样算">
+<meta name="keywords" content="DomDiff">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【算法】理解Dom-diff">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/06/23/【算法】理解Dom-diff/index.html">
+<meta property="og:site_name" content="倪晓磊的博客">
+<meta property="og:description" content="算法复杂度比较两棵DOM树的差异是 Virtual Dom 算法最核心的部分， 这也是所谓的Virtual Dom的 diff算法。 两个树的完全的diff算法是一个时间复杂度为 O（n^3） 的问题。 但是在前端当中， 你很少会跨越层级地移动Dom元素。 所以 Virtual Dom只会对同一个层级的元素进行对比。 下面的div指挥和同一层级的div对比， 第二层级的智慧跟第二层级对比。 这样算">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-06-23-21-55-03.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-06-23-21-57-26.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-06-29-21-05-31.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-06-29-20-58-31.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-06-29-21-22-26.png">
+<meta property="og:updated_time" content="2019-09-09T16:57:46.055Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【算法】理解Dom-diff">
+<meta name="twitter:description" content="算法复杂度比较两棵DOM树的差异是 Virtual Dom 算法最核心的部分， 这也是所谓的Virtual Dom的 diff算法。 两个树的完全的diff算法是一个时间复杂度为 O（n^3） 的问题。 但是在前端当中， 你很少会跨越层级地移动Dom元素。 所以 Virtual Dom只会对同一个层级的元素进行对比。 下面的div指挥和同一层级的div对比， 第二层级的智慧跟第二层级对比。 这样算">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-06-23-21-55-03.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/06/23/【算法】理解Dom-diff/">
+
+
+
+
+
+  <title>【算法】理解Dom-diff | 倪晓磊的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪晓磊的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-类别">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            类别
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/06/23/【算法】理解Dom-diff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="a磊的前端梦">
+      <meta itemprop="description" content="挑战10000小时定律">
+      <meta itemprop="image" content="/images/myavatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪晓磊的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【算法】理解Dom-diff</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-23T21:48:48+08:00">
+                2019-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h2><p>比较两棵DOM树的差异是 Virtual Dom 算法最核心的部分， 这也是所谓的Virtual Dom的 diff算法。 两个树的完全的diff算法是一个时间复杂度为 O（n^3） 的问题。 但是在前端当中， 你很少会跨越层级地移动Dom元素。 所以 Virtual Dom只会对同一个层级的元素进行对比。 下面的div指挥和同一层级的div对比， 第二层级的智慧跟第二层级对比。 这样算法复杂度就可以达到O(n)。</p>
+<p><img src="http://img.nixiaolei.com/2019-06-23-21-55-03.png" alt="2019-06-23-21-55-03"></p>
+<h2 id="对比方式"><a href="#对比方式" class="headerlink" title="对比方式"></a>对比方式</h2><p>实际的代码中， 会对新旧两棵树进行一个深度优先的遍历，这样每个节点都会有一个唯一的标记， 在深度优先遍历的时候， 每遍历到一个节点就把该节点和新的树进行对比。 如果有差异的话就记录到一个对象里面。</p>
+<p><img src="http://img.nixiaolei.com/2019-06-23-21-57-26.png" alt="2019-06-23-21-57-26"></p>
+<h2 id="实践一下"><a href="#实践一下" class="headerlink" title="实践一下"></a>实践一下</h2><p>所谓的<code>dom-diff</code> 抛去具体的dom处理逻辑， 其核心思想还是比较简单的， 其实就是一个深度优先遍历。</p>
+<p>我们就来尝试实现一下一个简单的dom-diff</p>
+<p>首先</p>
+<h3 id="模拟dom结构"><a href="#模拟dom结构" class="headerlink" title="模拟dom结构"></a>模拟dom结构</h3><p>以面向对象的编程方式， 构建出一个dom节点所必要的属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Element</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(type, props, children) &#123;</span><br><span class="line">    <span class="keyword">this</span>.type = type</span><br><span class="line">    <span class="keyword">this</span>.props = props</span><br><span class="line">    <span class="keyword">this</span>.children = children</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们再实现一个创建虚拟dom节点的快捷方式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createElement</span> (<span class="params">type, props, children</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Element(type, props, children)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>既然有了创建方法， 那现在就可以试着创建几个dom了，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> virtualDom1 = createElement(<span class="string">"ul"</span>, &#123;</span><br><span class="line">  class: "list"</span><br><span class="line">&#125;, [</span><br><span class="line">  createElement(<span class="string">"li"</span>, &#123; <span class="attr">class</span>: <span class="string">"item"</span>&#125;, [<span class="string">"1"</span>]),</span><br><span class="line">  createElement(<span class="string">"li"</span>, &#123; <span class="attr">class</span>: <span class="string">"item"</span>&#125;, [<span class="string">"2"</span>]),</span><br><span class="line">  createElement(<span class="string">"li"</span>, &#123; <span class="attr">class</span>: <span class="string">"item"</span>&#125;, [<span class="string">"3"</span>])</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> virtualDom2 = createElement(<span class="string">"ul"</span>, &#123;</span><br><span class="line">  class: "list-new"</span><br><span class="line">&#125;, [</span><br><span class="line">  createElement(<span class="string">"li"</span>, &#123; <span class="attr">class</span>: <span class="string">"item"</span>&#125;, [<span class="string">"a"</span>]),</span><br><span class="line">  createElement(<span class="string">"li"</span>, &#123; <span class="attr">class</span>: <span class="string">"item"</span>&#125;, [<span class="string">"444"</span>]),</span><br><span class="line">  createElement(<span class="string">"li"</span>, &#123; <span class="attr">class</span>: <span class="string">"item"</span>&#125;, [<span class="string">"c"</span>])</span><br><span class="line">])</span><br></pre></td></tr></table></figure></p>
+<p>这是两串模拟<code>ul &gt; li</code>的代码， 相信聪明的你可以看的出来</p>
+<h3 id="对比差异"><a href="#对比差异" class="headerlink" title="对比差异"></a>对比差异</h3><p>既然构建好了简单的虚拟dom， 接下来要做的无非就是比对了</p>
+<p>在对比差异的过程中， 我们还要记录最终的差异结果， 把当前修复批次记录下来， 用于之后同一处理</p>
+<p>开始比对之前， 我们要先搞清楚整体的逻辑， 我们应该比对哪些差异？</p>
+<ol>
+<li>标签类型的差异， 有可能是<code>p</code>， 有可能是<code>div</code>， 还有可能是纯文本</li>
+<li>dom的属性改变了 ， 有可能是class变了， 有可能是自定义属性变了</li>
+<li>dom的内容改变了， 这就是最基本的变化了， dom的内容发生了改变</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">'./util.js'</span></span><br><span class="line"><span class="comment">// 生成的补丁包</span></span><br><span class="line"><span class="keyword">let</span> patchs = &#123;&#125;</span><br><span class="line"><span class="comment">// 记录</span></span><br><span class="line"><span class="keyword">let</span> globalIndex = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// dom-diff的主要入口函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">diff</span>(<span class="params">oldTree, newTree</span>) </span>&#123;</span><br><span class="line">  dfswalk(oldTree, newTree, globalIndex)</span><br><span class="line">  <span class="keyword">return</span> patchs</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 深度优先遍历 -- 递归</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dfswalk</span>(<span class="params">oldTree, newTree, globalIndex</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 记录当前批次的修改队列</span></span><br><span class="line">  <span class="keyword">let</span> currentPatchs = []</span><br><span class="line">  <span class="comment">// 如果旧节点是文本</span></span><br><span class="line">  <span class="keyword">if</span>( _.isString(oldTree) ) &#123;</span><br><span class="line">    <span class="comment">// 如果新树也是字符串 并且 但是不和新树相同</span></span><br><span class="line">    <span class="keyword">if</span>(_.isString(newTree) &amp;&amp; oldTree !== newTree) &#123;</span><br><span class="line">      <span class="comment">// 将当前的更改追加入当前需要修改的队列中</span></span><br><span class="line">      currentPatchs.push(&#123;</span><br><span class="line">        type: <span class="string">"TEXT"</span>,</span><br><span class="line">        text: newTree</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果类型相同的</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>( oldTree.type === newTree.type ) &#123;</span><br><span class="line">    <span class="comment">// 调用对比属性的函数</span></span><br><span class="line">    diffProps(oldTree.props, newTree.props)</span><br><span class="line">    <span class="comment">// 比节点 =&gt; 尾调用优化</span></span><br><span class="line">    diffChildren(oldTree.children, newTree.children)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 如果本次检测到了修改 把每一次diff的结果放到patchs</span></span><br><span class="line">  <span class="keyword">if</span>(currentPatchs.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 记录到对应的节点上sdcxz</span></span><br><span class="line">    patchs[globalIndex] = currentPatchs</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对比两个dom的 属性</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">diffProps</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 对比props</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 负责循环新旧domde的子节点， 以旧节点的索引去匹配去匹配相应位置的新节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">diffChildren</span>(<span class="params">oldChildrens, newChildrens</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 遍历旧dom ,对比相同索引的新dom</span></span><br><span class="line">  oldChildrens.forEach(<span class="function">(<span class="params">child, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 被循环后又去调用新旧dom的比对</span></span><br><span class="line">    dfswalk(child, newChildrens[index], ++globalIndex)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  diff</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Vue-对dom-diff的优化"><a href="#Vue-对dom-diff的优化" class="headerlink" title="Vue 对dom-diff的优化"></a>Vue 对dom-diff的优化</h2><p>vue 在对比 oldTree 和 newTree 时会分别给新旧树的对比中会分配两个指针，分别是<code>oldStart</code>、<code>oldEnd</code> 、 <code>newStart</code>、<code>newEnd</code> ， 然后 start 指针和 end 指针都会在每次对比后相互靠近， 直至相遇， 具体对比规则如下</p>
+<p><img src="http://img.nixiaolei.com/2019-06-29-21-05-31.png" alt="2019-06-29-21-05-31"></p>
+<ol>
+<li>先对比头头、 尾尾是否一致</li>
+<li>对比头尾、 尾头， 如果相同，则头尾先互相拷贝插入， 然后删除旧的</li>
+<li>如果 <code>newStart</code> 和 <code>oldStart</code> 相对比， <code>newStart</code>有但<code>oldStart</code>没有此节点， 则将 <code>newStart</code> 对应的节点插入至 <code>oldStart</code>节点的前面， 并且将 <code>newStart</code>指针前进一格， 而<code>oldStart</code>指针不动， 直至找到匹配<br><img src="http://img.nixiaolei.com/2019-06-29-20-58-31.png" alt="2019-06-29-20-58-31"></li>
+<li>如果<code>oldEnd</code> 和 newEnd 不同时， 则将oldEnd 的元素先打上删除标记， 然后前进一格，  newEnd 元素则停留在原处，直至找到匹配<br><img src="http://img.nixiaolei.com/2019-06-29-21-22-26.png" alt="2019-06-29-21-22-26"></li>
+<li>对比阶段， 对比类型， 如果类型不同就直接放弃没必要继续对比了</li>
+</ol>
+<p>最终start 与 end 交汇后， 遍历一遍 oldTree ,将标记为删除的节点删除掉</p>
+<h3 id="Vue-为什么需要key"><a href="#Vue-为什么需要key" class="headerlink" title="Vue 为什么需要key"></a>Vue 为什么需要key</h3><p>首先， 如果不使用key，Vue会使用一种最大限度减少动态元素并且尽可能的尝试修复/再利用相同类型元素的算法。使用key，它会基于key的变化重新排列元素顺序，并且会移除key不存在的元素。</p>
+<p>并且， diff算法就可以快速切正确的找到此节点， 找到正确的位置插入新的节点，</p>
+<p>降低节点查找时间， 当有插入节点需要时， 有Key 的话就可以 类似于索引访问的形式直达目标节点，  而不是遍历一遍所有节点来查找目标节点</p>
+<p><strong>利用key的小技巧</strong><br>它也可以用于强制替换元素/组件而不是重复使用它。当你遇到如下场景时它可能会很有用:</p>
+<p>完整地触发组件的生命周期钩子<br>触发过渡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition&gt;</span><br><span class="line">  &lt;span :key=&quot;text&quot;&gt;&#123;&#123; text &#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/transition&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>总结</strong></p>
+<p>key是为了降低diff时的节点查找复杂度， 并且如果节点的key都不相同或者是说key都变了，那就直接判定为dom发生变化， 渲染新的</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>你的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="a磊的前端梦 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="a磊的前端梦 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    a磊的前端梦
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.nixiaolei.com/2019/06/23/【算法】理解Dom-diff/" title="【算法】理解Dom-diff">http://blog.nixiaolei.com/2019/06/23/【算法】理解Dom-diff/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="http://blog.nixiaolei.com/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DomDiff/" rel="tag"># DomDiff</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/【英语学习】基础语法/" rel="next" title="【英语学习】基础语法">
+                <i class="fa fa-chevron-left"></i> 【英语学习】基础语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/30/【React】Fiber架构/" rel="prev" title="【React】Fiber架构">
+                【React】Fiber架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/myavatar.jpg" alt="a磊的前端梦">
+            
+              <p class="site-author-name" itemprop="name">a磊的前端梦</p>
+              <p class="site-description motion-element" itemprop="description">挑战10000小时定律</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/nixiaolei" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:nxl3477@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://plus.google.com/nxl3477" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://segmentfault.com/u/nixiaolei" target="_blank" title="sf思否">
+                      
+                        <i class="fa fa-fw fa-bookmark"></i>sf思否</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法复杂度"><span class="nav-number">1.</span> <span class="nav-text">算法复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比方式"><span class="nav-number">2.</span> <span class="nav-text">对比方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践一下"><span class="nav-number">3.</span> <span class="nav-text">实践一下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟dom结构"><span class="nav-number">3.1.</span> <span class="nav-text">模拟dom结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比差异"><span class="nav-number">3.2.</span> <span class="nav-text">对比差异</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-对dom-diff的优化"><span class="nav-number">4.</span> <span class="nav-text">Vue 对dom-diff的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-为什么需要key"><span class="nav-number">4.1.</span> <span class="nav-text">Vue 为什么需要key</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a磊的前端梦</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">79.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

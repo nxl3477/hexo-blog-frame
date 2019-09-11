@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="05q8BlYpNjXZYUDSdiPGL1DqJauEoquptd_o08ZaUSs">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/my_favicon_small.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/my_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/my_favicon_small.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React,Fiber,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Fiber 是什么Fiber 是一个名词， 在计算机科学中除了进程（Process） 和线程（Thread）的概念还有一个概念叫做Fiber, 英文含义就是“纤维”， 意指比Thread更细的线， 也就是比线程（Thread）控制得更精密的并发处理机制。Fiber可以提升复杂React应用的可响应性和性能。 Fiber 即是React 新的调度算法（ reconciliation algorith">
+<meta name="keywords" content="React,Fiber">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【React】Fiber架构">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/06/30/【React】Fiber架构/index.html">
+<meta property="og:site_name" content="倪晓磊的博客">
+<meta property="og:description" content="Fiber 是什么Fiber 是一个名词， 在计算机科学中除了进程（Process） 和线程（Thread）的概念还有一个概念叫做Fiber, 英文含义就是“纤维”， 意指比Thread更细的线， 也就是比线程（Thread）控制得更精密的并发处理机制。Fiber可以提升复杂React应用的可响应性和性能。 Fiber 即是React 新的调度算法（ reconciliation algorith">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-06-30-13-11-52.png">
+<meta property="og:updated_time" content="2019-09-09T16:57:46.045Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【React】Fiber架构">
+<meta name="twitter:description" content="Fiber 是什么Fiber 是一个名词， 在计算机科学中除了进程（Process） 和线程（Thread）的概念还有一个概念叫做Fiber, 英文含义就是“纤维”， 意指比Thread更细的线， 也就是比线程（Thread）控制得更精密的并发处理机制。Fiber可以提升复杂React应用的可响应性和性能。 Fiber 即是React 新的调度算法（ reconciliation algorith">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-06-30-13-11-52.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/06/30/【React】Fiber架构/">
+
+
+
+
+
+  <title>【React】Fiber架构 | 倪晓磊的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">倪晓磊的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-类别">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            类别
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/06/30/【React】Fiber架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="a磊的前端梦">
+      <meta itemprop="description" content="挑战10000小时定律">
+      <meta itemprop="image" content="/images/myavatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪晓磊的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">【React】Fiber架构</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-30T01:06:56+08:00">
+                2019-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.9k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  31 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Fiber-是什么"><a href="#Fiber-是什么" class="headerlink" title="Fiber 是什么"></a>Fiber 是什么</h2><p>Fiber 是一个名词， 在计算机科学中除了进程（Process） 和线程（Thread）的概念还有一个概念叫做Fiber, 英文含义就是“纤维”， 意指比Thread更细的线， 也就是比线程（Thread）控制得更精密的并发处理机制。Fiber可以提升复杂React应用的可响应性和性能。 Fiber 即是React 新的调度算法（ reconciliation algorithm） 现有React 中， 更新过程是同步的，当组件树比较庞大的时候， 浏览器主线程被React占用。用户此时输入Input 会造成页面卡顿。</p>
+<p>Fiber使用协作式多任务处理任务。 将原来的整个Virtual Dom 的更新任务拆分成一个个小的任务。 每次做完一个小任务之后， 放弃一下自己的执行将线程空闲出来， 看看有没有其他的任务。如果有的话， 就暂停本次仍无， 执行其他的任务， 如果没有的话，就继续下一个任务。</p>
+<h2 id="React16与Fiber"><a href="#React16与Fiber" class="headerlink" title="React16与Fiber"></a>React16与Fiber</h2><ol>
+<li><p>react16升级了reconcile 算法架构， 从stack升级为fiber 架构。每次组件的state更新都会出发reconcile的执行也是一个递归过程， 而且一开始知道递归完所有节点才停止， 因此称为stack算法。由于js是单线程的， 因此此时就可能会影响用户的输入或者Ui的渲染帧频造成卡顿， 降低用户体验。而fiber 架构则不一样， 底层是基于 requestdleCallback来调度diff算法的执行， 它的特点顾名思义就是利用空闲时间来完成任务。 注意这里的空闲时间就是相对于那些优先级更高的任务（比如用户输入、 Ui渲染）来说的。</p>
+</li>
+<li><p>requestIdelCallback Polyfill 使用了一个33毫秒， 这个时间是React 认为的一个可以接收的最大值， 如果运行设备能做到大与30fps， 那么它会去调整这个值（通常情况下可以调整到16.6ms）。 调整策略是用当前每帧的总时间与实际每帧的时间进行比较， 当实际时间小于当前时间且稳定( 前后两次都小于当前时间 )， 那么就会认为这个值是有效的， 然后将没帧时间调整为该值（取前后两次中时间大的值）， 还有就是requestAnimationFrame 回调的第一个参数， 每一帧的起始时间， 最终借助requestAnimationFrame 让一批扁平任务恰好控制在一块一块的33ms这样的时间片内执行即可</p>
+</li>
+</ol>
+<h2 id="Fiber的两个阶段"><a href="#Fiber的两个阶段" class="headerlink" title="Fiber的两个阶段"></a>Fiber的两个阶段</h2><p>由reconciler和 renderer两个概念引出的是Phase的概念， Phase指的是React组件渲染时的阶段。</p>
+<ol>
+<li><p>Reconcile 阶段。 此阶段中， 依序遍历组件， 通过diff算法， 判断组件是否需要更新， 给需要更新的组件加上tag， 遍历完之后， 将所有带有tag的组件加到一个数组中。 这个阶段的任务可以被打断。</p>
+</li>
+<li><p>Commit 阶段。 根据Reconcile 阶段生成的数组， 遍历更新DOM， 这个阶段需要一次性执行完。（无法被打断）</p>
+</li>
+</ol>
+<p><img src="http://img.nixiaolei.com/2019-06-30-13-11-52.png" alt="2019-06-30-13-11-52"></p>
+<h3 id="如何打断任务"><a href="#如何打断任务" class="headerlink" title="如何打断任务"></a>如何打断任务</h3><p>Fiber的打断方式就是使用<code>cancelIdleCallback</code>方法取消掉回调</p>
+<h2 id="Fiber如何排列任务"><a href="#Fiber如何排列任务" class="headerlink" title="Fiber如何排列任务"></a>Fiber如何排列任务</h2><blockquote>
+<p>利用双向链表， 按照任务的优先级设定任务的过期时间，然后根据任务的过期时间，插入到双向链表中</p>
+</blockquote>
+<p>React Fiber 把更新过程碎片化， 每执行完一段更新过程， 就把控制权交还给React 负责仍无协调的模块， 看看有没有其他紧急任务要做， 如果没有就继续去更新， 如果由紧急任务， 那就去做紧急任务。Fiber分为2个阶段， </p>
+<ol>
+<li><p>第一阶段Reconciliation Phase( componentWillMount、componentWillReceiveProps、 shouldComponentUpdate、componentWillUpdate)  </p>
+</li>
+<li><p>第二阶段Commit Phase(componentDidMount、componentDidUpdate、componentWillUnmount )第一阶段可能会被打断， 也就意味着第一阶段中的生命周期函数在一次加载和更新过程中可能会被多次调用！</p>
+</li>
+</ol>
+<hr>
+<p>getDerivedStateFromProps在处在Render Phase阶段， 每次的更新都要触发。这个生命周期是纯函数、静态方法为了隔离实例(禁止this.refs等)单纯且高效， getSnapshotBeforeUpdate到了commit 阶段，因此这个函数只会运行一次</p>
+<h2 id="概述Fiber原理"><a href="#概述Fiber原理" class="headerlink" title="概述Fiber原理"></a>概述Fiber原理</h2><p>Fiber 核心思想是渲染和js执行之间的调度,  为了在进行复杂的js代码时不阻碍到用户体验, 比如React 在执行某些代码时, input 的框没有办法在用户执行时及时的做出响应, 这就会让用户觉得这个网页卡死了!,  Fiber 就是为了解决这个问题而生的</p>
+<p>Fiber 可以说是参考了操作系统管理进程的方式, 分时调度, 给每个进程一定的执行时间来回切换,   而Fiber 是让js任务与浏览器渲染之间来回切换, 以防止出现无响应的情况.</p>
+<p>那Fiber 会如何做呢:</p>
+<p>首先, Fiber 会模拟一个requestIdleCallback 方法, 是利用requestAnimationFrame 实现的polyfill 方法,  利用该方法回调中接收的参数来判定每一帧留下的空闲期,   然后给每一个任务都判定级别, 轻重缓急, 如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ImmediatePriority = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> UserBlockingPriority = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> NormalPriority = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">var</span> LowPriority = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> IdlePriority = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<p>每个优先级都对应着不一样的 deadline(超时时间):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Times out immediately</span></span><br><span class="line"><span class="keyword">var</span> IMMEDIATE_PRIORITY_TIMEOUT = <span class="number">-1</span>;</span><br><span class="line"><span class="comment">// Eventually times out</span></span><br><span class="line"><span class="comment">// 250ms以后过期</span></span><br><span class="line"><span class="keyword">var</span> USER_BLOCKING_PRIORITY = <span class="number">250</span>;</span><br><span class="line"><span class="keyword">var</span> NORMAL_PRIORITY_TIMEOUT = <span class="number">5000</span>;</span><br><span class="line"><span class="keyword">var</span> LOW_PRIORITY_TIMEOUT = <span class="number">10000</span>;</span><br><span class="line"><span class="comment">// Never times out</span></span><br><span class="line"><span class="comment">// 永不过期 - 为什么是12天， 因为v8整数上限</span></span><br><span class="line"><span class="keyword">var</span> IDLE_PRIORITY = maxSigned31BitInt;</span><br></pre></td></tr></table></figure>
+<p>规定好每个不同优先级任务的 超时时间后, 我们就可以对每个任务进行排队了, 那如何排队最灵活呢?  首先Fiber 会构建一个 <code>循环双向链</code> , 将每个任务都作为一个节点, 并根据超时时间作为排序的依据, 每当有新任务进入时, 从头挨个对比每个节点, 直至遇到超时时间大于该任务自身的节点, 将其插入到该位置, 如果整个链表中都没有找到超时时间大于该任务的节点, 那么就他就作为了链表的末尾节点, 并将 Next 指向链表的首节点. 又或者,如果首节点就符合条件, 那该节点就转而变成了首节点</p>
+<p>Fiber对浏览器的帧率有个最低下限的取值, 也就是33 ( 根据每秒30帧得出 ),  但是这个值也并不是写死的, 它会去跑两次方法尝试计算, 如果两次计算所花费的时间小于这个值, 也就是用两次测试来判断浏览器性能, 如果浏览器性能超出预期, 那么就会使用着两次计算结果的最大值. 这是Fiber在进行动态的压帧. 根据性能提供最优的时间.</p>
+<p>优先次序排列好了, 执行间隔也确定了, 那剩下的事情就是执行了,  执行呢就是我们刚刚说的, 利用<code>requestAnimationFrame</code> 计算出每一帧的空档期,  这里需要注意, Fiber 还留有一手备用, 那就是 <code>setTimeout</code>. 为什么要使用<code>setTimeout</code> 呢, 这是因为, <code>requestAnimationFrame</code>有个致命的问题, 当用户切换浏览器tab页以后, <code>requestAnimationFrame</code> 就会停止执行, 所以Fiber就会转而切换至使用<code>setTimeout</code> 代替.  并且在 <code>requestAnimationFrame</code> 执行时打断了 <code>setTimeout</code> , 在<code>setTimeout</code> 执行时打断了<code>requestAnimationFrame</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> requestAnimationFrameWithTimeout = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// schedule rAF and also a setTimeout</span></span><br><span class="line">  rAFID = localRequestAnimationFrame(<span class="function"><span class="keyword">function</span>(<span class="params">timestamp</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//每一次系统执行的performance.now 默认间隔是16.7</span></span><br><span class="line">    <span class="comment">// cancel the setTimeout</span></span><br><span class="line">    localClearTimeout(rAFTimeoutID);</span><br><span class="line">    callback(timestamp);</span><br><span class="line">  &#125;);</span><br><span class="line">  rAFTimeoutID = localSetTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// cancel the requestAnimationFrame</span></span><br><span class="line">    localCancelAnimationFrame(rAFID);</span><br><span class="line">    callback(exports.unstable_now());</span><br><span class="line">  &#125;, ANIMATION_FRAME_TIMEOUT);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Fiber在每一帧的具体执行期间,会尽可能多的执行任务, 也就是说一个任务执行完如果时间还没到还会再找下一个任务,  并使用<code>MessageChannel</code>来进行分配任务, 并且有时候会有浏览器渲染任务较重时,如重排, 导致了占用时间超时, 那么Fiber会强制执行以超时的那些任务, 因为这些任务实在不能再拖了, 再拖下去,整个程序就废了, 所以必须现在执行完毕,  执行完的任务就会退出链表, 当本次查找到的超时任务都执行完毕后, Fiber 又会再去遍历一遍链表看看还有没有新的超时任务, 如果有那就接着执行掉, 执行完了同理, 又去再查找一遍, 一直重复, 直至没有超时任务了, 然后让出线程让浏览器渲染.  </p>
+<p>到这里就是Fiber 调度的主要原理, 写的很糙, 可能直有我自己能看懂了</p>
+<h2 id="Fiber-源码-注释"><a href="#Fiber-源码-注释" class="headerlink" title="Fiber 源码 + 注释"></a>Fiber 源码 + 注释</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br><span class="line">758</span><br><span class="line">759</span><br><span class="line">760</span><br><span class="line">761</span><br><span class="line">762</span><br><span class="line">763</span><br><span class="line">764</span><br><span class="line">765</span><br><span class="line">766</span><br><span class="line">767</span><br><span class="line">768</span><br><span class="line">769</span><br><span class="line">770</span><br><span class="line">771</span><br><span class="line">772</span><br><span class="line">773</span><br><span class="line">774</span><br><span class="line">775</span><br><span class="line">776</span><br><span class="line">777</span><br><span class="line">778</span><br><span class="line">779</span><br><span class="line">780</span><br><span class="line">781</span><br><span class="line">782</span><br><span class="line">783</span><br><span class="line">784</span><br><span class="line">785</span><br><span class="line">786</span><br><span class="line">787</span><br><span class="line">788</span><br><span class="line">789</span><br><span class="line">790</span><br><span class="line">791</span><br><span class="line">792</span><br><span class="line">793</span><br><span class="line">794</span><br><span class="line">795</span><br><span class="line">796</span><br><span class="line">797</span><br><span class="line">798</span><br><span class="line">799</span><br><span class="line">800</span><br><span class="line">801</span><br><span class="line">802</span><br><span class="line">803</span><br><span class="line">804</span><br><span class="line">805</span><br><span class="line">806</span><br><span class="line">807</span><br><span class="line">808</span><br><span class="line">809</span><br><span class="line">810</span><br><span class="line">811</span><br><span class="line">812</span><br><span class="line">813</span><br><span class="line">814</span><br><span class="line">815</span><br><span class="line">816</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** @license React v0.13.6</span></span><br><span class="line"><span class="comment"> * scheduler.development.js</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Copyright (c) Facebook, Inc. and its affiliates.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This source code is licensed under the MIT license found in the</span></span><br><span class="line"><span class="comment"> * LICENSE file in the root directory of this source tree.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 老袁解析react fiber</span></span><br><span class="line"><span class="comment"> * 1.获取当前系统的开始时间</span></span><br><span class="line"><span class="comment"> * 2.设置任务的优先级</span></span><br><span class="line"><span class="comment"> * 3.根据优先级别设置对应的过期时间</span></span><br><span class="line"><span class="comment"> * 4.根据过期时间进行双向链表的排序</span></span><br><span class="line"><span class="comment"> * 5.排完序了 然后如何执行呢？？？ensureHostCallbackIsScheduled</span></span><br><span class="line"><span class="comment"> * 6.按照每一帧之后的空闲开始进行更新 requestAnimationFrameWithTimeout</span></span><br><span class="line"><span class="comment"> * 7.animationTick是线索 计算帧过期时间并压缩帧</span></span><br><span class="line"><span class="comment"> * 8.配合MessageChannel进行具体的调度任务</span></span><br><span class="line"><span class="comment"> * 9.prevScheduledCallback == flushWork最终执行调度</span></span><br><span class="line"><span class="comment"> * 原则：有过期的执行全部过期 没过期尽可能多的执行</span></span><br><span class="line"><span class="comment"> * 剩下没执行完轮回到5 如果插入了高优先级的立即执行</span></span><br><span class="line"><span class="comment"> *  */</span></span><br><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">"production"</span>) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">    "use strict"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(exports, <span class="string">"__esModule"</span>, &#123; <span class="attr">value</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> enableSchedulerDebugging = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* eslint-disable no-var */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Use symbols?</span></span><br><span class="line">    <span class="comment">//yideng 2.设置任务的优先级</span></span><br><span class="line">    <span class="keyword">var</span> ImmediatePriority = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> UserBlockingPriority = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">var</span> NormalPriority = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">var</span> LowPriority = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">var</span> IdlePriority = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// var ImmediatePriority = 1;  //最高优先级</span></span><br><span class="line">    <span class="comment">// var UserBlockingPriority = 2; //用户阻塞型优先级</span></span><br><span class="line">    <span class="comment">// var NormalPriority = 3; //普通优先级</span></span><br><span class="line">    <span class="comment">// var LowPriority = 4; // 低优先级</span></span><br><span class="line">    <span class="comment">// var IdlePriority = 5; // 空闲优先级</span></span><br><span class="line">    <span class="comment">//==========接下来是对五种优先级别设置的五个过期时间=============</span></span><br><span class="line">    <span class="comment">// Max 31 bit integer. The max integer size in V8 for 32-bit systems.</span></span><br><span class="line">    <span class="comment">// Math.pow(2, 30) - 1</span></span><br><span class="line">    <span class="comment">// 0b111111111111111111111111111111</span></span><br><span class="line">    <span class="comment">//3.根据优先级别设置对应的过期时间</span></span><br><span class="line">    <span class="comment">//32位系统V8引擎里最大的整数 据粗略计算这个时间大概是12.427天</span></span><br><span class="line">    <span class="comment">//tab页开着12天才会过期</span></span><br><span class="line">    <span class="keyword">var</span> maxSigned31BitInt = <span class="number">1073741823</span>;</span><br><span class="line">    <span class="comment">// 立马过期 ==&gt; ImmediatePriority</span></span><br><span class="line">    <span class="comment">// Times out immediately</span></span><br><span class="line">    <span class="keyword">var</span> IMMEDIATE_PRIORITY_TIMEOUT = <span class="number">-1</span>;</span><br><span class="line">    <span class="comment">// Eventually times out</span></span><br><span class="line">    <span class="comment">// 250ms以后过期</span></span><br><span class="line">    <span class="keyword">var</span> USER_BLOCKING_PRIORITY = <span class="number">250</span>;</span><br><span class="line">    <span class="keyword">var</span> NORMAL_PRIORITY_TIMEOUT = <span class="number">5000</span>;</span><br><span class="line">    <span class="keyword">var</span> LOW_PRIORITY_TIMEOUT = <span class="number">10000</span>;</span><br><span class="line">    <span class="comment">// Never times out</span></span><br><span class="line">    <span class="comment">// 永不过期 - 为什么是12天， 因为v8整数上限</span></span><br><span class="line">    <span class="keyword">var</span> IDLE_PRIORITY = maxSigned31BitInt;</span><br><span class="line">    <span class="comment">/*每个任务在添加到链表里的时候，都会通过 performance.now() + timeout</span></span><br><span class="line"><span class="comment">    来得出这个任务的过期时间，随着时间的推移，当前时间会越来越接近这个过期时间，</span></span><br><span class="line"><span class="comment">    所以过期时间越小的代表优先级越高。如果过期时间已经比当前时间小了，</span></span><br><span class="line"><span class="comment">    说明这个任务已经过期了还没执行，需要立马去执行(asap)。*/</span></span><br><span class="line">    <span class="comment">// Callbacks are stored as a circular, doubly linked list.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一个任务节点</span></span><br><span class="line">    <span class="keyword">var</span> firstCallbackNode = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> currentDidTimeout = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// Pausing the scheduler is useful for debugging.</span></span><br><span class="line">    <span class="keyword">var</span> isSchedulerPaused = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> currentPriorityLevel = NormalPriority;</span><br><span class="line">    <span class="keyword">var</span> currentEventStartTime = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">var</span> currentExpirationTime = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// This is set when a callback is being executed, to prevent re-entrancy.</span></span><br><span class="line">    <span class="keyword">var</span> isExecutingCallback = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> isHostCallbackScheduled = <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//yideng 1.获取当前系统的开始时间-performance.now</span></span><br><span class="line">    <span class="keyword">var</span> hasNativePerformanceNow =</span><br><span class="line">      <span class="keyword">typeof</span> performance === <span class="string">"object"</span> &amp;&amp; <span class="keyword">typeof</span> performance.now === <span class="string">"function"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">ensureHostCallbackIsScheduled</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (isExecutingCallback) &#123;</span><br><span class="line">        <span class="comment">// Don't schedule work yet; wait until the next time we yield.</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// Schedule the host callback using the earliest expiration in the list.</span></span><br><span class="line">      <span class="keyword">var</span> expirationTime = firstCallbackNode.expirationTime;</span><br><span class="line">      <span class="comment">// 加锁</span></span><br><span class="line">      <span class="keyword">if</span> (!isHostCallbackScheduled) &#123;</span><br><span class="line">        isHostCallbackScheduled = <span class="literal">true</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Cancel the existing host callback.</span></span><br><span class="line">        cancelHostCallback();</span><br><span class="line">      &#125;</span><br><span class="line">      requestHostCallback(flushWork, expirationTime);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">flushFirstCallback</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> flushedNode = firstCallbackNode;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Remove the node from the list before calling the callback. That way the</span></span><br><span class="line">      <span class="comment">// list is in a consistent state even if the callback throws.</span></span><br><span class="line">      <span class="keyword">var</span> next = firstCallbackNode.next;</span><br><span class="line">      <span class="keyword">if</span> (firstCallbackNode === next) &#123;</span><br><span class="line">        <span class="comment">// This is the last callback in the list.</span></span><br><span class="line">        firstCallbackNode = <span class="literal">null</span>;</span><br><span class="line">        next = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> lastCallbackNode = firstCallbackNode.previous;</span><br><span class="line">        firstCallbackNode = lastCallbackNode.next = next;</span><br><span class="line">        next.previous = lastCallbackNode;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      flushedNode.next = flushedNode.previous = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Now it's safe to call the callback.</span></span><br><span class="line">      <span class="keyword">var</span> callback = flushedNode.callback;</span><br><span class="line">      <span class="keyword">var</span> expirationTime = flushedNode.expirationTime;</span><br><span class="line">      <span class="keyword">var</span> priorityLevel = flushedNode.priorityLevel;</span><br><span class="line">      <span class="keyword">var</span> previousPriorityLevel = currentPriorityLevel;</span><br><span class="line">      <span class="keyword">var</span> previousExpirationTime = currentExpirationTime;</span><br><span class="line">      currentPriorityLevel = priorityLevel;</span><br><span class="line">      currentExpirationTime = expirationTime;</span><br><span class="line">      <span class="keyword">var</span> continuationCallback;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        continuationCallback = callback();</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        currentPriorityLevel = previousPriorityLevel;</span><br><span class="line">        currentExpirationTime = previousExpirationTime;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// A callback may return a continuation. The continuation should be scheduled</span></span><br><span class="line">      <span class="comment">// with the same priority and expiration as the just-finished callback.</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> continuationCallback === <span class="string">"function"</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> continuationNode = &#123;</span><br><span class="line">          callback: continuationCallback,</span><br><span class="line">          priorityLevel: priorityLevel,</span><br><span class="line">          expirationTime: expirationTime,</span><br><span class="line">          next: <span class="literal">null</span>,</span><br><span class="line">          previous: <span class="literal">null</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Insert the new callback into the list, sorted by its expiration. This is</span></span><br><span class="line">        <span class="comment">// almost the same as the code in `scheduleCallback`, except the callback</span></span><br><span class="line">        <span class="comment">// is inserted into the list *before* callbacks of equal expiration instead</span></span><br><span class="line">        <span class="comment">// of after.</span></span><br><span class="line">        <span class="keyword">if</span> (firstCallbackNode === <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">// This is the first callback in the list.</span></span><br><span class="line">          firstCallbackNode = continuationNode.next = continuationNode.previous = continuationNode;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">var</span> nextAfterContinuation = <span class="literal">null</span>;</span><br><span class="line">          <span class="keyword">var</span> node = firstCallbackNode;</span><br><span class="line">          <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (node.expirationTime &gt;= expirationTime) &#123;</span><br><span class="line">              <span class="comment">// This callback expires at or after the continuation. We will insert</span></span><br><span class="line">              <span class="comment">// the continuation *before* this callback.</span></span><br><span class="line">              nextAfterContinuation = node;</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next;</span><br><span class="line">          &#125; <span class="keyword">while</span> (node !== firstCallbackNode);</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (nextAfterContinuation === <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// No equal or lower priority callback was found, which means the new</span></span><br><span class="line">            <span class="comment">// callback is the lowest priority callback in the list.</span></span><br><span class="line">            nextAfterContinuation = firstCallbackNode;</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nextAfterContinuation === firstCallbackNode) &#123;</span><br><span class="line">            <span class="comment">// The new callback is the highest priority callback in the list.</span></span><br><span class="line">            firstCallbackNode = continuationNode;</span><br><span class="line">            ensureHostCallbackIsScheduled();</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">var</span> previous = nextAfterContinuation.previous;</span><br><span class="line">          previous.next = nextAfterContinuation.previous = continuationNode;</span><br><span class="line">          continuationNode.next = nextAfterContinuation;</span><br><span class="line">          continuationNode.previous = previous;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">flushImmediateWork</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (</span><br><span class="line">        <span class="comment">// Confirm we've exited the outer most event handler</span></span><br><span class="line">        currentEventStartTime === <span class="number">-1</span> &amp;&amp;</span><br><span class="line">        firstCallbackNode !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">        firstCallbackNode.priorityLevel === ImmediatePriority</span><br><span class="line">      ) &#123;</span><br><span class="line">        isExecutingCallback = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">do</span> &#123;</span><br><span class="line">            flushFirstCallback();</span><br><span class="line">          &#125; <span class="keyword">while</span> (</span><br><span class="line">            <span class="comment">// Keep flushing until there are no more immediate callbacks</span></span><br><span class="line">            firstCallbackNode !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">            firstCallbackNode.priorityLevel === ImmediatePriority</span><br><span class="line">          );</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          isExecutingCallback = <span class="literal">false</span>;</span><br><span class="line">          <span class="keyword">if</span> (firstCallbackNode !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// There's still work remaining. Request another callback.</span></span><br><span class="line">            ensureHostCallbackIsScheduled();</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            isHostCallbackScheduled = <span class="literal">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">flushWork</span>(<span class="params">didTimeout</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// Exit right away if we're currently paused</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (enableSchedulerDebugging &amp;&amp; isSchedulerPaused) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      isExecutingCallback = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">var</span> previousDidTimeout = currentDidTimeout;</span><br><span class="line">      currentDidTimeout = didTimeout;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//如果是任务过期了 赶紧排队把过期的任务给执行了</span></span><br><span class="line">        <span class="keyword">if</span> (didTimeout) &#123;</span><br><span class="line">          <span class="comment">// Flush all the expired callbacks without yielding.</span></span><br><span class="line">          <span class="keyword">while</span> (</span><br><span class="line">            firstCallbackNode !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">            !(enableSchedulerDebugging &amp;&amp; isSchedulerPaused)</span><br><span class="line">          ) &#123;</span><br><span class="line">            <span class="comment">// TODO Wrap in feature flag</span></span><br><span class="line">            <span class="comment">// Read the current time. Flush all the callbacks that expire at or</span></span><br><span class="line">            <span class="comment">// earlier than that time. Then read the current time again and repeat.</span></span><br><span class="line">            <span class="comment">// This optimizes for as few performance.now calls as possible.</span></span><br><span class="line">            <span class="keyword">var</span> currentTime = exports.unstable_now();</span><br><span class="line">            <span class="keyword">if</span> (firstCallbackNode.expirationTime &lt;= currentTime) &#123;</span><br><span class="line">              <span class="keyword">do</span> &#123;</span><br><span class="line">                flushFirstCallback();</span><br><span class="line">              &#125; <span class="keyword">while</span> (</span><br><span class="line">                firstCallbackNode !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">                firstCallbackNode.expirationTime &lt;= currentTime &amp;&amp;</span><br><span class="line">                !(enableSchedulerDebugging &amp;&amp; isSchedulerPaused)</span><br><span class="line">              );</span><br><span class="line">              <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//当前帧有富余时间，while的逻辑是只要有任务且当前帧没过期就去执行任务。</span></span><br><span class="line">          <span class="comment">//执行队首任务，把队首任务从链表移除，并把第二个任务置为队首任务。执行任务可能产生新的任务，再把新任务插入到任务链表</span></span><br><span class="line">          <span class="comment">// Keep flushing callbacks until we run out of time in the frame.</span></span><br><span class="line">          <span class="keyword">if</span> (firstCallbackNode !== <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">              <span class="keyword">if</span> (enableSchedulerDebugging &amp;&amp; isSchedulerPaused) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              flushFirstCallback();</span><br><span class="line">              <span class="comment">//shouldYieldToHost代表当前帧过期了，取反的话就是没过期。</span></span><br><span class="line">            &#125; <span class="keyword">while</span> (firstCallbackNode !== <span class="literal">null</span> &amp;&amp; !shouldYieldToHost());</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        isExecutingCallback = <span class="literal">false</span>;</span><br><span class="line">        currentDidTimeout = previousDidTimeout;</span><br><span class="line">        <span class="comment">//最后，如果还有任务的话，再启动一轮新的任务执行调度</span></span><br><span class="line">        <span class="keyword">if</span> (firstCallbackNode !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">// There's still work remaining. Request another callback.</span></span><br><span class="line">          ensureHostCallbackIsScheduled();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          isHostCallbackScheduled = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Before exiting, flush all the immediate work that was scheduled.</span></span><br><span class="line">         <span class="comment">//最最后，如果还有任务且有最高优先级的任务，就都执行一遍。</span></span><br><span class="line">        flushImmediateWork();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_runWithPriority</span>(<span class="params">priorityLevel, eventHandler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">switch</span> (priorityLevel) &#123;</span><br><span class="line">        <span class="keyword">case</span> ImmediatePriority:</span><br><span class="line">        <span class="keyword">case</span> UserBlockingPriority:</span><br><span class="line">        <span class="keyword">case</span> NormalPriority:</span><br><span class="line">        <span class="keyword">case</span> LowPriority:</span><br><span class="line">        <span class="keyword">case</span> IdlePriority:</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">          priorityLevel = NormalPriority;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> previousPriorityLevel = currentPriorityLevel;</span><br><span class="line">      <span class="keyword">var</span> previousEventStartTime = currentEventStartTime;</span><br><span class="line">      currentPriorityLevel = priorityLevel;</span><br><span class="line">      currentEventStartTime = exports.unstable_now();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> eventHandler();</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        currentPriorityLevel = previousPriorityLevel;</span><br><span class="line">        currentEventStartTime = previousEventStartTime;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Before exiting, flush all the immediate work that was scheduled.</span></span><br><span class="line">        flushImmediateWork();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_next</span>(<span class="params">eventHandler</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> priorityLevel = <span class="keyword">void</span> <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">switch</span> (currentPriorityLevel) &#123;</span><br><span class="line">        <span class="keyword">case</span> ImmediatePriority:</span><br><span class="line">        <span class="keyword">case</span> UserBlockingPriority:</span><br><span class="line">        <span class="keyword">case</span> NormalPriority:</span><br><span class="line">          <span class="comment">// Shift down to normal priority</span></span><br><span class="line">          priorityLevel = NormalPriority;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">          <span class="comment">// Anything lower than normal priority should remain at the current level.</span></span><br><span class="line">          priorityLevel = currentPriorityLevel;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> previousPriorityLevel = currentPriorityLevel;</span><br><span class="line">      <span class="keyword">var</span> previousEventStartTime = currentEventStartTime;</span><br><span class="line">      currentPriorityLevel = priorityLevel;</span><br><span class="line">      currentEventStartTime = exports.unstable_now();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> eventHandler();</span><br><span class="line">      &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        currentPriorityLevel = previousPriorityLevel;</span><br><span class="line">        currentEventStartTime = previousEventStartTime;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Before exiting, flush all the immediate work that was scheduled.</span></span><br><span class="line">        flushImmediateWork();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_wrapCallback</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> parentPriorityLevel = currentPriorityLevel;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// This is a fork of runWithPriority, inlined for performance.</span></span><br><span class="line">        <span class="keyword">var</span> previousPriorityLevel = currentPriorityLevel;</span><br><span class="line">        <span class="keyword">var</span> previousEventStartTime = currentEventStartTime;</span><br><span class="line">        currentPriorityLevel = parentPriorityLevel;</span><br><span class="line">        currentEventStartTime = exports.unstable_now();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> callback.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">          currentPriorityLevel = previousPriorityLevel;</span><br><span class="line">          currentEventStartTime = previousEventStartTime;</span><br><span class="line">          flushImmediateWork();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//yideng 4.根据过期时间进行双向链表的排序</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_scheduleCallback</span>(<span class="params">callback, deprecated_options</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> startTime =</span><br><span class="line">        currentEventStartTime !== <span class="number">-1</span></span><br><span class="line">          ? currentEventStartTime</span><br><span class="line">          : exports.unstable_now();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> expirationTime;</span><br><span class="line">      <span class="keyword">if</span> (</span><br><span class="line">        <span class="keyword">typeof</span> deprecated_options === <span class="string">"object"</span> &amp;&amp;</span><br><span class="line">        deprecated_options !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">        <span class="keyword">typeof</span> deprecated_options.timeout === <span class="string">"number"</span></span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="comment">// <span class="doctag">FIXME:</span> Remove this branch once we lift expiration times out of React.</span></span><br><span class="line">        <span class="comment">//如果没有传递过去时间的话直接按照默认的传递</span></span><br><span class="line">        expirationTime = startTime + deprecated_options.timeout;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (currentPriorityLevel) &#123;</span><br><span class="line">          <span class="keyword">case</span> ImmediatePriority:</span><br><span class="line">            expirationTime = startTime + IMMEDIATE_PRIORITY_TIMEOUT;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> UserBlockingPriority:</span><br><span class="line">            expirationTime = startTime + USER_BLOCKING_PRIORITY;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> IdlePriority:</span><br><span class="line">            expirationTime = startTime + IDLE_PRIORITY;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> LowPriority:</span><br><span class="line">            expirationTime = startTime + LOW_PRIORITY_TIMEOUT;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> NormalPriority:</span><br><span class="line">          <span class="keyword">default</span>:</span><br><span class="line">            expirationTime = startTime + NORMAL_PRIORITY_TIMEOUT;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//yideng 双向的链表</span></span><br><span class="line">      <span class="keyword">var</span> newNode = &#123;</span><br><span class="line">        callback: callback, <span class="comment">//任务具体的内容</span></span><br><span class="line">        priorityLevel: currentPriorityLevel, <span class="comment">//任务优先级</span></span><br><span class="line">        expirationTime: expirationTime, <span class="comment">//任务的过期时间</span></span><br><span class="line">        next: <span class="literal">null</span>, <span class="comment">//下一个节点</span></span><br><span class="line">        previous: <span class="literal">null</span> <span class="comment">//上一个节点</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Insert the new callback into the list, ordered first by expiration, then</span></span><br><span class="line">      <span class="comment">// by insertion. So the new callback is inserted any other callback with</span></span><br><span class="line">      <span class="comment">// equal expiration.</span></span><br><span class="line">      <span class="comment">//yideng仿照之前的双向节点的例子 插入指定节点</span></span><br><span class="line">      <span class="keyword">if</span> (firstCallbackNode === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// This is the first callback in the list.</span></span><br><span class="line">        firstCallbackNode = newNode.next = newNode.previous = newNode;</span><br><span class="line">        <span class="comment">//排完顺序之后按照指定的规则执行任务</span></span><br><span class="line">        <span class="comment">//那么什么是合适的时间呢？也就是之前讨论过的每一帧绘制完成之后的空闲时间</span></span><br><span class="line">        <span class="comment">//5.排完序了 然后如何执行呢？？？ensureHostCallbackIsScheduled</span></span><br><span class="line">        ensureHostCallbackIsScheduled();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 一直查找链表, 直至某个节点的next === firtNode</span></span><br><span class="line">        <span class="keyword">var</span> next = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">var</span> node = firstCallbackNode;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">          <span class="comment">// 对比过期时间</span></span><br><span class="line">          <span class="keyword">if</span> (node.expirationTime &gt; expirationTime) &#123;</span><br><span class="line">            <span class="comment">// 如果当前节点的过期时间 比 新来的callback 过期时间要晚 , 则将next指向当前的节点</span></span><br><span class="line">            <span class="comment">// The new callback expires before this one.</span></span><br><span class="line">            next = node;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          node = node.next;</span><br><span class="line">        &#125; <span class="keyword">while</span> (node !== firstCallbackNode);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// next === null 就表示始终未找到某个节点比新来的回调过期时间要晚, 这就表示他是最晚的, 他是链表的末尾, 所以把他的next指向首节点</span></span><br><span class="line">        <span class="keyword">if</span> (next === <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">// No callback with a later expiration was found, which means the new</span></span><br><span class="line">          <span class="comment">// callback has the latest expiration in the list.</span></span><br><span class="line">          next = firstCallbackNode;</span><br><span class="line"></span><br><span class="line">          <span class="comment">// next === firstCallbackNode 表示找到符合条件的节点， 但是该节点是首节点， 这就表示 新的回调 比 firtCallbackNode 的优先级还要高的话， 就将他作为</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (next === firstCallbackNode) &#123;</span><br><span class="line">          <span class="comment">// The new callback has the earliest expiration in the entire list.</span></span><br><span class="line">          firstCallbackNode = newNode;</span><br><span class="line">          ensureHostCallbackIsScheduled();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> previous = next.previous;</span><br><span class="line">        previous.next = next.previous = newNode;</span><br><span class="line">        newNode.next = next;</span><br><span class="line">        newNode.previous = previous;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_pauseExecution</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      isSchedulerPaused = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_continueExecution</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      isSchedulerPaused = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">if</span> (firstCallbackNode !== <span class="literal">null</span>) &#123;</span><br><span class="line">        ensureHostCallbackIsScheduled();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_getFirstCallbackNode</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> firstCallbackNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_cancelCallback</span>(<span class="params">callbackNode</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> next = callbackNode.next;</span><br><span class="line">      <span class="keyword">if</span> (next === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Already cancelled.</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (next === callbackNode) &#123;</span><br><span class="line">        <span class="comment">// This is the only scheduled callback. Clear the list.</span></span><br><span class="line">        firstCallbackNode = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// Remove the callback from its position in the list.</span></span><br><span class="line">        <span class="keyword">if</span> (callbackNode === firstCallbackNode) &#123;</span><br><span class="line">          firstCallbackNode = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> previous = callbackNode.previous;</span><br><span class="line">        previous.next = next;</span><br><span class="line">        next.previous = previous;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      callbackNode.next = callbackNode.previous = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_getCurrentPriorityLevel</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> currentPriorityLevel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">unstable_shouldYield</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        !currentDidTimeout &amp;&amp;</span><br><span class="line">        ((firstCallbackNode !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">          firstCallbackNode.expirationTime &lt; currentExpirationTime) ||</span><br><span class="line">          shouldYieldToHost())</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The remaining code is essentially a polyfill for requestIdleCallback. It</span></span><br><span class="line">    <span class="comment">// works by scheduling a requestAnimationFrame, storing the time for the start</span></span><br><span class="line">    <span class="comment">// of the frame, then scheduling a postMessage which gets scheduled after paint.</span></span><br><span class="line">    <span class="comment">// Within the postMessage handler do as much work as possible until time + frame</span></span><br><span class="line">    <span class="comment">// rate. By separating the idle call into a separate event tick we ensure that</span></span><br><span class="line">    <span class="comment">// layout, paint and other browser work is counted against the available time.</span></span><br><span class="line">    <span class="comment">// The frame rate is dynamically adjusted.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// We capture a local reference to any global, in case it gets polyfilled after</span></span><br><span class="line">    <span class="comment">// this module is initially evaluated. We want to be using a</span></span><br><span class="line">    <span class="comment">// consistent implementation.</span></span><br><span class="line">    <span class="keyword">var</span> localDate = <span class="built_in">Date</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// This initialization code may run even on server environments if a component</span></span><br><span class="line">    <span class="comment">// just imports ReactDOM (e.g. for findDOMNode). Some environments might not</span></span><br><span class="line">    <span class="comment">// have setTimeout or clearTimeout. However, we always expect them to be defined</span></span><br><span class="line">    <span class="comment">// on the client. https://github.com/facebook/react/pull/13088</span></span><br><span class="line">    <span class="keyword">var</span> localSetTimeout =</span><br><span class="line">      <span class="keyword">typeof</span> setTimeout === <span class="string">"function"</span> ? setTimeout : <span class="literal">undefined</span>;</span><br><span class="line">    <span class="keyword">var</span> localClearTimeout =</span><br><span class="line">      <span class="keyword">typeof</span> clearTimeout === <span class="string">"function"</span> ? clearTimeout : <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// We don't expect either of these to necessarily be defined, but we will error</span></span><br><span class="line">    <span class="comment">// later if they are missing on the client.</span></span><br><span class="line">    <span class="keyword">var</span> localRequestAnimationFrame =</span><br><span class="line">      <span class="keyword">typeof</span> requestAnimationFrame === <span class="string">"function"</span></span><br><span class="line">        ? requestAnimationFrame</span><br><span class="line">        : <span class="literal">undefined</span>;</span><br><span class="line">    <span class="keyword">var</span> localCancelAnimationFrame =</span><br><span class="line">      <span class="keyword">typeof</span> cancelAnimationFrame === <span class="string">"function"</span></span><br><span class="line">        ? cancelAnimationFrame</span><br><span class="line">        : <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// requestAnimationFrame does not run when the tab is in the background. If</span></span><br><span class="line">    <span class="comment">// we're backgrounded we prefer for that work to happen so that the page</span></span><br><span class="line">    <span class="comment">// continues to load in the background. So we also schedule a 'setTimeout' as</span></span><br><span class="line">    <span class="comment">// a fallback.</span></span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Need a better heuristic for backgrounded work.</span></span><br><span class="line">    <span class="comment">// ↑这句话表示，使用setTimeout 也是无奈之举， 之后会更优化， 当下是迫于浏览器不支持</span></span><br><span class="line">    <span class="keyword">var</span> ANIMATION_FRAME_TIMEOUT = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">var</span> rAFID;</span><br><span class="line">    <span class="keyword">var</span> rAFTimeoutID;</span><br><span class="line">    <span class="comment">//yideng 如果tab不激活的话 使用SetTimeout进行处理 如果正常情况直接干掉timeout</span></span><br><span class="line">    <span class="comment">//6.按照每一帧之后的空闲开始进行更新requestAnimationFrameWithTimeout</span></span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">    <span class="comment">// 这里又使用了 setTimeout 又使用了RequestAnimationFrame 并且还互相清除， </span></span><br><span class="line">    <span class="comment">// 是因为 RequestAnimationFrame 有一个落点， 就是当浏览器切到其他tab页的时候会暂停执行</span></span><br><span class="line">    <span class="keyword">var</span> requestAnimationFrameWithTimeout = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// schedule rAF and also a setTimeout</span></span><br><span class="line">      rAFID = localRequestAnimationFrame(<span class="function"><span class="keyword">function</span>(<span class="params">timestamp</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//每一次系统执行的performance.now 默认间隔是16.7</span></span><br><span class="line">        <span class="comment">// cancel the setTimeout</span></span><br><span class="line">        localClearTimeout(rAFTimeoutID);</span><br><span class="line">        callback(timestamp);</span><br><span class="line">      &#125;);</span><br><span class="line">      rAFTimeoutID = localSetTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// cancel the requestAnimationFrame</span></span><br><span class="line">        localCancelAnimationFrame(rAFID);</span><br><span class="line">        callback(exports.unstable_now());</span><br><span class="line">      &#125;, ANIMATION_FRAME_TIMEOUT);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (hasNativePerformanceNow) &#123;</span><br><span class="line">      <span class="keyword">var</span> Performance = performance;</span><br><span class="line">      exports.unstable_now = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Performance.now();</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      exports.unstable_now = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> localDate.now();</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> requestHostCallback;</span><br><span class="line">    <span class="keyword">var</span> cancelHostCallback;</span><br><span class="line">    <span class="keyword">var</span> shouldYieldToHost;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> globalValue = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">"undefined"</span>) &#123;</span><br><span class="line">      globalValue = <span class="built_in">window</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> global !== <span class="string">"undefined"</span>) &#123;</span><br><span class="line">      globalValue = global;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (globalValue &amp;&amp; globalValue._schedMock) &#123;</span><br><span class="line">      <span class="comment">// Dynamic injection, only for testing purposes.</span></span><br><span class="line">      <span class="keyword">var</span> globalImpl = globalValue._schedMock;</span><br><span class="line">      requestHostCallback = globalImpl[<span class="number">0</span>];</span><br><span class="line">      cancelHostCallback = globalImpl[<span class="number">1</span>];</span><br><span class="line">      shouldYieldToHost = globalImpl[<span class="number">2</span>];</span><br><span class="line">      exports.unstable_now = globalImpl[<span class="number">3</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (</span><br><span class="line">      <span class="comment">// If Scheduler runs in a non-DOM environment, it falls back to a naive</span></span><br><span class="line">      <span class="comment">// implementation using setTimeout.</span></span><br><span class="line">      <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">"undefined"</span> ||</span><br><span class="line">      <span class="comment">// Check if MessageChannel is supported, too.</span></span><br><span class="line">      <span class="keyword">typeof</span> MessageChannel !== <span class="string">"function"</span></span><br><span class="line">    ) &#123;</span><br><span class="line">      <span class="comment">// If this accidentally gets imported in a non-browser environment, e.g. JavaScriptCore,</span></span><br><span class="line">      <span class="comment">// fallback to a naive implementation.</span></span><br><span class="line">      <span class="keyword">var</span> _callback = <span class="literal">null</span>;</span><br><span class="line">      <span class="keyword">var</span> _flushCallback = <span class="function"><span class="keyword">function</span>(<span class="params">didTimeout</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_callback !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            _callback(didTimeout);</span><br><span class="line">          &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            _callback = <span class="literal">null</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      requestHostCallback = <span class="function"><span class="keyword">function</span>(<span class="params">cb, ms</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_callback !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">// Protect against re-entrancy.</span></span><br><span class="line">          setTimeout(requestHostCallback, <span class="number">0</span>, cb);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          _callback = cb;</span><br><span class="line">          setTimeout(_flushCallback, <span class="number">0</span>, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      cancelHostCallback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        _callback = <span class="literal">null</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">      shouldYieldToHost = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">console</span> !== <span class="string">"undefined"</span>) &#123;</span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> Remove fb.me link</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> localRequestAnimationFrame !== <span class="string">"function"</span>) &#123;</span><br><span class="line">          <span class="built_in">console</span>.error(</span><br><span class="line">            <span class="string">"This browser doesn't support requestAnimationFrame. "</span> +</span><br><span class="line">              <span class="string">"Make sure that you load a "</span> +</span><br><span class="line">              <span class="string">"polyfill in older browsers. https://fb.me/react-polyfills"</span></span><br><span class="line">          );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> localCancelAnimationFrame !== <span class="string">"function"</span>) &#123;</span><br><span class="line">          <span class="built_in">console</span>.error(</span><br><span class="line">            <span class="string">"This browser doesn't support cancelAnimationFrame. "</span> +</span><br><span class="line">              <span class="string">"Make sure that you load a "</span> +</span><br><span class="line">              <span class="string">"polyfill in older browsers. https://fb.me/react-polyfills"</span></span><br><span class="line">          );</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> scheduledHostCallback = <span class="literal">null</span>; <span class="comment">//代表任务链表的执行器</span></span><br><span class="line">      <span class="keyword">var</span> isMessageEventScheduled = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">var</span> timeoutTime = <span class="number">-1</span>; <span class="comment">//代表最高优先级任务firstCallbackNode的过期时间</span></span><br><span class="line">      <span class="keyword">var</span> isAnimationFrameScheduled = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">var</span> isFlushingHostCallback = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">var</span> frameDeadline = <span class="number">0</span>; <span class="comment">//代表一帧的过期时间，通过rAF回调入参t加上activeFrameTime来计算</span></span><br><span class="line">      <span class="comment">// We start out assuming that we run at 30fps but then the heuristic tracking</span></span><br><span class="line">      <span class="comment">// will adjust this value to a faster fps if we get more frequent animation</span></span><br><span class="line">      <span class="comment">// frames.</span></span><br><span class="line">      <span class="keyword">var</span> previousFrameTime = <span class="number">33</span>; <span class="comment">// 一帧的渲染时间33ms，这里假设 1s 30帧</span></span><br><span class="line">      <span class="keyword">var</span> activeFrameTime = <span class="number">33</span>;</span><br><span class="line"></span><br><span class="line">      shouldYieldToHost = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> frameDeadline &lt;= exports.unstable_now();</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// We use the postMessage trick to defer idle work until after the repaint.</span></span><br><span class="line">      <span class="comment">//如下是整个的执行流程，</span></span><br><span class="line">      <span class="comment">//8.配合MessageChannel进行具体的调度任务</span></span><br><span class="line">      <span class="comment">//8-1.在每一帧开始的rAF的回调里记录每一帧的开始时间，并计算每一帧的过期时间，</span></span><br><span class="line">      <span class="comment">//8-2.通过messageChannel发送消息。在帧末messageChannel的回调里接收消息，</span></span><br><span class="line">      <span class="comment">//8-3.根据当前帧的过期时间和当前时间进行比对来决定当前帧能否执行任务，</span></span><br><span class="line">      <span class="comment">//8-4.如果能的话会依次从任务链表里拿出队首任务来执行</span></span><br><span class="line">      <span class="comment">//8-5.执行尽可能多的任务后如果还有任务，下一帧再重新调度。</span></span><br><span class="line">      <span class="keyword">var</span> channel = <span class="keyword">new</span> MessageChannel();</span><br><span class="line">      <span class="keyword">var</span> port = channel.port2;</span><br><span class="line">      <span class="comment">//下面的代码逻辑决定当前帧要不要执行任务</span></span><br><span class="line">      <span class="comment">// 1、如果当前帧没过期，说明当前帧有富余时间，可以执行任务</span></span><br><span class="line">      <span class="comment">// 2、如果当前帧过期了，说明当前帧没有时间了，这里再看一下当前任务firstCallbackNode</span></span><br><span class="line">      <span class="comment">//是否过期，如果过期了也要执行任务；如果当前任务没过期，说明不着急，那就先不执行去</span></span><br><span class="line">      channel.port1.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        isMessageEventScheduled = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> prevScheduledCallback = scheduledHostCallback;</span><br><span class="line">        <span class="keyword">var</span> prevTimeoutTime = timeoutTime;</span><br><span class="line">        scheduledHostCallback = <span class="literal">null</span>;</span><br><span class="line">        timeoutTime = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> currentTime = exports.unstable_now();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> didTimeout = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (frameDeadline - currentTime &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="comment">// There's no time left in this idle period. Check if the callback has</span></span><br><span class="line">          <span class="comment">// a timeout and whether it's been exceeded.</span></span><br><span class="line">          <span class="keyword">if</span> (prevTimeoutTime !== <span class="number">-1</span> &amp;&amp; prevTimeoutTime &lt;= currentTime) &#123;</span><br><span class="line">            <span class="comment">// Exceeded the timeout. Invoke the callback even though there's no</span></span><br><span class="line">            <span class="comment">// time left.</span></span><br><span class="line">            <span class="comment">//任务过期</span></span><br><span class="line">            didTimeout = <span class="literal">true</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// No timeout.</span></span><br><span class="line">            <span class="comment">//当前帧由于浏览器渲染等原因过期了，那就去下一帧再处理</span></span><br><span class="line">            <span class="keyword">if</span> (!isAnimationFrameScheduled) &#123;</span><br><span class="line">              <span class="comment">// Schedule another animation callback so we retry later.</span></span><br><span class="line">              isAnimationFrameScheduled = <span class="literal">true</span>;</span><br><span class="line">              requestAnimationFrameWithTimeout(animationTick);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// Exit without invoking the callback.</span></span><br><span class="line">            scheduledHostCallback = prevScheduledCallback;</span><br><span class="line">            timeoutTime = prevTimeoutTime;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (prevScheduledCallback !== <span class="literal">null</span>) &#123;</span><br><span class="line">          isFlushingHostCallback = <span class="literal">true</span>;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            prevScheduledCallback(didTimeout);</span><br><span class="line">          &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            isFlushingHostCallback = <span class="literal">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="comment">//7.animationTick是线索 计算帧过期时间并压缩帧</span></span><br><span class="line">      <span class="keyword">var</span> animationTick = <span class="function"><span class="keyword">function</span>(<span class="params">rafTime</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (scheduledHostCallback !== <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="comment">//有任务再进行递归，没任务的话不需要工作</span></span><br><span class="line">          <span class="comment">// Eagerly schedule the next animation callback at the beginning of the</span></span><br><span class="line">          <span class="comment">// frame. If the scheduler queue is not empty at the end of the frame, it</span></span><br><span class="line">          <span class="comment">// will continue flushing inside that callback. If the queue *is* empty,</span></span><br><span class="line">          <span class="comment">// then it will exit immediately. Posting the callback at the start of the</span></span><br><span class="line">          <span class="comment">// frame ensures it's fired within the earliest possible frame. If we</span></span><br><span class="line">          <span class="comment">// waited until the end of the frame to post the callback, we risk the</span></span><br><span class="line">          <span class="comment">// browser skipping a frame and not firing the callback until the frame</span></span><br><span class="line">          <span class="comment">// after that.</span></span><br><span class="line">          requestAnimationFrameWithTimeout(animationTick);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// No pending work. Exit.</span></span><br><span class="line">          isAnimationFrameScheduled = <span class="literal">false</span>;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// rafTime 就是 requestAnimationFrame 回调接收的时间</span></span><br><span class="line">        <span class="keyword">var</span> nextFrameTime = rafTime - frameDeadline + activeFrameTime;</span><br><span class="line">        <span class="comment">//用连续的两次时间 被不断的压缩activeFrameTime</span></span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">          nextFrameTime &lt; activeFrameTime &amp;&amp;</span><br><span class="line">          previousFrameTime &lt; activeFrameTime</span><br><span class="line">        ) &#123;</span><br><span class="line">          <span class="keyword">if</span> (nextFrameTime &lt; <span class="number">8</span>) &#123;</span><br><span class="line">            <span class="comment">// Defensive coding. We don't support higher frame rates than 120hz.</span></span><br><span class="line">            <span class="comment">// If the calculated frame time gets lower than 8, it is probably a bug.</span></span><br><span class="line">            nextFrameTime = <span class="number">8</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">// If one frame goes long, then the next one can be short to catch up.</span></span><br><span class="line">          <span class="comment">// If two frames are short in a row, then that's an indication that we</span></span><br><span class="line">          <span class="comment">// actually have a higher frame rate than what we're currently optimizing.</span></span><br><span class="line">          <span class="comment">// We adjust our heuristic dynamically accordingly. For example, if we're</span></span><br><span class="line">          <span class="comment">// running on 120hz display or 90hz VR display.</span></span><br><span class="line">          <span class="comment">// Take the max of the two in case one of them was an anomaly due to</span></span><br><span class="line">          <span class="comment">// missed frame deadlines.</span></span><br><span class="line">          activeFrameTime =</span><br><span class="line">            nextFrameTime &lt; previousFrameTime</span><br><span class="line">              ? previousFrameTime</span><br><span class="line">              : nextFrameTime;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          previousFrameTime = nextFrameTime;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//计算当前帧的截止时间，用开始时间加上每一帧的渲染时间</span></span><br><span class="line">        frameDeadline = rafTime + activeFrameTime;</span><br><span class="line">        <span class="keyword">if</span> (!isMessageEventScheduled) &#123;</span><br><span class="line">          isMessageEventScheduled = <span class="literal">true</span>;</span><br><span class="line">          <span class="comment">//port2 负责发送数据</span></span><br><span class="line">          <span class="comment">//port2监听消息的回调来做任务调度的具体工作</span></span><br><span class="line">          port.postMessage(<span class="literal">undefined</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 接收两个参数， flushwork 和 过期时间</span></span><br><span class="line">      requestHostCallback = <span class="function"><span class="keyword">function</span>(<span class="params">callback, absoluteTimeout</span>) </span>&#123;</span><br><span class="line">        scheduledHostCallback = callback;</span><br><span class="line">        <span class="comment">// 过期时间</span></span><br><span class="line">        timeoutTime = absoluteTimeout;</span><br><span class="line">        <span class="keyword">if</span> (isFlushingHostCallback || absoluteTimeout &lt; <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="comment">// Don't wait for the next frame. Continue working ASAP, in a new event.</span></span><br><span class="line">          port.postMessage(<span class="literal">undefined</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isAnimationFrameScheduled) &#123;</span><br><span class="line">          <span class="comment">// If rAF didn't already schedule one, we need to schedule a frame.</span></span><br><span class="line">          <span class="comment">// <span class="doctag">TODO:</span> If this rAF doesn't materialize because the browser throttles, we</span></span><br><span class="line">          <span class="comment">// might want to still have setTimeout trigger rIC as a backup to ensure</span></span><br><span class="line">          <span class="comment">// that we keep performing work.</span></span><br><span class="line">          isAnimationFrameScheduled = <span class="literal">true</span>;</span><br><span class="line">          requestAnimationFrameWithTimeout(animationTick);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      cancelHostCallback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        scheduledHostCallback = <span class="literal">null</span>;</span><br><span class="line">        isMessageEventScheduled = <span class="literal">false</span>;</span><br><span class="line">        timeoutTime = <span class="number">-1</span>;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    exports.unstable_ImmediatePriority = ImmediatePriority;</span><br><span class="line">    exports.unstable_UserBlockingPriority = UserBlockingPriority;</span><br><span class="line">    exports.unstable_NormalPriority = NormalPriority;</span><br><span class="line">    exports.unstable_IdlePriority = IdlePriority;</span><br><span class="line">    exports.unstable_LowPriority = LowPriority;</span><br><span class="line">    exports.unstable_runWithPriority = unstable_runWithPriority;</span><br><span class="line">    exports.unstable_next = unstable_next;</span><br><span class="line">    exports.unstable_scheduleCallback = unstable_scheduleCallback;</span><br><span class="line">    exports.unstable_cancelCallback = unstable_cancelCallback;</span><br><span class="line">    exports.unstable_wrapCallback = unstable_wrapCallback;</span><br><span class="line">    exports.unstable_getCurrentPriorityLevel = unstable_getCurrentPriorityLevel;</span><br><span class="line">    exports.unstable_shouldYield = unstable_shouldYield;</span><br><span class="line">    exports.unstable_continueExecution = unstable_continueExecution;</span><br><span class="line">    exports.unstable_pauseExecution = unstable_pauseExecution;</span><br><span class="line">    exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="双向链表实现"><a href="#双向链表实现" class="headerlink" title="双向链表实现"></a>双向链表实现</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.双向链表是指每个节点有previous和next两个属性来分别指向前后两个节点。</span></span><br><span class="line"><span class="comment">// 2.循环的意思是，最后一个节点的next指向第一个节点，</span></span><br><span class="line"><span class="comment">// 下面假设有一群人需要按照年龄进行排队，小孩站前边，大人站后边。</span></span><br><span class="line"><span class="comment">// 在一个过程内会不断有人过来，我们需要把他插到正确的位置。删除的话只考虑每次把排头的人给去掉。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//person的类型定义</span></span><br><span class="line">interface Person &#123;</span><br><span class="line">  name: string; <span class="comment">//姓名</span></span><br><span class="line">  age: number; <span class="comment">//年龄，依赖这个属性排序</span></span><br><span class="line">  next: Person; <span class="comment">//紧跟在后面的人,默认是null</span></span><br><span class="line">  previous: Person; <span class="comment">//前面相邻的那个人,默认是null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> firstNode = <span class="literal">null</span>; <span class="comment">//一开始链表里没有节点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入的逻辑</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertByAge</span>(<span class="params">newPerson: Person</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> ((firstNode = <span class="literal">null</span>)) &#123;</span><br><span class="line">    <span class="comment">//如果 firstNode为空，说明newPerson是第一个人，</span></span><br><span class="line">    <span class="comment">//把它赋值给firstNode，并把next和previous属性指向自身，自成一个环。</span></span><br><span class="line">    firstNode = newPerson.next = newPerson.previous = newPerson;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//队伍里有人了，新来的人要找准自己的位置</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> next = <span class="literal">null</span>; <span class="comment">//记录newPerson插入到哪个人前边</span></span><br><span class="line">    <span class="keyword">var</span> person = firstNode; <span class="comment">// person 在下边的循环中会从第一个人开始往后找</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (person.age &gt; newPerson.age) &#123;</span><br><span class="line">        <span class="comment">//如果person的年龄比新来的人大，说明新来的人找到位置了，他恰好要排在person的前边，结束</span></span><br><span class="line">        next = person;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//继续找后面的人</span></span><br><span class="line">      node = node.next;</span><br><span class="line">    &#125; <span class="keyword">while</span> (node !== firstNode); <span class="comment">//这里的while是为了防止无限循环，毕竟是环形的结构</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (next === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">//找了一圈发现 没有person的age比newPerson大，说明newPerson应该放到队伍的最后,也就是说newPerson的后面应该是firstNode。</span></span><br><span class="line">      next = firstNode;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (next === firstNode) &#123;</span><br><span class="line">      <span class="comment">//找第一个的时候就找到next了，说明newPerson要放到firstNode前面，这时候firstNode就要更新为newPerson</span></span><br><span class="line">      firstNode = newPerson;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//下面是newPerson的插入操作，给next及previous两个人的前后链接都关联到newPerson</span></span><br><span class="line">    <span class="keyword">var</span> previous = next.previous;</span><br><span class="line">    previous.next = next.previous = newPerson;</span><br><span class="line">    newPerson.next = next;</span><br><span class="line">    newPerson.previous = previous;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//插入成功</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除第一个节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteFirstPerson</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (firstNode === <span class="literal">null</span>) <span class="keyword">return</span>; <span class="comment">//队伍里没有人，返回</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> next = firstNode.next; <span class="comment">//第二个人</span></span><br><span class="line">  <span class="keyword">if</span> (firstNode === next) &#123;</span><br><span class="line">    <span class="comment">//这时候只有一个人</span></span><br><span class="line">    firstNode = <span class="literal">null</span>;</span><br><span class="line">    next = <span class="literal">null</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> lastPerson = firstNode.previous; <span class="comment">//找到最后一个人</span></span><br><span class="line">    firstNode = lastPerson.next = next; <span class="comment">//更新新的第一人</span></span><br><span class="line">    next.previout = lastPerson; <span class="comment">//并在新的第一人和最后一人之间建立连接</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>你的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="a磊的前端梦 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="a磊的前端梦 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    a磊的前端梦
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.nixiaolei.com/2019/06/30/【React】Fiber架构/" title="【React】Fiber架构">http://blog.nixiaolei.com/2019/06/30/【React】Fiber架构/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="http://blog.nixiaolei.com/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Fiber/" rel="tag"># Fiber</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/23/【算法】理解Dom-diff/" rel="next" title="【算法】理解Dom-diff">
+                <i class="fa fa-chevron-left"></i> 【算法】理解Dom-diff
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/30/【JS】关于requestIdleCallback函数的作用/" rel="prev" title="【JS】关于requestIdleCallback函数的作用">
+                【JS】关于requestIdleCallback函数的作用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/myavatar.jpg" alt="a磊的前端梦">
+            
+              <p class="site-author-name" itemprop="name">a磊的前端梦</p>
+              <p class="site-description motion-element" itemprop="description">挑战10000小时定律</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/nixiaolei" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:nxl3477@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://plus.google.com/nxl3477" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://segmentfault.com/u/nixiaolei" target="_blank" title="sf思否">
+                      
+                        <i class="fa fa-fw fa-bookmark"></i>sf思否</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiber-是什么"><span class="nav-number">1.</span> <span class="nav-text">Fiber 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React16与Fiber"><span class="nav-number">2.</span> <span class="nav-text">React16与Fiber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiber的两个阶段"><span class="nav-number">3.</span> <span class="nav-text">Fiber的两个阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何打断任务"><span class="nav-number">3.1.</span> <span class="nav-text">如何打断任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiber如何排列任务"><span class="nav-number">4.</span> <span class="nav-text">Fiber如何排列任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述Fiber原理"><span class="nav-number">5.</span> <span class="nav-text">概述Fiber原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fiber-源码-注释"><span class="nav-number">6.</span> <span class="nav-text">Fiber 源码 + 注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向链表实现"><span class="nav-number">7.</span> <span class="nav-text">双向链表实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a磊的前端梦</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">79.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
