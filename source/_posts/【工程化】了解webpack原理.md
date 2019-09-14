@@ -2,7 +2,7 @@
 title: 【工程化】了解webpack原理
 date: 2019-07-11 22:58:30
 categories: 工程化
-tags:  [webpack, 工程化]
+tags:  [webpack, 工程化, Ast]
 ---
 
 
@@ -52,4 +52,118 @@ happypack 可以用，但也需要考虑下应用场景： 在需要打包的文
 实际操作起来效果不明显
 
 
-25.20
+## 如何实现一个loader
+
+ 熟话说， 看源码是最好的学习方式， 现在我们先找一个比较简单的开源loader ,看看别人是怎么写的?
+ 
+ 我们下载`markdon-loader`, 打开node_modules 中其的代码， 发现如下：
+ ![2019-09-14-19-30-43](http://img.nixiaolei.com/2019-09-14-19-30-43.png)
+
+
+让我们加点注释理解一下
+
+![2019-09-14-19-34-46](http://img.nixiaolei.com/2019-09-14-19-34-46.png)
+
+
+loader 有一个前置钩子， 会在进入主体函数前被调用：
+
+```js
+module.exports = function (content, map, meta) {
+  //  this 是我们运行时数据调用方法和补充载体 也就是loader函数的执行上下文， 所以可以通过webpack 提供的函
+  // 数库来从 this 获取外部 rule 处对 loader 配置的option
+
+  console.log('🍎进入loader')
+  console.log('前置钩子内容🍌', this.data)
+  return content + ";console.log(1)"
+}
+
+// 一个叫pitch的前置钩子 ( 在进入⬆️主体前触发)
+module.exports.pitch = function (r, prerequest, data) {
+  console.log("进入前置钩子")
+  data.value = "are you ok"
+}
+```
+
+在外面webpack 配置的地方引用我们上方编写的loader
+```js
+const path = require('path')
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: path.resolve("./loader/index.js"),
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+
+让我们看下此时的输出结果
+![2019-09-14-20-18-39](http://img.nixiaolei.com/2019-09-14-20-18-39.png)
+
+
+#### 获取相关的option 配置
+webpack 提供的函数库可以帮助我们， 在执行阶段从 this 对象上获取到我们配置时所传入的 option 的相关 loader  配置
+```js
+const loaderUtils = require('loader-utils')
+
+module.exports = function (content, map, meta) {
+  //  this 是我们运行时数据调用方法和补充载体 也就是loader函数的执行上下文， 所以可以通过webpack 提供的函
+  // 数库来从 this 获取外部 rule 处对 loader 配置的option
+
+  console.log('🍎进入loader')
+  console.log('前置钩子内容🍌', this.data)
+  const options = loaderUtils.getOptions(this)
+  console.log('🍊获取到的配置文件', options)
+  return content + ";console.log(1)"
+}
+
+// 一个叫pitch的前置钩子 ( 在进入⬆️主体前触发)
+module.exports.pitch = function (r, prerequest, data) {
+  console.log("进入前置钩子")
+  data.value = "are you ok"
+}
+```
+
+
+此时我们就成功获取到了配置时所传入的参数了
+
+![2019-09-14-20-24-56](http://img.nixiaolei.com/2019-09-14-20-24-56.png)
+
+#### 异步loader
+如果我们的编写过程中有异步的需求, 我们可以使用下面这两个方法
+
+* this.async 执行异步函数
+* this.callback 执行函数的回调， 返回处理结果
+
+
+
+## loader  与 Ast
+既然loader处理的核心是 Ast, 那么我们同样的夜来尝试一下Ast 的使用,
+
+首先我们下载一个`acorn` , 这是一个专门处理 ast 的库, 我们使用 acorn 提供的方法尝试去转换一段代码， 然后使用walk 所提供的方法将其转换回来
+```JS
+const acorn = require("acorn")
+const walk = require('acorn-walk')
+
+console.log(acorn.parse("const a = 20"))
+walk.simple(acorn.parse('let x = 10'), {
+  Literal(node) {
+    console.log(`Found a literal: ${node.value}`)
+  }
+})
+```
+
+输出的结果
+
+![2019-09-14-21-07-23](http://img.nixiaolei.com/2019-09-14-21-07-23.png)
+

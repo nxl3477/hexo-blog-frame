@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="webpack,工程化,">
+  <meta name="keywords" content="webpack,工程化,Ast,">
 
 
 
@@ -80,17 +80,23 @@
 
 
 <meta name="description" content="webpack 的成功之处在于其loader , 但 webpack 的失败之处也出在这个loader  对于webpack 来讲， 万物都是模块， webpack 为什么可以做到万物都可以 require就是使用了loader,  但同时也是loader 导致了webpack 的编译速度（你懂的）， 这是为什么呢， 这里先说一下基本原理  webpack 在处理的时候， 会经过多个loader">
-<meta name="keywords" content="webpack,工程化">
+<meta name="keywords" content="webpack,工程化,Ast">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【工程化】了解webpack原理">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/07/11/【工程化】了解webpack原理/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
 <meta property="og:description" content="webpack 的成功之处在于其loader , 但 webpack 的失败之处也出在这个loader  对于webpack 来讲， 万物都是模块， webpack 为什么可以做到万物都可以 require就是使用了loader,  但同时也是loader 导致了webpack 的编译速度（你懂的）， 这是为什么呢， 这里先说一下基本原理  webpack 在处理的时候， 会经过多个loader">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-11T16:03:05.777Z">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-09-14-19-30-43.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-09-14-19-34-46.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-09-14-20-18-39.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-09-14-20-24-56.png">
+<meta property="og:image" content="http://img.nixiaolei.com/2019-09-14-21-07-23.png">
+<meta property="og:updated_time" content="2019-09-14T13:09:08.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【工程化】了解webpack原理">
 <meta name="twitter:description" content="webpack 的成功之处在于其loader , 但 webpack 的失败之处也出在这个loader  对于webpack 来讲， 万物都是模块， webpack 为什么可以做到万物都可以 require就是使用了loader,  但同时也是loader 导致了webpack 的编译速度（你懂的）， 这是为什么呢， 这里先说一下基本原理  webpack 在处理的时候， 会经过多个loader">
+<meta name="twitter:image" content="http://img.nixiaolei.com/2019-09-14-19-30-43.png">
 
 
 
@@ -358,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  632 字
+                  1.3k 字
                 </span>
               
 
@@ -374,7 +380,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -413,7 +419,26 @@
 <p>相信大家都听过或者尝试过臭名昭著的 <code>happypack</code> 多核打包插件， 但这个插件实际上在高版本的webpack 上效果略低啊</p>
 <p>happypack 可以用，但也需要考虑下应用场景： 在需要打包的文件太少不建议， 因为多核打包也是需要消耗系统性能的， 反而会使打包变慢了</p>
 <p>实际操作起来效果不明显</p>
-<p>25.20</p>
+<h2 id="如何实现一个loader"><a href="#如何实现一个loader" class="headerlink" title="如何实现一个loader"></a>如何实现一个loader</h2><p> 熟话说， 看源码是最好的学习方式， 现在我们先找一个比较简单的开源loader ,看看别人是怎么写的?</p>
+<p> 我们下载<code>markdon-loader</code>, 打开node_modules 中其的代码， 发现如下：<br> <img src="http://img.nixiaolei.com/2019-09-14-19-30-43.png" alt="2019-09-14-19-30-43"></p>
+<p>让我们加点注释理解一下</p>
+<p><img src="http://img.nixiaolei.com/2019-09-14-19-34-46.png" alt="2019-09-14-19-34-46"></p>
+<p>loader 有一个前置钩子， 会在进入主体函数前被调用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">content, map, meta</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  this 是我们运行时数据调用方法和补充载体 也就是loader函数的执行上下文， 所以可以通过webpack 提供的函</span></span><br><span class="line">  <span class="comment">// 数库来从 this 获取外部 rule 处对 loader 配置的option</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'🍎进入loader'</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'前置钩子内容🍌'</span>, <span class="keyword">this</span>.data)</span><br><span class="line">  <span class="keyword">return</span> content + <span class="string">";console.log(1)"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个叫pitch的前置钩子 ( 在进入⬆️主体前触发)</span></span><br><span class="line"><span class="built_in">module</span>.exports.pitch = <span class="function"><span class="keyword">function</span> (<span class="params">r, prerequest, data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"进入前置钩子"</span>)</span><br><span class="line">  data.value = <span class="string">"are you ok"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在外面webpack 配置的地方引用我们上方编写的loader<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        exclude: <span class="regexp">/(node_modules|bower_components)/</span>,</span><br><span class="line">        use: &#123;</span><br><span class="line">          loader: path.resolve(<span class="string">"./loader/index.js"</span>),</span><br><span class="line">          options: &#123;</span><br><span class="line">            presets: [<span class="string">'@babel/preset-env'</span>]</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>让我们看下此时的输出结果<br><img src="http://img.nixiaolei.com/2019-09-14-20-18-39.png" alt="2019-09-14-20-18-39"></p>
+<h4 id="获取相关的option-配置"><a href="#获取相关的option-配置" class="headerlink" title="获取相关的option 配置"></a>获取相关的option 配置</h4><p>webpack 提供的函数库可以帮助我们， 在执行阶段从 this 对象上获取到我们配置时所传入的 option 的相关 loader  配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> loaderUtils = <span class="built_in">require</span>(<span class="string">'loader-utils'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">content, map, meta</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  this 是我们运行时数据调用方法和补充载体 也就是loader函数的执行上下文， 所以可以通过webpack 提供的函</span></span><br><span class="line">  <span class="comment">// 数库来从 this 获取外部 rule 处对 loader 配置的option</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'🍎进入loader'</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'前置钩子内容🍌'</span>, <span class="keyword">this</span>.data)</span><br><span class="line">  <span class="keyword">const</span> options = loaderUtils.getOptions(<span class="keyword">this</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'🍊获取到的配置文件'</span>, options)</span><br><span class="line">  <span class="keyword">return</span> content + <span class="string">";console.log(1)"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个叫pitch的前置钩子 ( 在进入⬆️主体前触发)</span></span><br><span class="line"><span class="built_in">module</span>.exports.pitch = <span class="function"><span class="keyword">function</span> (<span class="params">r, prerequest, data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"进入前置钩子"</span>)</span><br><span class="line">  data.value = <span class="string">"are you ok"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时我们就成功获取到了配置时所传入的参数了</p>
+<p><img src="http://img.nixiaolei.com/2019-09-14-20-24-56.png" alt="2019-09-14-20-24-56"></p>
+<h4 id="异步loader"><a href="#异步loader" class="headerlink" title="异步loader"></a>异步loader</h4><p>如果我们的编写过程中有异步的需求, 我们可以使用下面这两个方法</p>
+<ul>
+<li>this.async 执行异步函数</li>
+<li>this.callback 执行函数的回调， 返回处理结果</li>
+</ul>
+<h2 id="loader-与-Ast"><a href="#loader-与-Ast" class="headerlink" title="loader  与 Ast"></a>loader  与 Ast</h2><p>既然loader处理的核心是 Ast, 那么我们同样的夜来尝试一下Ast 的使用,</p>
+<p>首先我们下载一个<code>acorn</code> , 这是一个专门处理 ast 的库, 我们使用 acorn 提供的方法尝试去转换一段代码， 然后使用walk 所提供的方法将其转换回来<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> acorn = <span class="built_in">require</span>(<span class="string">"acorn"</span>)</span><br><span class="line"><span class="keyword">const</span> walk = <span class="built_in">require</span>(<span class="string">'acorn-walk'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(acorn.parse(<span class="string">"const a = 20"</span>))</span><br><span class="line">walk.simple(acorn.parse(<span class="string">'let x = 10'</span>), &#123;</span><br><span class="line">  Literal(node) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Found a literal: <span class="subst">$&#123;node.value&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>输出的结果</p>
+<p><img src="http://img.nixiaolei.com/2019-09-14-21-07-23.png" alt="2019-09-14-21-07-23"></p>
 
       
     </div>
@@ -481,6 +506,8 @@
             <a href="/tags/webpack/" rel="tag"># webpack</a>
           
             <a href="/tags/工程化/" rel="tag"># 工程化</a>
+          
+            <a href="/tags/Ast/" rel="tag"># Ast</a>
           
         </div>
       
@@ -588,7 +615,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +637,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -671,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-与优化"><span class="nav-number">1.</span> <span class="nav-text">webpack 与优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-与优化"><span class="nav-number">1.</span> <span class="nav-text">webpack 与优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现一个loader"><span class="nav-number">2.</span> <span class="nav-text">如何实现一个loader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取相关的option-配置"><span class="nav-number">2.0.1.</span> <span class="nav-text">获取相关的option 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步loader"><span class="nav-number">2.0.2.</span> <span class="nav-text">异步loader</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#loader-与-Ast"><span class="nav-number">3.</span> <span class="nav-text">loader  与 Ast</span></a></li></div>
             
 
           </div>
@@ -705,7 +732,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">79.2k</span>
+    <span title="Site words total count">80.4k</span>
   
 </div>
 
