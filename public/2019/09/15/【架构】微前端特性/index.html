@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="倪晓磊的博客">
 <meta property="og:description" content="微前端，其实就是微服务在前端的一种实践 微前端的特性 取代 iframe   各个开发团队都可以自行选择技术栈， 不受同一项目中其他团队影响; 各个交付产物都可以被独立使用， 避免和其它交付产物耦合; 各个交付产物中的样式不会污染到其他组件; 各个交付产物都可以自由使用浏览器原生API， 而非要求使用封装后的API;  为什么不用 iframe[ 不可控制 ] — iframe 嵌入的显示区大小不">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-15T14:47:53.546Z">
+<meta property="og:updated_time" content="2019-09-15T15:44:26.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【架构】微前端特性">
 <meta name="twitter:description" content="微前端，其实就是微服务在前端的一种实践 微前端的特性 取代 iframe   各个开发团队都可以自行选择技术栈， 不受同一项目中其他团队影响; 各个交付产物都可以被独立使用， 避免和其它交付产物耦合; 各个交付产物中的样式不会污染到其他组件; 各个交付产物都可以自由使用浏览器原生API， 而非要求使用封装后的API;  为什么不用 iframe[ 不可控制 ] — iframe 嵌入的显示区大小不">
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  237 字
+                  352 字
                 </span>
               
 
@@ -406,6 +406,15 @@
 <li>各个交付产物都可以自由使用浏览器原生API， 而非要求使用封装后的API;</li>
 </ol>
 <h4 id="为什么不用-iframe"><a href="#为什么不用-iframe" class="headerlink" title="为什么不用 iframe"></a>为什么不用 iframe</h4><p>[ 不可控制 ] — iframe 嵌入的显示区大小不容易控制， 存在一定局限性<br>[ bfcache ] — URL的记录完全无效， 页面刷新不能够记忆， 刷新会返回首页， iframe 功能之间跳转也无效<br>[ 兼容性坑 ] — iframe 的样式显示， 兼容性等都具有局限性<br>[ 性能开销 ] — iframe 阻塞onload， 占用连接池， 多层嵌套页面崩溃</p>
+<h2 id="实现微前端的手段"><a href="#实现微前端的手段" class="headerlink" title="实现微前端的手段"></a>实现微前端的手段</h2><p>现阶段实现微前端的方式大致有以下六种：</p>
+<ol>
+<li>使用 HTTP 服务器的路由来重定向多个应用</li>
+<li>在不同的框架之上设计通讯、加载机制，诸如 Mooa 和 Single-SPA</li>
+<li>通过组合多个独立应用、组件来构建一个单体应用</li>
+<li>iFrame。使用 iFrame 及自定义消息传递机制</li>
+<li>使用纯 Web Components 构建应用</li>
+<li>结合 Web Components 构建</li>
+</ol>
 
       
     </div>
@@ -659,7 +668,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#微前端的特性"><span class="nav-number">1.</span> <span class="nav-text">微前端的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不用-iframe"><span class="nav-number">1.0.1.</span> <span class="nav-text">为什么不用 iframe</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#微前端的特性"><span class="nav-number">1.</span> <span class="nav-text">微前端的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不用-iframe"><span class="nav-number">1.0.1.</span> <span class="nav-text">为什么不用 iframe</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#实现微前端的手段"><span class="nav-number">2.</span> <span class="nav-text">实现微前端的手段</span></a></li></div>
             
 
           </div>
@@ -693,7 +702,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">82.9k</span>
+    <span title="Site words total count">83k</span>
   
 </div>
 

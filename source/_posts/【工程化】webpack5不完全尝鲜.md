@@ -78,7 +78,7 @@ eval("console.log(\"你好，webpack\")\n\n//# sourceURL=webpack:///./src/index.
 ```
 
 是不是比webpack4 少了好多
-> 详细对比可以参考 站内文章 `【工程化】webpack-编译后文件解析`
+> webpack4 具体情况可以参考 站内文章 `【工程化】webpack-编译后文件解析`
 
 少去了一大坨的恶心代码！
 
