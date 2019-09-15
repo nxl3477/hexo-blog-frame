@@ -2,7 +2,7 @@
 title: 【工程化】babel简单原理及简单实现
 date: 2019-09-14 21:36:45
 categories: 工程化
-tags:  [webpack, 工程化, Ast]
+tags:  [babel, 工程化, Ast]
 ---
 
 
