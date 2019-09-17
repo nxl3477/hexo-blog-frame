@@ -344,3 +344,7 @@ new Vue({
 
 ## 项目代码地址
 > https://github.com/nxl3477/note/tree/master/%E5%AE%9E%E6%88%98/%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84
+
+
+## 参考文献
+> https://juejin.im/post/5d7f702ce51d4561f777e258?utm_source=gold_browser_extension
