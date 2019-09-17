@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-17-22-40-23.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-17-22-37-15.png">
 <meta property="og:image" content="http://img.nixiaolei.com/microferesult.gif">
-<meta property="og:updated_time" content="2019-09-17T15:17:23.526Z">
+<meta property="og:updated_time" content="2019-09-17T15:34:02.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【架构】利用systemJs构建微前端">
 <meta name="twitter:description" content="微前端，其实就是微服务在前端的一种实践 微前端的特性 取代 iframe   各个开发团队都可以自行选择技术栈， 不受同一项目中其他团队影响; 各个交付产物都可以被独立使用， 避免和其它交付产物耦合; 各个交付产物中的样式不会污染到其他组件; 各个交付产物都可以自由使用浏览器原生API， 而非要求使用封装后的API;  目前实现微前端的多种手段现阶段实现微前端的方式大致有以下六种：  使用 HTT">
@@ -362,7 +362,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k 字
+                  2.1k 字
                 </span>
               
 
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -446,7 +446,7 @@
 <p>然后我们将vue 项目和 react项目分别打包出来， 放入总线项目中：<br>这里的index.js 就是项目打包产出的文件，<br>需要注意的是,jsx想要在浏览器中运行， 我们还需要引入babel,<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.staticfile.org/babel-standalone/7.0.0-beta.3/babel.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>并且script标签上要加上<code>type=&quot;text/babel&quot; data-type=&quot;react-app&quot;</code> </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=<span class="string">"vue"</span>&gt;</span><br><span class="line">    &lt;index&gt;<span class="xml"><span class="tag">&lt;/<span class="name">index</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div id="react"&gt;&lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">new Vue(&#123;</span></span><br><span class="line"><span class="regexp">  el: "#vue",</span></span><br><span class="line"><span class="regexp">  components: &#123;</span></span><br><span class="line"><span class="regexp">    "index": () =&gt; System.import("./</span>scripts/vue/index.js<span class="string">")</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;script type="</span>text/babel<span class="string">" data-type="</span>react-app<span class="string">"&gt;</span></span><br><span class="line"><span class="string">  System.import("</span>./scripts/react/index.js<span class="string">").then(_ =&gt; &#123;</span></span><br><span class="line"><span class="string">    const domContainer = document.querySelector('#react');</span></span><br><span class="line"><span class="string">    const e = React.createElement;</span></span><br><span class="line"><span class="string">    const App = _.default;</span></span><br><span class="line"><span class="string">    ReactDOM.render(&lt;App /&gt;, domContainer);</span></span><br><span class="line"><span class="string">  &#125;)</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>让我们打开看一下此时的效果。<br><img src="http://img.nixiaolei.com/microferesult.gif" alt="微前端实现结果"></p>
+<p>让我们打开看一下此时的效果。<br>不但保留了 vue , react 两个项目的各自逻辑功能， 而且还成功进行了组件之间的通信， 如图中， 点击的通信按钮会影另一个组件的内部状态。<br><img src="http://img.nixiaolei.com/microferesult.gif" alt="微前端实现结果"></p>
 <h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>一个基本的微前端架构成功实现了， 接下来我们需要做的更多的事情， 就是：</p>
 <ol>
 <li>解决整合的难度及成本， 可以编写shell脚本或者是构建一个额外的打包配置</li>

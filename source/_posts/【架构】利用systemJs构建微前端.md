@@ -324,6 +324,7 @@ new Vue({
 
 
 让我们打开看一下此时的效果。
+不但保留了 vue , react 两个项目的各自逻辑功能， 而且还成功进行了组件之间的通信， 如图中， 点击的通信按钮会影另一个组件的内部状态。
 ![微前端实现结果](http://img.nixiaolei.com/microferesult.gif)
 
 
