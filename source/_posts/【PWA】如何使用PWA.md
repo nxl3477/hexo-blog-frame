@@ -185,7 +185,7 @@ self.addEventListener('fetch', (event) => {
 
 ### 更优的方案
 
-利用google 的workderbox ， 当然，这也有工程化的方案
+利用google 的workderbox ， 当然，这也有工程化的方案, 一句话搞定所有
 
 * workbox-webpack-plugin
 

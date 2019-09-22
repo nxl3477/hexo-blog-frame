@@ -1169,7 +1169,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js入门之光源/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之聚光灯/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -1188,7 +1188,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/04/【Three】Three-js入门之光源/" itemprop="url">【Three】Three.js入门之光源</a></h2>
+                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/" itemprop="url">【Three】Three.js光源入门之聚光灯</a></h2>
         
 
         <div class="post-meta">
@@ -1254,7 +1254,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  156 字
+                  982 字
                 </span>
               
 
@@ -1270,7 +1270,7 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -1293,22 +1293,19 @@ K8s 是 Google 开源的容器集群管理系统。在 Docker 技术的基础上
       
         
           
-          光源也分为很多种
+          聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。
+基础特性
+具有锥形效果的光源， 能够朝着一个方向投射光线
+最常用到的光源， 它可以产生阴影
+锥形效果， 类似电筒光照效果
 
-AmbientLight —- 环境光
-PonitLight —- 点光源
-SpotLight —- 聚光灯
-DirectionalLight —- 平行光
-
-然后还有各种高级的光照效果
-光源种类描述
-具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述
-
-环境
+光照效果样例
+使用方式
+THREE.SpotLight(hex, intensity, distance, ang
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/04/【Three】Three-js入门之光源/#more" rel="contents">
+            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1734,7 +1731,7 @@ clone() —- 复制当前颜色。 color 光源颜色
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之聚光灯/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js入门之光源/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -1753,7 +1750,7 @@ clone() —- 复制当前颜色。 color 光源颜色
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/" itemprop="url">【Three】Three.js光源入门之聚光灯</a></h2>
+                <a class="post-title-link" href="/2019/04/04/【Three】Three-js入门之光源/" itemprop="url">【Three】Three.js入门之光源</a></h2>
         
 
         <div class="post-meta">
@@ -1819,7 +1816,7 @@ clone() —- 复制当前颜色。 color 光源颜色
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  982 字
+                  156 字
                 </span>
               
 
@@ -1835,7 +1832,7 @@ clone() —- 复制当前颜色。 color 光源颜色
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -1858,19 +1855,22 @@ clone() —- 复制当前颜色。 color 光源颜色
       
         
           
-          聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。
-基础特性
-具有锥形效果的光源， 能够朝着一个方向投射光线
-最常用到的光源， 它可以产生阴影
-锥形效果， 类似电筒光照效果
+          光源也分为很多种
 
-光照效果样例
-使用方式
-THREE.SpotLight(hex, intensity, distance, ang
+AmbientLight —- 环境光
+PonitLight —- 点光源
+SpotLight —- 聚光灯
+DirectionalLight —- 平行光
+
+然后还有各种高级的光照效果
+光源种类描述
+具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述
+
+环境
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/#more" rel="contents">
+            <a class="btn" href="/2019/04/04/【Three】Three-js入门之光源/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2242,7 +2242,7 @@ React 重新渲染问题React中，当父组件中触发setState， 尽管未修
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">86.9k</span>
+    <span title="Site words total count">87k</span>
   
 </div>
 
