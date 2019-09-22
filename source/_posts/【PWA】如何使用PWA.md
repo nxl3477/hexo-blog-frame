@@ -189,7 +189,10 @@ self.addEventListener('fetch', (event) => {
 
 * workbox-webpack-plugin
 
-> 官方地址：  https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
+
+官方地址:
+
+> https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
 
 
 ## 更完善的pwa 解决方案
