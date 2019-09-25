@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之环境光/">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/04/04/【Three】Three-js光源入门之聚光灯/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="a磊的前端梦">
@@ -294,7 +294,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之环境光/" itemprop="url">【Three】Three.js光源入门之环境光</a></h2>
+                <a class="post-title-link" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/" itemprop="url">【Three】Three.js光源入门之聚光灯</a></h2>
         
 
         <div class="post-meta">
@@ -360,7 +360,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k 字
+                  982 字
                 </span>
               
 
@@ -399,20 +399,19 @@
       
         
           
-          环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果
-环境光
-AmbientLight 
+          聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。
+基础特性
+具有锥形效果的光源， 能够朝着一个方向投射光线
+最常用到的光源， 它可以产生阴影
+锥形效果， 类似电筒光照效果
 
-它是一种基础光源， 影响整个场景的光源
-环境光没有明确的光源位置， 在各处形成的亮度也是一致的。
-它不会影响阴影的产生。
-不能将环境光作为场景中唯一的光源。
-在Three中使用
-T
+光照效果样例
+使用方式
+THREE.SpotLight(hex, intensity, distance, ang
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之环境光/#more" rel="contents">
+            <a class="btn" href="/2019/04/04/【Three】Three-js光源入门之聚光灯/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
