@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[【CI】理解持续集成]]></title>
-    <url>%2F2019%2F11%2F20%2F%E3%80%90CI%E3%80%91%E7%90%86%E8%A7%A3%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%2F</url>
-    <content type="text"><![CDATA[前端项目持续集成为什么需要持续集成 持续集成是通过平台串联各个开发环节， 实现和沉淀工作自动化的方法。 线上代码和代码仓库不同步， 影响迭代和团队协作。 静态资源发布依赖人工，浪费开发人力。 缺少自动化测试，产品质量得不到保障。 文案简单修改上限，需要技术介入。 CI 持续集成 continuous integration 在持续集成环境中， 开发人员将会频繁的提交代码到主干。 这些新提交的代码最终合并到主线之前， 都需要通过编译和自动化测试流进行验证。这样做是基于之前持续集成过程中很重视自动化测试验证结果， 以保障所有的提交在合并主干之后的质量问题， 对可能出现的一些问题进行预警。 自己的描述 在所有向主分支修改的操作就需要线进行编译和自动化测试的监测， 测试会生成报表， 根据这个报表的结果来决定是否向主分支合并， 如果报表未通过就会被打回来（还会邮件通知领导）， 这样可以防止出现破坏主分支的情况出现 相比于持续交付、 持续部署， 持续集成更与我们前端息息相关， 并且大公司的QA是不受理未通过测试的提交的。 CD (1) 持续交付 Continuous Delivery 持续交付就是讲我们的应用发布出去的过程。 这个过程可以确保我们尽可能快的实现交付。 这就意味着除了自动化测试， 我们还需要有自动化的发布流， 以及通过一个按钮就可以随时随地实现应用的部署上限。 通过持续交付， 您可以决定每天， 每周， 每两周发布一次， 这完全可以根据自己的业务进行设置。 但是， 如果您真的希望体验持续交付的优势，就需要先进行小批量的发布， 尽快部署到生产线，以便在出现问题时方便进行故障排除。 自己的描述 在已具备完善的持续集成后， 就可以改善发布过程， 通过一个按钮就进行发布 但是， 如果您真的希望体验持续交付的优势，就需要先进行小批量的发布， 尽快部署到生产线，以便在出现问题时方便进行故障排除。也就是CI一通过就直接部署上线 CD (2) 持续部署 Continuous Deployment 如果我们想更加深入一点的话， 就是持续部署了。通过这个方式，任何修改通过了所有已有的工作流就会直接和客户见面。 没有人为干预( 没有一键部署按钮 )， 只有当一个修改在工作流中构建失败才能阻止它部署到产品线。 持续部署是很优秀的方式， 可以加速与客户的反馈循环，但是会给团队带来压力， 因为不再有“发布日”了。 开发人员可以专注于构建软件， 他们看到他们的修改在完成工作后的几分钟就上线了。 基本上， 当开发人员在主分支中合并一个提交时， 这个分支将被构建、测试， 如果一切顺利， 则部署到生产环境中。 自己的描述 自动实时的部署上限， 是最优的解决办法， 但持续部署的要求是团队非常成熟， 并且上线前是需要经过QA测试的，所以实际情况下很难实现， 一般的团队也很难接收，风险很大 开发环节 作为持续集成， 这些开发环节一一不可缺少。 首先在项目初级阶段，会拉上我们前端咨询功能的可行性。 商讨完成后UI、UE出设计图， 然后交给开发， 开发马不停蹄的实现， 然后将代码和素材， 开发文档都上传到代码仓库， 一般公司都会使用gitLab, gitLab的hooks钩子挂载到CI服务器平台(如Jenkins)， 然后在CI服务器上编写一些脚本构建项目（如：webpack、fis）， 当代码提交到仓库， CI平台就会监测到， 拉取仓库代码进行打包， 然后运行自动化测试， 并发送提测通知， 将项目发布到内网环境（QA和RD的机器上）， 所以CI平台必须免密登录的权限， 否则无法部署。 整个持续集成流程与结构 统一代码仓库通过分支管理合并主干, 如： SVN 自动化构建工具， 编译、部署、测试、监控、本机、开发上线环境。 如： FIS3、Webpack、jdists、package.json、chai、supertest、mocha、selenium-webdriver 持续集成平台。如： Jenkins、Travis CI 部署工具。如：rsync、shelljs、yargs。 运营同学有权限操作运营页面保存即可上限。 SVN/ GIT版本管理工具使用原则 不能随意修改主分支内容( master / Trunk ) 新分支(branch)应从主分支切出 向主分支提交代码前,必须先 拉取最新的主分支代码合至分支（pull &amp;&amp; merge）， 并解决冲突 向主分支合并时及时的打Tags]]></content>
-      <categories>
-        <category>CI</category>
-      </categories>
-      <tags>
-        <tag>CI</tag>
-        <tag>前端持续集成</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[【工程化】如何资源定位]]></title>
     <url>%2F2019%2F11%2F20%2F%E3%80%90%E5%B7%A5%E7%A8%8B%E5%8C%96%E3%80%91%E5%A6%82%E4%BD%95%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%2F</url>
     <content type="text"><![CDATA[资源定位浏览器会自动的缓存静态文件， 如： a.css 第一次访问成功后被浏览器缓存， 第二次就回直接走内存中读取， 这有利于提升性能， 但这也带来了一些问题， 当网站发布新版本的时候， 无法做到强制用户的浏览器去更新数据， 浏览器还是傻傻的使用了之前的缓存 所有有了多种解决办法， 但也各有利弊 1. 加版本号加版本号是最常见的方法， 比如： a.css?v=1.1 b.css?v=1.1 这个方法确实非常有效， 每次发布新版本都可以做到及时更新数据了，但这又带来了一些问题 我a修改了， b没有修改。 b的版本也要更新， b的浏览器缓存就被浪费了 每次修改， 引用的所有静态文件都要去手动更改版本号， 特别麻烦 2. md5戳因为版本号所带来的问题， 所以就有人有了新的想法， 将版本号改为了md5戳， 这样就不用去因为版本号浪费缓存资源 但这又产生了新问题 当你改了html， 也改了css , 我们应该先上谁 先上html的话， 在你上新版css 之前访问的用户就会出现问题， 依旧会使用旧的css样式。 先上css的话， 在你上新版html之前， 如果用户没有css缓存, 用旧的html去使用新的css也会出现问题。 那为什么不一起上呢？ 这个因为css 和 html资源不可能一样大， 发布所需要的时间也不同， 那怎么办呢 3. 将md5作为文件名既然后面加md5戳行不通， 那就又有了新思路， 我们把md5作为 css的文件名， 然后先发布新的css资源文件，再发布新的html文件 上新的css保留旧的css文件， 不要去删除旧的css ,尽管旧文件都在， 但是没关系的， 利 &gt; 弊 这样的好处呢？ 将md5作为css 的文件名就是为了每次将css资源作为新的文件发布， 不覆盖原有的文件 html未发布之前依旧可以访问到旧的css , 新的html发布立即可以访问到新的css资源 并且方便回滚， 回滚不用上线， 只要改个html， 静态资源全部都还在 4. 更优的解决办法哪变了弄哪， 不把整个文件都改进去 总结 配置超长时间的本地缓存 - 节省带宽， 提高性能 采用内容摘要作为缓存更新依据 - 精确的缓存控制 静态资源cdn部署 更资源发布路径实现非覆盖式发布 - 平滑升级]]></content>
@@ -44,8 +32,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>webpack</tag>
         <tag>工程化</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -126,8 +114,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>webpack</tag>
         <tag>工程化</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -138,8 +126,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>webpack</tag>
         <tag>工程化</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -150,8 +138,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>webpack</tag>
         <tag>工程化</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -162,8 +150,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>工程化</tag>
         <tag>babel</tag>
+        <tag>工程化</tag>
         <tag>Ast</tag>
       </tags>
   </entry>
@@ -241,9 +229,9 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>webpack</tag>
         <tag>工程化</tag>
         <tag>Ast</tag>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -624,8 +612,20 @@
         <category>Vue</category>
       </categories>
       <tags>
-        <tag>适配</tag>
         <tag>Vue</tag>
+        <tag>适配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【CI】理解持续集成]]></title>
+    <url>%2F2019%2F04%2F20%2F%E3%80%90CI%E3%80%91%E7%90%86%E8%A7%A3%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%2F</url>
+    <content type="text"><![CDATA[前端项目持续集成为什么需要持续集成 持续集成是通过平台串联各个开发环节， 实现和沉淀工作自动化的方法。 线上代码和代码仓库不同步， 影响迭代和团队协作。 静态资源发布依赖人工，浪费开发人力。 缺少自动化测试，产品质量得不到保障。 文案简单修改上限，需要技术介入。 CI 持续集成 continuous integration 在持续集成环境中， 开发人员将会频繁的提交代码到主干。 这些新提交的代码最终合并到主线之前， 都需要通过编译和自动化测试流进行验证。这样做是基于之前持续集成过程中很重视自动化测试验证结果， 以保障所有的提交在合并主干之后的质量问题， 对可能出现的一些问题进行预警。 自己的描述 在所有向主分支修改的操作就需要线进行编译和自动化测试的监测， 测试会生成报表， 根据这个报表的结果来决定是否向主分支合并， 如果报表未通过就会被打回来（还会邮件通知领导）， 这样可以防止出现破坏主分支的情况出现 相比于持续交付、 持续部署， 持续集成更与我们前端息息相关， 并且大公司的QA是不受理未通过测试的提交的。 CD (1) 持续交付 Continuous Delivery 持续交付就是讲我们的应用发布出去的过程。 这个过程可以确保我们尽可能快的实现交付。 这就意味着除了自动化测试， 我们还需要有自动化的发布流， 以及通过一个按钮就可以随时随地实现应用的部署上限。 通过持续交付， 您可以决定每天， 每周， 每两周发布一次， 这完全可以根据自己的业务进行设置。 但是， 如果您真的希望体验持续交付的优势，就需要先进行小批量的发布， 尽快部署到生产线，以便在出现问题时方便进行故障排除。 自己的描述 在已具备完善的持续集成后， 就可以改善发布过程， 通过一个按钮就进行发布 但是， 如果您真的希望体验持续交付的优势，就需要先进行小批量的发布， 尽快部署到生产线，以便在出现问题时方便进行故障排除。也就是CI一通过就直接部署上线 CD (2) 持续部署 Continuous Deployment 如果我们想更加深入一点的话， 就是持续部署了。通过这个方式，任何修改通过了所有已有的工作流就会直接和客户见面。 没有人为干预( 没有一键部署按钮 )， 只有当一个修改在工作流中构建失败才能阻止它部署到产品线。 持续部署是很优秀的方式， 可以加速与客户的反馈循环，但是会给团队带来压力， 因为不再有“发布日”了。 开发人员可以专注于构建软件， 他们看到他们的修改在完成工作后的几分钟就上线了。 基本上， 当开发人员在主分支中合并一个提交时， 这个分支将被构建、测试， 如果一切顺利， 则部署到生产环境中。 自己的描述 自动实时的部署上限， 是最优的解决办法， 但持续部署的要求是团队非常成熟， 并且上线前是需要经过QA测试的，所以实际情况下很难实现， 一般的团队也很难接收，风险很大 开发环节 作为持续集成， 这些开发环节一一不可缺少。 首先在项目初级阶段，会拉上我们前端咨询功能的可行性。 商讨完成后UI、UE出设计图， 然后交给开发， 开发马不停蹄的实现， 然后将代码和素材， 开发文档都上传到代码仓库， 一般公司都会使用gitLab, gitLab的hooks钩子挂载到CI服务器平台(如Jenkins)， 然后在CI服务器上编写一些脚本构建项目（如：webpack、fis）， 当代码提交到仓库， CI平台就会监测到， 拉取仓库代码进行打包， 然后运行自动化测试， 并发送提测通知， 将项目发布到内网环境（QA和RD的机器上）， 所以CI平台必须免密登录的权限， 否则无法部署。 整个持续集成流程与结构 统一代码仓库通过分支管理合并主干, 如： SVN 自动化构建工具， 编译、部署、测试、监控、本机、开发上线环境。 如： FIS3、Webpack、jdists、package.json、chai、supertest、mocha、selenium-webdriver 持续集成平台。如： Jenkins、Travis CI 部署工具。如：rsync、shelljs、yargs。 运营同学有权限操作运营页面保存即可上限。 SVN/ GIT版本管理工具使用原则 不能随意修改主分支内容( master / Trunk ) 新分支(branch)应从主分支切出 向主分支提交代码前,必须先 拉取最新的主分支代码合至分支（pull &amp;&amp; merge）， 并解决冲突 向主分支合并时及时的打Tags]]></content>
+      <categories>
+        <category>CI</category>
+      </categories>
+      <tags>
+        <tag>CI</tag>
+        <tag>前端持续集成</tag>
       </tags>
   </entry>
   <entry>
@@ -841,9 +841,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[【Three】Three.js光源入门之环境光]]></title>
-    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%85%89%2F</url>
-    <content type="text"><![CDATA[环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果 环境光 AmbientLight 它是一种基础光源， 影响整个场景的光源 环境光没有明确的光源位置， 在各处形成的亮度也是一致的。 它不会影响阴影的产生。 不能将环境光作为场景中唯一的光源。 在Three中使用 THREE.AmbientLight(hex) add(color) 添加到当前颜色上 clone 复制当前颜色 如果只有环境光没有物同样是看不见东西的， 所以想测试环境光， 得先创建物体， 看一下下面两幅图: 这是正常环境光情况下的物体 然后我们把环境光调暗一点: 可以看到， 两张图中鲜艳的绿色明显的暗淡了 环境光换色刚刚我们只是调整了亮度明暗， 现在我们试试给环境光换个颜色， 就换个红色吧， 红色的灯感觉蛮吓人的 我们发现， 立方体好像少了一个， 这是因为一个不透明的物体 ， 我们所看到的颜色其实是他反射出来的颜色， 而绿色立方体无法反射红色通道的颜色， 所以， 绿色立方体在我们看上去就像是隐藏了一样， 实际上是黑了， 而我们的白色， 他能反射所有颜色， 所以是他就变红了 如何添加1scene.add(new THREE.AmbientLight(0xff0000)) 实际操作一下大体思路， 我们创建一个面，和一个立方体， 先不投射任何的光，看看是什么效果， 然后我们最后放上环境光，看一下效果 第一步-创建好立方体和面123456789101112131415161718var commonObj = common() var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) document.body.appendChild(commonObj.renderer.domElement) commonObj.renderer.render(commonObj.scene, commonObj.camera) 此时浏览器中的效果 可以看到， 此时尽管我们给物体设定了他的颜色， 但我们看到的不管是面还是立方体都依旧是黑色。 第二步-添加光源上帝说要有光， 我们给添加一个环境光试试 12// 环境光commonObj.scene.add(new THREE.AmbientLight()) // 默认白光 好， 就这行代码，就算是加上了 第三步-改变环境光颜色环境光默认是白色， 那我们可不可以试着改变一下， 把环境光改为红色？ 是不是会很吓人 12// 环境光commonObj.scene.add(new THREE.AmbientLight(0xff0000)) // 设置红色 此时原本白色的面，也变为了红色， 感觉好刺眼， 吓得我赶紧关了 完整代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; // 公共的方法 function common() &#123; var scene = new THREE.Scene() var renderer = new THREE.WebGLRenderer() renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0)) renderer.setSize(window.innerWidth, window.innerHeight) renderer.shadowMapEnabled = true // 创建面 var planeGeometry = new THREE.PlaneGeometry(60, 30) // 材质 var planeMaterial = new THREE.MeshLambertMaterial(&#123;color: 0xffffff&#125;) var plane = new THREE.Mesh(planeGeometry, planeMaterial) plane.rotation.x = -0.5 * Math.PI plane.position.set(15, 0, 10) scene.add(plane) var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000) return &#123; scene, renderer, plane, camera &#125; &#125; // 开始创建 var commonObj = common() var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) // 环境光 commonObj.scene.add(new THREE.AmbientLight()) document.body.appendChild(commonObj.renderer.domElement) commonObj.renderer.render(commonObj.scene, commonObj.camera)&lt;/script&gt;&lt;/html&gt;]]></content>
+    <title><![CDATA[【Three】Three.js光源入门之点光源]]></title>
+    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%82%B9%E5%85%89%E6%BA%90%2F</url>
+    <content type="text"><![CDATA[点光源是一种单点发光照亮物体的光源 基础介绍 照射所有方向的光源，例如照明弹 点光源是单点发光方式 点光源不会产生阴影， 减少GPU 的负担 调用方法1THREE.PointLight(hex, intensity, distance) clone() —- 复制当前颜色。 color 光源颜色 intensity —- 光照强度 distance —- 光源照射的距离 position —- 光源所在位置 测试点光源测试方法和大体上和环境光是一样的， 但是点光源和环境光不同的是， 他有个特点， 它能产生阴影 那我们就创建一个点光源和几个几何物体， 顺便移动一下点光源， 看看阴影是如何变化的 创建立方体1234567// 立方体var cubeGeomtry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial)cube.position.set(0, 6, 0)commonObj.scene.add(cube) 创建球体123456// 球体var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 创建点光源1234// 添加点光源var pointLight = new THREE.PointLight(0xffffff)pointLight.position.set(-40, 60, -10)commonObj.scene.add(pointLight) 让点光源动起来1234567function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera)&#125;render() 最终效果我们可以看到， 随着点光源的不断发生位置变动， 我们可以看到阴影发生逐渐的发生变化 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeomtry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial) cube.position.set(0, 6, 0) commonObj.scene.add(cube) // 球体 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 30, 25) commonObj.camera.lookAt(commonObj.scene.position) // 添加点光源 var pointLight = new THREE.PointLight(0xffffff) pointLight.position.set(-40, 60, -10) commonObj.scene.add(pointLight) function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera) &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
       <categories>
         <category>图形学</category>
       </categories>
@@ -877,9 +877,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[【Three】Three.js光源入门之点光源]]></title>
-    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%82%B9%E5%85%89%E6%BA%90%2F</url>
-    <content type="text"><![CDATA[点光源是一种单点发光照亮物体的光源 基础介绍 照射所有方向的光源，例如照明弹 点光源是单点发光方式 点光源不会产生阴影， 减少GPU 的负担 调用方法1THREE.PointLight(hex, intensity, distance) clone() —- 复制当前颜色。 color 光源颜色 intensity —- 光照强度 distance —- 光源照射的距离 position —- 光源所在位置 测试点光源测试方法和大体上和环境光是一样的， 但是点光源和环境光不同的是， 他有个特点， 它能产生阴影 那我们就创建一个点光源和几个几何物体， 顺便移动一下点光源， 看看阴影是如何变化的 创建立方体1234567// 立方体var cubeGeomtry = new THREE.BoxGeometry(5,5,5)var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;)var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial)cube.position.set(0, 6, 0)commonObj.scene.add(cube) 创建球体123456// 球体var sphereGeometry = new THREE.SphereGeometry(4, 20, 30)var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;)var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial)sphere.position.set(20, 6, 0)commonObj.scene.add(sphere) 创建点光源1234// 添加点光源var pointLight = new THREE.PointLight(0xffffff)pointLight.position.set(-40, 60, -10)commonObj.scene.add(pointLight) 让点光源动起来1234567function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera)&#125;render() 最终效果我们可以看到， 随着点光源的不断发生位置变动， 我们可以看到阴影发生逐渐的发生变化 完整代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; var commonObj = common() // 立方体 var cubeGeomtry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeomtry, cubeMaterial) cube.position.set(0, 6, 0) commonObj.scene.add(cube) // 球体 var sphereGeometry = new THREE.SphereGeometry(4, 20, 30) var sphreMaterial = new THREE.MeshLambertMaterial(&#123; color: 0x7777ff &#125;) var sphere = new THREE.Mesh(sphereGeometry, sphreMaterial) sphere.position.set(20, 6, 0) commonObj.scene.add(sphere) commonObj.camera.position.set(-25, 30, 25) commonObj.camera.lookAt(commonObj.scene.position) // 添加点光源 var pointLight = new THREE.PointLight(0xffffff) pointLight.position.set(-40, 60, -10) commonObj.scene.add(pointLight) function render() &#123; requestAnimationFrame(render) pointLight.position.z += 0.2 commonObj.renderer.render(commonObj.scene, commonObj.camera) &#125; render() document.body.appendChild(commonObj.renderer.domElement)&lt;/script&gt;&lt;/html&gt;]]></content>
+    <title><![CDATA[【Three】Three.js光源入门之环境光]]></title>
+    <url>%2F2019%2F04%2F04%2F%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%85%89%2F</url>
+    <content type="text"><![CDATA[环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果 环境光 AmbientLight 它是一种基础光源， 影响整个场景的光源 环境光没有明确的光源位置， 在各处形成的亮度也是一致的。 它不会影响阴影的产生。 不能将环境光作为场景中唯一的光源。 在Three中使用 THREE.AmbientLight(hex) add(color) 添加到当前颜色上 clone 复制当前颜色 如果只有环境光没有物同样是看不见东西的， 所以想测试环境光， 得先创建物体， 看一下下面两幅图: 这是正常环境光情况下的物体 然后我们把环境光调暗一点: 可以看到， 两张图中鲜艳的绿色明显的暗淡了 环境光换色刚刚我们只是调整了亮度明暗， 现在我们试试给环境光换个颜色， 就换个红色吧， 红色的灯感觉蛮吓人的 我们发现， 立方体好像少了一个， 这是因为一个不透明的物体 ， 我们所看到的颜色其实是他反射出来的颜色， 而绿色立方体无法反射红色通道的颜色， 所以， 绿色立方体在我们看上去就像是隐藏了一样， 实际上是黑了， 而我们的白色， 他能反射所有颜色， 所以是他就变红了 如何添加1scene.add(new THREE.AmbientLight(0xff0000)) 实际操作一下大体思路， 我们创建一个面，和一个立方体， 先不投射任何的光，看看是什么效果， 然后我们最后放上环境光，看一下效果 第一步-创建好立方体和面123456789101112131415161718var commonObj = common() var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) document.body.appendChild(commonObj.renderer.domElement) commonObj.renderer.render(commonObj.scene, commonObj.camera) 此时浏览器中的效果 可以看到， 此时尽管我们给物体设定了他的颜色， 但我们看到的不管是面还是立方体都依旧是黑色。 第二步-添加光源上帝说要有光， 我们给添加一个环境光试试 12// 环境光commonObj.scene.add(new THREE.AmbientLight()) // 默认白光 好， 就这行代码，就算是加上了 第三步-改变环境光颜色环境光默认是白色， 那我们可不可以试着改变一下， 把环境光改为红色？ 是不是会很吓人 12// 环境光commonObj.scene.add(new THREE.AmbientLight(0xff0000)) // 设置红色 此时原本白色的面，也变为了红色， 感觉好刺眼， 吓得我赶紧关了 完整代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;第一个ThreeJs&lt;/title&gt;&lt;/head&gt;&lt;style&gt; body &#123; margin: 0; overflow: hidden; &#125;&lt;/style&gt;&lt;body&gt;&lt;/body&gt;&lt;script src="../three.js"&gt;&lt;/script&gt;&lt;!-- 游戏帧率辅助库 --&gt;&lt;script src="../stats.min.js"&gt;&lt;/script&gt;&lt;script src="../SceneUtils.js"&gt;&lt;/script&gt;&lt;script src="../common/common.js"&gt;&lt;/script&gt;&lt;script&gt; // 公共的方法 function common() &#123; var scene = new THREE.Scene() var renderer = new THREE.WebGLRenderer() renderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0)) renderer.setSize(window.innerWidth, window.innerHeight) renderer.shadowMapEnabled = true // 创建面 var planeGeometry = new THREE.PlaneGeometry(60, 30) // 材质 var planeMaterial = new THREE.MeshLambertMaterial(&#123;color: 0xffffff&#125;) var plane = new THREE.Mesh(planeGeometry, planeMaterial) plane.rotation.x = -0.5 * Math.PI plane.position.set(15, 0, 10) scene.add(plane) var camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000) return &#123; scene, renderer, plane, camera &#125; &#125; // 开始创建 var commonObj = common() var cubeGeometry = new THREE.BoxGeometry(5,5,5) var cubeMaterial = new THREE.MeshLambertMaterial(&#123; color: 0xff0000 &#125;) var cube = new THREE.Mesh(cubeGeometry, cubeMaterial) // 打开立方体的阴影 cube.castShadow = true cube.position.set(-4, 2.5, 0) commonObj.scene.add(cube) // 调整相机位置 commonObj.camera.position.set(-25, 20, 25) // 镜头朝向舞台中央 commonObj.camera.lookAt(commonObj.scene.position) // 环境光 commonObj.scene.add(new THREE.AmbientLight()) document.body.appendChild(commonObj.renderer.domElement) commonObj.renderer.render(commonObj.scene, commonObj.camera)&lt;/script&gt;&lt;/html&gt;]]></content>
       <categories>
         <category>图形学</category>
       </categories>
