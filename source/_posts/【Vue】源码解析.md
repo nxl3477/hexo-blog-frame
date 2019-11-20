@@ -17,7 +17,7 @@ tags: Vue
 ## 🍎diffDom优劣
 现在很多人都说 `Vue`, `React` 多牛， `Diff`算法快，不用操作`Dom`。
 
-只能无语。
+其实不然。
 
 `Diff`算法不是不需要操作`Dom`,  而是不需要开发者去操作`Dom`了， `Diff`算法其实不快， 就算使用了`virtual Dom`,  还得花实现把真实`Dom` 转换为 `virtual Dom` 再去比对， 这远远没有`js`直接 `getElementById`直达目标来的快
 
