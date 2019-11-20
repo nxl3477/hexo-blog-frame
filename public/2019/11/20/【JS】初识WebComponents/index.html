@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Web Components Custom Elements 定制元素， 也就是自定义的元素，像vue的组件   HTML Imports 支持import 方式引用组件   HTML Templates 可以实现把dom结构写好   Shadow DOM 沙箱dom ， 外部的css不会影响其    Custom Elements提供⼀一种⽅方式让开发者可以⾃自定义 HTML 元素，包括特定的组">
+<meta name="description" content="Web Components Custom Elements 定制元素， 也就是自定义的元素，像vue的组件   HTML Imports 支持import 方式引用组件   HTML Templates 可以实现把dom结构写好   Shadow DOM 沙箱dom ， 外部的css不会影响其    Custom Elements提供⼀种⽅式让开发者可以⾃定义 HTML 元素，包括特定的组成，样">
 <meta name="keywords" content="JavaScript,webComponents">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【JS】初识WebComponents">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/11/20/【JS】初识WebComponents/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="Web Components Custom Elements 定制元素， 也就是自定义的元素，像vue的组件   HTML Imports 支持import 方式引用组件   HTML Templates 可以实现把dom结构写好   Shadow DOM 沙箱dom ， 外部的css不会影响其    Custom Elements提供⼀一种⽅方式让开发者可以⾃自定义 HTML 元素，包括特定的组">
+<meta property="og:description" content="Web Components Custom Elements 定制元素， 也就是自定义的元素，像vue的组件   HTML Imports 支持import 方式引用组件   HTML Templates 可以实现把dom结构写好   Shadow DOM 沙箱dom ， 外部的css不会影响其    Custom Elements提供⼀种⽅式让开发者可以⾃定义 HTML 元素，包括特定的组成，样">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-20T03:42:27.637Z">
+<meta property="og:updated_time" content="2019-11-20T14:29:07.959Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【JS】初识WebComponents">
-<meta name="twitter:description" content="Web Components Custom Elements 定制元素， 也就是自定义的元素，像vue的组件   HTML Imports 支持import 方式引用组件   HTML Templates 可以实现把dom结构写好   Shadow DOM 沙箱dom ， 外部的css不会影响其    Custom Elements提供⼀一种⽅方式让开发者可以⾃自定义 HTML 元素，包括特定的组">
+<meta name="twitter:description" content="Web Components Custom Elements 定制元素， 也就是自定义的元素，像vue的组件   HTML Imports 支持import 方式引用组件   HTML Templates 可以实现把dom结构写好   Shadow DOM 沙箱dom ， 外部的css不会影响其    Custom Elements提供⼀种⽅式让开发者可以⾃定义 HTML 元素，包括特定的组成，样">
 
 
 
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  567 字
+                  531 字
                 </span>
               
 
@@ -413,13 +413,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="Custom-Elements"><a href="#Custom-Elements" class="headerlink" title="Custom Elements"></a>Custom Elements</h2><p>提供⼀一种⽅方式让开发者可以⾃自定义 HTML 元素，包括特定的组成，样式和⾏行行为。</p>
+<h2 id="Custom-Elements"><a href="#Custom-Elements" class="headerlink" title="Custom Elements"></a>Custom Elements</h2><p>提供⼀种⽅式让开发者可以⾃定义 HTML 元素，包括特定的组成，样式和行为。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class ButtonHelloElement extends HTMLButtonElement &#123;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">      super()</span><br><span class="line">      this.addEventListener(&apos;click&apos;, () =&gt; &#123;</span><br><span class="line">        alert(&apos;hello world&apos;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  customElements.define(&apos;button-hello&apos;, ButtonHelloElement, &#123;</span><br><span class="line">    extends: &apos;button&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;button id=&quot;button-hello&quot;&gt;hello world&lt;/button&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="HTML-Imports"><a href="#HTML-Imports" class="headerlink" title="HTML Imports"></a>HTML Imports</h2><p>HTML Imports 是⼀一种在 HTMLs 中引⽤用以及复⽤用其他的HTML ⽂文档的⽅方式。这个 Import 很漂亮，可以简单理理解为我们常⻅见的模板中的 include 之类的作⽤用。</p>
+<h2 id="HTML-Imports"><a href="#HTML-Imports" class="headerlink" title="HTML Imports"></a>HTML Imports</h2><p>HTML Imports 是一种在 HTML 中引⽤以及复⽤其他的HTML ⽂档的⽅式。这个 Import 很漂亮，可以简单理解为我们常⻅的模板中的 include 之类的作⽤。</p>
 <p>听说这个标准后来被废弃了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;import&quot; href=“/components/header.html&quot;&gt;</span><br><span class="line">const link = document.querySelector(&apos;link[rel=import]&apos;)</span><br><span class="line">const header = link.import;</span><br><span class="line">const pulse = header.querySelector(‘div.logo&apos;);</span><br><span class="line">//获取 import 的 HTML 的 document</span><br><span class="line">const d = document.currentScript.ownerDocument</span><br></pre></td></tr></table></figure></p>
-<h2 id="HTML-Templates"><a href="#HTML-Templates" class="headerlink" title="HTML Templates"></a>HTML Templates</h2><p>⽤用过 handlebars 的⼈人都知道有这么⼀一个东⻄西: <code>&lt;script id=&quot;template&quot; type=&quot;text/x-handlebars-template&quot;&gt;&lt;/script&gt;</code>那么 HTML Templates 便便是把这个东⻄西官⽅方标准化，提供了了⼀一个 template 标签来存放以后需要但是暂时不不渲染的 HTML 代码。</p>
+<h2 id="HTML-Templates"><a href="#HTML-Templates" class="headerlink" title="HTML Templates"></a>HTML Templates</h2><p>用过 handlebars 的⼈都知道有这么⼀个东⻄: <code>&lt;script id=&quot;template&quot; type=&quot;text/x-handlebars-template&quot;&gt;&lt;/script&gt;</code>那么 HTML Templates 便是把这个东⻄官⽅标准化，提供了了⼀个 template 标签来存放以后需要但是暂时不渲染的 HTML 代码。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;template id=&quot;template&quot;&gt;&lt;p&gt;Smile!&lt;/p&gt;&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  let num = 3;</span><br><span class="line">  const fragment = document.getElementById(&apos;template&apos;).content.cloneNode(true);</span><br><span class="line">  while (num-- &gt; 1) &#123;</span><br><span class="line">    fragment.firstChild.before(fragment.firstChild.cloneNode(true));</span><br><span class="line">    fragment.firstChild.textContent += fragment.lastChild.textContent;</span><br><span class="line">  &#125;</span><br><span class="line">  document.body.appendChild(fragment);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="Shadow-DOM"><a href="#Shadow-DOM" class="headerlink" title="Shadow DOM"></a>Shadow DOM</h2><p>Shadow DOM 最本质的需求是需要⼀一个隔离组件代码作⽤用域的东⻄西，例例如我组件代码的 CSS 不不能影响其他组件之类的，⽽而iframe ⼜又太重并且可能有各种奇怪问题。旨在提供⼀一种更更好地组织⻚页⾯面元素的⽅方式，来为⽇日趋复杂的⻚页⾯面应⽤用提供强⼤大⽀支持，避免代码间的相互影响。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const div = document.getElementById(&apos;id&apos;)</span><br><span class="line">const shadowRoot = div.createShadowRoot()</span><br><span class="line">const span = document.createElement(&apos;span&apos;)</span><br><span class="line">span.textContent = &apos;hello world&apos;</span><br><span class="line">shadowRoot.appendChild(span)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Shadow-DOM"><a href="#Shadow-DOM" class="headerlink" title="Shadow DOM"></a>Shadow DOM</h2><p>Shadow DOM 最本质的需求是需要⼀个隔离组件代码作⽤域的东⻄西，例如我组件代码的 CSS 不能影响其他组件之类的，⽽iframe ⼜太重并且可能有各种奇怪问题。旨在提供⼀种更好地组织⻚⾯元素的⽅式，来为⽇趋复杂的⻚⾯应⽤提供强⼤⽀持，避免代码间的相互影响。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const div = document.getElementById(&apos;id&apos;)</span><br><span class="line">const shadowRoot = div.createShadowRoot()</span><br><span class="line">const span = document.createElement(&apos;span&apos;)</span><br><span class="line">span.textContent = &apos;hello world&apos;</span><br><span class="line">shadowRoot.appendChild(span)</span><br></pre></td></tr></table></figure></p>
 <p>x-foo::shadow &gt; span 可以匹配到 #top 元素<br>x-foo /deep/ span 可以匹配到 #not-top 和 #top 元素<br>:host(.foo) 匹配 <code>&lt;x-foo&gt;</code> 元素</p>
 
       
