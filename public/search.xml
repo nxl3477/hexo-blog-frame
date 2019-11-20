@@ -124,8 +124,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>工程化</tag>
         <tag>webpack</tag>
+        <tag>工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -303,10 +303,10 @@
     <content><![CDATA[<h2 id="为什么选择PWA"><a href="#为什么选择PWA" class="headerlink" title="为什么选择PWA"></a>为什么选择PWA</h2><ol>
 <li>浏览器的存储机制有缺陷， </li>
 <li>indexDB, webSQL 虽有存储空间，但读取性能较弱，  </li>
-<li>localhost 存储存在上线, 虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿</li>
-<li>浏览器实现的mainifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新</li>
+<li><code>localhost</code>存储存在上限,虽能通过<code>iframe</code> 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿</li>
+<li>浏览器实现的<code>manifest</code> 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新</li>
 <li>以上的方式始终离不开网络</li>
-<li>2018年safari 全面支持pwa</li>
+<li>2018年<code>safari</code> 全面支持<code>pwa</code></li>
 <li>增加首屏体验</li>
 </ol>
 <h2 id="pwa-的特点"><a href="#pwa-的特点" class="headerlink" title="pwa 的特点"></a>pwa 的特点</h2><p>[ 响应式 ] — ⽤用户界⾯面可以兼容多种设备，⽐比如: 桌⾯面，移动端，平板。<br>[ 应⽤化 ] — 交互体验接近native应⽤用。<br>[ ⽹络低依赖: ] — 无⽹络或者低速网络下依然可以使⽤。<br>[ 延续性 ] 借助推送功能，能够维持⽤户粘性。<br>[ 可安装 ] 可以被安装到主屏，这样⽤户随时可以从主屏启动应⽤。<br>[ 可被发现 ] 被视为⼀个独⽴立应⽤，⽽且可以被搜索.<br>[ 可更新 ] — 当⽤户重新联⽹网时，可以更新内容.<br>[ 安全 ] — 可以使⽤HTTPS来防⽌止内容伪造和中间⼈攻击。<br>[ 渐进性 ] — 所有⽤用户都可以使⽤用，浏览器器⽆无关。<br>[ 兼容url ] — 可以通过url传播。</p>
@@ -491,8 +491,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>工程化</tag>
         <tag>webpack</tag>
+        <tag>工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -524,8 +524,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>工程化</tag>
         <tag>webpack</tag>
+        <tag>工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -557,8 +557,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>工程化</tag>
         <tag>webpack</tag>
+        <tag>工程化</tag>
       </tags>
   </entry>
   <entry>
@@ -592,8 +592,8 @@
         <category>工程化</category>
       </categories>
       <tags>
-        <tag>babel</tag>
         <tag>工程化</tag>
+        <tag>babel</tag>
         <tag>Ast</tag>
       </tags>
   </entry>
@@ -774,9 +774,9 @@
         <category>工程化</category>
       </categories>
       <tags>
+        <tag>webpack</tag>
         <tag>工程化</tag>
         <tag>Ast</tag>
-        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -3131,6 +3131,58 @@
       </tags>
   </entry>
   <entry>
+    <title>【Three】Three.js光源入门之环境光</title>
+    <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%85%89/</url>
+    <content><![CDATA[<p>环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果</p>
+<h2 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h2><blockquote>
+<p>AmbientLight </p>
+</blockquote>
+<p>它是一种基础光源， 影响整个场景的光源</p>
+<p>环境光没有明确的光源位置， 在各处形成的亮度也是一致的。</p>
+<p>它不会影响阴影的产生。</p>
+<p>不能将环境光作为场景中唯一的光源。</p>
+<h3 id="在Three中使用"><a href="#在Three中使用" class="headerlink" title="在Three中使用"></a>在Three中使用</h3><blockquote>
+<p>THREE.AmbientLight(hex)</p>
+</blockquote>
+<blockquote>
+<p>add(color) 添加到当前颜色上</p>
+</blockquote>
+<blockquote>
+<p>clone 复制当前颜色</p>
+</blockquote>
+<p>如果只有环境光没有物同样是看不见东西的， 所以想测试环境光， 得先创建物体， </p>
+<p>看一下下面两幅图:</p>
+<p>这是正常环境光情况下的物体<br><img src="http://img.nixiaolei.com/three-ambientLight.png" alt="正常环境光"></p>
+<p>然后我们把环境光调暗一点:</p>
+<p><img src="http://img.nixiaolei.com/three-ambientLight-darker.png" alt="调暗环境光"></p>
+<p>可以看到， 两张图中鲜艳的绿色明显的暗淡了</p>
+<h3 id="环境光换色"><a href="#环境光换色" class="headerlink" title="环境光换色"></a>环境光换色</h3><p>刚刚我们只是调整了亮度明暗， 现在我们试试给环境光换个颜色， 就换个红色吧， 红色的灯感觉蛮吓人的</p>
+<p><img src="http://img.nixiaolei.com/three-ambientLight-red02.png" alt="红色环境光"></p>
+<p>我们发现， 立方体好像少了一个， 这是因为一个不透明的物体 ， 我们所看到的颜色其实是他反射出来的颜色， 而绿色立方体无法反射红色通道的颜色， 所以， 绿色立方体在我们看上去就像是隐藏了一样， 实际上是黑了， 而我们的白色， 他能反射所有颜色， 所以是他就变红了</p>
+<h2 id="如何添加"><a href="#如何添加" class="headerlink" title="如何添加"></a>如何添加</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">scene.add(<span class="keyword">new</span> THREE.AmbientLight(<span class="number">0xff0000</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="实际操作一下"><a href="#实际操作一下" class="headerlink" title="实际操作一下"></a>实际操作一下</h2><p>大体思路， 我们创建一个面，和一个立方体， 先不投射任何的光，看看是什么效果， 然后我们最后放上环境光，看一下效果</p>
+<h3 id="第一步-创建好立方体和面"><a href="#第一步-创建好立方体和面" class="headerlink" title="第一步-创建好立方体和面"></a>第一步-创建好立方体和面</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> commonObj = common()</span><br><span class="line"> <span class="keyword">var</span> cubeGeometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line"> <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0xff0000</span> &#125;)</span><br><span class="line"> <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 打开立方体的阴影</span></span><br><span class="line"> cube.castShadow = <span class="literal">true</span></span><br><span class="line"> cube.position.set(<span class="number">-4</span>, <span class="number">2.5</span>, <span class="number">0</span>)</span><br><span class="line"> </span><br><span class="line"> commonObj.scene.add(cube)</span><br><span class="line"> <span class="comment">// 调整相机位置</span></span><br><span class="line"> commonObj.camera.position.set(<span class="number">-25</span>, <span class="number">20</span>, <span class="number">25</span>)</span><br><span class="line"> <span class="comment">// 镜头朝向舞台中央</span></span><br><span class="line"> commonObj.camera.lookAt(commonObj.scene.position)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="built_in">document</span>.body.appendChild(commonObj.renderer.domElement)</span><br><span class="line"> commonObj.renderer.render(commonObj.scene, commonObj.camera)</span><br></pre></td></tr></table></figure>
+<p>此时浏览器中的效果<br><img src="http://img.nixiaolei.com/three-ambientLight-nolight.png" alt="无光环境"></p>
+<p>可以看到， 此时尽管我们给物体设定了他的颜色， 但我们看到的不管是面还是立方体都依旧是黑色。</p>
+<h3 id="第二步-添加光源"><a href="#第二步-添加光源" class="headerlink" title="第二步-添加光源"></a>第二步-添加光源</h3><p>上帝说要有光， 我们给添加一个环境光试试</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 环境光</span></span><br><span class="line">commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight()) <span class="comment">// 默认白光</span></span><br></pre></td></tr></table></figure>
+<p>好， 就这行代码，就算是加上了</p>
+<p><img src="http://img.nixiaolei.com/three-ambientLight-haslight.png" alt="有光环境"></p>
+<h3 id="第三步-改变环境光颜色"><a href="#第三步-改变环境光颜色" class="headerlink" title="第三步-改变环境光颜色"></a>第三步-改变环境光颜色</h3><p>环境光默认是白色， 那我们可不可以试着改变一下， 把环境光改为红色？ 是不是会很吓人</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 环境光</span></span><br><span class="line">commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight(<span class="number">0xff0000</span>)) <span class="comment">// 设置红色</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://img.nixiaolei.com/three-ambientLight-redlight.png" alt="红色环境光"></p>
+<p>此时原本白色的面，也变为了红色， 感觉好刺眼， 吓得我赶紧关了</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>第一个ThreeJs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  body &#123;</span></span><br><span class="line"><span class="undefined">    margin: 0;</span></span><br><span class="line"><span class="undefined">    overflow: hidden;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../three.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 游戏帧率辅助库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../stats.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../SceneUtils.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../common/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 公共的方法</span></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">common</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene()</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer()</span></span><br><span class="line"><span class="javascript">    renderer.setClearColor(<span class="keyword">new</span> THREE.Color(<span class="number">0xEEEEEE</span>, <span class="number">1.0</span>))</span></span><br><span class="line"><span class="javascript">    renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span></span><br><span class="line"><span class="javascript">    renderer.shadowMapEnabled = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 创建面</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeGeometry = <span class="keyword">new</span> THREE.PlaneGeometry(<span class="number">60</span>, <span class="number">30</span>)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 材质</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;<span class="attr">color</span>: <span class="number">0xffffff</span>&#125;)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> plane = <span class="keyword">new</span> THREE.Mesh(planeGeometry, planeMaterial)</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    plane.rotation.x = <span class="number">-0.5</span> * <span class="built_in">Math</span>.PI</span></span><br><span class="line"><span class="undefined">    plane.position.set(15, 0, 10)</span></span><br><span class="line"><span class="undefined">    scene.add(plane)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">60</span>, <span class="built_in">window</span>.innerWidth / <span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">      scene,</span></span><br><span class="line"><span class="undefined">      renderer,</span></span><br><span class="line"><span class="undefined">      plane,</span></span><br><span class="line"><span class="undefined">      camera</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 开始创建</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> commonObj = common()</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeGeometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0xff0000</span> &#125;)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 打开立方体的阴影</span></span></span><br><span class="line"><span class="javascript">  cube.castShadow = <span class="literal">true</span></span></span><br><span class="line"><span class="undefined">  cube.position.set(-4, 2.5, 0)</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  commonObj.scene.add(cube)</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 调整相机位置</span></span></span><br><span class="line"><span class="undefined">  commonObj.camera.position.set(-25, 20, 25)</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 镜头朝向舞台中央</span></span></span><br><span class="line"><span class="undefined">  commonObj.camera.lookAt(commonObj.scene.position)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 环境光</span></span></span><br><span class="line"><span class="javascript">  commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight())</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.body.appendChild(commonObj.renderer.domElement)</span></span><br><span class="line"><span class="undefined">  commonObj.renderer.render(commonObj.scene, commonObj.camera)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学</tag>
+        <tag>ThreeJs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Three】Three.js光源入门之点光源</title>
     <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%82%B9%E5%85%89%E6%BA%90/</url>
     <content><![CDATA[<p>点光源是一种单点发光照亮物体的光源</p>
@@ -3155,47 +3207,6 @@
 <h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><p>我们可以看到， 随着点光源的不断发生位置变动， 我们可以看到阴影发生逐渐的发生变化</p>
 <p><img src="http://img.nixiaolei.com/yA1pla0mDn.gif" alt></p>
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>第一个ThreeJs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  body &#123;</span></span><br><span class="line"><span class="undefined">    margin: 0;</span></span><br><span class="line"><span class="undefined">    overflow: hidden;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../three.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../common/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 游戏帧率辅助库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../stats.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../SceneUtils.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../common/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> commonObj = common()</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 立方体</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeGeomtry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0xff0000</span> &#125;)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeomtry, cubeMaterial)</span></span><br><span class="line"><span class="undefined">  cube.position.set(0, 6, 0)</span></span><br><span class="line"><span class="undefined">  commonObj.scene.add(cube)</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="javascript">  <span class="comment">// 球体</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> sphereGeometry = <span class="keyword">new</span> THREE.SphereGeometry(<span class="number">4</span>, <span class="number">20</span>, <span class="number">30</span>)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> sphreMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0x7777ff</span> &#125;)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> sphere = <span class="keyword">new</span> THREE.Mesh(sphereGeometry, sphreMaterial)</span></span><br><span class="line"><span class="undefined">  sphere.position.set(20, 6, 0)</span></span><br><span class="line"><span class="undefined">  commonObj.scene.add(sphere)</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  commonObj.camera.position.set(-25, 30, 25)</span></span><br><span class="line"><span class="undefined">  commonObj.camera.lookAt(commonObj.scene.position)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 添加点光源</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> pointLight = <span class="keyword">new</span> THREE.PointLight(<span class="number">0xffffff</span>)</span></span><br><span class="line"><span class="undefined">  pointLight.position.set(-40, 60, -10)</span></span><br><span class="line"><span class="undefined">  commonObj.scene.add(pointLight)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">    requestAnimationFrame(render)</span></span><br><span class="line"><span class="undefined">    pointLight.position.z += 0.2</span></span><br><span class="line"><span class="undefined">    commonObj.renderer.render(commonObj.scene, commonObj.camera)</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">  render()</span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.body.appendChild(commonObj.renderer.domElement)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>图形学</category>
-      </categories>
-      <tags>
-        <tag>图形学</tag>
-        <tag>ThreeJs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Three】Three.js入门之光源</title>
-    <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90/</url>
-    <content><![CDATA[<p>光源也分为很多种</p>
-<ul>
-<li>AmbientLight —- 环境光</li>
-<li>PonitLight —- 点光源</li>
-<li>SpotLight —- 聚光灯</li>
-<li>DirectionalLight —- 平行光</li>
-</ul>
-<p>然后还有各种高级的光照效果</p>
-<h2 id="光源种类描述"><a href="#光源种类描述" class="headerlink" title="光源种类描述"></a>光源种类描述</h2><blockquote>
-<p>具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述</p>
-</blockquote>
-<h3 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h3><blockquote>
-<p>AmbientLight</p>
-</blockquote>
-<p>基础光源， 影响整个场景的光源</p>
-<h3 id="点光源"><a href="#点光源" class="headerlink" title="点光源"></a>点光源</h3><blockquote>
-<p>PonitLight</p>
-</blockquote>
-<p>空间中的一个点， 朝所有方向发射光源</p>
-<h3 id="聚光灯"><a href="#聚光灯" class="headerlink" title="聚光灯"></a>聚光灯</h3><blockquote>
-<p>SpotLight</p>
-</blockquote>
-<p>具有锥形效果的聚光灯光源</p>
-<h3 id="平行光"><a href="#平行光" class="headerlink" title="平行光"></a>平行光</h3><p>无限光， 模拟远处太阳的光辉</p>
-<h3 id="高级光照效果"><a href="#高级光照效果" class="headerlink" title="高级光照效果"></a>高级光照效果</h3><ul>
-<li>半球光</li>
-<li>平面光</li>
-<li>镜头眩光</li>
-</ul>
 ]]></content>
       <categories>
         <category>图形学</category>
@@ -3241,48 +3252,37 @@
       </tags>
   </entry>
   <entry>
-    <title>【Three】Three.js光源入门之环境光</title>
-    <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E7%8E%AF%E5%A2%83%E5%85%89/</url>
-    <content><![CDATA[<p>环境光是环境整体的光照效果， 是场景内若干光源的多次反射形成的一种亮度一致的效果</p>
-<h2 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h2><blockquote>
-<p>AmbientLight </p>
+    <title>【Three】Three.js入门之光源</title>
+    <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90/</url>
+    <content><![CDATA[<p>光源也分为很多种</p>
+<ul>
+<li>AmbientLight —- 环境光</li>
+<li>PonitLight —- 点光源</li>
+<li>SpotLight —- 聚光灯</li>
+<li>DirectionalLight —- 平行光</li>
+</ul>
+<p>然后还有各种高级的光照效果</p>
+<h2 id="光源种类描述"><a href="#光源种类描述" class="headerlink" title="光源种类描述"></a>光源种类描述</h2><blockquote>
+<p>具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述</p>
 </blockquote>
-<p>它是一种基础光源， 影响整个场景的光源</p>
-<p>环境光没有明确的光源位置， 在各处形成的亮度也是一致的。</p>
-<p>它不会影响阴影的产生。</p>
-<p>不能将环境光作为场景中唯一的光源。</p>
-<h3 id="在Three中使用"><a href="#在Three中使用" class="headerlink" title="在Three中使用"></a>在Three中使用</h3><blockquote>
-<p>THREE.AmbientLight(hex)</p>
+<h3 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h3><blockquote>
+<p>AmbientLight</p>
 </blockquote>
-<blockquote>
-<p>add(color) 添加到当前颜色上</p>
+<p>基础光源， 影响整个场景的光源</p>
+<h3 id="点光源"><a href="#点光源" class="headerlink" title="点光源"></a>点光源</h3><blockquote>
+<p>PonitLight</p>
 </blockquote>
-<blockquote>
-<p>clone 复制当前颜色</p>
+<p>空间中的一个点， 朝所有方向发射光源</p>
+<h3 id="聚光灯"><a href="#聚光灯" class="headerlink" title="聚光灯"></a>聚光灯</h3><blockquote>
+<p>SpotLight</p>
 </blockquote>
-<p>如果只有环境光没有物同样是看不见东西的， 所以想测试环境光， 得先创建物体， </p>
-<p>看一下下面两幅图:</p>
-<p>这是正常环境光情况下的物体<br><img src="http://img.nixiaolei.com/three-ambientLight.png" alt="正常环境光"></p>
-<p>然后我们把环境光调暗一点:</p>
-<p><img src="http://img.nixiaolei.com/three-ambientLight-darker.png" alt="调暗环境光"></p>
-<p>可以看到， 两张图中鲜艳的绿色明显的暗淡了</p>
-<h3 id="环境光换色"><a href="#环境光换色" class="headerlink" title="环境光换色"></a>环境光换色</h3><p>刚刚我们只是调整了亮度明暗， 现在我们试试给环境光换个颜色， 就换个红色吧， 红色的灯感觉蛮吓人的</p>
-<p><img src="http://img.nixiaolei.com/three-ambientLight-red02.png" alt="红色环境光"></p>
-<p>我们发现， 立方体好像少了一个， 这是因为一个不透明的物体 ， 我们所看到的颜色其实是他反射出来的颜色， 而绿色立方体无法反射红色通道的颜色， 所以， 绿色立方体在我们看上去就像是隐藏了一样， 实际上是黑了， 而我们的白色， 他能反射所有颜色， 所以是他就变红了</p>
-<h2 id="如何添加"><a href="#如何添加" class="headerlink" title="如何添加"></a>如何添加</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">scene.add(<span class="keyword">new</span> THREE.AmbientLight(<span class="number">0xff0000</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="实际操作一下"><a href="#实际操作一下" class="headerlink" title="实际操作一下"></a>实际操作一下</h2><p>大体思路， 我们创建一个面，和一个立方体， 先不投射任何的光，看看是什么效果， 然后我们最后放上环境光，看一下效果</p>
-<h3 id="第一步-创建好立方体和面"><a href="#第一步-创建好立方体和面" class="headerlink" title="第一步-创建好立方体和面"></a>第一步-创建好立方体和面</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> commonObj = common()</span><br><span class="line"> <span class="keyword">var</span> cubeGeometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>)</span><br><span class="line"> <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0xff0000</span> &#125;)</span><br><span class="line"> <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 打开立方体的阴影</span></span><br><span class="line"> cube.castShadow = <span class="literal">true</span></span><br><span class="line"> cube.position.set(<span class="number">-4</span>, <span class="number">2.5</span>, <span class="number">0</span>)</span><br><span class="line"> </span><br><span class="line"> commonObj.scene.add(cube)</span><br><span class="line"> <span class="comment">// 调整相机位置</span></span><br><span class="line"> commonObj.camera.position.set(<span class="number">-25</span>, <span class="number">20</span>, <span class="number">25</span>)</span><br><span class="line"> <span class="comment">// 镜头朝向舞台中央</span></span><br><span class="line"> commonObj.camera.lookAt(commonObj.scene.position)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="built_in">document</span>.body.appendChild(commonObj.renderer.domElement)</span><br><span class="line"> commonObj.renderer.render(commonObj.scene, commonObj.camera)</span><br></pre></td></tr></table></figure>
-<p>此时浏览器中的效果<br><img src="http://img.nixiaolei.com/three-ambientLight-nolight.png" alt="无光环境"></p>
-<p>可以看到， 此时尽管我们给物体设定了他的颜色， 但我们看到的不管是面还是立方体都依旧是黑色。</p>
-<h3 id="第二步-添加光源"><a href="#第二步-添加光源" class="headerlink" title="第二步-添加光源"></a>第二步-添加光源</h3><p>上帝说要有光， 我们给添加一个环境光试试</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 环境光</span></span><br><span class="line">commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight()) <span class="comment">// 默认白光</span></span><br></pre></td></tr></table></figure>
-<p>好， 就这行代码，就算是加上了</p>
-<p><img src="http://img.nixiaolei.com/three-ambientLight-haslight.png" alt="有光环境"></p>
-<h3 id="第三步-改变环境光颜色"><a href="#第三步-改变环境光颜色" class="headerlink" title="第三步-改变环境光颜色"></a>第三步-改变环境光颜色</h3><p>环境光默认是白色， 那我们可不可以试着改变一下， 把环境光改为红色？ 是不是会很吓人</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 环境光</span></span><br><span class="line">commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight(<span class="number">0xff0000</span>)) <span class="comment">// 设置红色</span></span><br></pre></td></tr></table></figure>
-<p><img src="http://img.nixiaolei.com/three-ambientLight-redlight.png" alt="红色环境光"></p>
-<p>此时原本白色的面，也变为了红色， 感觉好刺眼， 吓得我赶紧关了</p>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>第一个ThreeJs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  body &#123;</span></span><br><span class="line"><span class="undefined">    margin: 0;</span></span><br><span class="line"><span class="undefined">    overflow: hidden;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../three.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 游戏帧率辅助库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../stats.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../SceneUtils.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../common/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 公共的方法</span></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">common</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene()</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer()</span></span><br><span class="line"><span class="javascript">    renderer.setClearColor(<span class="keyword">new</span> THREE.Color(<span class="number">0xEEEEEE</span>, <span class="number">1.0</span>))</span></span><br><span class="line"><span class="javascript">    renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span></span><br><span class="line"><span class="javascript">    renderer.shadowMapEnabled = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 创建面</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeGeometry = <span class="keyword">new</span> THREE.PlaneGeometry(<span class="number">60</span>, <span class="number">30</span>)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 材质</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;<span class="attr">color</span>: <span class="number">0xffffff</span>&#125;)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> plane = <span class="keyword">new</span> THREE.Mesh(planeGeometry, planeMaterial)</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    plane.rotation.x = <span class="number">-0.5</span> * <span class="built_in">Math</span>.PI</span></span><br><span class="line"><span class="undefined">    plane.position.set(15, 0, 10)</span></span><br><span class="line"><span class="undefined">    scene.add(plane)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">60</span>, <span class="built_in">window</span>.innerWidth / <span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">      scene,</span></span><br><span class="line"><span class="undefined">      renderer,</span></span><br><span class="line"><span class="undefined">      plane,</span></span><br><span class="line"><span class="undefined">      camera</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 开始创建</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> commonObj = common()</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeGeometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0xff0000</span> &#125;)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 打开立方体的阴影</span></span></span><br><span class="line"><span class="javascript">  cube.castShadow = <span class="literal">true</span></span></span><br><span class="line"><span class="undefined">  cube.position.set(-4, 2.5, 0)</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  commonObj.scene.add(cube)</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 调整相机位置</span></span></span><br><span class="line"><span class="undefined">  commonObj.camera.position.set(-25, 20, 25)</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 镜头朝向舞台中央</span></span></span><br><span class="line"><span class="undefined">  commonObj.camera.lookAt(commonObj.scene.position)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 环境光</span></span></span><br><span class="line"><span class="javascript">  commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight())</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.body.appendChild(commonObj.renderer.domElement)</span></span><br><span class="line"><span class="undefined">  commonObj.renderer.render(commonObj.scene, commonObj.camera)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>具有锥形效果的聚光灯光源</p>
+<h3 id="平行光"><a href="#平行光" class="headerlink" title="平行光"></a>平行光</h3><p>无限光， 模拟远处太阳的光辉</p>
+<h3 id="高级光照效果"><a href="#高级光照效果" class="headerlink" title="高级光照效果"></a>高级光照效果</h3><ul>
+<li>半球光</li>
+<li>平面光</li>
+<li>镜头眩光</li>
+</ul>
 ]]></content>
       <categories>
         <category>图形学</category>

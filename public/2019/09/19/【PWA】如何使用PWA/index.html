@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="为什么选择PWA 浏览器的存储机制有缺陷，  indexDB, webSQL 虽有存储空间，但读取性能较弱，   localhost 存储存在上线, 虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿 浏览器实现的mainifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新 以上的方式始终离不开网络 2018年safa">
+<meta name="description" content="为什么选择PWA 浏览器的存储机制有缺陷，  indexDB, webSQL 虽有存储空间，但读取性能较弱，   localhost存储存在上限,虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿 浏览器实现的manifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新 以上的方式始终离不开网络 2018年safari">
 <meta name="keywords" content="PWA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【PWA】如何使用PWA">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/09/19/【PWA】如何使用PWA/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="为什么选择PWA 浏览器的存储机制有缺陷，  indexDB, webSQL 虽有存储空间，但读取性能较弱，   localhost 存储存在上线, 虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿 浏览器实现的mainifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新 以上的方式始终离不开网络 2018年safa">
+<meta property="og:description" content="为什么选择PWA 浏览器的存储机制有缺陷，  indexDB, webSQL 虽有存储空间，但读取性能较弱，   localhost存储存在上限,虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿 浏览器实现的manifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新 以上的方式始终离不开网络 2018年safari">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-19-23-15-01.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-22-21-58-13.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-22-21-56-41.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-22-22-55-18.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-09-22-22-58-17.png">
-<meta property="og:updated_time" content="2019-09-22T15:30:38.636Z">
+<meta property="og:updated_time" content="2019-11-20T06:19:24.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【PWA】如何使用PWA">
-<meta name="twitter:description" content="为什么选择PWA 浏览器的存储机制有缺陷，  indexDB, webSQL 虽有存储空间，但读取性能较弱，   localhost 存储存在上线, 虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿 浏览器实现的mainifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新 以上的方式始终离不开网络 2018年safa">
+<meta name="twitter:description" content="为什么选择PWA 浏览器的存储机制有缺陷，  indexDB, webSQL 虽有存储空间，但读取性能较弱，   localhost存储存在上限,虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿 浏览器实现的manifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新 以上的方式始终离不开网络 2018年safari">
 <meta name="twitter:image" content="http://img.nixiaolei.com/2019-09-19-23-15-01.png">
 
 
@@ -404,10 +404,10 @@
         <h2 id="为什么选择PWA"><a href="#为什么选择PWA" class="headerlink" title="为什么选择PWA"></a>为什么选择PWA</h2><ol>
 <li>浏览器的存储机制有缺陷， </li>
 <li>indexDB, webSQL 虽有存储空间，但读取性能较弱，  </li>
-<li>localhost 存储存在上线, 虽能通过iframe 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿</li>
-<li>浏览器实现的mainifest 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新</li>
+<li><code>localhost</code>存储存在上限,虽能通过<code>iframe</code> 和域名 扩展空间， 但成本较大， 并且较差的手机， 超过2.5M就会出现性能问题，引起卡顿</li>
+<li>浏览器实现的<code>manifest</code> 不完善， 很有可能一份数据在用户手机上存一辈子， 无法更新</li>
 <li>以上的方式始终离不开网络</li>
-<li>2018年safari 全面支持pwa</li>
+<li>2018年<code>safari</code> 全面支持<code>pwa</code></li>
 <li>增加首屏体验</li>
 </ol>
 <h2 id="pwa-的特点"><a href="#pwa-的特点" class="headerlink" title="pwa 的特点"></a>pwa 的特点</h2><p>[ 响应式 ] — ⽤用户界⾯面可以兼容多种设备，⽐比如: 桌⾯面，移动端，平板。<br>[ 应⽤化 ] — 交互体验接近native应⽤用。<br>[ ⽹络低依赖: ] — 无⽹络或者低速网络下依然可以使⽤。<br>[ 延续性 ] 借助推送功能，能够维持⽤户粘性。<br>[ 可安装 ] 可以被安装到主屏，这样⽤户随时可以从主屏启动应⽤。<br>[ 可被发现 ] 被视为⼀个独⽴立应⽤，⽽且可以被搜索.<br>[ 可更新 ] — 当⽤户重新联⽹网时，可以更新内容.<br>[ 安全 ] — 可以使⽤HTTPS来防⽌止内容伪造和中间⼈攻击。<br>[ 渐进性 ] — 所有⽤用户都可以使⽤用，浏览器器⽆无关。<br>[ 兼容url ] — 可以通过url传播。</p>
