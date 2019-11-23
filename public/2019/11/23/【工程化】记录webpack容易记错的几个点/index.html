@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="倪晓磊, a磊, 倪晓磊的博客, a磊的前端梦, 全栈开发, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
+  <meta name="keywords" content="webpack,工程化,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="挑战10000小时定律">
-<meta name="keywords" content="倪晓磊, a磊, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
-<meta property="og:type" content="website">
-<meta property="og:title" content="倪晓磊的博客">
-<meta property="og:url" content="http://blog.nixiaolei.com/tags/尾递归/index.html">
+<meta name="description" content="filename 与 chunkFilename他们都是 webpack 配置文件里， output 中所提供的字段之一， filename负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 bundle.js 通常我们的配置可能是123output: &amp;#123;  filename: &apos;[name]-[hash].js&apos;&amp;#125; chunkFilename它负责控制webp">
+<meta name="keywords" content="webpack,工程化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【工程化】记录webpack容易记错的几个点">
+<meta property="og:url" content="http://blog.nixiaolei.com/2019/11/23/【工程化】记录webpack容易记错的几个点/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="挑战10000小时定律">
+<meta property="og:description" content="filename 与 chunkFilename他们都是 webpack 配置文件里， output 中所提供的字段之一， filename负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 bundle.js 通常我们的配置可能是123output: &amp;#123;  filename: &apos;[name]-[hash].js&apos;&amp;#125; chunkFilename它负责控制webp">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-23T05:35:50.054Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="倪晓磊的博客">
-<meta name="twitter:description" content="挑战10000小时定律">
+<meta name="twitter:title" content="【工程化】记录webpack容易记错的几个点">
+<meta name="twitter:description" content="filename 与 chunkFilename他们都是 webpack 配置文件里， output 中所提供的字段之一， filename负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 bundle.js 通常我们的配置可能是123output: &amp;#123;  filename: &apos;[name]-[hash].js&apos;&amp;#125; chunkFilename它负责控制webp">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/tags/尾递归/">
+  <link rel="canonical" href="http://blog.nixiaolei.com/2019/11/23/【工程化】记录webpack容易记错的几个点/">
 
 
 
 
 
-  <title>标签: 尾递归 | 倪晓磊的博客</title>
+  <title>【工程化】记录webpack容易记错的几个点 | 倪晓磊的博客</title>
   
 
 
@@ -144,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -260,52 +261,269 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>尾递归<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.nixiaolei.com/2019/11/23/【工程化】记录webpack容易记错的几个点/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="a磊的前端梦">
+      <meta itemprop="description" content="挑战10000小时定律">
+      <meta itemprop="image" content="/images/myavatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="倪晓磊的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/06/16/【JS】递归、尾递归与尾调用/" itemprop="url">
-              
-                <span itemprop="name">【JS】递归、尾递归与尾调用</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">【工程化】记录webpack容易记错的几个点</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-16T19:04:41+08:00" content="2019-06-16">
-          06-16
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-23T11:55:03+08:00">
+                2019-11-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工程化/" itemprop="url" rel="index">
+                    <span itemprop="name">工程化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  652 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="filename-与-chunkFilename"><a href="#filename-与-chunkFilename" class="headerlink" title="filename 与 chunkFilename"></a>filename 与 chunkFilename</h2><p>他们都是 webpack 配置文件里， <code>output</code> 中所提供的字段之一，</p>
+<h4 id="filename"><a href="#filename" class="headerlink" title="filename"></a>filename</h4><p>负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 <code>bundle.js</code></p>
+<p>通常我们的配置可能是<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">output: &#123;</span><br><span class="line">  filename: <span class="string">'[name]-[hash].js'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="chunkFilename"><a href="#chunkFilename" class="headerlink" title="chunkFilename"></a>chunkFilename</h4><p>它负责控制webpack对代码进行 code splite 后产出的可按需加载文件的文件名， 有的时候我们不会去填写， 但也没有关系， webpack 会根据你 <code>filename</code>字段的配置来推断出来, 会将你设置的 <code>[name]</code> 替换为 <code>[id]</code>, 根据上面的<code>filename</code>配置的话也就是变成了 <code>[id]-[hash].js</code></p>
+<blockquote>
+<p><a href="https://webpack.docschina.org/configuration/output/#output-chunkfilename" target="_blank" rel="noopener">文档地址</a></p>
+</blockquote>
+<h2 id="webpackPrefetch、webpackPreload-和-webpackChunkName"><a href="#webpackPrefetch、webpackPreload-和-webpackChunkName" class="headerlink" title="webpackPrefetch、webpackPreload 和 webpackChunkName"></a>webpackPrefetch、webpackPreload 和 webpackChunkName</h2><p>他们都是属于魔法注释</p>
+<p>具体用法都像下面这样, 以此来告诉webpack 针对某个模块应该怎么处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="comment">/* webpackChunkName: "myname" */</span> <span class="string">'./index.js'</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="webpackChunkName"><a href="#webpackChunkName" class="headerlink" title="webpackChunkName"></a>webpackChunkName</h4><p>webpack4 目前的 chunk 生成命名还没有那么的智能， 只能生成一串 <code>id</code>, 比如<code>0.as123sads.js</code> 这样类似的文件， 但是我们的chunk 文件怎么可能只有一个， 如果是按照<code>id</code> 来的话岂不是一个文件发生变化， 那可能影响到其他的文件的id 也发生变化吗， 那可太蠢了</p>
+<p>所以 <code>webpackChunkName</code> 就是为了解决这个问题， 可以让我们指定一个chunk 文件名称， 通过魔法注释告诉 <code>webpack</code> 这个chunk应该叫什么</p>
+<h4 id="webpackPrefetch"><a href="#webpackPrefetch" class="headerlink" title="webpackPrefetch"></a>webpackPrefetch</h4><p>翻译过来是<code>预拉取</code></p>
+<p>其特点是 被<code>prefetch</code>的 <code>chunk</code> 会在浏览器首屏资源加载完成后， 在浏览器的空闲时间进行下载</p>
+<p>会在页面中生成如下代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"prefetch"</span> <span class="attr">as</span>=<span class="string">"script"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="webpackPreload"><a href="#webpackPreload" class="headerlink" title="webpackPreload"></a>webpackPreload</h4><p><code>预加载</code> 是预加载当前导航下可能需要资源</p>
+<p>其特点是会和浏览器首屏资源并行下载， 立即开始请求</p>
+<h2 id="臭名昭著的-hash、chunkhash、contenthash"><a href="#臭名昭著的-hash、chunkhash、contenthash" class="headerlink" title="臭名昭著的 hash、chunkhash、contenthash"></a>臭名昭著的 hash、chunkhash、contenthash</h2><p>都是生成hash ， 但是计算的依据及效果确是大有不同</p>
+<h4 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h4><p>hash 的计算是跟整个项目的构建相关，每次构建都会有一个相同的hash</p>
+<h4 id="chunkhash"><a href="#chunkhash" class="headerlink" title="chunkhash"></a>chunkhash</h4><p>根据不同的 chunk 文件分析生成对应的 hash ， 这个hash 和chunk 是一对一的关系， 这也解决了每次打包一个chunk的修改会导致所有chunk的hash都发生变化的问题</p>
+<h4 id="contenthash"><a href="#contenthash" class="headerlink" title="contenthash"></a>contenthash</h4><p>这个就比较好理解了， 根据文件内容生成特有的 hash, 不管你是css 还是 js 只要你这份文件没有改变， 那hash就不会改变， 所以使用这种 hash 打出来的包会hash 各不相同， 是一个比较好用的hash 方式</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>你的支持将鼓励我继续创作</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="a磊的前端梦 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="a磊的前端梦 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    a磊的前端梦
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://blog.nixiaolei.com/2019/11/23/【工程化】记录webpack容易记错的几个点/" title="【工程化】记录webpack容易记错的几个点">http://blog.nixiaolei.com/2019/11/23/【工程化】记录webpack容易记错的几个点/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="http://blog.nixiaolei.com/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+            <a href="/tags/工程化/" rel="tag"># 工程化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/【flutter】如何将打项目包成app/" rel="next" title="【flutter】如何将打项目包成app">
+                <i class="fa fa-chevron-left"></i> 【flutter】如何将打项目包成app
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -313,6 +531,14 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
+    </div>
+
+  
+
 
         </div>
         
@@ -333,8 +559,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -424,6 +659,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#filename-与-chunkFilename"><span class="nav-number">1.</span> <span class="nav-text">filename 与 chunkFilename</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filename"><span class="nav-number">1.0.1.</span> <span class="nav-text">filename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chunkFilename"><span class="nav-number">1.0.2.</span> <span class="nav-text">chunkFilename</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#webpackPrefetch、webpackPreload-和-webpackChunkName"><span class="nav-number">2.</span> <span class="nav-text">webpackPrefetch、webpackPreload 和 webpackChunkName</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackChunkName"><span class="nav-number">2.0.1.</span> <span class="nav-text">webpackChunkName</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackPrefetch"><span class="nav-number">2.0.2.</span> <span class="nav-text">webpackPrefetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackPreload"><span class="nav-number">2.0.3.</span> <span class="nav-text">webpackPreload</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#臭名昭著的-hash、chunkhash、contenthash"><span class="nav-number">3.</span> <span class="nav-text">臭名昭著的 hash、chunkhash、contenthash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hash"><span class="nav-number">3.0.1.</span> <span class="nav-text">hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chunkhash"><span class="nav-number">3.0.2.</span> <span class="nav-text">chunkhash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contenthash"><span class="nav-number">3.0.3.</span> <span class="nav-text">contenthash</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -574,6 +825,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -602,6 +857,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
