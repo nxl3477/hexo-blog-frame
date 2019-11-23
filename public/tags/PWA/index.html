@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content=",,">
+  <meta name="keywords" content="倪晓磊, a磊, 倪晓磊的博客, a磊的前端梦, 全栈开发, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
 
 
 
@@ -79,20 +79,17 @@
 
 
 
-<meta name="description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  利用memo我们就能函数组件创造为Purecomponent 总之就">
-<meta name="keywords" content="React,性能优化">
+<meta name="description" content="挑战10000小时定律">
+<meta name="keywords" content="倪晓磊, a磊, 前端, 前端开发, nixiaolei, Node.js, webpack, JavaScript, HTML, CSS, Python, webGL">
 <meta property="og:type" content="website">
-<meta property="og:title" content="【React】memo为函数组件创造shouldComponentUpdate">
-<meta property="og:url" content="http://blog.nixiaolei.com/【React】memo为函数组件创造shouldComponentUpdate.html">
+<meta property="og:title" content="倪晓磊的博客">
+<meta property="og:url" content="http://blog.nixiaolei.com/tags/PWA/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
-<meta property="og:description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  利用memo我们就能函数组件创造为Purecomponent 总之就">
+<meta property="og:description" content="挑战10000小时定律">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.nixiaolei.com/2019-04-12-22-30-31.png">
-<meta property="og:updated_time" content="2019-11-23T02:30:19.806Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【React】memo为函数组件创造shouldComponentUpdate">
-<meta name="twitter:description" content="React v16.6.0出了一些新的包装函数(wrapped functions)，一种用于函数组件PureComponent / shouldComponentUpdate形式的React.memo()  React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。  利用memo我们就能函数组件创造为Purecomponent 总之就">
-<meta name="twitter:image" content="http://img.nixiaolei.com/2019-04-12-22-30-31.png">
+<meta name="twitter:title" content="倪晓磊的博客">
+<meta name="twitter:description" content="挑战10000小时定律">
 
 
 
@@ -122,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.nixiaolei.com/【React】memo为函数组件创造shouldComponentUpdate.html">
+  <link rel="canonical" href="http://blog.nixiaolei.com/tags/PWA/">
 
 
 
 
 
-  <title>【React】memo为函数组件创造shouldComponentUpdate | 倪晓磊的博客</title>
+  <title>标签: PWA | 倪晓磊的博客</title>
   
 
 
@@ -147,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -263,49 +260,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
+  
+  
+  
+  <div class="post-block tag">
 
-	<h2 class="post-title" itemprop="name headline">【React】memo为函数组件创造shouldComponentUpdate</h2>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-        
-        
-          <p><code>React v16.6.0</code>出了一些新的包装函数(<code>wrapped functions</code>)，一种用于函数组件<code>PureComponent / shouldComponentUpdate</code>形式的<code>React.memo()</code></p>
-<blockquote>
-<p>React.memo()是一个高阶函数，它与 React.PureComponent类似，但是一个函数组件而非一个类。</p>
-</blockquote>
-<p>利用<code>memo</code>我们就能函数组件创造为<code>Purecomponent</code></p>
-<p>总之就是， 在今天，我们也能为函数组件做性能优化了， 就让我们来演示下具体如何使用</p>
-<h2 id="先创建一个普通的函数组件"><a href="#先创建一个普通的函数组件" class="headerlink" title="先创建一个普通的函数组件"></a>先创建一个普通的函数组件</h2><p>这是一个最普通的函数组件， 接收一个<code>name</code>的<code>props</code>参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个函数组件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">&#123; name &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'I am rendering'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Memo组件 name =&gt; &#123; name &#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="显式地shouldComponentUpdate"><a href="#显式地shouldComponentUpdate" class="headerlink" title="显式地shouldComponentUpdate"></a>显式地shouldComponentUpdate</h2><p>然后我们为其量身定制一个<code>shouldComponentUpdate</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">areEqual</span>(<span class="params">prevProps, nextProps</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( prevProps.name == nextProps.name ) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="产生出一个新组件"><a href="#产生出一个新组件" class="headerlink" title="产生出一个新组件"></a>产生出一个新组件</h2><p>利用<code>memo</code>这个高阶函数，我们创造出一个新的组件，这将会是个拥有<code>shouldComponentUpdate</code>的函数组件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; memo, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">const</span> DemoComponent = memo(Child, areEqual)</span><br></pre></td></tr></table></figure></p>
-<h2 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h2><p>最后我们将其放入<code>render</code>函数， 让它渲染出来， 并传入刚刚设定的<code>name</code>参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Menotest</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &#123;<span class="comment">/* seconds作为Props传入 */</span>&#125;</span><br><span class="line">        &lt;DemoComponent name=<span class="string">"小明"</span> /&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>结果如下:<br><img src="http://img.nixiaolei.com/2019-04-12-22-30-31.png" alt="2019-04-12-22-30-31"></p>
-<hr>
-<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; memo, Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个函数组件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">&#123; name &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'I am rendering'</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Memo组件 name =&gt; &#123; name &#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意 函数组件没有state , 显式的shouldComponentUpdate</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">areEqual</span>(<span class="params">prevProps, nextProps</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( prevProps.name == nextProps.name ) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> DemoComponent = memo(Child, areEqual)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Menotest</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &#123;<span class="comment">/* seconds作为Props传入 */</span>&#125;</span><br><span class="line">        &lt;DemoComponent name=<span class="string">"小明"</span> /&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-        
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h2>PWA<small>标签</small>
+        </h2>
       </div>
+
       
-      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/2019/09/19/【PWA】如何使用PWA/" itemprop="url">
+              
+                <span itemprop="name">【PWA】如何使用PWA</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-09-19T21:53:14+08:00" content="2019-09-19">
+          09-19
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
-    
-    
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -313,14 +313,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC80MzM0My8xOTg4NA=="></div>
-    </div>
-
-  
-
 
         </div>
         
@@ -341,17 +333,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -368,7 +351,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">123</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -379,7 +362,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -390,7 +373,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -442,22 +425,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#先创建一个普通的函数组件"><span class="nav-number">1.</span> <span class="nav-text">先创建一个普通的函数组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显式地shouldComponentUpdate"><span class="nav-number">2.</span> <span class="nav-text">显式地shouldComponentUpdate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#产生出一个新组件"><span class="nav-number">3.</span> <span class="nav-text">产生出一个新组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看结果"><span class="nav-number">4.</span> <span class="nav-text">查看结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">5.</span> <span class="nav-text">完整代码</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -485,7 +452,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">91.3k</span>
+    <span title="Site words total count">95.2k</span>
   
 </div>
 
@@ -607,10 +574,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -639,17 +602,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
