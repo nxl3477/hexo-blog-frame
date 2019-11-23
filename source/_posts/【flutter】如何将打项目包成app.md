@@ -98,4 +98,7 @@ signingConfigs {
 
 flutter build apk
 
+## 参考文档
 
+* https://segmentfault.com/q/1010000018586277/a-1020000018755836
+* https://blog.csdn.net/duo_shine/article/details/81382757
