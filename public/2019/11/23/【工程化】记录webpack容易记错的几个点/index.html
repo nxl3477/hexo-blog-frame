@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="webpack,工程化,">
+  <meta name="keywords" content="工程化,webpack,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="filename 与 chunkFilename他们都是 webpack 配置文件里， output 中所提供的字段之一， filename负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 bundle.js 通常我们的配置可能是123output: &amp;#123;  filename: &apos;[name]-[hash].js&apos;&amp;#125; chunkFilename它负责控制webp">
-<meta name="keywords" content="webpack,工程化">
+<meta name="keywords" content="工程化,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【工程化】记录webpack容易记错的几个点">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/11/23/【工程化】记录webpack容易记错的几个点/index.html">
 <meta property="og:site_name" content="倪晓磊的博客">
 <meta property="og:description" content="filename 与 chunkFilename他们都是 webpack 配置文件里， output 中所提供的字段之一， filename负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 bundle.js 通常我们的配置可能是123output: &amp;#123;  filename: &apos;[name]-[hash].js&apos;&amp;#125; chunkFilename它负责控制webp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-23T05:35:50.054Z">
+<meta property="og:updated_time" content="2019-11-23T05:39:38.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【工程化】记录webpack容易记错的几个点">
 <meta name="twitter:description" content="filename 与 chunkFilename他们都是 webpack 配置文件里， output 中所提供的字段之一， filename负责配置就是我们平时打包时候所看到的产出文件的名字, 比如最常见的 bundle.js 通常我们的配置可能是123output: &amp;#123;  filename: &apos;[name]-[hash].js&apos;&amp;#125; chunkFilename它负责控制webp">
@@ -358,7 +358,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  652 字
+                  661 字
                 </span>
               
 
@@ -416,6 +416,9 @@
 <h4 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h4><p>hash 的计算是跟整个项目的构建相关，每次构建都会有一个相同的hash</p>
 <h4 id="chunkhash"><a href="#chunkhash" class="headerlink" title="chunkhash"></a>chunkhash</h4><p>根据不同的 chunk 文件分析生成对应的 hash ， 这个hash 和chunk 是一对一的关系， 这也解决了每次打包一个chunk的修改会导致所有chunk的hash都发生变化的问题</p>
 <h4 id="contenthash"><a href="#contenthash" class="headerlink" title="contenthash"></a>contenthash</h4><p>这个就比较好理解了， 根据文件内容生成特有的 hash, 不管你是css 还是 js 只要你这份文件没有改变， 那hash就不会改变， 所以使用这种 hash 打出来的包会hash 各不相同， 是一个比较好用的hash 方式</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://juejin.im/post/5cede821f265da1bbd4b5630" target="_blank" rel="noopener">https://juejin.im/post/5cede821f265da1bbd4b5630</a></li>
+</ul>
 
       
     </div>
@@ -480,9 +483,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/webpack/" rel="tag"># webpack</a>
-          
             <a href="/tags/工程化/" rel="tag"># 工程化</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
           
         </div>
       
@@ -669,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#filename-与-chunkFilename"><span class="nav-number">1.</span> <span class="nav-text">filename 与 chunkFilename</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filename"><span class="nav-number">1.0.1.</span> <span class="nav-text">filename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chunkFilename"><span class="nav-number">1.0.2.</span> <span class="nav-text">chunkFilename</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#webpackPrefetch、webpackPreload-和-webpackChunkName"><span class="nav-number">2.</span> <span class="nav-text">webpackPrefetch、webpackPreload 和 webpackChunkName</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackChunkName"><span class="nav-number">2.0.1.</span> <span class="nav-text">webpackChunkName</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackPrefetch"><span class="nav-number">2.0.2.</span> <span class="nav-text">webpackPrefetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackPreload"><span class="nav-number">2.0.3.</span> <span class="nav-text">webpackPreload</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#臭名昭著的-hash、chunkhash、contenthash"><span class="nav-number">3.</span> <span class="nav-text">臭名昭著的 hash、chunkhash、contenthash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hash"><span class="nav-number">3.0.1.</span> <span class="nav-text">hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chunkhash"><span class="nav-number">3.0.2.</span> <span class="nav-text">chunkhash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contenthash"><span class="nav-number">3.0.3.</span> <span class="nav-text">contenthash</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#filename-与-chunkFilename"><span class="nav-number">1.</span> <span class="nav-text">filename 与 chunkFilename</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filename"><span class="nav-number">1.0.1.</span> <span class="nav-text">filename</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chunkFilename"><span class="nav-number">1.0.2.</span> <span class="nav-text">chunkFilename</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#webpackPrefetch、webpackPreload-和-webpackChunkName"><span class="nav-number">2.</span> <span class="nav-text">webpackPrefetch、webpackPreload 和 webpackChunkName</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackChunkName"><span class="nav-number">2.0.1.</span> <span class="nav-text">webpackChunkName</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackPrefetch"><span class="nav-number">2.0.2.</span> <span class="nav-text">webpackPrefetch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpackPreload"><span class="nav-number">2.0.3.</span> <span class="nav-text">webpackPreload</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#臭名昭著的-hash、chunkhash、contenthash"><span class="nav-number">3.</span> <span class="nav-text">臭名昭著的 hash、chunkhash、contenthash</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hash"><span class="nav-number">3.0.1.</span> <span class="nav-text">hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chunkhash"><span class="nav-number">3.0.2.</span> <span class="nav-text">chunkhash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#contenthash"><span class="nav-number">3.0.3.</span> <span class="nav-text">contenthash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></div>
             
 
           </div>

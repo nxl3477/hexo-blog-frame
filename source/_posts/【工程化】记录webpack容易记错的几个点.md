@@ -87,3 +87,6 @@ hash 的计算是跟整个项目的构建相关，每次构建都会有一个相
 
 
 
+## 参考文献
+
+* https://juejin.im/post/5cede821f265da1bbd4b5630
