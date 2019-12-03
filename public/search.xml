@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>【工程化】@babel/preset-env 与@babel/plugin-transform-runtime 使用及场景区别</title>
+    <url>/2019/12/03/%E3%80%90%E5%B7%A5%E7%A8%8B%E5%8C%96%E3%80%91-babel-env-%E4%B8%8E-babel-plugin-transform-runtime-%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%9C%BA%E6%99%AF%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>之前在用babel 的时候有个地方一直挺晕的，<code>@babel/preset-env</code> 和  <code>@babel/plugin-transform-runtime</code>都具有转换语法的能力， 并且都能实现按需 <code>polyfill</code> ,但是网上又找不到比较明确的答案， 趁这次尝试 roullp 的时候试了试.</p>
+<p>如果我们什么都不做， 没有为babel 编写参数及配置， 那babel 并没有那么大的威力， 它什么都不会做， 正是因为各个预设插件的灵活组合、赋能， 让 babel 充满魅力， 创造奇迹</p>
+<p>首先是 @babel/preset-env</p>
+<h2 id="babel-preset-env"><a href="#babel-preset-env" class="headerlink" title="@babel/preset-env"></a>@babel/preset-env</h2><p>这是一个我们很常用的预设， 几乎所有的教程和框架里都会让你配置它， 它的出现取代了 <code>preset-es20**</code> 系列的babel 预设， 你再也不需要繁杂的兼容配置了。 每出一个新提案就加一个？ 太蠢了。</p>
+<p>有了它， 我们就可以拥有全部， 并且！ 它还可以做到按需加载我们需要的 polyfill。 就是这么神奇。<br>但是吧， 它也不是那么自动化的， 如果你要是不会配置，很有可能就没有用起它的功能</p>
+<p>不管怎么养， 首先试一下，眼见为实</p>
+<p>首先创建一个 <code>index.js</code>,内容如下， 很简单<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br></pre></td></tr></table></figure></p>
+<p>然后我们在根目录下创建一个 <code>.babelrc</code>文件, 帮我们刚刚说的预设加进去<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"@babel/preset-env"</span>]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后我我们打包一下（这里我用的是roullup）</p>
+<p>看一下产出的结果<br><img src="http://img.nixiaolei.com/2019-12-03-21-00-52.png" alt="2019-12-03-21-00-52"></p>
+<p>我们可以看到， 它babel帮我们做了这几件事情:</p>
+<ol>
+<li>转换箭头函数</li>
+<li>const 变为 var </li>
+</ol>
+<p>奇怪， 为什么 babel 不帮我们转换 map ?  还有 promise 这些也都是es6的特性呀</p>
+<p>嗯～，会不会是我们的目标浏览器不对， babel 觉得不需要转换了， 会不会是这样， 那我们加一个 .browserslistrc 试一下</p>
+<p>那就。让我们在根目录下创建一个 <code>.browserslistrc</code><br><img src="http://img.nixiaolei.com/2019-12-03-21-06-54.png" alt="2019-12-03-21-06-54"></p>
+<p>好。现在让我们再打包一次.<br><img src="http://img.nixiaolei.com/2019-12-03-21-07-43.png" alt="2019-12-03-21-07-43"></p>
+<p>咦， 没什么效果。 跟刚刚一样啊。 说明不是目标浏览器配置的问题， 是babel 做不了这个事。</p>
+<p>因为默认 @babel/preset-env 只会转换语法，也就是我们看到的箭头函数、const一类。<br>如果进一步需要转换内置对象、实例方法，那就得用polyfill, 这就需要你做一点配置了, </p>
+<p>这里有一个至关重要的参数 “useBuiltIns”，他是控制 @babel/preset-env 使用何种方式帮我们导入 polyfill 的核心， 它有三个值可以选</p>
+<h3 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h3><p>这是一种入口导入方式,  只要我们在打包配置入口 或者 文件入口写入 <code>import &quot;core-js&quot;</code> 这样一串代码， babel 就会替我们根据当前你所配置的目标浏览器(browserslist)来引入所需要的polyfill  。</p>
+<p>像这样， 我们在 index.js 文件中加入试一下<code>core-js</code><br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"core-js"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br></pre></td></tr></table></figure></p>
+<p>babel配置如下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    [&quot;@babel/preset-env&quot;, </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;useBuiltIns&quot;: &quot;entry&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当前 .browserslistrc 文件(更改目标浏览器为 Chrome 是为了此处演示更直观，简洁)， 我们只要求兼容 chrome 50版本以上即可（当下最新版本为78）<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Chrome &gt; <span class="number">50</span></span><br></pre></td></tr></table></figure></p>
+<p>那打包后如何呢？<br><img src="http://img.nixiaolei.com/2019-12-03-21-46-14.png" alt="2019-12-03-21-46-14"></p>
+<p>恐怖如斯啊，babel把我们填写的 <code>import &quot;core-js&quot;</code>替换掉， 转而导入了一大片的polyfill， 而且都是一些我没有用到的东西。</p>
+<p>那我们提升一下目标浏览器呢？ 它还会导入这么多吗？<br>此时， 我们把目标浏览器调整为比较接近最新版本的 75(当下最新版本为78)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// .browserslistrc</span><br><span class="line"></span><br><span class="line">Chrome &gt; 75</span><br></pre></td></tr></table></figure>
+<p>此刻打包后引入的 polyfill 明显少了好多。<br><img src="http://img.nixiaolei.com/2019-12-03-21-51-46.png" alt="2019-12-03-21-51-46"></p>
+<p>但同样是我们没用过的。<br>这也就是印证了上面所说的， 当 useBuiltIns 的值为 entry 时， @babel/preset-env 会按照你所设置的目标浏览器在入口处来引入所需的 polyfill,<br>不管你需不需要。</p>
+<p>如此，我们可以知道， useBuiltIns = entry 的优点是覆盖面积就比较广， 一股脑全部搞定， 但是缺点就是打出来的包就大了多了很多没有用到的 polyfill, 并且还会污染全局</p>
+<h3 id="useage"><a href="#useage" class="headerlink" title="useage"></a>useage</h3><p>这个就比较神奇了， useBuiltIns = useage 时，会参考目标浏览器（browserslist） 和 代码中所使用到的特性来按需加入 polyfill</p>
+<p>当然， 使用 useBuiltIns = useage, 还需要填写另一个参数 corejs 的版本号，</p>
+<blockquote>
+<p>core-js 支持两个版本， 2 或 3， 很多新特性已经不会加入到 2 里面了， 比如: flat 等等最新的方法， 2 这个版本里面都是没有的， 所以建议大家用3 </p>
+</blockquote>
+<p>此时的 <code>.babelrc</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"@babel/preset-env"</span>, </span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"useBuiltIns"</span>: <span class="string">"usage"</span>,</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时的 index.js<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="keyword">const</span> hasNumber = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>].includes(num)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber(<span class="number">2</span>) )</span><br></pre></td></tr></table></figure></p>
+<p>此时的  .browserslistrc</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; 1%</span><br><span class="line">last 10 versions</span><br><span class="line">not ie &lt;= 8</span><br></pre></td></tr></table></figure>
+<p>打包后:<br><img src="http://img.nixiaolei.com/2019-12-03-22-59-03.png" alt="2019-12-03-22-59-03"></p>
+<p>nice ,够神奇， 我们用的几个新特性真的通通都加上了</p>
+<p>这种方式打包体积不大，但是如果我们排除node_modules/目录，遇上没有经过转译的第三方包，就检测不到第三方包内部的 ‘hello‘.includes(‘h‘)这种句法，这时候我们就会遇到bug</p>
+<h3 id="false"><a href="#false" class="headerlink" title="false"></a>false</h3><p>剩下最后一个 useBuiltIns = false , 那就简单了， 这也是默认值 ， 使用这个值时不引入 polyfill</p>
+<h2 id="babel-runtime"><a href="#babel-runtime" class="headerlink" title="@babel/runtime"></a>@babel/runtime</h2><p>这种方式会借助 helper function 来实现特性的兼容，<br>并且利用 @babel/plugin-transform-runtime 插件还能以沙箱垫片的方式防止污染全局， 并抽离公共的 helper function , 以节省代码的冗余</p>
+<p>也就是说 @babel/runtime 是一个核心， 一种实现方式， 而 @babel/plugin-transform-runtime 就是一个管家， 负责更好的重复使用 @babel/runtime</p>
+<p>@babel/plugin-transform-runtime 插件也有一个 corejs 参数需要填写</p>
+<blockquote>
+<p>版本2 不支持内置对象 ， 但自从Babel 7.4.0 之后，拥有了  @babel/runtime-corejs3 ， 我们可以放心使用 corejs: 3 对实例方法做支持</p>
+</blockquote>
+<p>当前的 .babelrc </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"@babel/preset-env"</span>]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    [ </span><br><span class="line">      <span class="string">"@babel/plugin-transform-runtime"</span>, &#123;</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当前的 index.js<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="keyword">const</span> hasNumber = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>].includes(num)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber(<span class="number">2</span>) )</span><br></pre></td></tr></table></figure></p>
+<p>打包后如下:<br><img src="http://img.nixiaolei.com/2019-12-04-00-01-39.png" alt="2019-12-04-00-01-39"></p>
+<p>我们看到使用 @babel/plugin-transform-runtime 编译后的代码和之前的 @babel/preset-env 编译结果大不一样了，<br>它使用了帮助函数, 并且赋予了别名 ， 抽出为公共方法， 实现复用。 比如它用了 _Promise 代替了 new Promise ， 从而避免了创建全局对象</p>
+<h2 id="上面两种方式一起用会怎么样"><a href="#上面两种方式一起用会怎么样" class="headerlink" title="上面两种方式一起用会怎么样"></a>上面两种方式一起用会怎么样</h2><h3 id="useage-和-babel-runtime"><a href="#useage-和-babel-runtime" class="headerlink" title="useage 和 @babel/runtime"></a>useage 和 @babel/runtime</h3><p>useage 和 @babel/runtime 同时使用的情况下比较智能，  并没有引入重复的 polyfill</p>
+<blockquote>
+<p>个人分析原因应该是：  babel 的 plugin 比 prset 要先执行， 所以preset-env 得到了 @babel/runtime 使用帮助函数包装后的代码，而 useage 又是检测代码使用哪些新特性来判断的， 所以它拿到手的只是一堆 帮助函数， 自然没有效果了</p>
+</blockquote>
+<p>实验过程如下：</p>
+<p>当前index.js<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="keyword">const</span> hasNumber = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>].includes(num)</span><br><span class="line"><span class="keyword">const</span> hasNumber2 = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>].includes(num)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber2(<span class="number">3</span>) )</span><br></pre></td></tr></table></figure></p>
+<p>当前 .babelrc<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"@babel/preset-env"</span>, </span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"useBuiltIns"</span>: <span class="string">"usage"</span>,</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    [ </span><br><span class="line">      <span class="string">"@babel/plugin-transform-runtime"</span>, &#123;</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>打包结果:<br><img src="http://img.nixiaolei.com/2019-12-04-00-23-24.png" alt="2019-12-04-00-23-24"></p>
+<h3 id="entry-和-babel-runtime"><a href="#entry-和-babel-runtime" class="headerlink" title="entry 和 @babel/runtime"></a>entry 和 @babel/runtime</h3><p>跟 useage 的情况不一样， entry 模式下， 在经过 @babel/runtime 处理后不但有了各种帮助函数还引入了许多polyfill， 这就会导致打包体积无情的增大</p>
+<blockquote>
+<p>个人分析: entry 模式下遭遇到入口的 <code>import &quot;core-js&quot;</code> 及就立即替换为当前目标浏览器下所需的所有 polyfill, 所以也就跟 @babel/runtime 互不冲突了， 导致了重复引入代码的问题， 所以这两种方式千万不要一起使用， 二选一即可</p>
+</blockquote>
+<p>实现过程如下:</p>
+<p>当前 index.js:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"core-js"</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="keyword">const</span> hasNumber = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>].includes(num)</span><br><span class="line"><span class="keyword">const</span> hasNumber2 = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>].includes(num)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber2(<span class="number">3</span>) )</span><br></pre></td></tr></table></figure>
+<p>当前 .babelrc<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"@babel/preset-env"</span>, </span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"useBuiltIns"</span>: <span class="string">"entry"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    [ </span><br><span class="line">      <span class="string">"@babel/plugin-transform-runtime"</span>, &#123;</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当前 .browserslistrc 的目标版本(为了减少打包后的文件行数为又改为chrome 了， 懂那个意思就行)<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Chrome &gt; 70</span><br></pre></td></tr></table></figure></p>
+<p>打包结果: </p>
+<p><img src="http://img.nixiaolei.com/2019-12-04-00-32-40.png" alt="2019-12-04-00-32-40"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>@babel/preset-env 拥有根据 useBuiltIns 参数的多种polyfill实现，优点是覆盖面比较全（entry）， 缺点是会污染全局， 推荐在业务项目中使用<ul>
+<li>entry 的覆盖面积全， 但是打包体积自然就大，  </li>
+<li>useage 可以按需引入 polyfill,  打包体积就小， 但如果打包忽略node_modules 时如果第三方包未转译则会出现兼容问题</li>
+</ul>
+</li>
+<li><p>@babel/runtime 在 babel 7.4 之后大放异彩， 利用 corejs 3 也实现了各种内置对象的支持， 并且依靠 @babel/plugin-transform-runtime 的能力，沙箱垫片和代码复用， 避免帮助函数重复 inject 过多的问题， 该方式的优点是不会污染全局， 适合在类库开发中使用</p>
+<p>上面 1， 2 两种方式取其一即可， 同时使用没有意义, 还可能造成重复的 polyfill 文件</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工程化</category>
+      </categories>
+      <tags>
+        <tag>工程化</tag>
+        <tag>babel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【工程化】记录webpack容易记错的几个点</title>
     <url>/2019/11/23/%E3%80%90%E5%B7%A5%E7%A8%8B%E5%8C%96%E3%80%91%E8%AE%B0%E5%BD%95webpack%E5%AE%B9%E6%98%93%E8%AE%B0%E9%94%99%E7%9A%84%E5%87%A0%E4%B8%AA%E7%82%B9/</url>
     <content><![CDATA[<h2 id="filename-与-chunkFilename"><a href="#filename-与-chunkFilename" class="headerlink" title="filename 与 chunkFilename"></a>filename 与 chunkFilename</h2><p>他们都是 webpack 配置文件里， <code>output</code> 中所提供的字段之一，</p>
@@ -3228,47 +3327,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【Three】Three.js入门之光源</title>
-    <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90/</url>
-    <content><![CDATA[<p>光源也分为很多种</p>
-<ul>
-<li>AmbientLight —- 环境光</li>
-<li>PonitLight —- 点光源</li>
-<li>SpotLight —- 聚光灯</li>
-<li>DirectionalLight —- 平行光</li>
-</ul>
-<p>然后还有各种高级的光照效果</p>
-<h2 id="光源种类描述"><a href="#光源种类描述" class="headerlink" title="光源种类描述"></a>光源种类描述</h2><blockquote>
-<p>具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述</p>
-</blockquote>
-<h3 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h3><blockquote>
-<p>AmbientLight</p>
-</blockquote>
-<p>基础光源， 影响整个场景的光源</p>
-<h3 id="点光源"><a href="#点光源" class="headerlink" title="点光源"></a>点光源</h3><blockquote>
-<p>PonitLight</p>
-</blockquote>
-<p>空间中的一个点， 朝所有方向发射光源</p>
-<h3 id="聚光灯"><a href="#聚光灯" class="headerlink" title="聚光灯"></a>聚光灯</h3><blockquote>
-<p>SpotLight</p>
-</blockquote>
-<p>具有锥形效果的聚光灯光源</p>
-<h3 id="平行光"><a href="#平行光" class="headerlink" title="平行光"></a>平行光</h3><p>无限光， 模拟远处太阳的光辉</p>
-<h3 id="高级光照效果"><a href="#高级光照效果" class="headerlink" title="高级光照效果"></a>高级光照效果</h3><ul>
-<li>半球光</li>
-<li>平面光</li>
-<li>镜头眩光</li>
-</ul>
-]]></content>
-      <categories>
-        <category>图形学</category>
-      </categories>
-      <tags>
-        <tag>图形学</tag>
-        <tag>ThreeJs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Three】Three.js光源入门之聚光灯</title>
     <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%89%E6%BA%90%E5%85%A5%E9%97%A8%E4%B9%8B%E8%81%9A%E5%85%89%E7%81%AF/</url>
     <content><![CDATA[<p>聚光灯是一特殊的光源， 聚光灯能朝一个方向投射出锥形的光线。</p>
@@ -3346,6 +3404,47 @@
 <p><img src="http://img.nixiaolei.com/three-ambientLight-redlight.png" alt="红色环境光"></p>
 <p>此时原本白色的面，也变为了红色， 感觉好刺眼， 吓得我赶紧关了</p>
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>第一个ThreeJs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  body &#123;</span></span><br><span class="line"><span class="undefined">    margin: 0;</span></span><br><span class="line"><span class="undefined">    overflow: hidden;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../three.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 游戏帧率辅助库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../stats.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../SceneUtils.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../common/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 公共的方法</span></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">common</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> scene = <span class="keyword">new</span> THREE.Scene()</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer()</span></span><br><span class="line"><span class="javascript">    renderer.setClearColor(<span class="keyword">new</span> THREE.Color(<span class="number">0xEEEEEE</span>, <span class="number">1.0</span>))</span></span><br><span class="line"><span class="javascript">    renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight)</span></span><br><span class="line"><span class="javascript">    renderer.shadowMapEnabled = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 创建面</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeGeometry = <span class="keyword">new</span> THREE.PlaneGeometry(<span class="number">60</span>, <span class="number">30</span>)</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 材质</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> planeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;<span class="attr">color</span>: <span class="number">0xffffff</span>&#125;)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> plane = <span class="keyword">new</span> THREE.Mesh(planeGeometry, planeMaterial)</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="javascript">    plane.rotation.x = <span class="number">-0.5</span> * <span class="built_in">Math</span>.PI</span></span><br><span class="line"><span class="undefined">    plane.position.set(15, 0, 10)</span></span><br><span class="line"><span class="undefined">    scene.add(plane)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">60</span>, <span class="built_in">window</span>.innerWidth / <span class="built_in">window</span>.innerHeight, <span class="number">0.1</span>, <span class="number">1000</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">      scene,</span></span><br><span class="line"><span class="undefined">      renderer,</span></span><br><span class="line"><span class="undefined">      plane,</span></span><br><span class="line"><span class="undefined">      camera</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 开始创建</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> commonObj = common()</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeGeometry = <span class="keyword">new</span> THREE.BoxGeometry(<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cubeMaterial = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123; <span class="attr">color</span>: <span class="number">0xff0000</span> &#125;)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> cube = <span class="keyword">new</span> THREE.Mesh(cubeGeometry, cubeMaterial)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 打开立方体的阴影</span></span></span><br><span class="line"><span class="javascript">  cube.castShadow = <span class="literal">true</span></span></span><br><span class="line"><span class="undefined">  cube.position.set(-4, 2.5, 0)</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="undefined">  commonObj.scene.add(cube)</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 调整相机位置</span></span></span><br><span class="line"><span class="undefined">  commonObj.camera.position.set(-25, 20, 25)</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 镜头朝向舞台中央</span></span></span><br><span class="line"><span class="undefined">  commonObj.camera.lookAt(commonObj.scene.position)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 环境光</span></span></span><br><span class="line"><span class="javascript">  commonObj.scene.add(<span class="keyword">new</span> THREE.AmbientLight())</span></span><br><span class="line"><span class="undefined">  </span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.body.appendChild(commonObj.renderer.domElement)</span></span><br><span class="line"><span class="undefined">  commonObj.renderer.render(commonObj.scene, commonObj.camera)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学</tag>
+        <tag>ThreeJs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Three】Three.js入门之光源</title>
+    <url>/2019/04/04/%E3%80%90Three%E3%80%91Three-js%E5%85%A5%E9%97%A8%E4%B9%8B%E5%85%89%E6%BA%90/</url>
+    <content><![CDATA[<p>光源也分为很多种</p>
+<ul>
+<li>AmbientLight —- 环境光</li>
+<li>PonitLight —- 点光源</li>
+<li>SpotLight —- 聚光灯</li>
+<li>DirectionalLight —- 平行光</li>
+</ul>
+<p>然后还有各种高级的光照效果</p>
+<h2 id="光源种类描述"><a href="#光源种类描述" class="headerlink" title="光源种类描述"></a>光源种类描述</h2><blockquote>
+<p>具体内容在站内搜索光源的关键字， 如：环境光，  篇幅太长不在此处描述</p>
+</blockquote>
+<h3 id="环境光"><a href="#环境光" class="headerlink" title="环境光"></a>环境光</h3><blockquote>
+<p>AmbientLight</p>
+</blockquote>
+<p>基础光源， 影响整个场景的光源</p>
+<h3 id="点光源"><a href="#点光源" class="headerlink" title="点光源"></a>点光源</h3><blockquote>
+<p>PonitLight</p>
+</blockquote>
+<p>空间中的一个点， 朝所有方向发射光源</p>
+<h3 id="聚光灯"><a href="#聚光灯" class="headerlink" title="聚光灯"></a>聚光灯</h3><blockquote>
+<p>SpotLight</p>
+</blockquote>
+<p>具有锥形效果的聚光灯光源</p>
+<h3 id="平行光"><a href="#平行光" class="headerlink" title="平行光"></a>平行光</h3><p>无限光， 模拟远处太阳的光辉</p>
+<h3 id="高级光照效果"><a href="#高级光照效果" class="headerlink" title="高级光照效果"></a>高级光照效果</h3><ul>
+<li>半球光</li>
+<li>平面光</li>
+<li>镜头眩光</li>
+</ul>
 ]]></content>
       <categories>
         <category>图形学</category>
