@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="工程化,babel,">
+  <meta name="keywords" content="babel,工程化,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="之前在用babel 的时候有个地方一直挺晕的，@babel/preset-env 和  @babel/plugin-transform-runtime都具有转换语法的能力， 并且都能实现按需 polyfill ,但是网上又找不到比较明确的答案， 趁这次尝试 roullp 的时候试了试. 如果我们什么都不做， 没有为babel 编写参数及配置， 那babel 并没有那么大的威力， 它什么都不会做，">
-<meta name="keywords" content="工程化,babel">
+<meta name="keywords" content="babel,工程化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【工程化】@babel&#x2F;preset-env 与@babel&#x2F;plugin-transform-runtime 使用及场景区别">
 <meta property="og:url" content="http://blog.nixiaolei.com/2019/12/03/【工程化】-babel-env-与-babel-plugin-transform-runtime-使用及场景区别/index.html">
@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://img.nixiaolei.com/2019-12-04-00-01-39.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-12-04-00-23-24.png">
 <meta property="og:image" content="http://img.nixiaolei.com/2019-12-04-00-32-40.png">
-<meta property="og:updated_time" content="2019-12-03T16:41:39.556Z">
+<meta property="og:updated_time" content="2019-12-03T17:00:02.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【工程化】@babel&#x2F;preset-env 与@babel&#x2F;plugin-transform-runtime 使用及场景区别">
 <meta name="twitter:description" content="之前在用babel 的时候有个地方一直挺晕的，@babel/preset-env 和  @babel/plugin-transform-runtime都具有转换语法的能力， 并且都能实现按需 polyfill ,但是网上又找不到比较明确的答案， 趁这次尝试 roullp 的时候试了试. 如果我们什么都不做， 没有为babel 编写参数及配置， 那babel 并没有那么大的威力， 它什么都不会做，">
@@ -470,7 +470,8 @@
 <p>实验过程如下：</p>
 <p>当前index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Promise</span>()</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].map(<span class="function"><span class="params">item</span> =&gt;</span> item * item)</span><br><span class="line"><span class="keyword">const</span> hasNumber = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>].includes(num)</span><br><span class="line"><span class="keyword">const</span> hasNumber2 = <span class="function">(<span class="params">num</span>) =&gt;</span> [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>].includes(num)</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber(<span class="number">2</span>))</span><br><span class="line"><span class="built_in">console</span>.log( hasNumber2(<span class="number">3</span>) )</span><br></pre></td></tr></table></figure></p>
 <p>当前 .babelrc<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"@babel/preset-env"</span>, </span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"useBuiltIns"</span>: <span class="string">"usage"</span>,</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    [ </span><br><span class="line">      <span class="string">"@babel/plugin-transform-runtime"</span>, &#123;</span><br><span class="line">        <span class="string">"corejs"</span>: <span class="number">3</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>打包结果:<br><img src="http://img.nixiaolei.com/2019-12-04-00-23-24.png" alt="2019-12-04-00-23-24"></p>
+<p>打包结果:</p>
+<p><img src="http://img.nixiaolei.com/2019-12-04-00-23-24.png" alt="2019-12-04-00-23-24"></p>
 <h3 id="entry-和-babel-runtime"><a href="#entry-和-babel-runtime" class="headerlink" title="entry 和 @babel/runtime"></a>entry 和 @babel/runtime</h3><p>跟 useage 的情况不一样， entry 模式下， 在经过 @babel/runtime 处理后不但有了各种帮助函数还引入了许多polyfill， 这就会导致打包体积无情的增大</p>
 <blockquote>
 <p>个人分析: entry 模式下遭遇到入口的 <code>import &quot;core-js&quot;</code> 及就立即替换为当前目标浏览器下所需的所有 polyfill, 所以也就跟 @babel/runtime 互不冲突了， 导致了重复引入代码的问题， 所以这两种方式千万不要一起使用， 二选一即可</p>
@@ -556,9 +557,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工程化/" rel="tag"># 工程化</a>
-          
             <a href="/tags/babel/" rel="tag"># babel</a>
+          
+            <a href="/tags/工程化/" rel="tag"># 工程化</a>
           
         </div>
       

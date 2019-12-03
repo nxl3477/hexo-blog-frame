@@ -283,6 +283,7 @@ console.log( hasNumber2(3) )
 }
 ```
 打包结果:
+
 ![2019-12-04-00-23-24](http://img.nixiaolei.com/2019-12-04-00-23-24.png)
 
 
